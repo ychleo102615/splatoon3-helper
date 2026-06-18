@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-18T00:00:00Z",
+  "title": "Design System: Splatoon 3 武器工具 (SPLAT-DEX)",
+  "extensions": {
+    "colorMeta": {
+      "turf-green": { "role": "primary", "displayName": "Turf Green 草綠", "canonical": "oklch(0.80 0.27 142)", "tonalRamp": ["#052B05","#0A4A0A","#0E6B0E","#12930F","#19D719","#5CE85C","#97F297","#D6FBD6"] },
+      "splat-magenta": { "role": "secondary", "displayName": "Splat Magenta 噴濺洋紅", "canonical": "oklch(0.63 0.22 360)", "tonalRamp": ["#3A0A1E","#5E1230","#8A1B46","#B8245C","#F02D7D","#F566A0","#FA9CC2","#FDD0E2"] },
+      "ink-purple": { "role": "tertiary", "displayName": "Ink Purple 墨紫", "canonical": "oklch(0.50 0.27 295)", "tonalRamp": ["#1C0A3A","#2E0F5E","#46188A","#5E22B8","#7B2FF7","#A06CFA","#C29CFC","#E0CFFE"] },
+      "fresh-yellow": { "role": "tertiary", "displayName": "Fresh Yellow 鮮黃", "canonical": "oklch(0.92 0.18 102)", "tonalRamp": ["#3D3500","#5E5200","#8A7800","#B8A000","#E0C500","#FFE21D","#FFEC66","#FFF6B8"] },
+      "ink-900": { "role": "neutral", "displayName": "Ink 墨底", "canonical": "oklch(0.16 0.02 250)", "tonalRamp": ["#0C1219","#17202B","#28323F","#3D4A59","#5A6B7C","#94A3B2","#C4CDD6","#E8EDF2"] },
+      "panel-bg": { "role": "neutral", "displayName": "Spec Sheet 規格表面", "canonical": "oklch(0.95 0.004 165)", "tonalRamp": ["#0F1620","#26302E","#3E4A47","#5A6B66","#7E8E89","#A6B2AD","#C9D4D0","#EEF2F1"] },
+      "callout-amber": { "role": "tertiary", "displayName": "Callout 標註琥珀", "canonical": "oklch(0.66 0.13 70)", "tonalRamp": ["#2E1A00","#4A2C00","#6E4200","#935800","#B87200","#E08A1E","#F2B262","#F9D9AC"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display / 武器名", "purpose": "招牌時刻的標題與武器名;CJK 可渲染的 M PLUS Rounded 1c 800。僅限品牌區。" },
+      "wordmark": { "displayName": "Wordmark (Latin)", "purpose": "Bungee 貼紙招牌,僅拉丁字,絕不套 CJK。" },
+      "body": { "displayName": "Body / UI", "purpose": "三語 UI、標籤、按鈕、內文,M PLUS Rounded 1c。" },
+      "data": { "displayName": "Data / Mono", "purpose": "規格表數值與編號,IBM Plex Mono + tabular-nums。" }
+    },
+    "shadows": [
+      { "name": "sticker", "value": "0 6px 0 #12A912, 0 14px 24px rgba(25,215,25,0.35)", "purpose": "主品牌 CTA(抽!鈕)的可按壓貼紙厚度。招牌時刻,不可濫用。" },
+      { "name": "panel-lift", "value": "0 12px 32px rgba(0,0,0,0.45)", "purpose": "把淺色規格表面板從墨黑底上抬起,劃清品牌區與資料區。" }
+    ],
+    "motion": [
+      { "name": "ease-state", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "ease-out-quint;狀態轉場(hover/focus/選取)150–200ms。" },
+      { "name": "idle-bob", "value": "transform 動態,3s ease-in-out infinite alternate", "purpose": "SVG 美術的待機微動;prefers-reduced-motion 下停用。" }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (抽!)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "主品牌 CTA,綠色貼紙鈕,用於隨機器抽選與主要行動。",
+      "html": "<button class=\"ds-btn-primary\">SPLAT! 再抽一次</button>",
+      "css": ".ds-btn-primary{font-family:\"M PLUS Rounded 1c\",\"Noto Sans TC\",sans-serif;font-weight:800;font-size:1.125rem;letter-spacing:0.02em;color:#0C1219;background:#19D719;border:none;border-radius:18px;padding:16px 20px;cursor:pointer;box-shadow:0 6px 0 #12A912,0 14px 24px rgba(25,215,25,0.35);transition:background .18s cubic-bezier(0.22,1,0.36,1),transform .18s cubic-bezier(0.22,1,0.36,1)}.ds-btn-primary:hover{background:#12A912}.ds-btn-primary:active{transform:translateY(3px);box-shadow:0 3px 0 #0E7A0E}.ds-btn-primary:focus-visible{outline:2px solid #19D719;outline-offset:3px}@media(prefers-reduced-motion:reduce){.ds-btn-primary{transition:none}}"
+    },
+    {
+      "name": "Filter Chips",
+      "kind": "chip",
+      "refersTo": "chip-filter",
+      "description": "分類篩選 pill,多選 toggle。選中態靠綠色填充 + 字色翻轉。",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip\" aria-pressed=\"true\">射擊槍</button><button class=\"ds-chip\" aria-pressed=\"false\">滾筒</button><button class=\"ds-chip\" aria-pressed=\"false\">潑桶</button></div>",
+      "css": ".ds-chips{display:flex;gap:8px}.ds-chip{font-family:\"M PLUS Rounded 1c\",\"Noto Sans TC\",sans-serif;font-weight:700;font-size:0.75rem;letter-spacing:0.04em;padding:6px 12px;border:none;border-radius:999px;background:rgba(255,255,255,0.08);color:#E8EDF2;cursor:pointer;transition:background .18s cubic-bezier(0.22,1,0.36,1)}.ds-chip[aria-pressed=\"true\"]{background:#19D719;color:#0C1219}.ds-chip:hover{background:rgba(255,255,255,0.16)}.ds-chip[aria-pressed=\"true\"]:hover{background:#12A912}.ds-chip:focus-visible{outline:2px solid #19D719;outline-offset:2px}"
+    },
+    {
+      "name": "Weapon Card",
+      "kind": "card",
+      "refersTo": "card-weapon",
+      "description": "列表武器卡,墨底半透明 + 自繪 ink-splat 背景點綴,交替配色。",
+      "html": "<article class=\"ds-wcard\"><svg class=\"ds-splat\" viewBox=\"0 0 100 100\" aria-hidden=\"true\"><path fill=\"#19D719\" d=\"M52 8c8 2 9 14 18 14s14-6 18 4-6 16-2 24 8 18-2 22-18-2-24 4-10 12-20 8-8-14-18-16S6 96 4 84s12-14 12-24S6 44 12 34s18 0 24-6 6-22 16-20z\"/></svg><div class=\"ds-wart\"><svg viewBox=\"0 0 64 64\" width=\"56\" height=\"56\" aria-hidden=\"true\"><g fill=\"#E8EDF2\"><rect x=\"6\" y=\"26\" width=\"34\" height=\"12\" rx=\"3\"/><rect x=\"38\" y=\"22\" width=\"16\" height=\"9\" rx=\"2\"/><rect x=\"14\" y=\"36\" width=\"9\" height=\"16\" rx=\"2\"/></g></svg></div><b class=\"ds-wname\">スプラシューター</b><small class=\"ds-wmeta\">射擊槍 · Splattershot</small></article>",
+      "css": ".ds-wcard{position:relative;overflow:hidden;background:rgba(255,255,255,0.05);border-radius:18px;padding:12px;width:160px;color:#E8EDF2}.ds-splat{position:absolute;inset:-10% -10% auto auto;width:90px;height:90px;opacity:.9}.ds-wart{position:relative;z-index:1;height:64px;display:grid;place-items:center}.ds-wname{display:block;font-family:\"M PLUS Rounded 1c\",\"Noto Sans TC\",sans-serif;font-weight:700;font-size:0.95rem;margin-top:6px}.ds-wmeta{font-family:\"M PLUS Rounded 1c\",sans-serif;font-size:0.7rem;color:#94A3B2}.ds-wcard:hover{background:rgba(255,255,255,0.09)}.ds-wcard:hover .ds-splat{transform:rotate(8deg);transition:transform .25s cubic-bezier(0.22,1,0.36,1)}@media(prefers-reduced-motion:reduce){.ds-wcard:hover .ds-splat{transform:none}}"
+    },
+    {
+      "name": "Search Input",
+      "kind": "input",
+      "refersTo": "input-search",
+      "description": "暗色上的純白搜尋欄,含圖示與足夠對比的 placeholder。",
+      "html": "<label class=\"ds-search\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"#5A6B66\" stroke-width=\"2.5\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"M21 21l-4-4\"/></svg><input type=\"search\" placeholder=\"搜尋武器…\" aria-label=\"搜尋武器\"></label>",
+      "css": ".ds-search{display:flex;align-items:center;gap:8px;background:#FFFFFF;border-radius:14px;padding:11px 14px;width:240px}.ds-search input{border:none;outline:none;background:none;flex:1;font-family:\"M PLUS Rounded 1c\",\"Noto Sans TC\",sans-serif;font-weight:500;font-size:0.95rem;color:#0F1620}.ds-search input::placeholder{color:#5A6B66}.ds-search:focus-within{box-shadow:0 0 0 2px #19D719}"
+    },
+    {
+      "name": "Spec Sheet Panel",
+      "kind": "custom",
+      "refersTo": "panel-data",
+      "description": "簽名元件:資料畫面的淺色規格表,等寬數值 + 髮絲線 + 單色量表,數字 tabular 對齊。",
+      "html": "<div class=\"ds-spec\"><div class=\"ds-spec-h\">戰鬥數值 / 範例</div><div class=\"ds-srow\"><span class=\"ds-k\">傷害 DMG</span><span class=\"ds-bar\"><i style=\"width:62%\"></i></span><span class=\"ds-v\">36.0</span></div><div class=\"ds-srow\"><span class=\"ds-k\">射程 RNG</span><span class=\"ds-bar\"><i style=\"width:55%\"></i></span><span class=\"ds-v\">52</span></div><div class=\"ds-srow\"><span class=\"ds-k\">連射 FIRE</span><span class=\"ds-bar\"><i style=\"width:78%\"></i></span><span class=\"ds-v\">78</span></div></div>",
+      "css": ".ds-spec{background:#EEF2F1;color:#0F1620;border-radius:14px;padding:16px;width:280px;box-shadow:0 12px 32px rgba(0,0,0,0.45)}.ds-spec-h{font-family:\"IBM Plex Mono\",monospace;font-size:0.65rem;letter-spacing:0.2em;color:#5A6B66;border-bottom:1px solid #C9D4D0;padding-bottom:6px;margin-bottom:10px}.ds-srow{display:grid;grid-template-columns:72px 1fr 40px;gap:10px;align-items:center;margin-bottom:9px}.ds-k{font-family:\"IBM Plex Mono\",monospace;font-size:0.75rem;color:#5A6B66}.ds-bar{height:8px;border:1px solid #C9D4D0;border-radius:2px;position:relative;overflow:hidden}.ds-bar i{position:absolute;inset:0;background:#0F1620}.ds-v{font-family:\"IBM Plex Mono\",monospace;font-weight:600;font-size:0.8125rem;font-feature-settings:\"tnum\" 1;text-align:right;color:#E08A1E}"
+    },
+    {
+      "name": "Language Switcher",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "常駐三語切換,目前語言用品牌色填充標示,其餘冷灰。",
+      "html": "<div class=\"ds-lang\" role=\"group\" aria-label=\"語言\"><button aria-current=\"true\">中</button><button>JP</button><button>EN</button></div>",
+      "css": ".ds-lang{display:inline-flex;gap:4px}.ds-lang button{font-family:\"M PLUS Rounded 1c\",sans-serif;font-weight:700;font-size:0.7rem;border:none;border-radius:6px;padding:4px 8px;background:none;color:#94A3B2;cursor:pointer;transition:color .18s,background .18s}.ds-lang button[aria-current=\"true\"]{background:#F02D7D;color:#FFFFFF}.ds-lang button:hover{color:#E8EDF2}.ds-lang button[aria-current=\"true\"]:hover{color:#FFFFFF}.ds-lang button:focus-visible{outline:2px solid #19D719;outline-offset:2px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "霓虹噴漆 × 規格室 (The Spray Can & The Spec Sheet)",
+    "overview": "這個系統活在兩個地帶的張力之間。外殼是街頭:墨黑底色上爆出霓虹噴漆,貼紙般的招牌字,武器卡是噴濺色塊。核心是規格室:當玩家要看數值,畫面切換成一張冷靜的淺色規格表——等寬數字、細線分隔、量測式標註。品牌負責想逛想抽,規格表負責看得懂信得過。兩個地帶不是兩套設計,而是同一產品的兩個音量。",
+    "keyCharacteristics": [
+      "墨黑霓虹的品牌外殼 + 淺色規格表的資料核心,涇渭分明。",
+      "視覺資產一律自繪 SVG;美術是內容亮點,不是裝飾。",
+      "三語(ja-JP / zh-TW / en)一等公民,字體與版面需容納 CJK 與不同長度。",
+      "Mobile-first;招牌處放膽,資料處克制。"
+    ],
+    "rules": [
+      { "name": "The Two-Zone Rule", "body": "全站只有兩種色彩音量。品牌區可 Committed(霓虹可大面積);資料區是 Restrained(除單一主數值/選取用綠,其餘中性)。禁止把霓虹潑進資料表當裝飾。", "section": "colors" },
+      { "name": "The Green-Is-Not-Ink Rule", "body": "Turf Green 永不作內文或長文字色,只作填充、圖示、選取、量表。需要綠色文字感時用綠底 + 墨黑字。", "section": "colors" },
+      { "name": "The Category-Never-Color-Alone Rule", "body": "11 分類一律靠 SVG 圖示 + 文字標籤區分,顏色只是輔助,色盲友善。", "section": "colors" },
+      { "name": "The Display-Stays-Home Rule", "body": "Display 與 Wordmark 只活在招牌時刻;資料表、UI 標籤、按鈕、表單一律 Body/Label/Data 字體。", "section": "typography" },
+      { "name": "The Mono-For-Numbers Rule", "body": "所有並列比較的數值用 IBM Plex Mono + tnum,武器間數值上下對齊掃讀。", "section": "typography" },
+      { "name": "The Flat-By-Default Rule", "body": "表面預設平,深度靠色調分層。陰影只在主 CTA(貼紙厚度)與淺色資料面板(抬升)出現。", "section": "elevation" }
+    ],
+    "dos": [
+      "Do 把霓虹大膽集中在品牌區;資料區一律 Restrained。一處放膽,其餘安靜。",
+      "Do 用淺色 Panel-bg + IBM Plex Mono + tabular-nums 呈現所有數值。",
+      "Do 武器名與 CJK 標題用 M PLUS Rounded 1c 800(可渲染日文/中文)。",
+      "Do 內文用冷白 #E8EDF2,資料用 #0F1620;對比 ≥4.5:1。",
+      "Do 11 分類一律 SVG 圖示 + 文字標籤並行,顏色只是輔助。",
+      "Do 尊重 prefers-reduced-motion,所有動態都有降階版本。"
+    ],
+    "donts": [
+      "Don't 做成一般 SaaS 儀表板:藍灰側欄 + 同尺寸卡片網格。",
+      "Don't 落入通用 AI 模板:米色背景、高反差襯線、赤陶色、旋轉卡片堆砌。",
+      "Don't 讓 UI 看起來像官方或任天堂授權工具;不用任何遊戲 dump 官方圖檔。",
+      "Don't 把 Bungee 或 800 圓黑用在武器名以外的標籤、按鈕或數值(Bungee 無 CJK;display 入資料是 product 大忌)。",
+      "Don't 用 Turf Green 當內文或長文字色。",
+      "Don't 把霓虹潑進規格表當裝飾;資料區除單一主數值/選取外保持中性。",
+      "Don't 用淺到看不清的灰當 placeholder 或內文。"
+    ]
+  }
+}
