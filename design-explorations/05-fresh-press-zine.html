@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>方案 5 — Fresh Press Zine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Permanent+Marker&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --paper:#F3EFE6;
+    --ink:#1A1A1A;
+    --pink:#FF48B0;   /* riso fluoro pink */
+    --blue:#0078BF;   /* riso blue */
+    --over:#6A2C7A;   /* overprint */
+    --yellow:#FFD400;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Work Sans",system-ui,sans-serif;background:var(--ink);color:var(--paper);
+    min-height:100vh;padding:48px 20px 80px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  .head{margin-bottom:42px}
+  .kicker{font-family:"Permanent Marker";font-size:18px;color:var(--pink);transform:rotate(-3deg);display:inline-block}
+  .head h1{font-family:"Archivo Black";font-size:clamp(40px,8.5vw,86px);line-height:.86;
+    letter-spacing:-1px;margin:8px 0 12px;color:var(--paper);
+    text-shadow:3px 3px 0 var(--blue),-3px -2px 0 var(--pink)}
+  .head p{max-width:640px;font-size:16px;color:#cfc9bb;line-height:1.55}
+  .palette{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;font-family:"Work Sans";font-weight:700;font-size:11px}
+  .chip{display:flex;align-items:center;gap:7px;border:1px solid #4a463d;padding:5px 11px 5px 5px}
+  .sw{width:16px;height:16px}
+
+  .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+  .device{width:344px}
+  /* zine page = printed paper with grain + misregistration feel */
+  .screen{height:700px;background:var(--paper);color:var(--ink);position:relative;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.55);
+    --grain:rgba(0,0,0,.035)}
+  .screen::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;
+    background-image:radial-gradient(var(--grain) .8px,transparent .9px);background-size:4px 4px}
+  /* staple */
+  .screen::after{content:"";position:absolute;top:26px;left:18px;width:14px;height:4px;background:#9a958a;
+    box-shadow:0 640px 0 #9a958a;z-index:30;border-radius:1px}
+  .scap{text-align:center;margin-top:14px;font-family:"Permanent Marker";font-size:16px;color:#a59f90}
+  .scap b{color:var(--pink)}
+
+  /* masthead */
+  .mast{padding:18px 18px 8px 40px;border-bottom:3px solid var(--ink);position:relative}
+  .mast .iss{font-family:"Work Sans";font-weight:800;font-size:10px;letter-spacing:.18em;color:var(--blue)}
+  .mast h2{font-family:"Archivo Black";font-size:26px;line-height:.9;letter-spacing:-.5px}
+  .mast h2 em{font-style:normal;color:var(--pink)}
+  .mast .lang{position:absolute;right:14px;top:16px;font-family:"Work Sans";font-weight:800;font-size:11px}
+  .mast .lang b{background:var(--ink);color:var(--paper);padding:2px 6px}
+  .mast .lang span{color:#8a8madd}
+
+  /* search scrap */
+  .scrap{margin:12px 18px 8px 40px;border:2px solid var(--ink);background:#fff;padding:8px 12px;
+    font-family:"Work Sans";font-weight:600;font-size:13px;color:#777;transform:rotate(-.6deg)}
+  .tags{display:flex;gap:7px;flex-wrap:wrap;padding:0 18px 12px 40px}
+  .tag{font-family:"Work Sans";font-weight:800;font-size:11px;padding:3px 9px;border:2px solid var(--ink);transform:rotate(-1.5deg)}
+  .tag.on{background:var(--pink);color:#fff;border-color:var(--pink)}
+  .tag:nth-child(3){transform:rotate(1.2deg)}
+
+  /* collage list */
+  .collage{padding:4px 16px 16px;overflow-y:auto;height:calc(100% - 196px)}
+  .clip{background:#fff;border:2px solid var(--ink);padding:10px;margin-bottom:13px;position:relative;display:flex;gap:12px;align-items:center}
+  .clip:nth-child(odd){transform:rotate(-.8deg)}
+  .clip:nth-child(even){transform:rotate(.7deg)}
+  .clip .tape{position:absolute;top:-8px;left:24px;width:42px;height:16px;background:rgba(255,212,0,.65);transform:rotate(-6deg)}
+  .clip .ph{width:60px;height:54px;flex:0 0 auto;display:grid;place-items:center;position:relative;
+    background:var(--blue)}
+  .clip .ph svg{mix-blend-mode:screen}
+  .clip .ph::after{content:"";position:absolute;inset:0;background:var(--pink);mix-blend-mode:multiply;opacity:.0}
+  .clip .txt b{font-family:"Archivo Black";font-size:16px;display:block;line-height:.95}
+  .clip .txt small{font-family:"Work Sans";font-weight:600;font-size:11px;color:#555}
+  .clip .txt .mk{font-family:"Permanent Marker";font-size:13px;color:var(--pink);display:inline-block;transform:rotate(-2deg)}
+
+  /* ---- detail: zine spread ---- */
+  .spread{padding:14px 18px 4px 40px}
+  .bigart{background:var(--blue);position:relative;height:190px;display:grid;place-items:center;border:2px solid var(--ink)}
+  .bigart svg{mix-blend-mode:screen;position:relative;z-index:2}
+  .bigart::after{content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 60% 40%,var(--pink),transparent 60%);mix-blend-mode:multiply;opacity:.55}
+  .bigart .circle{position:absolute;z-index:5;width:120px;height:120px;border:3px solid var(--yellow);
+    border-radius:50%;top:36px;right:18px;transform:rotate(8deg)}
+  .bigart .arrow{position:absolute;z-index:5;right:140px;top:90px;font-family:"Permanent Marker";font-size:15px;color:var(--yellow)}
+  .dh{display:flex;align-items:baseline;gap:10px;margin-top:12px;flex-wrap:wrap}
+  .dh h2{font-family:"Archivo Black";font-size:28px;line-height:.85;letter-spacing:-.5px}
+  .dh .cat{font-family:"Permanent Marker";font-size:16px;color:var(--pink)}
+  .dh .en{font-family:"Work Sans";font-weight:600;font-size:12px;color:#555;width:100%}
+  .annot{padding:8px 18px 12px 40px}
+  .annot .row{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+  .annot .k{font-family:"Work Sans";font-weight:800;font-size:12px;width:48px}
+  .annot .track{flex:1;height:14px;background:#fff;border:2px solid var(--ink);position:relative}
+  .annot .track i{position:absolute;inset:0;width:var(--v);background:var(--pink)}
+  .annot .track i.b{background:var(--blue)}
+  .annot .note{font-family:"Permanent Marker";font-size:13px;color:var(--blue);width:46px;text-align:right}
+  .lo{display:flex;gap:10px;margin-top:6px}
+  .lo div{flex:1;border:2px solid var(--ink);background:#fff;padding:7px 9px;transform:rotate(-.5deg)}
+  .lo small{font-family:"Work Sans";font-weight:800;font-size:9px;color:var(--blue);letter-spacing:.1em}
+  .lo b{display:block;font-family:"Archivo Black";font-size:13px;margin-top:2px}
+
+  /* ---- random: spin cut-out ---- */
+  .rw{padding:14px 18px 14px 40px;height:calc(100% - 0px);display:flex;flex-direction:column}
+  .rtitle{font-family:"Archivo Black";font-size:30px;line-height:.85}
+  .rtitle em{font-style:normal;color:var(--pink)}
+  .rsub{font-family:"Permanent Marker";font-size:15px;color:var(--blue);margin:4px 0 12px;transform:rotate(-1.5deg)}
+  .rtags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}
+  .rtags span{font-family:"Work Sans";font-weight:800;font-size:11px;padding:3px 9px;border:2px solid var(--ink)}
+  .rtags span.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .pulled{flex:1;background:#fff;border:3px solid var(--ink);position:relative;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;transform:rotate(-1deg);margin-bottom:14px}
+  .pulled .tape{position:absolute;top:-10px;left:50%;margin-left:-30px;width:60px;height:20px;background:rgba(255,212,0,.7);transform:rotate(3deg)}
+  .pulled .pic{width:120px;height:108px;background:var(--blue);display:grid;place-items:center;position:relative}
+  .pulled .pic svg{mix-blend-mode:screen}
+  .pulled .pic::after{content:"";position:absolute;inset:0;background:var(--pink);mix-blend-mode:multiply;opacity:.4}
+  .pulled b{font-family:"Archivo Black";font-size:22px;margin-top:12px;text-align:center;line-height:.9;color:var(--ink)}
+  .pulled small{font-family:"Permanent Marker";font-size:14px;color:var(--pink)}
+  .spin{font-family:"Archivo Black";font-size:20px;color:#fff;background:var(--pink);
+    border:3px solid var(--ink);padding:14px;cursor:pointer;box-shadow:5px 5px 0 var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="kicker">~ design route 05 / 共 5 種 ~</span>
+    <h1>FRESH PRESS<br/>ZINE</h1>
+    <p>呼應 Splatoon 美術真正的根:龐克手作雜誌、貼紙拼貼、Riso 油印雙色套印。螢光粉 × 油印藍交疊出第三色,刻意的套色錯位、紙張顆粒、手寫麥克筆註記。最有「人味」、最不像 AI 模板的一條路 —— 印刷感,而非螢幕光。</p>
+    <div class="palette">
+      <span class="chip"><i class="sw" style="background:#F3EFE6"></i>Newsprint F3EFE6</span>
+      <span class="chip"><i class="sw" style="background:#FF48B0"></i>Riso Pink FF48B0</span>
+      <span class="chip"><i class="sw" style="background:#0078BF"></i>Riso Blue 0078BF</span>
+      <span class="chip"><i class="sw" style="background:#FFD400"></i>Tape Yellow FFD400</span>
+      <span class="chip" style="border:none">字體 Archivo Black · Permanent Marker · Work Sans</span>
+    </div>
+  </header>
+
+  <div class="rail">
+
+    <!-- ===== LIST ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="mast">
+          <div class="lang"><b>中</b> <span>jp en</span></div>
+          <div class="iss">ISSUE #03 · 非官方 · DIY</div>
+          <h2>武器 <em>ZINE</em></h2>
+        </div>
+        <div class="scrap">⌕ 翻找一把武器…</div>
+        <div class="tags"><span class="tag on">全部</span><span class="tag">射擊槍</span><span class="tag">滾筒</span><span class="tag">潑桶</span></div>
+        <div class="collage">
+          <div class="clip"><span class="tape"></span><div class="ph"><svg width="44" height="30"><g fill="#fff"><rect x="6" y="12" width="22" height="7"/><rect x="26" y="9" width="11" height="5"/></g></svg></div><div class="txt"><b>スプラシューター</b><small>Splattershot</small><br><span class="mk">↳ 均衡新手款</span></div></div>
+          <div class="clip"><span class="tape"></span><div class="ph"><svg width="44" height="30"><g fill="#fff"><rect x="6" y="13" width="24" height="5"/><circle cx="33" cy="15" r="6"/></g></svg></div><div class="txt"><b>スプラローラー</b><small>Splat Roller · 滾筒</small><br><span class="mk">↳ 一壓滿地!</span></div></div>
+          <div class="clip"><span class="tape"></span><div class="ph"><svg width="44" height="30"><g fill="#fff"><rect x="6" y="14" width="28" height="3"/><polygon points="32,10 40,15 32,20"/></g></svg></div><div class="txt"><b>スプラチャージャー</b><small>Charger · 充能槍</small><br><span class="mk">↳ 狙擊狂熱</span></div></div>
+          <div class="clip"><span class="tape"></span><div class="ph"><svg width="44" height="30"><g fill="#fff"><rect x="18" y="5" width="6" height="18"/><path d="M9 22h26l-5 6H14z"/></g></svg></div><div class="txt"><b>バケットスロッシャー</b><small>Slosher · 潑桶</small></div></div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>A</b> · 武器列表</p>
+    </div>
+
+    <!-- ===== DETAIL ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="mast">
+          <div class="lang"><b>中</b> <span>jp en</span></div>
+          <div class="iss">‹ 回到 ZINE</div>
+          <h2>特集 <em>FEATURE</em></h2>
+        </div>
+        <div class="spread">
+          <div class="bigart">
+            <svg width="140" height="130" viewBox="0 0 64 56"><g fill="#fff"><rect x="6" y="22" width="34" height="12" rx="2"/><rect x="38" y="18" width="18" height="9" rx="1"/><rect x="14" y="32" width="9" height="16" rx="2"/></g></svg>
+            <div class="circle"></div>
+            <div class="arrow">這把超好上手!↗</div>
+          </div>
+          <div class="dh">
+            <h2>スプラシューター</h2>
+            <span class="cat">射擊槍</span>
+            <span class="en">Splattershot · 最均衡的入門主武器</span>
+          </div>
+        </div>
+        <div class="annot">
+          <div class="row"><span class="k">傷害</span><span class="track"><i style="--v:62%"></i></span><span class="note">36</span></div>
+          <div class="row"><span class="k">射程</span><span class="track"><i style="--v:55%"></i></span><span class="note">52</span></div>
+          <div class="row"><span class="k">連射</span><span class="track"><i class="b" style="--v:78%"></i></span><span class="note">78</span></div>
+          <div class="row"><span class="k">耗墨</span><span class="track"><i style="--v:30%"></i></span><span class="note">30</span></div>
+          <div class="lo">
+            <div><small>SUB 副武器</small><b>キューバンボム</b></div>
+            <div><small>SPECIAL 特殊</small><b>ウルトラショット</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>B</b> · 武器詳情</p>
+    </div>
+
+    <!-- ===== RANDOM ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="rw">
+          <div class="rtitle">今天<br/>抽 <em>哪把?</em></div>
+          <div class="rsub">~ 隨手翻、隨手抽 ~</div>
+          <div class="rtags"><span class="on">射擊槍</span><span class="on">潑桶</span><span>滾筒</span><span>炸彈副</span></div>
+          <div class="pulled">
+            <span class="tape"></span>
+            <div class="pic"><svg width="84" height="76" viewBox="0 0 64 56"><g fill="#fff"><rect x="22" y="8" width="9" height="32" rx="2"/><path d="M12 40h30l-6 12H18z"/></g></svg></div>
+            <b>バケットスロッシャー</b>
+            <small>Slosher · 潑桶</small>
+          </div>
+          <button class="spin">↻ 再翻一頁!</button>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>C</b> · 隨機決定器</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

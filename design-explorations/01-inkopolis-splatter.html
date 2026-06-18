@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>方案 1 — Inkopolis Splatter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Baloo+2:wght@500;600;700;800&family=Archivo:wght@600;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#101820;
+    --paper:#F5F3E7;
+    --green:#19D719;   /* turf A */
+    --magenta:#F02D7D; /* turf B */
+    --purple:#7B2FF7;
+    --yellow:#FFE21D;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Baloo 2",system-ui,sans-serif;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(123,47,247,.25), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(240,45,125,.22), transparent 45%),
+      var(--ink);
+    color:var(--paper);
+    min-height:100vh;
+    padding:48px 20px 80px;
+    background-attachment:fixed;
+  }
+  /* halftone dots overlay */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:radial-gradient(rgba(255,255,255,.05) 1.2px, transparent 1.3px);
+    background-size:11px 11px;mix-blend-mode:screen;
+  }
+  .wrap{max-width:1180px;margin:0 auto;position:relative;z-index:1}
+
+  /* ---------- showcase header ---------- */
+  .head{margin-bottom:42px}
+  .kicker{
+    display:inline-block;font-family:"Archivo";font-weight:900;letter-spacing:.22em;
+    font-size:12px;background:var(--green);color:var(--ink);padding:6px 12px;
+    transform:rotate(-2deg);border-radius:4px;
+  }
+  .head h1{
+    font-family:"Bungee";font-size:clamp(34px,7vw,68px);line-height:.95;
+    margin:18px 0 8px;letter-spacing:.5px;
+    text-shadow:4px 4px 0 var(--magenta), 8px 8px 0 var(--purple);
+  }
+  .head p{max-width:620px;font-size:17px;color:#cfd6d0;font-weight:500}
+  .palette{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+  .chip{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;
+    background:rgba(255,255,255,.06);padding:6px 12px 6px 6px;border-radius:30px}
+  .sw{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3)}
+
+  /* ---------- phone rail ---------- */
+  .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .device{width:330px;flex:0 0 auto}
+  .screen{
+    background:var(--ink);border:3px solid #000;border-radius:34px;overflow:hidden;
+    box-shadow:0 24px 60px rgba(0,0,0,.55), inset 0 0 0 4px rgba(255,255,255,.04);
+    height:680px;position:relative;
+  }
+  .scap{text-align:center;margin-top:14px;font-family:"Archivo";font-weight:700;
+    letter-spacing:.16em;font-size:12px;color:#8a9690}
+  .scap b{color:var(--yellow)}
+
+  /* shared in-screen chrome */
+  .topbar{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 12px}
+  .logo{font-family:"Bungee";font-size:18px;color:var(--paper);line-height:1}
+  .logo span{color:var(--green)}
+  .lang{display:flex;gap:4px;font-family:"Archivo";font-weight:700;font-size:11px}
+  .lang b{background:var(--magenta);color:#fff;padding:3px 6px;border-radius:5px}
+  .lang i{color:#6d7a73;font-style:normal;padding:3px 5px}
+  .notice{font-size:10px;text-align:center;color:#5d6a63;padding:0 16px 8px;font-weight:600}
+
+  /* search + filters */
+  .search{margin:4px 16px 12px;display:flex;align-items:center;gap:8px;
+    background:#fff;border-radius:14px;padding:11px 14px;color:#5a5a5a;font-weight:600;font-size:14px}
+  .search svg{flex:0 0 auto}
+  .fbar{display:flex;gap:8px;overflow:hidden;padding:0 16px 14px;flex-wrap:wrap}
+  .fcat{font-family:"Archivo";font-weight:700;font-size:12px;padding:6px 12px;border-radius:30px;
+    background:rgba(255,255,255,.08);color:#cfd6d0}
+  .fcat.on{background:var(--green);color:var(--ink)}
+
+  /* weapon grid */
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0 16px 20px;
+    overflow-y:auto;height:calc(100% - 196px)}
+  .wcard{background:rgba(255,255,255,.05);border-radius:18px;padding:12px;position:relative;overflow:hidden}
+  .wcard .splat{position:absolute;inset:-10% -10% auto auto;width:90px;height:90px;opacity:.9}
+  .wart{height:78px;display:grid;place-items:center;position:relative;z-index:1}
+  .wname{font-weight:800;font-size:14px;margin-top:6px;line-height:1.1}
+  .wmeta{font-size:11px;color:#9aa7a0;font-weight:600}
+  .wtag{display:inline-block;margin-top:7px;font-family:"Archivo";font-weight:700;font-size:10px;
+    padding:3px 8px;border-radius:20px;background:var(--purple);color:#fff}
+
+  /* ---------- detail screen ---------- */
+  .hero{position:relative;padding:6px 16px 0;text-align:center}
+  .heroSplat{width:230px;height:230px;margin:0 auto;display:grid;place-items:center;position:relative}
+  .heroSplat .blob{position:absolute;inset:0}
+  .heroSplat svg.weapon{position:relative;z-index:2;width:150px;height:150px}
+  .catpill{display:inline-block;font-family:"Archivo";font-weight:900;letter-spacing:.12em;
+    font-size:11px;background:var(--yellow);color:var(--ink);padding:5px 12px;border-radius:20px;transform:rotate(-2deg)}
+  .dtitle{font-family:"Bungee";font-size:26px;margin:10px 0 2px}
+  .dsub{font-size:13px;color:#9aa7a0;font-weight:600}
+  .loadout{display:flex;gap:10px;justify-content:center;margin:14px 0 6px}
+  .lo{flex:1;background:rgba(255,255,255,.06);border-radius:14px;padding:10px;text-align:center}
+  .lo small{display:block;font-family:"Archivo";font-weight:700;font-size:9px;letter-spacing:.1em;color:#7f8c85}
+  .lo b{font-size:13px;font-weight:800}
+  .lo .icn{font-size:22px;line-height:1.4}
+  .stats{padding:8px 16px 18px}
+  .stathead{font-family:"Archivo";font-weight:900;letter-spacing:.18em;font-size:11px;color:var(--green);margin:6px 0 10px}
+  .srow{margin-bottom:11px}
+  .srow .lab{display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-bottom:5px}
+  .srow .lab b{color:#cfd6d0}.srow .lab i{font-style:normal;color:#7f8c85;font-family:"Archivo"}
+  .meter{height:13px;border-radius:8px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+  .meter i{position:absolute;inset:0;width:var(--v);border-radius:8px;
+    background:linear-gradient(90deg,var(--green),var(--yellow));clip-path:url(#dripclip)}
+
+  /* ---------- random screen ---------- */
+  .rwrap{display:flex;flex-direction:column;height:calc(100% - 60px);padding:4px 16px 16px}
+  .rlead{font-family:"Bungee";font-size:20px;text-align:center;margin:6px 0}
+  .rlead span{color:var(--magenta)}
+  .rfilter{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:6px 0 10px}
+  .rfilter span{font-family:"Archivo";font-weight:700;font-size:11px;padding:5px 10px;border-radius:20px;background:rgba(255,255,255,.08)}
+  .rfilter span.on{background:var(--magenta);color:#fff}
+  .rstage{flex:1;display:grid;place-items:center;position:relative}
+  .rresult{text-align:center;position:relative;z-index:2}
+  .rresult .rsplat{width:200px;height:200px;margin:0 auto;display:grid;place-items:center;position:relative}
+  .rresult .rsplat svg.weapon{position:relative;z-index:2;width:120px;height:120px}
+  .rname{font-family:"Bungee";font-size:24px;margin-top:6px}
+  .rcat{font-family:"Archivo";font-weight:700;font-size:12px;color:var(--yellow);letter-spacing:.1em}
+  .rbtn{display:block;width:100%;font-family:"Bungee";font-size:22px;color:var(--ink);
+    background:var(--green);border:none;border-radius:18px;padding:16px;cursor:pointer;
+    box-shadow:0 6px 0 #0fa30f, 0 14px 24px rgba(25,215,25,.35);letter-spacing:1px}
+
+  @media(max-width:760px){.rail{gap:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- inline reusable SVG defs (splat shapes + weapon glyphs) -->
+  <svg width="0" height="0" style="position:absolute"><defs>
+    <clipPath id="dripclip"><path d="M0,0 H100 V60 Q92,78 84,60 Q76,80 68,60 Q60,78 52,60 Q44,80 36,60 Q28,78 20,60 Q12,80 4,60 Q0,64 0,55 Z" transform="scale(.01,.0166)"/></clipPath>
+  </defs></svg>
+
+  <header class="head">
+    <span class="kicker">DESIGN ROUTE 01 / 共 5 種</span>
+    <h1>INKOPOLIS<br/>SPLATTER</h1>
+    <p>把遊戲最招牌的「雙隊霓虹對比 + 墨水噴濺 + 貼紙字體」直接當成介面語言。武器卡是噴濺色塊,數值是擴散的墨水量表 —— 吵鬧、年輕、過目不忘。</p>
+    <div class="palette">
+      <span class="chip"><i class="sw" style="background:#101820"></i>Ink #101820</span>
+      <span class="chip"><i class="sw" style="background:#19D719"></i>Turf Green #19D719</span>
+      <span class="chip"><i class="sw" style="background:#F02D7D"></i>Magenta #F02D7D</span>
+      <span class="chip"><i class="sw" style="background:#7B2FF7"></i>Purple #7B2FF7</span>
+      <span class="chip"><i class="sw" style="background:#FFE21D"></i>Yellow #FFE21D</span>
+      <span class="chip" style="background:none">字體 Bungee · Baloo 2 · Archivo</span>
+    </div>
+  </header>
+
+  <div class="rail">
+
+    <!-- ============ SCREEN 1 : LIST ============ -->
+    <div class="device">
+      <div class="screen">
+        <div class="topbar">
+          <div class="logo">SPLAT<span>·</span>DEX</div>
+          <div class="lang"><b>中</b><i>JP</i><i>EN</i></div>
+        </div>
+        <div class="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+          搜尋武器…
+        </div>
+        <div class="fbar">
+          <span class="fcat on">全部</span>
+          <span class="fcat">射擊槍</span>
+          <span class="fcat">滾筒</span>
+          <span class="fcat">充能槍</span>
+          <span class="fcat">潑桶</span>
+        </div>
+        <div class="grid">
+          <!-- card -->
+          <div class="wcard">
+            <svg class="splat" viewBox="0 0 100 100"><path fill="#19D719" d="M52 8c8 2 9 14 18 14s14-6 18 4-6 16-2 24 8 18-2 22-18-2-24 4-10 12-20 8-8-14-18-16S6 96 4 84s12-14 12-24S6 44 12 34s18 0 24-6 6-22 16-20z"/></svg>
+            <div class="wart"><svg class="weapon" width="64" height="64" viewBox="0 0 64 64"><g fill="#F5F3E7"><rect x="6" y="26" width="34" height="12" rx="3"/><rect x="38" y="22" width="16" height="9" rx="2"/><rect x="14" y="36" width="9" height="16" rx="2"/></g></svg></div>
+            <div class="wname">スプラシューター</div>
+            <div class="wmeta">射擊槍 · Splattershot</div>
+            <span class="wtag">三連發砲</span>
+          </div>
+          <div class="wcard">
+            <svg class="splat" viewBox="0 0 100 100"><path fill="#F02D7D" d="M52 8c8 2 9 14 18 14s14-6 18 4-6 16-2 24 8 18-2 22-18-2-24 4-10 12-20 8-8-14-18-16S6 96 4 84s12-14 12-24S6 44 12 34s18 0 24-6 6-22 16-20z"/></svg>
+            <div class="wart"><svg class="weapon" width="64" height="64" viewBox="0 0 64 64"><g fill="#F5F3E7"><rect x="8" y="30" width="40" height="8" rx="2"/><circle cx="48" cy="34" r="9"/><rect x="16" y="36" width="8" height="15" rx="2"/></g></svg></div>
+            <div class="wname">スプラローラー</div>
+            <div class="wmeta">滾筒 · Splat Roller</div>
+            <span class="wtag">大關門</span>
+          </div>
+          <div class="wcard">
+            <svg class="splat" viewBox="0 0 100 100"><path fill="#7B2FF7" d="M52 8c8 2 9 14 18 14s14-6 18 4-6 16-2 24 8 18-2 22-18-2-24 4-10 12-20 8-8-14-18-16S6 96 4 84s12-14 12-24S6 44 12 34s18 0 24-6 6-22 16-20z"/></svg>
+            <div class="wart"><svg class="weapon" width="64" height="64" viewBox="0 0 64 64"><g fill="#F5F3E7"><rect x="6" y="32" width="48" height="5" rx="2"/><polygon points="50,28 62,34 50,40"/><rect x="14" y="36" width="7" height="15" rx="2"/></g></svg></div>
+            <div class="wname">スプラチャージャー</div>
+            <div class="wmeta">充能槍 · Splat Charger</div>
+            <span class="wtag">墨色霧滅</span>
+          </div>
+          <div class="wcard">
+            <svg class="splat" viewBox="0 0 100 100"><path fill="#FFE21D" d="M52 8c8 2 9 14 18 14s14-6 18 4-6 16-2 24 8 18-2 22-18-2-24 4-10 12-20 8-8-14-18-16S6 96 4 84s12-14 12-24S6 44 12 34s18 0 24-6 6-22 16-20z"/></svg>
+            <div class="wart"><svg class="weapon" width="64" height="64" viewBox="0 0 64 64"><g fill="#101820"><rect x="22" y="10" width="9" height="34" rx="3"/><path d="M14 44 h26 l-6 10 h-14 z"/></g></svg></div>
+            <div class="wname">バケットスロッシャー</div>
+            <div class="wmeta">潑桶 · Slosher</div>
+            <span class="wtag">護盾</span>
+          </div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>A</b> · 武器列表 LIST</p>
+    </div>
+
+    <!-- ============ SCREEN 2 : DETAIL ============ -->
+    <div class="device">
+      <div class="screen">
+        <div class="topbar">
+          <div class="logo" style="font-size:14px">‹ 返回列表</div>
+          <div class="lang"><b>中</b><i>JP</i><i>EN</i></div>
+        </div>
+        <div class="hero">
+          <div class="heroSplat">
+            <svg class="blob" viewBox="0 0 100 100"><path fill="#19D719" d="M50 4c10 4 8 16 20 16s16-4 18 8-8 14-4 24 10 16 0 24-18 0-24 8-8 14-20 10-6-16-18-18S2 92 2 80s14-12 14-24S4 40 10 30s18 2 24-6 6-24 16-20z"/></svg>
+            <svg class="weapon" viewBox="0 0 64 64"><g fill="#101820"><rect x="6" y="26" width="34" height="12" rx="3"/><rect x="38" y="22" width="18" height="9" rx="2"/><rect x="14" y="36" width="9" height="18" rx="2"/></g></svg>
+          </div>
+          <span class="catpill">射擊槍 · SHOOTER</span>
+          <h2 class="dtitle">スプラシューター</h2>
+          <p class="dsub">Splattershot · 最均衡的入門主武器</p>
+          <div class="loadout">
+            <div class="lo"><small>SUB 副武器</small><div class="icn">💣</div><b>キューバンボム</b></div>
+            <div class="lo"><small>SPECIAL 特殊</small><div class="icn">🚀</div><b>ウルトラショット</b></div>
+          </div>
+        </div>
+        <div class="stats">
+          <div class="stathead">戰鬥數值 / 範例</div>
+          <div class="srow"><div class="lab"><b>傷害</b><i>36</i></div><div class="meter"><i style="--v:62%"></i></div></div>
+          <div class="srow"><div class="lab"><b>射程</b><i>52</i></div><div class="meter"><i style="--v:55%"></i></div></div>
+          <div class="srow"><div class="lab"><b>連射</b><i>78</i></div><div class="meter"><i style="--v:78%"></i></div></div>
+          <div class="srow"><div class="lab"><b>耗墨</b><i>30</i></div><div class="meter"><i style="--v:30%"></i></div></div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>B</b> · 武器詳情 DETAIL</p>
+    </div>
+
+    <!-- ============ SCREEN 3 : RANDOM ============ -->
+    <div class="device">
+      <div class="screen">
+        <div class="topbar">
+          <div class="logo">抽<span>·</span>武器</div>
+          <div class="lang"><b>中</b><i>JP</i><i>EN</i></div>
+        </div>
+        <div class="rwrap">
+          <div class="rlead">開打前 <span>抽一把!</span></div>
+          <div class="rfilter">
+            <span class="on">射擊槍</span><span class="on">潑桶</span><span>滾筒</span><span>炸彈副</span>
+          </div>
+          <div class="rstage">
+            <div class="rresult">
+              <div class="rsplat">
+                <svg class="blob" viewBox="0 0 100 100" style="position:absolute;inset:0"><path fill="#F02D7D" d="M50 4c10 4 8 16 20 16s16-4 18 8-8 14-4 24 10 16 0 24-18 0-24 8-8 14-20 10-6-16-18-18S2 92 2 80s14-12 14-24S4 40 10 30s18 2 24-6 6-24 16-20z"/></svg>
+                <svg class="weapon" viewBox="0 0 64 64"><g fill="#101820"><rect x="22" y="10" width="9" height="34" rx="3"/><path d="M14 44 h26 l-6 10 h-14 z"/></g></svg>
+              </div>
+              <div class="rname">バケットスロッシャー</div>
+              <div class="rcat">潑桶 · SLOSHER</div>
+            </div>
+          </div>
+          <button class="rbtn">SPLAT! 再抽一次</button>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>C</b> · 隨機決定器 RANDOM</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

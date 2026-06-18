@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>方案 3 — Armory Blueprint</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --blue:#0C2A4D;     /* blueprint ground */
+    --blue2:#103a68;
+    --line:#5FA8E0;     /* draft line */
+    --line-soft:rgba(95,168,224,.28);
+    --paper:#DCEBFB;    /* light text */
+    --amber:#FFB54A;    /* highlight callout */
+    --red:#FF6B5E;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"IBM Plex Sans",system-ui,sans-serif;
+    background:var(--blue);color:var(--paper);min-height:100vh;padding:48px 20px 80px;
+    background-image:
+      linear-gradient(var(--line-soft) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+    background-size:26px 26px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  .head{margin-bottom:40px}
+  .kicker{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.2em;color:var(--line);
+    border:1px solid var(--line-soft);display:inline-block;padding:4px 10px}
+  .head h1{font-family:"IBM Plex Mono";font-weight:700;font-size:clamp(32px,6.5vw,60px);
+    margin:14px 0 8px;letter-spacing:1px}
+  .head h1 b{color:var(--amber)}
+  .head p{max-width:640px;font-size:16px;color:#9dc2e6;line-height:1.55}
+  .palette{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;font-family:"IBM Plex Mono";font-size:11px}
+  .chip{display:flex;align-items:center;gap:7px;border:1px solid var(--line-soft);padding:5px 10px 5px 5px}
+  .sw{width:16px;height:16px}
+
+  .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+  .device{width:344px}
+  .screen{height:692px;border:1px solid var(--line);position:relative;overflow:hidden;
+    background:linear-gradient(180deg,var(--blue2),var(--blue));box-shadow:0 22px 56px rgba(0,0,0,.5)}
+  /* corner crop marks */
+  .screen::before,.screen::after{content:"";position:absolute;width:14px;height:14px;border:1px solid var(--line);z-index:20}
+  .screen::before{top:8px;left:8px;border-right:0;border-bottom:0}
+  .screen::after{bottom:8px;right:8px;border-left:0;border-top:0}
+  .scap{text-align:center;margin-top:13px;font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.1em;color:#6f9bc4}
+  .scap b{color:var(--amber)}
+
+  .hd{display:flex;justify-content:space-between;align-items:flex-end;padding:16px 16px 10px;border-bottom:1px solid var(--line-soft)}
+  .hd .ttl{font-family:"IBM Plex Mono";font-weight:600;font-size:13px;letter-spacing:.12em}
+  .hd .ttl small{display:block;color:var(--line);font-size:10px;letter-spacing:.2em}
+  .hd .lang{font-family:"IBM Plex Mono";font-size:11px}
+  .hd .lang b{color:var(--amber)}.hd .lang span{color:#5d83ab}
+
+  /* search + meta line */
+  .toolrow{display:flex;gap:8px;padding:12px 16px}
+  .search{flex:1;border:1px solid var(--line-soft);padding:8px 11px;font-family:"IBM Plex Mono";
+    font-size:12px;color:#82a9cf;display:flex;align-items:center;gap:8px}
+  .filterbtn{border:1px solid var(--line-soft);padding:8px 11px;font-family:"IBM Plex Mono";font-size:12px;color:var(--paper)}
+  .legend{padding:0 16px 8px;font-family:"IBM Plex Mono";font-size:10px;color:#6f9bc4;letter-spacing:.05em}
+
+  /* spec catalog rows */
+  .cat{padding:0 16px;overflow-y:auto;height:calc(100% - 150px)}
+  .crow{display:grid;grid-template-columns:54px 1fr auto;gap:10px;align-items:center;
+    padding:11px 0;border-bottom:1px solid var(--line-soft)}
+  .crow .thumb{height:40px;border:1px solid var(--line-soft);display:grid;place-items:center;position:relative}
+  .crow .thumb span{position:absolute;top:1px;left:3px;font-family:"IBM Plex Mono";font-size:8px;color:var(--line)}
+  .crow .info b{font-family:"IBM Plex Sans";font-weight:600;font-size:15px;display:block;line-height:1.15}
+  .crow .info small{font-family:"IBM Plex Mono";font-size:10px;color:#7ea4cb}
+  .crow .info em{font-style:normal;color:var(--amber);font-family:"IBM Plex Mono";font-size:10px}
+  .crow .idx{font-family:"IBM Plex Mono";font-size:11px;color:var(--line);text-align:right}
+  .crow .idx i{display:block;color:#5d83ab;font-style:normal;font-size:9px}
+
+  /* ---- detail: technical drawing ---- */
+  .dwg{padding:14px 16px 4px;position:relative}
+  .dwgbox{border:1px solid var(--line-soft);height:200px;position:relative;display:grid;place-items:center}
+  .dwgbox .tag{position:absolute;top:6px;left:8px;font-family:"IBM Plex Mono";font-size:9px;color:var(--line);letter-spacing:.18em}
+  .dwgbox .scale{position:absolute;bottom:6px;right:8px;font-family:"IBM Plex Mono";font-size:9px;color:#6f9bc4}
+  /* dimension callouts */
+  .callout{position:absolute;font-family:"IBM Plex Mono";font-size:9px;color:var(--amber)}
+  .c1{top:30px;left:14px}.c2{bottom:42px;right:16px}
+  .dim{position:absolute;border-top:1px dashed var(--amber);left:40px;right:40px;top:50%}
+  .dim::before,.dim::after{content:"";position:absolute;top:-3px;width:1px;height:7px;background:var(--amber)}
+  .dim::before{left:0}.dim::after{right:0}
+
+  .idblock{display:flex;justify-content:space-between;align-items:flex-start;margin-top:12px}
+  .idblock h2{font-family:"IBM Plex Sans";font-weight:700;font-size:23px;line-height:1}
+  .idblock .en{font-family:"IBM Plex Mono";font-size:11px;color:#7ea4cb;margin-top:3px}
+  .idblock .cls{text-align:right;font-family:"IBM Plex Mono";font-size:10px;color:var(--line)}
+  .idblock .cls b{color:var(--amber);display:block;font-size:13px}
+
+  .specsheet{padding:12px 16px}
+  .sh-h{font-family:"IBM Plex Mono";font-size:10px;letter-spacing:.2em;color:var(--line);
+    border-bottom:1px solid var(--line);padding-bottom:5px;margin-bottom:8px}
+  .sline{display:grid;grid-template-columns:62px 1fr 40px;gap:8px;align-items:center;margin-bottom:7px}
+  .sline .k{font-family:"IBM Plex Mono";font-size:11px;color:#9dc2e6}
+  .sline .v{font-family:"IBM Plex Mono";font-size:11px;color:var(--amber);text-align:right}
+  .bar{height:8px;border:1px solid var(--line-soft);position:relative}
+  .bar i{position:absolute;inset:0;width:var(--v);background:
+    repeating-linear-gradient(135deg,var(--line) 0 2px,transparent 2px 5px);border-right:1px solid var(--line)}
+  .lo{display:flex;gap:8px;margin-top:8px}
+  .lo div{flex:1;border:1px solid var(--line-soft);padding:7px 9px}
+  .lo small{font-family:"IBM Plex Mono";font-size:9px;color:var(--line);letter-spacing:.1em}
+  .lo b{display:block;font-size:13px;font-weight:600;margin-top:2px}
+
+  /* ---- random: requisition slip ---- */
+  .rwrap{padding:14px 16px;height:calc(100% - 64px);display:flex;flex-direction:column}
+  .rh{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;color:var(--line);margin-bottom:10px}
+  .params{border:1px solid var(--line-soft);padding:10px;margin-bottom:10px}
+  .params .pl{font-family:"IBM Plex Mono";font-size:9px;color:#6f9bc4;letter-spacing:.1em;margin-bottom:6px}
+  .params .row2{display:flex;gap:6px;flex-wrap:wrap}
+  .params .row2 span{font-family:"IBM Plex Mono";font-size:11px;border:1px solid var(--line-soft);padding:3px 8px}
+  .params .row2 span.on{background:var(--line);color:var(--blue)}
+  .slip{flex:1;border:1px dashed var(--line);display:flex;flex-direction:column;justify-content:center;align-items:center;position:relative;margin-bottom:10px}
+  .slip .stamp{position:absolute;top:12px;right:12px;border:2px solid var(--red);color:var(--red);
+    font-family:"IBM Plex Mono";font-weight:700;font-size:11px;padding:3px 8px;transform:rotate(-12deg);letter-spacing:.1em}
+  .slip h2{font-family:"IBM Plex Sans";font-weight:700;font-size:24px;margin-top:12px;text-align:center;line-height:1}
+  .slip .en{font-family:"IBM Plex Mono";font-size:11px;color:#7ea4cb;margin-top:4px}
+  .rbtn{font-family:"IBM Plex Mono";font-weight:600;font-size:15px;letter-spacing:.1em;
+    color:var(--blue);background:var(--amber);border:none;padding:13px;cursor:pointer}
+  .stroke{fill:none;stroke:var(--line);stroke-width:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="kicker">DESIGN ROUTE 03 / 共 5 種</span>
+    <h1>ARMORY <b>BLUEPRINT</b></h1>
+    <p>跟前兩個方案相反 —— 安靜、克制、數據優先。藍曬工程圖底紋、量測標註、等寬字數據表。武器是技術圖,而非貼紙。最適合「查數值」這個回訪核心,易讀、專業、不喧賓奪主。墨水色只當高亮。</p>
+    <div class="palette">
+      <span class="chip"><i class="sw" style="background:#0C2A4D"></i>Blueprint 0C2A4D</span>
+      <span class="chip"><i class="sw" style="background:#5FA8E0"></i>Draft Line 5FA8E0</span>
+      <span class="chip"><i class="sw" style="background:#FFB54A"></i>Callout Amber FFB54A</span>
+      <span class="chip"><i class="sw" style="background:#FF6B5E"></i>Stamp Red FF6B5E</span>
+      <span class="chip" style="border:none">字體 IBM Plex Mono · IBM Plex Sans</span>
+    </div>
+  </header>
+
+  <div class="rail">
+
+    <!-- ===== LIST ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="hd"><div class="ttl">武器型錄<small>WEAPON CATALOG</small></div><div class="lang"><b>中</b> <span>JP·EN</span></div></div>
+        <div class="toolrow">
+          <div class="search">⌕ 搜尋編號 / 名稱</div>
+          <div class="filterbtn">⚙ 篩選</div>
+        </div>
+        <div class="legend">// 共 139 項 · 點選展開規格表 · 數值為範例快照 v.X</div>
+        <div class="cat">
+          <div class="crow"><div class="thumb"><span>S-01</span><svg width="36" height="22" class="stroke"><rect x="3" y="9" width="18" height="6"/><rect x="20" y="7" width="9" height="4"/></svg></div><div class="info"><b>スプラシューター</b><small>Splattershot</small> · <em>射擊槍</em></div><div class="idx">052<i>RNG</i></div></div>
+          <div class="crow"><div class="thumb"><span>R-01</span><svg width="36" height="22" class="stroke"><rect x="2" y="10" width="20" height="4"/><circle cx="26" cy="12" r="5"/></svg></div><div class="info"><b>スプラローラー</b><small>Splat Roller</small> · <em>滾筒</em></div><div class="idx">018<i>RNG</i></div></div>
+          <div class="crow"><div class="thumb"><span>C-01</span><svg width="36" height="22" class="stroke"><line x1="2" y1="12" x2="28" y2="12"/><polygon points="26,8 33,12 26,16"/></svg></div><div class="info"><b>スプラチャージャー</b><small>Splat Charger</small> · <em>充能槍</em></div><div class="idx">180<i>RNG</i></div></div>
+          <div class="crow"><div class="thumb"><span>L-01</span><svg width="36" height="22" class="stroke"><path d="M10 4v15"/><path d="M5 18h18l-4 4H9z"/></svg></div><div class="info"><b>バケットスロッシャー</b><small>Slosher</small> · <em>潑桶</em></div><div class="idx">055<i>RNG</i></div></div>
+          <div class="crow"><div class="thumb"><span>P-01</span><svg width="36" height="22" class="stroke"><circle cx="11" cy="12" r="7"/><rect x="18" y="10" width="13" height="4"/></svg></div><div class="info"><b>スプラスピナー</b><small>Splatling</small> · <em>蓄能槍</em></div><div class="idx">062<i>RNG</i></div></div>
+          <div class="crow"><div class="thumb"><span>B-01</span><svg width="36" height="22" class="stroke"><path d="M16 4v15"/><path d="M4 6c6 4 22 4 28 0"/></svg></div><div class="info"><b>トライストリンガー</b><small>Tri-Stringer</small> · <em>射弓</em></div><div class="idx">130<i>RNG</i></div></div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>A</b> · 武器列表 / 型錄</p>
+    </div>
+
+    <!-- ===== DETAIL ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="hd"><div class="ttl">‹ 型錄 / S-01<small>SPEC SHEET</small></div><div class="lang"><b>中</b> <span>JP·EN</span></div></div>
+        <div class="dwg">
+          <div class="dwgbox">
+            <span class="tag">FIG.1 — TOP VIEW</span>
+            <svg width="170" height="120" viewBox="0 0 64 44" class="stroke"><rect x="4" y="18" width="34" height="11" rx="1"/><rect x="36" y="14" width="18" height="8" rx="1"/><rect x="12" y="27" width="9" height="13" rx="1"/><circle cx="50" cy="18" r="2"/></svg>
+            <div class="dim"></div>
+            <span class="callout c1">⌀ nozzle</span>
+            <span class="callout c2">grip ∠</span>
+            <span class="scale">SCALE 1:4</span>
+          </div>
+          <div class="idblock">
+            <div><h2>スプラシューター</h2><div class="en">Splattershot</div></div>
+            <div class="cls">CLASS<b>SHOOTER</b>射擊槍</div>
+          </div>
+        </div>
+        <div class="specsheet">
+          <div class="sh-h">戰鬥數值 / COMBAT · 範例</div>
+          <div class="sline"><span class="k">傷害 DMG</span><div class="bar"><i style="--v:62%"></i></div><span class="v">36.0</span></div>
+          <div class="sline"><span class="k">射程 RNG</span><div class="bar"><i style="--v:55%"></i></div><span class="v">52</span></div>
+          <div class="sline"><span class="k">連射 FIRE</span><div class="bar"><i style="--v:78%"></i></div><span class="v">78</span></div>
+          <div class="sline"><span class="k">耗墨 INK</span><div class="bar"><i style="--v:30%"></i></div><span class="v">0.7%</span></div>
+          <div class="lo">
+            <div><small>SUB 副武器</small><b>キューバンボム</b></div>
+            <div><small>SP 特殊</small><b>ウルトラショット</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>B</b> · 武器詳情 / 規格表</p>
+    </div>
+
+    <!-- ===== RANDOM ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="hd"><div class="ttl">隨機調配<small>RANDOMIZER</small></div><div class="lang"><b>中</b> <span>JP·EN</span></div></div>
+        <div class="rwrap">
+          <div class="rh">// 設定抽選參數,系統隨機指派一把武器</div>
+          <div class="params">
+            <div class="pl">CLASS 分類</div>
+            <div class="row2"><span class="on">射擊槍</span><span class="on">潑桶</span><span>滾筒</span><span>充能槍</span></div>
+          </div>
+          <div class="params">
+            <div class="pl">SUB / SPECIAL 副·特殊</div>
+            <div class="row2"><span class="on">炸彈系</span><span>護盾系</span><span>不限</span></div>
+          </div>
+          <div class="slip">
+            <span class="stamp">ASSIGNED</span>
+            <svg width="90" height="80" viewBox="0 0 64 56" class="stroke"><path d="M22 6v34" /><path d="M10 40h30l-7 13H17z"/></svg>
+            <h2>バケットスロッシャー</h2>
+            <div class="en">Slosher · 潑桶 · L-01</div>
+          </div>
+          <button class="rbtn">RE-ROLL 重新指派</button>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>C</b> · 隨機決定器</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

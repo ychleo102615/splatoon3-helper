@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>方案 4 — Squid Beatz Arcade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#15131F;
+    --panel:#231E36;
+    --pink:#FF4D8D;
+    --cyan:#3DF2E0;
+    --yellow:#FFD23F;
+    --purple:#9B5CFF;
+    --white:#F4F0FF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Jost",system-ui,sans-serif;background:var(--bg);color:var(--white);
+    min-height:100vh;padding:48px 20px 80px;
+    background-image:
+      linear-gradient(rgba(155,92,255,.07) 2px,transparent 2px),
+      linear-gradient(90deg,rgba(155,92,255,.07) 2px,transparent 2px);
+    background-size:32px 32px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  .head{margin-bottom:42px}
+  .kicker{font-family:"VT323";font-size:18px;letter-spacing:.12em;color:var(--cyan);
+    background:#000;border:2px solid var(--cyan);padding:2px 12px;display:inline-block}
+  .head h1{font-family:"Press Start 2P";font-size:clamp(22px,4.4vw,42px);line-height:1.25;
+    margin:18px 0 14px;color:var(--yellow);
+    text-shadow:3px 3px 0 var(--pink),6px 6px 0 var(--purple)}
+  .head p{max-width:640px;font-size:17px;color:#c3b9e0;line-height:1.55}
+  .palette{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;font-family:"VT323";font-size:16px}
+  .chip{display:flex;align-items:center;gap:7px;background:var(--panel);padding:4px 11px 4px 4px;border:2px solid #000}
+  .sw{width:18px;height:18px}
+
+  .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+  .device{width:340px}
+  /* arcade cabinet frame */
+  .screen{height:694px;position:relative;overflow:hidden;background:var(--bg);
+    border:4px solid #000;border-radius:8px;
+    box-shadow:0 0 0 4px var(--purple),0 24px 60px rgba(0,0,0,.6)}
+  .screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;
+    background:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0 2px,transparent 2px 4px)}
+  .scap{text-align:center;margin-top:14px;font-family:"VT323";font-size:17px;letter-spacing:.06em;color:#7d72a3}
+  .scap b{color:var(--yellow)}
+
+  /* marquee header */
+  .marquee{background:linear-gradient(90deg,var(--pink),var(--purple));padding:9px 12px;
+    display:flex;justify-content:space-between;align-items:center;position:relative;z-index:10;border-bottom:3px solid #000}
+  .marquee .game{font-family:"Press Start 2P";font-size:11px;color:#fff;text-shadow:2px 2px 0 #000}
+  .marquee .coin{font-family:"VT323";font-size:17px;color:var(--yellow)}
+  .credits{background:#000;text-align:center;font-family:"VT323";font-size:15px;color:var(--cyan);
+    letter-spacing:.1em;padding:3px;position:relative;z-index:10}
+
+  /* hud / search row */
+  .hud{display:flex;gap:8px;padding:12px;position:relative;z-index:5}
+  .search{flex:1;background:#000;border:2px solid var(--cyan);font-family:"VT323";font-size:17px;
+    color:#7df0e4;padding:6px 10px}
+  .langbtn{background:#000;border:2px solid var(--yellow);font-family:"Press Start 2P";font-size:8px;
+    color:var(--yellow);padding:0 9px;display:flex;align-items:center}
+
+  .selhdr{font-family:"Press Start 2P";font-size:9px;color:var(--cyan);text-align:center;
+    padding:2px 0 10px;letter-spacing:.05em;position:relative;z-index:5}
+
+  /* character-select roster grid */
+  .roster{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px;position:relative;z-index:5}
+  .cell{aspect-ratio:1;background:var(--panel);border:2px solid #000;display:grid;place-items:center;position:relative}
+  .cell.on{border-color:var(--yellow);box-shadow:0 0 0 2px var(--yellow),0 0 14px var(--yellow)}
+  .cell .lv{position:absolute;top:2px;left:4px;font-family:"VT323";font-size:13px;color:var(--pink)}
+  .cell.lock{opacity:.4}
+  .cell.lock::after{content:"?";font-family:"Press Start 2P";font-size:14px;color:#6a5f8f}
+  /* selected name plate */
+  .nameplate{margin:12px;background:#000;border:2px solid var(--pink);padding:9px 12px;position:relative;z-index:5}
+  .nameplate b{font-family:"VT323";font-size:24px;color:var(--yellow);display:block;line-height:1}
+  .nameplate small{font-family:"VT323";font-size:15px;color:var(--cyan)}
+  .nameplate .badge{position:absolute;right:10px;top:9px;font-family:"Press Start 2P";font-size:7px;
+    color:#000;background:var(--cyan);padding:3px 5px}
+
+  /* ---- detail: stats screen ---- */
+  .fighter{padding:14px 12px 4px;position:relative;z-index:5;text-align:center}
+  .portrait{height:150px;background:radial-gradient(circle,var(--purple),transparent 70%);
+    display:grid;place-items:center;border:2px solid #000;position:relative}
+  .portrait .p1{position:absolute;top:4px;left:6px;font-family:"Press Start 2P";font-size:8px;color:var(--yellow)}
+  .fname{font-family:"VT323";font-size:30px;color:var(--yellow);margin-top:10px;line-height:.9}
+  .fen{font-family:"VT323";font-size:16px;color:var(--cyan)}
+  .ftype{display:inline-block;font-family:"Press Start 2P";font-size:7px;color:#000;
+    background:var(--pink);padding:4px 7px;margin-top:6px}
+  .statbox{padding:6px 14px 10px;position:relative;z-index:5}
+  .sb-h{font-family:"Press Start 2P";font-size:8px;color:var(--cyan);margin:8px 0;letter-spacing:.04em}
+  .pwr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .pwr .nm{font-family:"VT323";font-size:18px;width:60px;color:#c3b9e0}
+  .pwr .blocks{flex:1;display:flex;gap:3px}
+  .pwr .blocks i{flex:1;height:13px;background:#000;border:1px solid #3a3258}
+  .pwr .blocks i.f{background:var(--yellow);border-color:var(--yellow)}
+  .pwr .blocks i.f.c{background:var(--cyan);border-color:var(--cyan)}
+  .moves{display:flex;gap:8px;margin-top:6px}
+  .moves div{flex:1;background:#000;border:2px solid var(--purple);padding:7px;text-align:center}
+  .moves small{font-family:"Press Start 2P";font-size:6px;color:var(--purple)}
+  .moves b{font-family:"VT323";font-size:17px;color:var(--white);display:block;margin-top:3px}
+
+  /* ---- random: gachapon machine ---- */
+  .gwrap{padding:14px 12px;position:relative;z-index:5;height:calc(100% - 56px);display:flex;flex-direction:column}
+  .gh{font-family:"Press Start 2P";font-size:9px;color:var(--yellow);text-align:center;margin-bottom:10px}
+  .gfilter{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+  .gfilter span{font-family:"VT323";font-size:16px;border:2px solid #3a3258;padding:1px 9px;color:#c3b9e0}
+  .gfilter span.on{border-color:var(--cyan);color:var(--cyan)}
+  .machine{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .globe{width:170px;height:170px;border-radius:50%;border:5px solid var(--pink);
+    background:radial-gradient(circle at 35% 30%,rgba(61,242,224,.35),transparent 60%),#1c1830;
+    display:grid;place-items:center;position:relative;overflow:hidden}
+  .globe .caps{position:absolute;width:30px;height:30px;border-radius:50%}
+  .globe .caps:nth-child(1){background:var(--yellow);bottom:14px;left:30px}
+  .globe .caps:nth-child(2){background:var(--cyan);bottom:20px;left:66px}
+  .globe .caps:nth-child(3){background:var(--purple);bottom:14px;right:34px}
+  .globe .win{position:relative;z-index:2;width:80px;height:80px;border-radius:50%;
+    background:#000;display:grid;place-items:center;border:3px solid var(--yellow)}
+  .gout{font-family:"VT323";font-size:26px;color:var(--yellow);margin-top:10px;text-align:center;line-height:.9}
+  .gout small{display:block;font-size:15px;color:var(--cyan)}
+  .knob{margin-top:14px;width:100%;font-family:"Press Start 2P";font-size:11px;color:#000;
+    background:var(--yellow);border:3px solid #000;padding:13px;cursor:pointer;
+    box-shadow:0 5px 0 #b8932a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <span class="kicker">▶ DESIGN ROUTE 04 / 共 5 種</span>
+    <h1>SQUID BEATZ<br/>ARCADE</h1>
+    <p>取材 Inkopolis 街機與節奏遊戲的復古像素感。列表=格鬥遊戲的「選你的武器」角色盤,詳情=能力數值畫面,而隨機決定器直接變成扭蛋機 —— 主題契合度最高、最好玩的一條路。多色霓虹避免單調。</p>
+    <div class="palette">
+      <span class="chip"><i class="sw" style="background:#15131F"></i>CRT 15131F</span>
+      <span class="chip"><i class="sw" style="background:#FF4D8D"></i>Pink FF4D8D</span>
+      <span class="chip"><i class="sw" style="background:#3DF2E0"></i>Cyan 3DF2E0</span>
+      <span class="chip"><i class="sw" style="background:#FFD23F"></i>Yellow FFD23F</span>
+      <span class="chip"><i class="sw" style="background:#9B5CFF"></i>Purple 9B5CFF</span>
+      <span class="chip" style="background:none;border:none">字體 Press Start 2P · VT323 · Jost</span>
+    </div>
+  </header>
+
+  <div class="rail">
+
+    <!-- ===== LIST ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="marquee"><span class="game">SPLAT-DEX</span><span class="coin">◉ 1 CREDIT</span></div>
+        <div class="credits">★ INSERT COIN — 範例資料 · 非官方 ★</div>
+        <div class="hud">
+          <div class="search">⌕ SEARCH...</div>
+          <div class="langbtn">中</div>
+        </div>
+        <div class="selhdr">SELECT YOUR WEAPON</div>
+        <div class="roster">
+          <div class="cell on"><span class="lv">01</span><svg width="44" height="30"><g fill="#3DF2E0"><rect x="6" y="12" width="22" height="7"/><rect x="26" y="9" width="11" height="5"/></g></svg></div>
+          <div class="cell"><span class="lv">02</span><svg width="44" height="30"><g fill="#FF4D8D"><rect x="6" y="13" width="24" height="5"/><circle cx="33" cy="15" r="6"/></g></svg></div>
+          <div class="cell"><span class="lv">03</span><svg width="44" height="30"><g fill="#FFD23F"><rect x="6" y="14" width="28" height="3"/><polygon points="32,10 40,15 32,20"/></g></svg></div>
+          <div class="cell"><span class="lv">04</span><svg width="44" height="30"><g fill="#9B5CFF"><rect x="18" y="5" width="6" height="18"/><path d="M9 22h26l-5 6H14z"/></g></svg></div>
+          <div class="cell"><span class="lv">05</span><svg width="44" height="30"><g fill="#3DF2E0"><circle cx="15" cy="15" r="9" fill="none" stroke="#3DF2E0" stroke-width="3"/><rect x="24" y="13" width="14" height="5"/></g></svg></div>
+          <div class="cell lock"></div>
+          <div class="cell"><span class="lv">07</span><svg width="44" height="30"><g fill="#FFD23F"><path d="M22 5v18"/><path d="M8 8c8 5 20 5 28 0" fill="none" stroke="#FFD23F" stroke-width="2"/></g></svg></div>
+          <div class="cell lock"></div>
+          <div class="cell lock"></div>
+        </div>
+        <div class="nameplate">
+          <span class="badge">SHOOTER</span>
+          <b>スプラシューター</b>
+          <small>Splattershot · 射擊槍</small>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>A</b> · 武器列表 / 選擇盤</p>
+    </div>
+
+    <!-- ===== DETAIL ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="marquee"><span class="game">◂ BACK</span><span class="coin">STATS</span></div>
+        <div class="fighter">
+          <div class="portrait"><span class="p1">P1</span>
+            <svg width="120" height="110" viewBox="0 0 64 56"><g fill="#F4F0FF"><rect x="6" y="22" width="34" height="12" rx="2"/><rect x="38" y="18" width="18" height="9" rx="1"/><rect x="14" y="32" width="9" height="16" rx="2"/></g></svg>
+          </div>
+          <div class="fname">スプラシューター</div>
+          <div class="fen">Splattershot</div>
+          <div class="ftype">TYPE: SHOOTER 射擊槍</div>
+        </div>
+        <div class="statbox">
+          <div class="sb-h">// POWER STATS (範例)</div>
+          <div class="pwr"><span class="nm">傷害</span><span class="blocks"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
+          <div class="pwr"><span class="nm">射程</span><span class="blocks"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></span></div>
+          <div class="pwr"><span class="nm">連射</span><span class="blocks"><i class="f c"></i><i class="f c"></i><i class="f c"></i><i class="f c"></i><i></i></span></div>
+          <div class="pwr"><span class="nm">耗墨</span><span class="blocks"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></span></div>
+          <div class="moves">
+            <div><small>SUB</small><b>キューバンボム</b></div>
+            <div><small>SPECIAL</small><b>ウルトラショット</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>B</b> · 武器詳情 / 數值畫面</p>
+    </div>
+
+    <!-- ===== RANDOM ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="marquee"><span class="game">GACHA</span><span class="coin">◉ FREE</span></div>
+        <div class="gwrap">
+          <div class="gh">INSERT &amp; TURN!</div>
+          <div class="gfilter"><span class="on">射擊槍</span><span class="on">潑桶</span><span>滾筒</span><span>充能</span></div>
+          <div class="machine">
+            <div class="globe">
+              <span class="caps"></span><span class="caps"></span><span class="caps"></span>
+              <div class="win"><svg width="50" height="46" viewBox="0 0 64 56"><g fill="#FFD23F"><rect x="22" y="8" width="9" height="32" rx="2"/><path d="M12 40h30l-6 12H18z"/></g></svg></div>
+            </div>
+            <div class="gout">バケットスロッシャー<small>Slosher · 潑桶</small></div>
+          </div>
+          <button class="knob">↻ TURN HANDLE</button>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>C</b> · 隨機決定器 / 扭蛋機</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

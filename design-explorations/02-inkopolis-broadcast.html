@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>方案 2 — Inkopolis Broadcast</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@600;700;800;900&family=Saira:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --navy:#0A0E27;
+    --navy2:#11173B;
+    --cyan:#27E5FF;
+    --orange:#FF6B1A;
+    --pink:#FF3C8E;
+    --white:#EAF2FF;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:"Saira",system-ui,sans-serif;
+    background:var(--navy);color:var(--white);
+    min-height:100vh;padding:48px 20px 80px;
+    background-image:
+      linear-gradient(rgba(39,229,255,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(39,229,255,.04) 1px, transparent 1px);
+    background-size:42px 42px;
+  }
+  .wrap{max-width:1180px;margin:0 auto}
+
+  .head{margin-bottom:40px;border-left:5px solid var(--cyan);padding-left:18px}
+  .kicker{font-family:"Space Mono";font-size:12px;letter-spacing:.2em;color:var(--cyan)}
+  .head h1{font-family:"Saira Condensed";font-weight:900;font-size:clamp(38px,8vw,76px);
+    line-height:.9;text-transform:uppercase;letter-spacing:1px;margin:6px 0 10px}
+  .head h1 em{font-style:normal;color:var(--orange)}
+  .head p{max-width:640px;font-size:16px;color:#9fb0cf}
+  .palette{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;font-family:"Space Mono";font-size:11px}
+  .chip{display:flex;align-items:center;gap:7px;background:var(--navy2);padding:6px 12px 6px 6px;border-radius:3px}
+  .sw{width:18px;height:18px;border-radius:2px}
+
+  .rail{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+  .device{width:340px}
+  .screen{position:relative;height:690px;border-radius:6px;overflow:hidden;
+    background:linear-gradient(180deg,var(--navy2),var(--navy));
+    border:1px solid rgba(39,229,255,.25);box-shadow:0 24px 60px rgba(0,0,0,.6)}
+  /* CRT scanlines */
+  .screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:30;
+    background:repeating-linear-gradient(0deg, rgba(0,0,0,.16) 0 1px, transparent 1px 3px)}
+  .scap{text-align:center;margin-top:14px;font-family:"Space Mono";font-size:12px;letter-spacing:.12em;color:#5e6f93}
+  .scap b{color:var(--orange)}
+
+  /* channel bar */
+  .chbar{display:flex;align-items:center;justify-content:space-between;
+    background:#000;padding:7px 12px;font-family:"Space Mono";font-size:11px;position:relative;z-index:10}
+  .live{display:flex;align-items:center;gap:6px;color:var(--orange);font-weight:700;letter-spacing:.1em}
+  .live i{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange)}
+  .clock{color:var(--cyan)}
+  .chlang b{color:var(--cyan)}.chlang span{color:#46577d}
+
+  /* ticker */
+  .ticker{background:var(--cyan);color:var(--navy);font-family:"Saira Condensed";font-weight:800;
+    font-size:13px;letter-spacing:.04em;white-space:nowrap;overflow:hidden;padding:5px 0;position:relative;z-index:10}
+  .ticker div{display:inline-block;padding-left:100%;animation:tk 16s linear infinite}
+  @keyframes tk{to{transform:translateX(-100%)}}
+
+  /* program title block */
+  .prog{padding:14px 14px 4px;position:relative;z-index:5}
+  .prog .l3{display:inline-block;background:var(--orange);color:#000;font-family:"Saira Condensed";
+    font-weight:900;font-size:13px;letter-spacing:.12em;padding:3px 9px;text-transform:uppercase}
+  .prog h2{font-family:"Saira Condensed";font-weight:900;font-size:30px;line-height:.95;margin-top:8px;text-transform:uppercase}
+
+  /* search */
+  .search{margin:10px 14px;display:flex;align-items:center;gap:9px;background:#000;
+    border:1px solid rgba(39,229,255,.4);border-radius:3px;padding:9px 12px;font-family:"Space Mono";font-size:13px;color:#7e90b5}
+  .fbar{display:flex;gap:7px;padding:0 14px 12px;flex-wrap:wrap;position:relative;z-index:5}
+  .fcat{font-family:"Saira Condensed";font-weight:700;font-size:12px;letter-spacing:.05em;
+    text-transform:uppercase;padding:5px 11px;border:1px solid rgba(39,229,255,.3);color:#9fb0cf;border-radius:2px}
+  .fcat.on{background:var(--cyan);color:var(--navy);border-color:var(--cyan)}
+
+  /* roster rows (list) */
+  .rows{padding:0 14px;position:relative;z-index:5;overflow-y:auto;height:calc(100% - 250px)}
+  .row{display:flex;align-items:center;gap:12px;padding:10px 8px;border-bottom:1px solid rgba(39,229,255,.12)}
+  .row .num{font-family:"Space Mono";font-size:11px;color:var(--orange);width:24px}
+  .row .ic{width:46px;height:38px;background:rgba(39,229,255,.08);border:1px solid rgba(39,229,255,.25);
+    border-radius:3px;display:grid;place-items:center;flex:0 0 auto}
+  .row .nm{flex:1}
+  .row .nm b{display:block;font-family:"Saira Condensed";font-weight:800;font-size:17px;line-height:1;text-transform:uppercase}
+  .row .nm small{font-family:"Space Mono";font-size:10px;color:#7e90b5}
+  .row .cat{font-family:"Saira Condensed";font-weight:800;font-size:11px;letter-spacing:.08em;
+    color:var(--navy);background:var(--cyan);padding:3px 7px;border-radius:2px}
+  .row:nth-child(2n) .cat{background:var(--pink)}
+
+  /* ----- detail (player-card broadcast graphic) ----- */
+  .pcard{padding:10px 14px;position:relative;z-index:5}
+  .stage{height:180px;background:radial-gradient(circle at 50% 40%, rgba(39,229,255,.18), transparent 70%);
+    border:1px solid rgba(39,229,255,.25);border-radius:5px;display:grid;place-items:center;position:relative}
+  .stage::before{content:"WEAPON FILE";position:absolute;top:8px;left:10px;font-family:"Space Mono";font-size:9px;color:var(--cyan);letter-spacing:.2em}
+  .l3block{margin-top:12px}
+  .l3block .tier{display:inline-block;background:var(--cyan);color:#000;font-family:"Saira Condensed";
+    font-weight:900;font-size:12px;letter-spacing:.1em;padding:2px 8px}
+  .l3block h2{font-family:"Saira Condensed";font-weight:900;font-size:32px;line-height:.92;margin:6px 0 2px;text-transform:uppercase}
+  .l3block .en{font-family:"Space Mono";font-size:11px;color:#7e90b5}
+  .lo{display:flex;gap:8px;margin:12px 0}
+  .lo div{flex:1;background:#000;border:1px solid rgba(39,229,255,.25);border-radius:3px;padding:8px 10px}
+  .lo small{font-family:"Space Mono";font-size:9px;color:var(--cyan);letter-spacing:.1em}
+  .lo b{display:block;font-family:"Saira Condensed";font-weight:800;font-size:15px;text-transform:uppercase;margin-top:2px}
+  .statg{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;margin-top:6px}
+  .stat .t{display:flex;justify-content:space-between;font-family:"Space Mono";font-size:10px;color:#9fb0cf;margin-bottom:3px}
+  .stat .t b{color:var(--orange)}
+  .seg{display:flex;gap:2px}
+  .seg i{flex:1;height:7px;background:rgba(39,229,255,.14)}
+  .seg i.f{background:var(--cyan)}
+
+  /* ----- random (breaking news reveal) ----- */
+  .rwrap{padding:14px;position:relative;z-index:5;height:calc(100% - 88px);display:flex;flex-direction:column}
+  .breaking{background:var(--orange);color:#000;font-family:"Saira Condensed";font-weight:900;
+    font-size:15px;letter-spacing:.1em;padding:5px 10px;text-transform:uppercase;align-self:flex-start}
+  .rfilter{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+  .rfilter span{font-family:"Saira Condensed";font-weight:700;font-size:11px;text-transform:uppercase;
+    padding:4px 9px;border:1px solid rgba(39,229,255,.3);color:#9fb0cf}
+  .rfilter span.on{background:var(--pink);color:#000;border-color:var(--pink)}
+  .reveal{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    border:1px solid rgba(39,229,255,.25);border-radius:5px;margin:6px 0;
+    background:radial-gradient(circle at 50% 45%, rgba(255,60,142,.18), transparent 70%)}
+  .reveal .lbl{font-family:"Space Mono";font-size:10px;color:var(--cyan);letter-spacing:.25em}
+  .reveal h2{font-family:"Saira Condensed";font-weight:900;font-size:34px;text-transform:uppercase;margin:10px 0 2px;text-align:center;line-height:.9}
+  .reveal .en{font-family:"Space Mono";font-size:11px;color:#9fb0cf}
+  .rbtn{font-family:"Saira Condensed";font-weight:900;font-size:22px;letter-spacing:.06em;
+    text-transform:uppercase;color:#000;background:var(--cyan);border:none;padding:14px;cursor:pointer;border-radius:3px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="head">
+    <div class="kicker">DESIGN ROUTE 02 / 共 5 種</div>
+    <h1>INKOPOLIS <em>BROADCAST</em></h1>
+    <p>把遊戲內 News 播報的動態圖學搬進工具:LED 跑馬燈、下方資訊條(lower-third)、頻道時鐘、CRT 掃描線。武器詳情=選手出場卡,隨機器=「快報:你的武器是…」。冷靜的科技藍配警示橘。</p>
+    <div class="palette">
+      <span class="chip"><i class="sw" style="background:#0A0E27"></i>Navy 0A0E27</span>
+      <span class="chip"><i class="sw" style="background:#27E5FF"></i>LED Cyan 27E5FF</span>
+      <span class="chip"><i class="sw" style="background:#FF6B1A"></i>Alert Orange FF6B1A</span>
+      <span class="chip"><i class="sw" style="background:#FF3C8E"></i>Pink FF3C8E</span>
+      <span class="chip" style="background:none">字體 Saira Condensed · Saira · Space Mono</span>
+    </div>
+  </header>
+
+  <div class="rail">
+
+    <!-- ===== LIST ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="chbar">
+          <div class="live"><i></i>LIVE · CH.3</div>
+          <div class="clock">21:00 INK</div>
+          <div class="chlang"><b>中</b> <span>JP EN</span></div>
+        </div>
+        <div class="ticker"><div>所有武器數值為範例 · 資料來源 splatoon3.ink · 非官方工具 · 與任天堂無關 · 每小時更新一次快取 ·&nbsp;</div></div>
+        <div class="prog">
+          <span class="l3">頻道節目</span>
+          <h2>武器資料庫</h2>
+        </div>
+        <div class="search">⌕ &nbsp;搜尋武器…</div>
+        <div class="fbar">
+          <span class="fcat on">全部</span><span class="fcat">射擊槍</span><span class="fcat">滾筒</span><span class="fcat">充能槍</span>
+        </div>
+        <div class="rows">
+          <div class="row"><span class="num">01</span><span class="ic"><svg width="30" height="22"><g fill="#27E5FF"><rect x="2" y="8" width="17" height="6"/><rect x="18" y="6" width="9" height="5"/></g></svg></span><span class="nm"><b>スプラシューター</b><small>Splattershot</small></span><span class="cat">射擊</span></div>
+          <div class="row"><span class="num">02</span><span class="ic"><svg width="30" height="22"><g fill="#FF3C8E"><rect x="2" y="9" width="20" height="5"/><circle cx="24" cy="11" r="5"/></g></svg></span><span class="nm"><b>スプラローラー</b><small>Splat Roller</small></span><span class="cat">滾筒</span></div>
+          <div class="row"><span class="num">03</span><span class="ic"><svg width="30" height="22"><g fill="#27E5FF"><rect x="2" y="10" width="24" height="3"/><polygon points="24,7 30,11 24,15"/></g></svg></span><span class="nm"><b>スプラチャージャー</b><small>Splat Charger</small></span><span class="cat">充能</span></div>
+          <div class="row"><span class="num">04</span><span class="ic"><svg width="30" height="22"><g fill="#FF3C8E"><rect x="10" y="3" width="5" height="16"/><path d="M5 18h18l-4 4H9z"/></g></svg></span><span class="nm"><b>バケットスロッシャー</b><small>Slosher</small></span><span class="cat">潑桶</span></div>
+          <div class="row"><span class="num">05</span><span class="ic"><svg width="30" height="22"><g fill="#27E5FF"><circle cx="9" cy="11" r="7" fill="none" stroke="#27E5FF" stroke-width="2"/><rect x="16" y="9" width="12" height="4"/></g></svg></span><span class="nm"><b>スプラスピナー</b><small>Splatling</small></span><span class="cat">蓄能</span></div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>A</b> · 武器列表 LIST</p>
+    </div>
+
+    <!-- ===== DETAIL ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="chbar">
+          <div class="live">‹ 返回</div><div class="clock">FILE #001</div><div class="chlang"><b>中</b> <span>JP EN</span></div>
+        </div>
+        <div class="pcard">
+          <div class="stage">
+            <svg width="120" height="120" viewBox="0 0 64 64"><g fill="#EAF2FF"><rect x="6" y="26" width="34" height="12" rx="2"/><rect x="38" y="22" width="18" height="9" rx="1"/><rect x="14" y="36" width="9" height="18" rx="2"/></g></svg>
+          </div>
+          <div class="l3block">
+            <span class="tier">射擊槍 · SHOOTER</span>
+            <h2>スプラシューター</h2>
+            <div class="en">Splattershot · 均衡型主武器</div>
+          </div>
+          <div class="lo">
+            <div><small>SUB 副武器</small><b>キューバンボム</b></div>
+            <div><small>SPECIAL 特殊</small><b>ウルトラショット</b></div>
+          </div>
+          <div class="statg">
+            <div class="stat"><div class="t"><span>傷害</span><b>36</b></div><div class="seg"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></div></div>
+            <div class="stat"><div class="t"><span>射程</span><b>52</b></div><div class="seg"><i class="f"></i><i class="f"></i><i class="f"></i><i></i><i></i></div></div>
+            <div class="stat"><div class="t"><span>連射</span><b>78</b></div><div class="seg"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i><i></i></div></div>
+            <div class="stat"><div class="t"><span>耗墨</span><b>30</b></div><div class="seg"><i class="f"></i><i class="f"></i><i></i><i></i><i></i></div></div>
+          </div>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>B</b> · 武器詳情 DETAIL</p>
+    </div>
+
+    <!-- ===== RANDOM ===== -->
+    <div class="device">
+      <div class="screen">
+        <div class="chbar">
+          <div class="live"><i></i>抽選 LIVE</div><div class="clock">RNG</div><div class="chlang"><b>中</b> <span>JP EN</span></div>
+        </div>
+        <div class="rwrap">
+          <div class="breaking">⚡ 快報 BREAKING</div>
+          <div class="rfilter"><span class="on">射擊槍</span><span class="on">潑桶</span><span>滾筒</span><span>炸彈副</span></div>
+          <div class="reveal">
+            <div class="lbl">YOUR NEXT WEAPON IS</div>
+            <svg width="96" height="96" viewBox="0 0 64 64" style="margin-top:8px"><g fill="#EAF2FF"><rect x="22" y="8" width="9" height="34" rx="2"/><path d="M12 42h30l-6 11H18z"/></g></svg>
+            <h2>バケット<br/>スロッシャー</h2>
+            <div class="en">Slosher · 潑桶</div>
+          </div>
+          <button class="rbtn">▶ 重新抽選</button>
+        </div>
+      </div>
+      <p class="scap">畫面 <b>C</b> · 隨機決定器 RANDOM</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

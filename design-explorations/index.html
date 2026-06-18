@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Splatoon 3 武器工具 — 5 種設計方案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#0e0f13;--card:#181a22;--line:#2a2d38;--fg:#e8e9ee;--mut:#9095a3;--ac:#19D719}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Space Grotesk",system-ui,sans-serif;background:var(--bg);color:var(--fg);
+    min-height:100vh;padding:56px 22px 90px}
+  .wrap{max-width:1080px;margin:0 auto}
+  .kicker{font-family:"Space Mono";font-size:12px;letter-spacing:.22em;color:var(--ac)}
+  h1{font-size:clamp(30px,5vw,50px);line-height:1.05;margin:12px 0 10px;letter-spacing:-.5px}
+  .lead{max-width:680px;color:var(--mut);font-size:16px;line-height:1.6}
+  .note{margin-top:14px;font-family:"Space Mono";font-size:12px;color:#6f7585;
+    border-left:2px solid var(--line);padding-left:12px;line-height:1.7}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:38px}
+  a.card{display:block;text-decoration:none;color:inherit;background:var(--card);border:1px solid var(--line);
+    border-radius:16px;padding:22px;transition:.18s;position:relative;overflow:hidden}
+  a.card:hover{transform:translateY(-4px);border-color:var(--ac)}
+  a.card:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+  .no{font-family:"Space Mono";font-size:13px;color:var(--mut)}
+  .swatches{display:flex;gap:6px;margin:14px 0 16px}
+  .swatches i{width:30px;height:30px;border-radius:7px}
+  h2{font-size:21px;margin-bottom:4px}
+  .en{font-family:"Space Mono";font-size:12px;color:var(--mut);letter-spacing:.05em}
+  .desc{margin-top:10px;color:#c3c7d2;font-size:14px;line-height:1.55}
+  .traits{display:flex;gap:6px;margin-top:14px;flex-wrap:wrap}
+  .traits span{font-family:"Space Mono";font-size:11px;color:var(--mut);border:1px solid var(--line);
+    border-radius:20px;padding:3px 9px}
+  .go{position:absolute;top:22px;right:22px;color:var(--mut);font-size:18px}
+  footer{margin-top:46px;color:#6f7585;font-size:13px;font-family:"Space Mono";line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">SPLATOON 3 武器工具 · 設計探索</div>
+  <h1>5 種整體設計方案</h1>
+  <p class="lead">每個方案錨定 Splatoon 世界的一個不同切面,而非只換配色。三個核心畫面(列表 / 詳情 / 隨機決定器)各以手機框呈現,呼應 mobile-first。點任一張卡開啟完整方案。</p>
+  <div class="note">數值與部分搭配為版面用範例資料,非實際遊戲參數。<br>正式版資料來源:名稱字串 splatoon3.ink、數值自建 schema(Leanny 事實性數據)。</div>
+
+  <div class="grid">
+    <a class="card" href="01-inkopolis-splatter.html">
+      <span class="go">↗</span>
+      <div class="no">ROUTE 01</div>
+      <div class="swatches"><i style="background:#101820"></i><i style="background:#19D719"></i><i style="background:#F02D7D"></i><i style="background:#7B2FF7"></i></div>
+      <h2>Inkopolis Splatter</h2>
+      <div class="en">街頭塗鴉 · 墨水噴濺</div>
+      <p class="desc">雙隊霓虹對比、貼紙字體、墨水量表。最直覺的「Splatoon 感」,吵鬧而過目不忘。</p>
+      <div class="traits"><span>最大主義</span><span>高辨識度</span><span>年輕</span></div>
+    </a>
+
+    <a class="card" href="02-inkopolis-broadcast.html">
+      <span class="go">↗</span>
+      <div class="no">ROUTE 02</div>
+      <div class="swatches"><i style="background:#0A0E27"></i><i style="background:#27E5FF"></i><i style="background:#FF6B1A"></i><i style="background:#FF3C8E"></i></div>
+      <h2>Inkopolis Broadcast</h2>
+      <div class="en">電視播報 · 動態圖學</div>
+      <p class="desc">取材遊戲內 News 播報:跑馬燈、下方資訊條、CRT 掃描線。隨機器=「快報」揭曉。</p>
+      <div class="traits"><span>科技感</span><span>動態</span><span>敘事</span></div>
+    </a>
+
+    <a class="card" href="03-armory-blueprint.html">
+      <span class="go">↗</span>
+      <div class="no">ROUTE 03</div>
+      <div class="swatches"><i style="background:#0C2A4D"></i><i style="background:#5FA8E0"></i><i style="background:#FFB54A"></i><i style="background:#FF6B5E"></i></div>
+      <h2>Armory Blueprint</h2>
+      <div class="en">技術圖鑑 · 藍曬</div>
+      <p class="desc">克制、數據優先。量測標註、等寬字規格表。最貼合「查數值」回訪核心,專業易讀。</p>
+      <div class="traits"><span>克制</span><span>數據導向</span><span>專業</span></div>
+    </a>
+
+    <a class="card" href="04-squid-beatz-arcade.html">
+      <span class="go">↗</span>
+      <div class="no">ROUTE 04</div>
+      <div class="swatches"><i style="background:#15131F"></i><i style="background:#FF4D8D"></i><i style="background:#3DF2E0"></i><i style="background:#FFD23F"></i></div>
+      <h2>Squid Beatz Arcade</h2>
+      <div class="en">街機 · 像素</div>
+      <p class="desc">選擇盤式列表、能力數值畫面,隨機器=扭蛋機。主題契合度最高、最好玩。</p>
+      <div class="traits"><span>復古</span><span>趣味</span><span>主題契合</span></div>
+    </a>
+
+    <a class="card" href="05-fresh-press-zine.html">
+      <span class="go">↗</span>
+      <div class="no">ROUTE 05</div>
+      <div class="swatches"><i style="background:#F3EFE6"></i><i style="background:#FF48B0"></i><i style="background:#0078BF"></i><i style="background:#FFD400"></i></div>
+      <h2>Fresh Press Zine</h2>
+      <div class="en">Riso 油印 · 龐克拼貼</div>
+      <p class="desc">呼應 Splatoon 美術的根:雙色套印、套色錯位、手寫註記。最有人味、最不像模板。</p>
+      <div class="traits"><span>印刷感</span><span>手作</span><span>編輯設計</span></div>
+    </a>
+  </div>
+
+  <footer>
+    非官方工具 · 與任天堂無關 · 規格見 Splatoon3-武器工具-規格說明書.md<br>
+    建議比較後選定主方向,我可再就選定方案產出更完整的 design tokens 與 Tailwind 設定。
+  </footer>
+</div>
+</body>
+</html>
