@@ -2,6 +2,19 @@
 
 Splatoon 3 武器查詢與輔助工具(**非官方、非營利**,與任天堂無關)。React / Next.js(App Router)、Tailwind、next-intl 三語(ja-JP / zh-TW / en)、mobile-first。
 
+## 文件權責
+
+- **做什麼 / 範圍 / 合規 / 架構** → `Splatoon3-武器工具-規格說明書.md`(本檔下方為其硬性摘要)。
+- **為什麼 / 優先序 / 個性** → `PRODUCT.md`。
+- **長什麼樣 / token / 元件** → `DESIGN.md`(+ `.impeccable/design.json`)。
+- 衝突時優先序:**合規 > 範圍 > PRODUCT 原則 > DESIGN token**。三份文件平權,沒有任何一份能單獨主導。
+
+## 範圍與合規(硬性,以規格說明書為準)
+
+動工前讀 `Splatoon3-武器工具-規格說明書.md` §2 範圍、§4 合規;以下為不可違反項:
+- **不做(§2.2)**:賽程/鮭魚跑排程、勝率/使用率統計、互動裝備效益計算機、雙武器/配裝比較、讀取個人對戰資料(不碰 SplatNet 非公開 API、不做 token 生成)。
+- **合規(§4)**:對 splatoon3.ink 快取且抓取 ≤ 每小時一次、請求設 User-Agent、產品免費(可自願捐款)、標註來源 splatoon3.ink、全自繪 SVG 不用任何官方圖檔、明示「非官方,與任天堂無關」、數值需標快照遊戲版本、不照抄 Leanny 資料結構(自建 schema)。
+
 ## Design Context
 
 設計決策以下列兩份根目錄文件為準,動工任何 UI 前先讀:
@@ -15,7 +28,7 @@ Splatoon 3 武器查詢與輔助工具(**非官方、非營利**,與任天堂無
 - **Two-Zone Rule**:品牌區可放膽用霓虹;資料區除單一主數值/選取用綠外保持中性。
 - 字體分工:武器名/CJK 標題用 M PLUS Rounded 1c 800;Bungee 僅限拉丁字招牌(無 CJK,不可套武器名);數值用 IBM Plex Mono + tabular-nums。
 - Turf Green(#19D719)只作填充/圖示/選取/量表,**不當內文色**。
-- 合規:全自繪 SVG、不用官方圖檔、明示非官方、標註資料來源(splatoon3.ink)。
+- 合規硬條款見上方「範圍與合規」一節(那裡為準)。
 
 ## 探索素材
 

@@ -112,6 +112,8 @@ components:
 
 # Design System: Splatoon 3 武器工具 (SPLAT-DEX)
 
+> 本檔只談「長什麼樣」。範圍與合規以 `Splatoon3-武器工具-規格說明書.md`(§2 / §4)為準,視覺不得為了效果違反該二者。
+
 ## 1. Overview
 
 **Creative North Star: "霓虹噴漆 × 規格室 (The Spray Can & The Spec Sheet)"**
