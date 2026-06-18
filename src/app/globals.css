@@ -1,0 +1,80 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens — 單一事實來源對應 DESIGN.md / .impeccable/design.json。
+ * Tailwind v4 由 @theme 命名空間自動產出工具類別:
+ *   --color-*  → bg-* / text-* / border-*
+ *   --font-*   → font-*
+ *   --radius-* → rounded-*
+ *   --shadow-* → shadow-*
+ * 字體變數(--font-mplus 等)由 next/font 注入在 <html>,此處只引用。
+ */
+@theme {
+  /* 暗色外殼 */
+  --color-ink-900: #0c1219;
+  --color-ink-800: #17202b;
+  --color-ink-700: #28323f;
+  --color-text-on-dark: #e8edf2;
+  --color-muted-on-dark: #94a3b2;
+  --color-surface-translucent: #ffffff14;
+  --color-card-translucent: #ffffff0d;
+
+  /* 霓虹品牌色 */
+  --color-turf-green: #19d719;
+  --color-turf-green-deep: #12a912;
+  --color-splat-magenta: #f02d7d;
+  --color-ink-purple: #7b2ff7;
+  --color-fresh-yellow: #ffe21d;
+
+  /* 淺色規格表 */
+  --color-panel-bg: #eef2f1;
+  --color-panel-ink: #0f1620;
+  --color-panel-muted: #5a6b66;
+  --color-panel-line: #c9d4d0;
+  --color-callout-amber: #e08a1e;
+
+  /* 字體分工(見 DESIGN.md §3) */
+  --font-display: var(--font-mplus), 'Zen Maru Gothic', 'Noto Sans TC', system-ui, sans-serif;
+  --font-body: var(--font-mplus), 'Noto Sans TC', 'Noto Sans JP', system-ui, sans-serif;
+  --font-wordmark: var(--font-bungee), var(--font-mplus), sans-serif;
+  --font-data: var(--font-mono), ui-monospace, monospace;
+
+  /* 圓角 */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+
+  /* 陰影語彙(只兩個:貼紙 CTA / 面板抬升) */
+  --shadow-sticker: 0 6px 0 #12a912, 0 14px 24px rgba(25, 215, 25, 0.35);
+  --shadow-panel-lift: 0 12px 32px rgba(0, 0, 0, 0.45);
+
+  /* 狀態轉場 ease-out-quint */
+  --ease-state: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink-900);
+    color: var(--color-text-on-dark);
+    font-family: var(--font-body);
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* 可見的鍵盤 focus(PRODUCT a11y 底線);草綠外框,不位移版面 */
+  :focus-visible {
+    outline: 2px solid var(--color-turf-green);
+    outline-offset: 2px;
+  }
+
+  /* 規格表數值預設開 tabular-nums */
+  .font-data {
+    font-feature-settings: 'tnum' 1;
+  }
+}

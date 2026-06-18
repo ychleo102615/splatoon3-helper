@@ -1,0 +1,20 @@
+{
+  "Meta": {
+    "title": "SPLAT-DEX — Splatoon 3 Weapon Lookup",
+    "description": "Unofficial weapon lookup and random picker for Splatoon 3. Not affiliated with Nintendo."
+  },
+  "Home": {
+    "tagline": "Weapon lookup & random picker for Splatoon 3",
+    "lede": "Browse every main weapon, check its sub and special, read the spec sheet — or just spin one to play next.",
+    "browseWeapons": "Browse weapons",
+    "randomPicker": "Spin a weapon",
+    "comingSoon": "In the workshop"
+  },
+  "LanguageSwitcher": {
+    "label": "Language"
+  },
+  "Footer": {
+    "disclaimer": "Unofficial tool. Not affiliated with Nintendo.",
+    "dataSource": "Data: splatoon3.ink"
+  }
+}

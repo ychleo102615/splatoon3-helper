@@ -1,0 +1,20 @@
+{
+  "Meta": {
+    "title": "SPLAT-DEX — スプラトゥーン3 ブキ図鑑",
+    "description": "スプラトゥーン3 の非公式ブキ図鑑・ランダム選び。任天堂とは関係ありません。"
+  },
+  "Home": {
+    "tagline": "スプラトゥーン3 のブキ図鑑とランダム選び",
+    "lede": "すべてのメインウェポンを一覧で。サブ・スペシャルやスペック表をチェック、あるいは次の一本をランダムに。",
+    "browseWeapons": "ブキを見る",
+    "randomPicker": "ランダムで選ぶ",
+    "comingSoon": "準備中"
+  },
+  "LanguageSwitcher": {
+    "label": "言語"
+  },
+  "Footer": {
+    "disclaimer": "非公式ツールです。任天堂とは関係ありません。",
+    "dataSource": "データ出典:splatoon3.ink"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "Meta": {
+    "title": "SPLAT-DEX — Splatoon 3 武器查詢",
+    "description": "非官方 Splatoon 3 武器查詢與隨機決定器。與任天堂無關。"
+  },
+  "Home": {
+    "tagline": "Splatoon 3 武器查詢與隨機決定器",
+    "lede": "瀏覽所有主武器,查看副武器與特殊武器、閱讀規格表,或直接抽一把當作下一場的武器。",
+    "browseWeapons": "瀏覽武器",
+    "randomPicker": "隨機抽一把",
+    "comingSoon": "施工中"
+  },
+  "LanguageSwitcher": {
+    "label": "語言"
+  },
+  "Footer": {
+    "disclaimer": "非官方工具,與任天堂無關。",
+    "dataSource": "資料來源:splatoon3.ink"
+  }
+}
