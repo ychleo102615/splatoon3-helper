@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "data:fetch-locale": "node scripts/fetch-locale.mjs",
+    "data:fetch-leanny": "node scripts/fetch-leanny.mjs",
+    "data:build-snapshot": "node scripts/build-snapshot.mjs"
   },
   "dependencies": {
     "next": "^16.2.9",

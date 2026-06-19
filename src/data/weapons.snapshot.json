@@ -1,0 +1,7808 @@
+{
+  "meta": {
+    "gameVersion": "11.2.0",
+    "dataVersionCode": "1120",
+    "generatedAt": "2026-06-18T14:11:57.452Z",
+    "nameSource": "splatoon3.ink 優先(63/173 把),其餘取自 Leanny 語言檔",
+    "statSource": "Leanny 遊戲參數(事實性數據立場,自建 schema,不照抄其結構);damage 內部值÷10、ink×100、cadence 為幀",
+    "disclaimer": "非官方工具,與任天堂無關。名稱資料來源 splatoon3.ink。",
+    "coverage": {
+      "range": 173,
+      "damage": 339,
+      "inkConsumption": 173,
+      "cadence": 152
+    }
+  },
+  "weapons": [
+    {
+      "id": "blaster-light-00",
+      "category": "blaster",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 0,
+      "names": {
+        "ja-JP": "ラピッドブラスター",
+        "zh-TW": "快速爆破槍",
+        "en": "Rapid Blaster"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "884321fa6165eb37",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 35,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-01",
+      "category": "blaster",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-jetpack",
+      "season": 3,
+      "names": {
+        "ja-JP": "ラピッドブラスターデコ",
+        "zh-TW": "快速爆破槍 裝飾",
+        "en": "Rapid Blaster Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 35,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-long-00",
+      "category": "blaster",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": "Rブラスターエリート",
+        "zh-TW": "快速爆破槍 精英",
+        "en": "Rapid Blaster Pro"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "183dfb6256c39892",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 72,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 9.12,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-long-01",
+      "category": "blaster",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 4,
+      "names": {
+        "ja-JP": "Rブラスターエリートデコ",
+        "zh-TW": "快速爆破槍 精英裝飾",
+        "en": "Rapid Blaster Pro Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 72,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 9.12,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-long-02",
+      "category": "blaster",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-energy-stand",
+      "season": -1,
+      "names": {
+        "ja-JP": "RブラスターエリートWNTR",
+        "zh-TW": "快速爆破槍 精英WNTR",
+        "en": "Rapid Blaster Pro WNT-R"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 72,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 9.12,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-short-00",
+      "category": "blaster",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 0,
+      "names": {
+        "ja-JP": "クラッシュブラスター",
+        "zh-TW": "衝塗爆破槍",
+        "en": "Clash Blaster"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "830801a9f4555917",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 21,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-light-short-01",
+      "category": "blaster",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-firework",
+      "season": 3,
+      "names": {
+        "ja-JP": "クラッシュブラスターネオ",
+        "zh-TW": "衝塗爆破槍 新型",
+        "en": "Clash Blaster Neo"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 21,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-long-00",
+      "category": "blaster",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 0,
+      "names": {
+        "ja-JP": "ロングブラスター",
+        "zh-TW": "遠距爆破槍",
+        "en": "Range Blaster"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "30f4e84e186e226f",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 11,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 60,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-long-01",
+      "category": "blaster",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-castle",
+      "season": 8,
+      "names": {
+        "ja-JP": "ロングブラスターカスタム",
+        "zh-TW": "遠距爆破槍 改裝",
+        "en": "Custom Range Blaster"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 11,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 60,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-middle-00",
+      "category": "blaster",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 0,
+      "names": {
+        "ja-JP": "ホットブラスター",
+        "zh-TW": "火熱爆破槍",
+        "en": "Blaster"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "dde2f92988536cd2",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 27,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 10,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 50,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-middle-01",
+      "category": "blaster",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-pogo",
+      "season": 6,
+      "names": {
+        "ja-JP": "ホットブラスターカスタム",
+        "zh-TW": "火熱爆破槍 改裝",
+        "en": "Custom Blaster"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 27,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 10,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 50,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-middle-02",
+      "category": "blaster",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-chariot",
+      "season": -1,
+      "names": {
+        "ja-JP": "ホットブラスター艶",
+        "zh-TW": "火熱爆破槍 艷",
+        "en": "Gleamz Blaster"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 27,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 10,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 50,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-precision-00",
+      "category": "blaster",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-skewer",
+      "season": 4,
+      "names": {
+        "ja-JP": "S-BLAST92",
+        "zh-TW": "S-BLAST92",
+        "en": "S-BLAST '92"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "de8a2a542dbe6b99",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 45,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 9.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-precision-01",
+      "category": "blaster",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 6,
+      "names": {
+        "ja-JP": "S-BLAST91",
+        "zh-TW": "S-BLAST91",
+        "en": "S-BLAST '91"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 45,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 9.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-short-00",
+      "category": "blaster",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-super-hook",
+      "season": 0,
+      "names": {
+        "ja-JP": "ノヴァブラスター",
+        "zh-TW": "新星爆破槍",
+        "en": "Luna Blaster"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "05a0ddd5b919b698",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 19,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 7.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-short-01",
+      "category": "blaster",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 2,
+      "names": {
+        "ja-JP": "ノヴァブラスターネオ",
+        "zh-TW": "新星爆破槍 新型",
+        "en": "Luna Blaster Neo"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 19,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 7.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "blaster-short-o",
+      "category": "blaster",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-super-hook",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーブラスター レプリカ",
+        "zh-TW": "秩序爆破槍 複製",
+        "en": "Order Blaster Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 19,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "direct",
+          "value": 125,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "blast",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 7.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 40,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-compact-00",
+      "category": "brella",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-skewer",
+      "season": 0,
+      "names": {
+        "ja-JP": "スパイガジェット",
+        "zh-TW": "特務配件",
+        "en": "Undercover Brella"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "b4ebb5629d8c3e5f",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 9,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 3.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-compact-01",
+      "category": "brella",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-chimney",
+      "season": 6,
+      "names": {
+        "ja-JP": "スパイガジェットソレーラ",
+        "zh-TW": "特務配件 姐妹",
+        "en": "Undercover Sorella Brella"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 9,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 3.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-compact-02",
+      "category": "brella",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-micro-laser",
+      "season": -1,
+      "names": {
+        "ja-JP": "スパイガジェット繚",
+        "zh-TW": "特務配件 繚",
+        "en": "Patternz Undercover Brella"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 9,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 3.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-focus-00",
+      "category": "brella",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 7,
+      "names": {
+        "ja-JP": "24式張替傘・甲",
+        "zh-TW": "24式可替換傘‧甲",
+        "en": "Recycled Brella 24 Mk I"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "914ca6f3cba7aa98",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 10,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 6,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-focus-01",
+      "category": "brella",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-pogo",
+      "season": 8,
+      "names": {
+        "ja-JP": "24式張替傘・乙",
+        "zh-TW": "24式可替換傘‧乙",
+        "en": "Recycled Brella 24 Mk II"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 10,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 6,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-normal-00",
+      "category": "brella",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 0,
+      "names": {
+        "ja-JP": "パラシェルター",
+        "zh-TW": "遮陽防空傘",
+        "en": "Splat Brella"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "23deec47199c37d1",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 16.2,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 10.8,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 5,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-normal-01",
+      "category": "brella",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-jetpack",
+      "season": 5,
+      "names": {
+        "ja-JP": "パラシェルターソレーラ",
+        "zh-TW": "遮陽防空傘 姐妹",
+        "en": "Sorella Brella"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 16.2,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 10.8,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 5,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-normal-o",
+      "category": "brella",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーシェルター レプリカ",
+        "zh-TW": "秩序防空傘 複製",
+        "en": "Order Brella Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 16.2,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "pelletFar",
+          "value": 10.8,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 5,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-wide-00",
+      "category": "brella",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": "キャンピングシェルター",
+        "zh-TW": "露營防空傘",
+        "en": "Tenta Brella"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "342c1b18ce2732ea",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 17,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 11,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-wide-01",
+      "category": "brella",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 4,
+      "names": {
+        "ja-JP": "キャンピングシェルターソレーラ",
+        "zh-TW": "露營防空傘 姐妹",
+        "en": "Tenta Sorella Brella"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 17,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 11,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shelter-wide-02",
+      "category": "brella",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-firework",
+      "season": -1,
+      "names": {
+        "ja-JP": "キャンピングシェルターCREM",
+        "zh-TW": "露營防空傘CREM",
+        "en": "Tenta Brella CRE-M"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "pelletNear",
+          "value": 17,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 11,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-heavy-00",
+      "category": "brush",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 4,
+      "names": {
+        "ja-JP": "フィンセント",
+        "zh-TW": "文森",
+        "en": "Painbrush"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "3ab1a91f59f81345",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 33,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 4.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-heavy-01",
+      "category": "brush",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-multi-missile",
+      "season": 6,
+      "names": {
+        "ja-JP": "フィンセント・ヒュー",
+        "zh-TW": "文森‧新藝術",
+        "en": "Painbrush Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 33,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 4.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-heavy-02",
+      "category": "brush",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": -1,
+      "names": {
+        "ja-JP": "フィンセントBRNZ",
+        "zh-TW": "文森BRNZ",
+        "en": "Painbrush BRN-Z"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 33,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 4.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-mini-00",
+      "category": "brush",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 0,
+      "names": {
+        "ja-JP": "パブロ",
+        "zh-TW": "巴勃羅",
+        "en": "Inkbrush"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "895eaa9e4e5b427b",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 5,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-mini-01",
+      "category": "brush",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 2,
+      "names": {
+        "ja-JP": "パブロ・ヒュー",
+        "zh-TW": "巴勃羅‧新藝術",
+        "en": "Inkbrush Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 5,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-normal-00",
+      "category": "brush",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-super-hook",
+      "season": 0,
+      "names": {
+        "ja-JP": "ホクサイ",
+        "zh-TW": "北齋",
+        "en": "Octobrush"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "d9632c243eb36d73",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 23,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 20,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-normal-01",
+      "category": "brush",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 5,
+      "names": {
+        "ja-JP": "ホクサイ・ヒュー",
+        "zh-TW": "北齋‧新藝術",
+        "en": "Octobrush Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 23,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 20,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-normal-02",
+      "category": "brush",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-castle",
+      "season": -1,
+      "names": {
+        "ja-JP": "ホクサイ彗",
+        "zh-TW": "北齋 彗",
+        "en": "Cometz Octobrush"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 23,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 20,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "brush-normal-o",
+      "category": "brush",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-super-hook",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーブラシ レプリカ",
+        "zh-TW": "秩序排刷 複製",
+        "en": "Orderbrush Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 23,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 20,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 2.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 1,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-keeper-00",
+      "category": "charger",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-multi-missile",
+      "season": 0,
+      "names": {
+        "ja-JP": "ソイチューバー",
+        "zh-TW": "高壓油管槍",
+        "en": "Goo Tuber"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "17b8d348d6380ae9",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 71,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-keeper-01",
+      "category": "charger",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 5,
+      "names": {
+        "ja-JP": "ソイチューバーカスタム",
+        "zh-TW": "高壓油管槍 改裝",
+        "en": "Custom Goo Tuber"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 71,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-light-00",
+      "category": "charger",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 0,
+      "names": {
+        "ja-JP": "14式竹筒銃・甲",
+        "zh-TW": "14式竹筒槍‧甲",
+        "en": "Bamboozler 14 Mk I"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "5c8a27c6818f20e6",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-light-01",
+      "category": "charger",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-firework",
+      "season": 8,
+      "names": {
+        "ja-JP": "14式竹筒銃・乙",
+        "zh-TW": "14式竹筒槍‧乙",
+        "en": "Bamboozler 14 Mk II"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 85,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-long-00",
+      "category": "charger",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 0,
+      "names": {
+        "ja-JP": "リッター4K",
+        "zh-TW": "公升4K",
+        "en": "E-liter 4K"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "dc9f150e86663adb",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 96,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 92,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-long-01",
+      "category": "charger",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-castle",
+      "season": 7,
+      "names": {
+        "ja-JP": "リッター4Kカスタム",
+        "zh-TW": "公升4K 改裝",
+        "en": "Custom E-liter 4K"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 96,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 92,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-long-scope-00",
+      "category": "charger",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 0,
+      "names": {
+        "ja-JP": "4Kスコープ",
+        "zh-TW": "4K準星槍",
+        "en": "E-liter 4K Scope"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 100,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 92,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-long-scope-01",
+      "category": "charger",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-castle",
+      "season": 7,
+      "names": {
+        "ja-JP": "4Kスコープカスタム",
+        "zh-TW": "4K準星槍 改裝",
+        "en": "Custom E-liter 4K Scope"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 100,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 92,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-00",
+      "category": "charger",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラチャージャー",
+        "zh-TW": "斯普拉蓄力狙擊槍",
+        "en": "Splat Charger"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "961a7063fc94f087",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-01",
+      "category": "charger",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 3,
+      "names": {
+        "ja-JP": "スプラチャージャーコラボ",
+        "zh-TW": "斯普拉蓄力狙擊槍 聯名",
+        "en": "Z+F Splat Charger"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-02",
+      "category": "charger",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-chariot",
+      "season": -1,
+      "names": {
+        "ja-JP": "スプラチャージャーFRST",
+        "zh-TW": "斯普拉蓄力狙擊槍FRST",
+        "en": "Splat Charger CAM-O"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-o",
+      "category": "charger",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-blower",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーチャージャー レプリカ",
+        "zh-TW": "秩序蓄力狙擊槍 複製",
+        "en": "Order Charger Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-scope-00",
+      "category": "charger",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラスコープ",
+        "zh-TW": "斯普拉準星槍",
+        "en": "Splatterscope"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 91,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-scope-01",
+      "category": "charger",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 3,
+      "names": {
+        "ja-JP": "スプラスコープコラボ",
+        "zh-TW": "斯普拉準星槍 聯名",
+        "en": "Z+F Splatterscope"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 91,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-normal-scope-02",
+      "category": "charger",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-chariot",
+      "season": -1,
+      "names": {
+        "ja-JP": "スプラスコープFRST",
+        "zh-TW": "斯普拉準星槍FRST",
+        "en": "Splatterscope CAM-O"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 91,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 18,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-pencil-00",
+      "category": "charger",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 2,
+      "names": {
+        "ja-JP": "R-PEN/5H",
+        "zh-TW": "R-PEN/5H",
+        "en": "Snipewriter 5H"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "d22945127fb7584f",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 91,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 68,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 35,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-pencil-01",
+      "category": "charger",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 6,
+      "names": {
+        "ja-JP": "R-PEN/5B",
+        "zh-TW": "R-PEN/5B",
+        "en": "Snipewriter 5B"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 91,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 68,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 35,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-quick-00",
+      "category": "charger",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 0,
+      "names": {
+        "ja-JP": "スクイックリンα",
+        "zh-TW": "魷快潔α",
+        "en": "Classic Squiffer"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "535d3c822bba0415",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 10.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 45,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "charger-quick-01",
+      "category": "charger",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-super-hook",
+      "season": 7,
+      "names": {
+        "ja-JP": "スクイックリンβ",
+        "zh-TW": "魷快潔β",
+        "en": "New Squiffer"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "tap",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "fullCharge",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 10.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 45,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-dual-00",
+      "category": "dualies",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 0,
+      "names": {
+        "ja-JP": "デュアルスイーパー",
+        "zh-TW": "雙重清潔槍",
+        "en": "Dualie Squelchers"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "d39ba7409f6e1fbc",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-dual-01",
+      "category": "dualies",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-firework",
+      "season": 4,
+      "names": {
+        "ja-JP": "デュアルスイーパーカスタム",
+        "zh-TW": "雙重清潔槍 改裝",
+        "en": "Custom Dualie Squelchers"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-dual-02",
+      "category": "dualies",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-chimney",
+      "season": -1,
+      "names": {
+        "ja-JP": "デュアルスイーパー蹄",
+        "zh-TW": "雙重清潔槍 蹄",
+        "en": "Hoofz Dualie Squelchers"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-gallon-00",
+      "category": "dualies",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 0,
+      "names": {
+        "ja-JP": "ケルビン525",
+        "zh-TW": "開爾文525",
+        "en": "Glooga Dualies"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "3b31490a368e92e1",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 66,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 9,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-gallon-01",
+      "category": "dualies",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 7,
+      "names": {
+        "ja-JP": "ケルビン525デコ",
+        "zh-TW": "開爾文525 裝飾",
+        "en": "Glooga Dualies Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 66,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 9,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-long-00",
+      "category": "dualies",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 7,
+      "names": {
+        "ja-JP": "ガエンFF",
+        "zh-TW": "滅熄FF",
+        "en": "Douser Dualies FF"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "7065ab46c609e6d7",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 25.5,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12.8,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-long-01",
+      "category": "dualies",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 8,
+      "names": {
+        "ja-JP": "ガエンFFカスタム",
+        "zh-TW": "滅熄FF 改裝",
+        "en": "Custom Douser Dualies FF"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 25.5,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12.8,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-normal-00",
+      "category": "dualies",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-chariot",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラマニューバー",
+        "zh-TW": "斯普拉機動槍",
+        "en": "Splat Dualies"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "83c543ed4ae19005",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.72,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-normal-01",
+      "category": "dualies",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-pogo",
+      "season": 6,
+      "names": {
+        "ja-JP": "スプラマニューバーコラボ",
+        "zh-TW": "斯普拉機動槍 聯名",
+        "en": "Enperry Splat Dualies"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.72,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-normal-02",
+      "category": "dualies",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-great-barrier",
+      "season": -1,
+      "names": {
+        "ja-JP": "スプラマニューバー耀",
+        "zh-TW": "斯普拉機動槍 耀",
+        "en": "Twinklez Splat Dualies"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.72,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-normal-o",
+      "category": "dualies",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-chariot",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーマニューバー レプリカ",
+        "zh-TW": "秩序機動槍 複製",
+        "en": "Order Dualie Replicas"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.72,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-short-00",
+      "category": "dualies",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 0,
+      "names": {
+        "ja-JP": "スパッタリー",
+        "zh-TW": "濺鍍槍",
+        "en": "Dapple Dualies"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "79e6297eb501599f",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 25,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.66,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-short-01",
+      "category": "dualies",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-skewer",
+      "season": 2,
+      "names": {
+        "ja-JP": "スパッタリー・ヒュー",
+        "zh-TW": "濺鍍槍‧新藝術",
+        "en": "Dapple Dualies Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 25,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.66,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-short-02",
+      "category": "dualies",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-micro-laser",
+      "season": -1,
+      "names": {
+        "ja-JP": "スパッタリーOWL",
+        "zh-TW": "濺鍍槍OWL",
+        "en": "Dapple Dualies NOC-T"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 25,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.66,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-stepper-00",
+      "category": "dualies",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-skewer",
+      "season": 0,
+      "names": {
+        "ja-JP": "クアッドホッパーブラック",
+        "zh-TW": "四重彈跳手槍 黑",
+        "en": "Dark Tetra Dualies"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "523fca90c5771a63",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "maneuver-stepper-01",
+      "category": "dualies",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-super-hook",
+      "season": 4,
+      "names": {
+        "ja-JP": "クアッドホッパーホワイト",
+        "zh-TW": "四重彈跳手槍 白",
+        "en": "Light Tetra Dualies"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-compact-00",
+      "category": "roller",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-super-hook",
+      "season": 0,
+      "names": {
+        "ja-JP": "カーボンローラー",
+        "zh-TW": "碳纖維滾筒",
+        "en": "Carbon Roller"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "e78ca547494ad3c3",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 20,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3.96,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-compact-01",
+      "category": "roller",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 2,
+      "names": {
+        "ja-JP": "カーボンローラーデコ",
+        "zh-TW": "碳纖維滾筒 裝飾",
+        "en": "Carbon Roller Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 20,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3.96,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-compact-02",
+      "category": "roller",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-firework",
+      "season": -1,
+      "names": {
+        "ja-JP": "カーボンローラーANGL",
+        "zh-TW": "碳纖維滾筒ANGL",
+        "en": "Carbon Roller ANG-L"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 20,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3.96,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-heavy-00",
+      "category": "roller",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 0,
+      "names": {
+        "ja-JP": "ダイナモローラー",
+        "zh-TW": "電動馬達滾筒",
+        "en": "Dynamo Roller"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "3ed1b23808b91e54",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 76,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 21,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-heavy-01",
+      "category": "roller",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-firework",
+      "season": 5,
+      "names": {
+        "ja-JP": "ダイナモローラーテスラ",
+        "zh-TW": "電動馬達滾筒 高磁波",
+        "en": "Gold Dynamo Roller"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 76,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 21,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-heavy-02",
+      "category": "roller",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-micro-laser",
+      "season": -1,
+      "names": {
+        "ja-JP": "ダイナモローラー冥",
+        "zh-TW": "電動馬達滾筒 冥",
+        "en": "Starz Dynamo Roller"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 76,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 180,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 21,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-hunter-00",
+      "category": "roller",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-multi-missile",
+      "season": 0,
+      "names": {
+        "ja-JP": "ヴァリアブルローラー",
+        "zh-TW": "可變式滾筒",
+        "en": "Flingza Roller"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "03146bb3dc0defd4",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 150,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 12,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 42,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-hunter-01",
+      "category": "roller",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-chimney",
+      "season": 7,
+      "names": {
+        "ja-JP": "ヴァリアブルローラーフォイル",
+        "zh-TW": "可變式滾筒 金屬箔",
+        "en": "Foil Flingza Roller"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 150,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 12,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 42,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-normal-00",
+      "category": "roller",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラローラー",
+        "zh-TW": "斯普拉滾筒",
+        "en": "Splat Roller"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "e115c15c4a20d8ba",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 48,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 150,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-normal-01",
+      "category": "roller",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-castle",
+      "season": 3,
+      "names": {
+        "ja-JP": "スプラローラーコラボ",
+        "zh-TW": "斯普拉滾筒 聯名",
+        "en": "Krak-On Splat Roller"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 48,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 150,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-normal-o",
+      "category": "roller",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-great-barrier",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーローラー レプリカ",
+        "zh-TW": "秩序滾筒 複製",
+        "en": "Order Roller Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 48,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 150,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 26,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-wide-00",
+      "category": "roller",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-blower",
+      "season": 2,
+      "names": {
+        "ja-JP": "ワイドローラー",
+        "zh-TW": "寬滾筒",
+        "en": "Big Swig Roller"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "b04c2fbbe1c98e63",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-wide-01",
+      "category": "roller",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 4,
+      "names": {
+        "ja-JP": "ワイドローラーコラボ",
+        "zh-TW": "寬滾筒 聯名",
+        "en": "Big Swig Roller Express"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "roller-wide-02",
+      "category": "roller",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-pogo",
+      "season": -1,
+      "names": {
+        "ja-JP": "ワイドローラー惑",
+        "zh-TW": "寬滾筒 惑",
+        "en": "Planetz Big Swig Roller"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 56,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "flingNear",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "flingFar",
+          "value": 40,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "swingInterval",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-blaze-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-skewer",
+      "season": 0,
+      "names": {
+        "ja-JP": "プロモデラーMG",
+        "zh-TW": "專業模型槍MG",
+        "en": "Aerospray MG"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "935949ea2945806b",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 36,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-blaze-01",
+      "category": "shooter",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 2,
+      "names": {
+        "ja-JP": "プロモデラーRG",
+        "zh-TW": "專業模型槍RG",
+        "en": "Aerospray RG"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 36,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-blaze-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-chimney",
+      "season": -1,
+      "names": {
+        "ja-JP": "プロモデラー彩",
+        "zh-TW": "專業模型槍 彩",
+        "en": "Colorz Aerospray"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 36,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-expert-00",
+      "category": "shooter",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-chariot",
+      "season": 0,
+      "names": {
+        "ja-JP": "プライムシューター",
+        "zh-TW": "頂尖射擊槍",
+        "en": "Splattershot Pro"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "f74d638ac101904e",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-expert-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 2,
+      "names": {
+        "ja-JP": "プライムシューターコラボ",
+        "zh-TW": "頂尖射擊槍 聯名",
+        "en": "Forge Splattershot Pro"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-expert-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-multi-missile",
+      "season": -1,
+      "names": {
+        "ja-JP": "プライムシューターFRZN",
+        "zh-TW": "頂尖射擊槍FRZN",
+        "en": "Splattershot Pro FRZ-N"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-first-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 0,
+      "names": {
+        "ja-JP": "わかばシューター",
+        "zh-TW": "新葉射擊槍",
+        "en": "Splattershot Jr."
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "de148ea51e7c28fa",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 36,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.43,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-first-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 2,
+      "names": {
+        "ja-JP": "もみじシューター",
+        "zh-TW": "楓葉射擊槍",
+        "en": "Custom Splattershot Jr."
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 36,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.43,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-flash-00",
+      "category": "shooter",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 0,
+      "names": {
+        "ja-JP": "ボトルガイザー",
+        "zh-TW": "開瓶噴泉槍",
+        "en": "Squeezer"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "280ed6683d3eb523",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 77,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 38,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 19,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-flash-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-chimney",
+      "season": 6,
+      "names": {
+        "ja-JP": "ボトルガイザーフォイル",
+        "zh-TW": "開瓶噴泉槍 金屬箔",
+        "en": "Foil Squeezer"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 77,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 38,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 19,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.4,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-gravity-00",
+      "category": "shooter",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 0,
+      "names": {
+        "ja-JP": ".52ガロン",
+        "zh-TW": ".52加侖",
+        "en": ".52 Gal"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "513c64dd6cd5e723",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 55,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 52,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 9,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-gravity-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-chimney",
+      "season": 7,
+      "names": {
+        "ja-JP": ".52ガロンデコ",
+        "zh-TW": ".52加侖 裝飾",
+        "en": ".52 Gal Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 55,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 52,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 9,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-heavy-00",
+      "category": "shooter",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": ".96ガロン",
+        "zh-TW": ".96加侖",
+        "en": ".96 Gal"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "885c30f6102de958",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 74,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-heavy-01",
+      "category": "shooter",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-castle",
+      "season": 3,
+      "names": {
+        "ja-JP": ".96ガロンデコ",
+        "zh-TW": ".96加侖 裝飾",
+        "en": ".96 Gal Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 74,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-heavy-02",
+      "category": "shooter",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-energy-stand",
+      "season": -1,
+      "names": {
+        "ja-JP": ".96ガロン爪",
+        "zh-TW": ".96加侖 爪",
+        "en": "Clawz .96 Gal"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 74,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 12,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-long-00",
+      "category": "shooter",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-blower",
+      "season": 0,
+      "names": {
+        "ja-JP": "ジェットスイーパー",
+        "zh-TW": "噴射清潔槍",
+        "en": "Jet Squelcher"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "9e45e49e1e9c4853",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 82,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-long-01",
+      "category": "shooter",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 3,
+      "names": {
+        "ja-JP": "ジェットスイーパーカスタム",
+        "zh-TW": "噴射清潔槍 改裝",
+        "en": "Custom Jet Squelcher"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 82,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-long-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-pogo",
+      "season": -1,
+      "names": {
+        "ja-JP": "ジェットスイーパーCOBR",
+        "zh-TW": "噴射清潔槍COBR",
+        "en": "Jet Squelcher COB-R"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 82,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 8,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラシューター",
+        "zh-TW": "斯普拉射擊槍",
+        "en": "Splattershot"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "e60629ecf35192a1",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 2,
+      "names": {
+        "ja-JP": "スプラシューターコラボ",
+        "zh-TW": "斯普拉射擊槍 聯名",
+        "en": "Tentatek Splattershot"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-castle",
+      "season": -1,
+      "names": {
+        "ja-JP": "スプラシューター煌",
+        "zh-TW": "斯普拉射擊槍 煌",
+        "en": "Glamorz Splattershot"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-h",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 0,
+      "names": {
+        "ja-JP": "ヒーローシューター レプリカ",
+        "zh-TW": "英雄射擊槍 複製",
+        "en": "Hero Shot Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-o",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーシューター レプリカ",
+        "zh-TW": "秩序射擊槍 複製",
+        "en": "Order Shot Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-normal-oct",
+      "category": "shooter",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": -1,
+      "names": {
+        "ja-JP": "オクタシューター レプリカ",
+        "zh-TW": "章魚射擊槍 複製",
+        "en": "Octo Shot Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 52,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 36,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 18,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.92,
+          "unit": "percent"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-precision-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-chariot",
+      "season": 0,
+      "names": {
+        "ja-JP": "シャープマーカー",
+        "zh-TW": "窄域標記槍",
+        "en": "Splash-o-matic"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "ed647072fa99c73e",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-precision-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 3,
+      "names": {
+        "ja-JP": "シャープマーカーネオ",
+        "zh-TW": "窄域標記槍 新型",
+        "en": "Neo Splash-o-matic"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-precision-02",
+      "category": "shooter",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-ink-storm",
+      "season": -1,
+      "names": {
+        "ja-JP": "シャープマーカーGECK",
+        "zh-TW": "窄域標記槍GECK",
+        "en": "Splash-o-matic GCK-O"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 43,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-quick-long-00",
+      "category": "shooter",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 2,
+      "names": {
+        "ja-JP": "スペースシューター",
+        "zh-TW": "太空射擊槍",
+        "en": "Splattershot Nova"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "85c6eda8dffc77a0",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 68,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.96,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-quick-long-01",
+      "category": "shooter",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-jetpack",
+      "season": 4,
+      "names": {
+        "ja-JP": "スペースシューターコラボ",
+        "zh-TW": "太空射擊槍 聯名",
+        "en": "Annaki Splattershot Nova"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 68,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 12,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.96,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 6,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-quick-middle-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 0,
+      "names": {
+        "ja-JP": "N-ZAP85",
+        "zh-TW": "N-ZAP85",
+        "en": "N-ZAP '85"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "b3ab498b8a8a0667",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-quick-middle-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-firework",
+      "season": 3,
+      "names": {
+        "ja-JP": "N-ZAP89",
+        "zh-TW": "N-ZAP89",
+        "en": "N-ZAP '89"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 50,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-short-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 0,
+      "names": {
+        "ja-JP": "ボールドマーカー",
+        "zh-TW": "廣域標記槍",
+        "en": "Sploosh-o-matic"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "5567ca94a5374d21",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 12,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 38,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 19,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-short-01",
+      "category": "shooter",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 3,
+      "names": {
+        "ja-JP": "ボールドマーカーネオ",
+        "zh-TW": "廣域標記槍 新型",
+        "en": "Neo Sploosh-o-matic"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 12,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 38,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 19,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 0.8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-middle-00",
+      "category": "shooter",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 0,
+      "names": {
+        "ja-JP": "H3リールガン",
+        "zh-TW": "H3捲管槍",
+        "en": "H-3 Nozzlenose"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "5e5481f626f02cbf",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.08,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-middle-01",
+      "category": "shooter",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 4,
+      "names": {
+        "ja-JP": "H3リールガンD",
+        "zh-TW": "H3捲管槍D",
+        "en": "H-3 Nozzlenose D"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.08,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-middle-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": -1,
+      "names": {
+        "ja-JP": "H3リールガンSNAK",
+        "zh-TW": "H3捲管槍SNAK",
+        "en": "H-3 Nozzlenose VIP-R"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 22.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 2.08,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 5,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-quick-00",
+      "category": "shooter",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-chariot",
+      "season": 0,
+      "names": {
+        "ja-JP": "L3リールガン",
+        "zh-TW": "L3捲管槍",
+        "en": "L-3 Nozzlenose"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "0578f3b3d9af08ed",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 63,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.1,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-quick-01",
+      "category": "shooter",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 3,
+      "names": {
+        "ja-JP": "L3リールガンD",
+        "zh-TW": "L3捲管槍D",
+        "en": "L-3 Nozzlenose D"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 63,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.1,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "shooter-triple-quick-02",
+      "category": "shooter",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-jetpack",
+      "season": -1,
+      "names": {
+        "ja-JP": "L3リールガン箔",
+        "zh-TW": "L3捲管槍 箔",
+        "en": "Glitterz L-3 Nozzlenose"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 63,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 31,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15.5,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perShot",
+          "value": 1.1,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fireInterval",
+          "value": 4,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-bathtub-00",
+      "category": "slosher",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 0,
+      "names": {
+        "ja-JP": "オーバーフロッシャー",
+        "zh-TW": "滿溢泡澡潑桶",
+        "en": "Bloblobber"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "eb5098db38e209e1",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 85,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 32,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-bathtub-01",
+      "category": "slosher",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-castle",
+      "season": 5,
+      "names": {
+        "ja-JP": "オーバーフロッシャーデコ",
+        "zh-TW": "滿溢泡澡潑桶 裝飾",
+        "en": "Bloblobber Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 85,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 8,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 32,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-diffusion-00",
+      "category": "slosher",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-jetpack",
+      "season": 0,
+      "names": {
+        "ja-JP": "ヒッセン",
+        "zh-TW": "洗筆桶",
+        "en": "Tri-Slosher"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "b4df43b5b0d90b7a",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 31,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-diffusion-01",
+      "category": "slosher",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 3,
+      "names": {
+        "ja-JP": "ヒッセン・ヒュー",
+        "zh-TW": "洗筆桶‧新藝術",
+        "en": "Tri-Slosher Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 31,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-diffusion-02",
+      "category": "slosher",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-chimney",
+      "season": -1,
+      "names": {
+        "ja-JP": "ヒッセンASH",
+        "zh-TW": "洗筆桶ASH",
+        "en": "Tri-Slosher ASH-N"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 31,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 62,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 23,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-double-00",
+      "category": "slosher",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-skewer",
+      "season": 5,
+      "names": {
+        "ja-JP": "モップリン",
+        "zh-TW": "墨瀑淋",
+        "en": "Dread Wringer"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "09284d9bd3b61ea1",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 48,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 45,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-double-01",
+      "category": "slosher",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 7,
+      "names": {
+        "ja-JP": "モップリンD",
+        "zh-TW": "墨瀑淋D",
+        "en": "Dread Wringer D"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 48,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 45,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-double-02",
+      "category": "slosher",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-chariot",
+      "season": -1,
+      "names": {
+        "ja-JP": "モップリン角",
+        "zh-TW": "墨瀑淋 角",
+        "en": "Hornz Dread Wringer"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 48,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 45,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-launcher-00",
+      "category": "slosher",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 0,
+      "names": {
+        "ja-JP": "スクリュースロッシャー",
+        "zh-TW": "迴旋潑桶",
+        "en": "Sloshing Machine"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "5463ec85acff180c",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 76,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 52,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 9.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 38,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-launcher-01",
+      "category": "slosher",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": 5,
+      "names": {
+        "ja-JP": "スクリュースロッシャーネオ",
+        "zh-TW": "迴旋潑桶 新型",
+        "en": "Sloshing Machine Neo"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 76,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 52,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 9.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 38,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-strong-00",
+      "category": "slosher",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": 0,
+      "names": {
+        "ja-JP": "バケットスロッシャー",
+        "zh-TW": "飛濺潑桶",
+        "en": "Slosher"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "fe3b9b3b87ca491e",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 50,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 7.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 29,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-strong-01",
+      "category": "slosher",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-super-hook",
+      "season": 2,
+      "names": {
+        "ja-JP": "バケットスロッシャーデコ",
+        "zh-TW": "飛濺潑桶 裝飾",
+        "en": "Slosher Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 50,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 7.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 29,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-strong-o",
+      "category": "slosher",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-triple-tornado",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダースロッシャー レプリカ",
+        "zh-TW": "秩序潑桶 複製",
+        "en": "Order Slosher Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 50,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 7.6,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 29,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-washtub-00",
+      "category": "slosher",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 0,
+      "names": {
+        "ja-JP": "エクスプロッシャー",
+        "zh-TW": "爆炸潑桶",
+        "en": "Explosher"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "c19e07d4db9a4075",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 77,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 55,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 11.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "slosher-washtub-01",
+      "category": "slosher",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-pogo",
+      "season": 7,
+      "names": {
+        "ja-JP": "エクスプロッシャーカスタム",
+        "zh-TW": "爆炸潑桶 改裝",
+        "en": "Custom Explosher"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 77,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 55,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSlosh",
+          "value": 11.7,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "sloshInterval",
+          "value": 55,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-heavy-00",
+      "category": "splatana",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 8,
+      "names": {
+        "ja-JP": "デンタルワイパーミント",
+        "zh-TW": "巨齒刮水刀 薄荷",
+        "en": "Mint Decavitator"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "b5b716854159da15",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 63,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 80,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 6.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-heavy-01",
+      "category": "splatana",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-jetpack",
+      "season": 8,
+      "names": {
+        "ja-JP": "デンタルワイパースミ",
+        "zh-TW": "巨齒刮水刀 墨黑",
+        "en": "Charcoal Decavitator"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 63,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 80,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 160,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 6.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-lite-00",
+      "category": "splatana",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 1,
+      "names": {
+        "ja-JP": "ドライブワイパー",
+        "zh-TW": "雨刷刮水刀",
+        "en": "Splatana Wiper"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "67b2e7ac4bf64e71",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 14,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-lite-01",
+      "category": "splatana",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-multi-missile",
+      "season": 4,
+      "names": {
+        "ja-JP": "ドライブワイパーデコ",
+        "zh-TW": "雨刷刮水刀 裝飾",
+        "en": "Splatana Wiper Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 14,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-lite-02",
+      "category": "splatana",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": -1,
+      "names": {
+        "ja-JP": "ドライブワイパーRUST",
+        "zh-TW": "雨刷刮水刀RUST",
+        "en": "Splatana Wiper RUS-T"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 58,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 60,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 120,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 3,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 14,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-normal-00",
+      "category": "splatana",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-super-hook",
+      "season": 0,
+      "names": {
+        "ja-JP": "ジムワイパー",
+        "zh-TW": "工作刮水刀",
+        "en": "Splatana Stamper"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "c95b060287d757a2",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 5.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-normal-01",
+      "category": "splatana",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-chariot",
+      "season": 6,
+      "names": {
+        "ja-JP": "ジムワイパー・ヒュー",
+        "zh-TW": "工作刮水刀‧新藝術",
+        "en": "Splatana Stamper Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 5.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-normal-02",
+      "category": "splatana",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-nice-ball",
+      "season": -1,
+      "names": {
+        "ja-JP": "ジムワイパー封",
+        "zh-TW": "工作刮水刀 封",
+        "en": "Stickerz Splatana Stamper"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 5.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "saber-normal-o",
+      "category": "splatana",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-super-hook",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーワイパー レプリカ",
+        "zh-TW": "秩序刮水刀 複製",
+        "en": "Order Splatana Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 75,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "swing",
+          "value": 70,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "chargedSlash",
+          "value": 140,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perSwing",
+          "value": 5.2,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 20,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-downpour-00",
+      "category": "splatling",
+      "subWeaponId": "bomb-fizzy",
+      "specialWeaponId": "sp-jetpack",
+      "season": 0,
+      "names": {
+        "ja-JP": "クーゲルシュライバー",
+        "zh-TW": "圓珠筆",
+        "en": "Ballpoint Splatling"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "439343ee49a5126b",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 84,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 100,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-downpour-01",
+      "category": "splatling",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-blower",
+      "season": 5,
+      "names": {
+        "ja-JP": "クーゲルシュライバー・ヒュー",
+        "zh-TW": "圓珠筆‧新藝術",
+        "en": "Ballpoint Splatling Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 84,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 28,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 14,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 25,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 100,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-hyper-00",
+      "category": "splatling",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-nice-ball",
+      "season": 0,
+      "names": {
+        "ja-JP": "ハイドラント",
+        "zh-TW": "消防栓旋轉槍",
+        "en": "Hydra Splatling"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "c100f88e8b925e1c",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 85,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 35,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 150,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-hyper-01",
+      "category": "splatling",
+      "subWeaponId": "trap",
+      "specialWeaponId": "sp-chimney",
+      "season": 8,
+      "names": {
+        "ja-JP": "ハイドラントカスタム",
+        "zh-TW": "消防栓旋轉槍 改裝",
+        "en": "Custom Hydra Splatling"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 85,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 35,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 150,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-hyper-02",
+      "category": "splatling",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-great-barrier",
+      "season": -1,
+      "names": {
+        "ja-JP": "ハイドラント圧",
+        "zh-TW": "消防栓旋轉槍 壓",
+        "en": "Torrentz Hydra Splatling"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 85,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 35,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 150,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-hyper-short-00",
+      "category": "splatling",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-energy-stand",
+      "season": 5,
+      "names": {
+        "ja-JP": "イグザミナー",
+        "zh-TW": "審查者",
+        "en": "Heavy Edit Splatling"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "d9a573867cb6ba9a",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 26,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 13,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 20,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 120,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-hyper-short-01",
+      "category": "splatling",
+      "subWeaponId": "bomb-splash",
+      "specialWeaponId": "sp-chariot",
+      "season": 8,
+      "names": {
+        "ja-JP": "イグザミナー・ヒュー",
+        "zh-TW": "審查者‧新藝術",
+        "en": "Heavy Edit Splatling Nouveau"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 70,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 26,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 13,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 20,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 120,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-quick-00",
+      "category": "splatling",
+      "subWeaponId": "bomb-quick",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 0,
+      "names": {
+        "ja-JP": "スプラスピナー",
+        "zh-TW": "斯普拉旋轉槍",
+        "en": "Mini Splatling"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "cd34251e67bd3f3e",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 27,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-quick-01",
+      "category": "splatling",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-great-barrier",
+      "season": 2,
+      "names": {
+        "ja-JP": "スプラスピナーコラボ",
+        "zh-TW": "斯普拉旋轉槍 聯名",
+        "en": "Zink Mini Splatling"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 27,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-quick-02",
+      "category": "splatling",
+      "subWeaponId": "beacon",
+      "specialWeaponId": "sp-ultra-shot",
+      "season": -1,
+      "names": {
+        "ja-JP": "スプラスピナーPYTN",
+        "zh-TW": "斯普拉旋轉槍PYTN",
+        "en": "Mini Splatling RTL-R"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 62,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 27,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-serein-00",
+      "category": "splatling",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-ink-storm",
+      "season": 0,
+      "names": {
+        "ja-JP": "ノーチラス47",
+        "zh-TW": "鸚鵡螺號47",
+        "en": "Nautilus 47"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "6ede65010706778d",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 74,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 76,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-serein-01",
+      "category": "splatling",
+      "subWeaponId": "bomb-suction",
+      "specialWeaponId": "sp-pogo",
+      "season": 7,
+      "names": {
+        "ja-JP": "ノーチラス79",
+        "zh-TW": "鸚鵡螺號79",
+        "en": "Nautilus 79"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 74,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 32,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 16,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 15,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 76,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-standard-00",
+      "category": "splatling",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 0,
+      "names": {
+        "ja-JP": "バレルスピナー",
+        "zh-TW": "桶裝旋轉槍",
+        "en": "Heavy Splatling"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "3aac272457998973",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 22.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-standard-01",
+      "category": "splatling",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-castle",
+      "season": 4,
+      "names": {
+        "ja-JP": "バレルスピナーデコ",
+        "zh-TW": "桶裝旋轉槍 裝飾",
+        "en": "Heavy Splatling Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 22.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "spinner-standard-o",
+      "category": "splatling",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダースピナー レプリカ",
+        "zh-TW": "秩序旋轉槍 複製",
+        "en": "Order Splatling Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 78,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "near",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "far",
+          "value": 15,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 22.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-explosion-00",
+      "category": "stringer",
+      "subWeaponId": "bomb-robot",
+      "specialWeaponId": "sp-ultra-stamp",
+      "season": 8,
+      "names": {
+        "ja-JP": "フルイドV",
+        "zh-TW": "邦普V",
+        "en": "Wellstring V"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "66cd48f017d3f078",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 83,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 80,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-explosion-01",
+      "category": "stringer",
+      "subWeaponId": "point-sensor",
+      "specialWeaponId": "sp-shock-sonar",
+      "season": 8,
+      "names": {
+        "ja-JP": "フルイドVカスタム",
+        "zh-TW": "邦普V 改裝",
+        "en": "Custom Wellstring V"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 83,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 24,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 9,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 80,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-normal-00",
+      "category": "stringer",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-micro-laser",
+      "season": 0,
+      "names": {
+        "ja-JP": "トライストリンガー",
+        "zh-TW": "三發獵魚弓",
+        "en": "Tri-Stringer"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "2136716c07457658",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-normal-01",
+      "category": "stringer",
+      "subWeaponId": "sprinkler",
+      "specialWeaponId": "sp-firework",
+      "season": 5,
+      "names": {
+        "ja-JP": "トライストリンガーコラボ",
+        "zh-TW": "三發獵魚弓 聯名",
+        "en": "Inkline Tri-Stringer"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-normal-02",
+      "category": "stringer",
+      "subWeaponId": "line-marker",
+      "specialWeaponId": "sp-jetpack",
+      "season": -1,
+      "names": {
+        "ja-JP": "トライストリンガー燈",
+        "zh-TW": "三發獵魚弓 燈",
+        "en": "Bulbz Tri-Stringer"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-normal-o",
+      "category": "stringer",
+      "subWeaponId": "poison-mist",
+      "specialWeaponId": "sp-micro-laser",
+      "season": -1,
+      "names": {
+        "ja-JP": "オーダーストリンガー レプリカ",
+        "zh-TW": "秩序獵魚弓 複製",
+        "en": "Order Stringer Replica"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 88,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 35,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 8.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 72,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-short-00",
+      "category": "stringer",
+      "subWeaponId": "bomb-curling",
+      "specialWeaponId": "sp-multi-missile",
+      "season": 0,
+      "names": {
+        "ja-JP": "LACT-450",
+        "zh-TW": "LACT-450",
+        "en": "REEF-LUX 450"
+      },
+      "nameSource": "splatoon3.ink",
+      "localeId": "1f7612f08f804c54",
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 6.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 34,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-short-01",
+      "category": "stringer",
+      "subWeaponId": "shield",
+      "specialWeaponId": "sp-skewer",
+      "season": 6,
+      "names": {
+        "ja-JP": "LACT-450デコ",
+        "zh-TW": "LACT-450 裝飾",
+        "en": "REEF-LUX 450 Deco"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 6.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 34,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    },
+    {
+      "id": "stringer-short-02",
+      "category": "stringer",
+      "subWeaponId": "bomb-torpedo",
+      "specialWeaponId": "sp-nice-ball",
+      "season": -1,
+      "names": {
+        "ja-JP": "LACT-450MILK",
+        "zh-TW": "LACT-450MILK",
+        "en": "REEF-LUX 450 MIL-K"
+      },
+      "nameSource": "leanny",
+      "localeId": null,
+      "coreStats": [
+        {
+          "key": "range",
+          "value": 60,
+          "unit": "relative"
+        },
+        {
+          "key": "damage",
+          "label": "directMax",
+          "value": 45,
+          "unit": "hp"
+        },
+        {
+          "key": "damage",
+          "label": "directMin",
+          "value": 30,
+          "unit": "hp"
+        },
+        {
+          "key": "inkConsumption",
+          "label": "perFullCharge",
+          "value": 6.5,
+          "unit": "percent"
+        },
+        {
+          "key": "cadence",
+          "label": "fullChargeTime",
+          "value": 34,
+          "unit": "frame"
+        }
+      ],
+      "gearEffects": []
+    }
+  ]
+}

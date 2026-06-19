@@ -1,0 +1,341 @@
+{
+  "_source": "splatoon3.ink",
+  "_note": "主武器三語名稱(localeId → { ja-JP, zh-TW, en }),取自 splatoon3.ink locale 的 weapons 區塊,僅含三語皆存在的 id 交集;不含數值。",
+  "_coverageWarning": "splatoon3.ink locale 的 weapons 為賽程/活動 feed 衍生,僅涵蓋近期出現過的武器,並非完整全武器字典;涵蓋的武器數會隨時間變動。",
+  "_generatedAt": "2026-06-18T14:11:55.887Z",
+  "_localeSourceMap": {
+    "ja-JP": "ja-JP",
+    "zh-TW": "zh-TW",
+    "en": "en-US"
+  },
+  "coverage": {
+    "commonWeaponIds": 65
+  },
+  "names": {
+    "01b960996da8ed63": {
+      "ja-JP": "ランダム",
+      "zh-TW": "隨機",
+      "en": "Random"
+    },
+    "03146bb3dc0defd4": {
+      "ja-JP": "ヴァリアブルローラー",
+      "zh-TW": "可變式滾筒",
+      "en": "Flingza Roller"
+    },
+    "0578f3b3d9af08ed": {
+      "ja-JP": "L3リールガン",
+      "zh-TW": "L3捲管槍",
+      "en": "L-3 Nozzlenose"
+    },
+    "05a0ddd5b919b698": {
+      "ja-JP": "ノヴァブラスター",
+      "zh-TW": "新星爆破槍",
+      "en": "Luna Blaster"
+    },
+    "09284d9bd3b61ea1": {
+      "ja-JP": "モップリン",
+      "zh-TW": "墨瀑淋",
+      "en": "Dread Wringer"
+    },
+    "17b8d348d6380ae9": {
+      "ja-JP": "ソイチューバー",
+      "zh-TW": "高壓油管槍",
+      "en": "Goo Tuber"
+    },
+    "183dfb6256c39892": {
+      "ja-JP": "Rブラスターエリート",
+      "zh-TW": "快速爆破槍 精英",
+      "en": "Rapid Blaster Pro"
+    },
+    "1f7612f08f804c54": {
+      "ja-JP": "LACT-450",
+      "zh-TW": "LACT-450",
+      "en": "REEF-LUX 450"
+    },
+    "2136716c07457658": {
+      "ja-JP": "トライストリンガー",
+      "zh-TW": "三發獵魚弓",
+      "en": "Tri-Stringer"
+    },
+    "23deec47199c37d1": {
+      "ja-JP": "パラシェルター",
+      "zh-TW": "遮陽防空傘",
+      "en": "Splat Brella"
+    },
+    "280ed6683d3eb523": {
+      "ja-JP": "ボトルガイザー",
+      "zh-TW": "開瓶噴泉槍",
+      "en": "Squeezer"
+    },
+    "30f4e84e186e226f": {
+      "ja-JP": "ロングブラスター",
+      "zh-TW": "遠距爆破槍",
+      "en": "Range Blaster"
+    },
+    "342c1b18ce2732ea": {
+      "ja-JP": "キャンピングシェルター",
+      "zh-TW": "露營防空傘",
+      "en": "Tenta Brella"
+    },
+    "3aac272457998973": {
+      "ja-JP": "バレルスピナー",
+      "zh-TW": "桶裝旋轉槍",
+      "en": "Heavy Splatling"
+    },
+    "3ab1a91f59f81345": {
+      "ja-JP": "フィンセント",
+      "zh-TW": "文森",
+      "en": "Painbrush"
+    },
+    "3b31490a368e92e1": {
+      "ja-JP": "ケルビン525",
+      "zh-TW": "開爾文525",
+      "en": "Glooga Dualies"
+    },
+    "3ed1b23808b91e54": {
+      "ja-JP": "ダイナモローラー",
+      "zh-TW": "電動馬達滾筒",
+      "en": "Dynamo Roller"
+    },
+    "439343ee49a5126b": {
+      "ja-JP": "クーゲルシュライバー",
+      "zh-TW": "圓珠筆",
+      "en": "Ballpoint Splatling"
+    },
+    "513c64dd6cd5e723": {
+      "ja-JP": ".52ガロン",
+      "zh-TW": ".52加侖",
+      "en": ".52 Gal"
+    },
+    "523fca90c5771a63": {
+      "ja-JP": "クアッドホッパーブラック",
+      "zh-TW": "四重彈跳手槍 黑",
+      "en": "Dark Tetra Dualies"
+    },
+    "535d3c822bba0415": {
+      "ja-JP": "スクイックリンα",
+      "zh-TW": "魷快潔α",
+      "en": "Classic Squiffer"
+    },
+    "5463ec85acff180c": {
+      "ja-JP": "スクリュースロッシャー",
+      "zh-TW": "迴旋潑桶",
+      "en": "Sloshing Machine"
+    },
+    "5567ca94a5374d21": {
+      "ja-JP": "ボールドマーカー",
+      "zh-TW": "廣域標記槍",
+      "en": "Sploosh-o-matic"
+    },
+    "5c8a27c6818f20e6": {
+      "ja-JP": "14式竹筒銃・甲",
+      "zh-TW": "14式竹筒槍‧甲",
+      "en": "Bamboozler 14 Mk I"
+    },
+    "5e5481f626f02cbf": {
+      "ja-JP": "H3リールガン",
+      "zh-TW": "H3捲管槍",
+      "en": "H-3 Nozzlenose"
+    },
+    "66cd48f017d3f078": {
+      "ja-JP": "フルイドV",
+      "zh-TW": "邦普V",
+      "en": "Wellstring V"
+    },
+    "67b2e7ac4bf64e71": {
+      "ja-JP": "ドライブワイパー",
+      "zh-TW": "雨刷刮水刀",
+      "en": "Splatana Wiper"
+    },
+    "6ede65010706778d": {
+      "ja-JP": "ノーチラス47",
+      "zh-TW": "鸚鵡螺號47",
+      "en": "Nautilus 47"
+    },
+    "7065ab46c609e6d7": {
+      "ja-JP": "ガエンFF",
+      "zh-TW": "滅熄FF",
+      "en": "Douser Dualies FF"
+    },
+    "747937841598fff7": {
+      "ja-JP": "ランダム",
+      "zh-TW": "隨機",
+      "en": "Random"
+    },
+    "79e6297eb501599f": {
+      "ja-JP": "スパッタリー",
+      "zh-TW": "濺鍍槍",
+      "en": "Dapple Dualies"
+    },
+    "830801a9f4555917": {
+      "ja-JP": "クラッシュブラスター",
+      "zh-TW": "衝塗爆破槍",
+      "en": "Clash Blaster"
+    },
+    "83c543ed4ae19005": {
+      "ja-JP": "スプラマニューバー",
+      "zh-TW": "斯普拉機動槍",
+      "en": "Splat Dualies"
+    },
+    "85c6eda8dffc77a0": {
+      "ja-JP": "スペースシューター",
+      "zh-TW": "太空射擊槍",
+      "en": "Splattershot Nova"
+    },
+    "884321fa6165eb37": {
+      "ja-JP": "ラピッドブラスター",
+      "zh-TW": "快速爆破槍",
+      "en": "Rapid Blaster"
+    },
+    "885c30f6102de958": {
+      "ja-JP": ".96ガロン",
+      "zh-TW": ".96加侖",
+      "en": ".96 Gal"
+    },
+    "895eaa9e4e5b427b": {
+      "ja-JP": "パブロ",
+      "zh-TW": "巴勃羅",
+      "en": "Inkbrush"
+    },
+    "914ca6f3cba7aa98": {
+      "ja-JP": "24式張替傘・甲",
+      "zh-TW": "24式可替換傘‧甲",
+      "en": "Recycled Brella 24 Mk I"
+    },
+    "935949ea2945806b": {
+      "ja-JP": "プロモデラーMG",
+      "zh-TW": "專業模型槍MG",
+      "en": "Aerospray MG"
+    },
+    "961a7063fc94f087": {
+      "ja-JP": "スプラチャージャー",
+      "zh-TW": "斯普拉蓄力狙擊槍",
+      "en": "Splat Charger"
+    },
+    "9e45e49e1e9c4853": {
+      "ja-JP": "ジェットスイーパー",
+      "zh-TW": "噴射清潔槍",
+      "en": "Jet Squelcher"
+    },
+    "b04c2fbbe1c98e63": {
+      "ja-JP": "ワイドローラー",
+      "zh-TW": "寬滾筒",
+      "en": "Big Swig Roller"
+    },
+    "b3ab498b8a8a0667": {
+      "ja-JP": "N-ZAP85",
+      "zh-TW": "N-ZAP85",
+      "en": "N-ZAP '85"
+    },
+    "b4df43b5b0d90b7a": {
+      "ja-JP": "ヒッセン",
+      "zh-TW": "洗筆桶",
+      "en": "Tri-Slosher"
+    },
+    "b4ebb5629d8c3e5f": {
+      "ja-JP": "スパイガジェット",
+      "zh-TW": "特務配件",
+      "en": "Undercover Brella"
+    },
+    "b5b716854159da15": {
+      "ja-JP": "デンタルワイパーミント",
+      "zh-TW": "巨齒刮水刀 薄荷",
+      "en": "Mint Decavitator"
+    },
+    "c100f88e8b925e1c": {
+      "ja-JP": "ハイドラント",
+      "zh-TW": "消防栓旋轉槍",
+      "en": "Hydra Splatling"
+    },
+    "c19e07d4db9a4075": {
+      "ja-JP": "エクスプロッシャー",
+      "zh-TW": "爆炸潑桶",
+      "en": "Explosher"
+    },
+    "c95b060287d757a2": {
+      "ja-JP": "ジムワイパー",
+      "zh-TW": "工作刮水刀",
+      "en": "Splatana Stamper"
+    },
+    "cd34251e67bd3f3e": {
+      "ja-JP": "スプラスピナー",
+      "zh-TW": "斯普拉旋轉槍",
+      "en": "Mini Splatling"
+    },
+    "d22945127fb7584f": {
+      "ja-JP": "R-PEN/5H",
+      "zh-TW": "R-PEN/5H",
+      "en": "Snipewriter 5H"
+    },
+    "d39ba7409f6e1fbc": {
+      "ja-JP": "デュアルスイーパー",
+      "zh-TW": "雙重清潔槍",
+      "en": "Dualie Squelchers"
+    },
+    "d9632c243eb36d73": {
+      "ja-JP": "ホクサイ",
+      "zh-TW": "北齋",
+      "en": "Octobrush"
+    },
+    "d9a573867cb6ba9a": {
+      "ja-JP": "イグザミナー",
+      "zh-TW": "審查者",
+      "en": "Heavy Edit Splatling"
+    },
+    "dc9f150e86663adb": {
+      "ja-JP": "リッター4K",
+      "zh-TW": "公升4K",
+      "en": "E-liter 4K"
+    },
+    "dde2f92988536cd2": {
+      "ja-JP": "ホットブラスター",
+      "zh-TW": "火熱爆破槍",
+      "en": "Blaster"
+    },
+    "de148ea51e7c28fa": {
+      "ja-JP": "わかばシューター",
+      "zh-TW": "新葉射擊槍",
+      "en": "Splattershot Jr."
+    },
+    "de8a2a542dbe6b99": {
+      "ja-JP": "S-BLAST92",
+      "zh-TW": "S-BLAST92",
+      "en": "S-BLAST '92"
+    },
+    "e115c15c4a20d8ba": {
+      "ja-JP": "スプラローラー",
+      "zh-TW": "斯普拉滾筒",
+      "en": "Splat Roller"
+    },
+    "e60629ecf35192a1": {
+      "ja-JP": "スプラシューター",
+      "zh-TW": "斯普拉射擊槍",
+      "en": "Splattershot"
+    },
+    "e78ca547494ad3c3": {
+      "ja-JP": "カーボンローラー",
+      "zh-TW": "碳纖維滾筒",
+      "en": "Carbon Roller"
+    },
+    "eb5098db38e209e1": {
+      "ja-JP": "オーバーフロッシャー",
+      "zh-TW": "滿溢泡澡潑桶",
+      "en": "Bloblobber"
+    },
+    "ed647072fa99c73e": {
+      "ja-JP": "シャープマーカー",
+      "zh-TW": "窄域標記槍",
+      "en": "Splash-o-matic"
+    },
+    "f74d638ac101904e": {
+      "ja-JP": "プライムシューター",
+      "zh-TW": "頂尖射擊槍",
+      "en": "Splattershot Pro"
+    },
+    "fe3b9b3b87ca491e": {
+      "ja-JP": "バケットスロッシャー",
+      "zh-TW": "飛濺潑桶",
+      "en": "Slosher"
+    }
+  }
+}

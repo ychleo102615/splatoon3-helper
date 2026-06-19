@@ -14,6 +14,9 @@
 .DS_Store
 *.pem
 
+# data pipeline cache(splatoon3.ink 原始回應;抽取後的名稱表才納入版控)
+/.cache/
+
 # debug
 npm-debug.log*
 yarn-debug.log*
