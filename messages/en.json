@@ -31,7 +31,8 @@
     "specialLabel": "Special",
     "empty": "No weapons match your filters.",
     "backToHome": "‹ Home",
-    "backToList": "‹ Weapons"
+    "backToList": "‹ Weapons",
+    "iconAlt": "{name} icon"
   },
   "Random": {
     "title": "Random Picker",

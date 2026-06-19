@@ -31,7 +31,8 @@
     "specialLabel": "スペシャル",
     "empty": "条件に合うブキがありません。",
     "backToHome": "‹ ホーム",
-    "backToList": "‹ ブキ一覧"
+    "backToList": "‹ ブキ一覧",
+    "iconAlt": "{name} のアイコン"
   },
   "Random": {
     "title": "ランダム選び",

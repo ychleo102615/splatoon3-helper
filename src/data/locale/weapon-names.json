@@ -2,7 +2,7 @@
   "_source": "splatoon3.ink",
   "_note": "主武器三語名稱(localeId → { ja-JP, zh-TW, en }),取自 splatoon3.ink locale 的 weapons 區塊,僅含三語皆存在的 id 交集;不含數值。",
   "_coverageWarning": "splatoon3.ink locale 的 weapons 為賽程/活動 feed 衍生,僅涵蓋近期出現過的武器,並非完整全武器字典;涵蓋的武器數會隨時間變動。",
-  "_generatedAt": "2026-06-18T14:11:55.887Z",
+  "_generatedAt": "2026-06-19T13:33:24.424Z",
   "_localeSourceMap": {
     "ja-JP": "ja-JP",
     "zh-TW": "zh-TW",

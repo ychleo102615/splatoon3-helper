@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
+import { weaponIconUrl } from '@/config/icons';
 import {
   weapons,
   weaponById,
@@ -50,6 +51,10 @@ export default async function WeaponDetailPage({
   const ts = await getTranslations('Stats');
   const tc = await getTranslations('Categories');
   const tf = await getTranslations('Footer');
+
+  // §4.3.1 opt-in:官方圖示 URL;預設關閉(或無 iconName)時為 null → 不渲染圖示。
+  const iconUrl = weaponIconUrl(w.iconName);
+  const name = weaponName(w, loc);
 
   // 段落語意 label:有翻譯用翻譯,否則退回原始 key(防止漏字串時崩潰)。
   const seg = (label?: string) =>
@@ -99,13 +104,28 @@ export default async function WeaponDetailPage({
           </Link>
 
           {/* 品牌區:分類 + 武器名(招牌時刻) */}
-          <p className="mt-3 flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
-            <span className="size-2 rounded-full bg-turf-green" aria-hidden />
-            {tc(w.category)}
-          </p>
-          <h1 className="mt-2 text-balance font-display text-[clamp(1.75rem,6vw,3rem)] font-extrabold leading-[0.95] tracking-tight text-text-on-dark">
-            {weaponName(w, loc)}
-          </h1>
+          <div className="mt-3 flex items-start gap-4">
+            <div className="min-w-0 flex-1">
+              <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
+                <span className="size-2 rounded-full bg-turf-green" aria-hidden />
+                {tc(w.category)}
+              </p>
+              <h1 className="mt-2 text-balance font-display text-[clamp(1.75rem,6vw,3rem)] font-extrabold leading-[0.95] tracking-tight text-text-on-dark">
+                {name}
+              </h1>
+            </div>
+            {/* §4.3.1 opt-in:官方圖示(外部 hotlink);未啟用時 iconUrl 為 null → 不渲染,版面與原狀一致。 */}
+            {iconUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
+              <img
+                src={iconUrl}
+                alt={t('iconAlt', { name })}
+                width={96}
+                height={96}
+                className="size-20 shrink-0 object-contain drop-shadow sm:size-24"
+              />
+            ) : null}
+          </div>
 
           {/* 資料區:規格表(Two-Zone 的淺色冷靜面板) */}
           <section

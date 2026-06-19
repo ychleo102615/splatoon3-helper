@@ -30,7 +30,9 @@ pnpm data:build-snapshot     # 合併產出 weapons.snapshot.json 與 sub-specia
   每筆武器的 `nameSource` 標明其名稱來源。
 - **數值**:取自 **Leanny** 遊戲參數,僅以「事實性數據」立場使用;**不照抄其結構**,轉為本目錄 `schema.ts` 的扁平自有 schema。
 - **版本**:`meta.gameVersion`(由 Leanny 版本碼推導,如 `1120` → `11.2.0`)標註快照對應遊戲版本(§4.5)。
-- **圖像**:本管線不取用任何官方圖檔(§4.3,全自繪 SVG 另行處理)。
+- **圖像**:本管線**不下載、不入庫任何官方圖檔**(§4.3,全自繪 SVG 另行處理)。
+  唯一例外為 §4.3.1 opt-in:每筆 `iconName` 僅存 Leanny `weapon_flat` 的**檔名參照字串**(非圖檔本體);
+  圖檔是否於執行時外部載入,由 app 端環境變數 `NEXT_PUBLIC_WEAPON_ICONS`(預設關閉)控制,見 `.env.example` 與 `src/config/icons.ts`。
 - **非官方**:`meta.disclaimer` 標明非官方、與任天堂無關(§4.4)。
 
 ## 數值抽取規則(精簡核心子集,規格 §3.1)
@@ -65,5 +67,6 @@ pnpm data:build-snapshot     # 合併產出 weapons.snapshot.json 與 sub-specia
 | `coreStats.damage` | 各分類 `DamageParam` / `BlastParam` / `*UnitGroupParam` / `Bullet*Param`(÷10) |
 | `coreStats.inkConsumption` | `WeaponParam.InkConsume` / `InkConsumeFullCharge` / 各 swing 參數(×100) |
 | `coreStats.cadence` | `WeaponParam.RepeatFrame` / `ChargeFrameFullCharge` / `ChargeFrame_Second` 等 |
+| `iconName`(§4.3.1) | 以 `__RowId` 對 Leanny `images/weapon_flat` 檔名清單比對(`Path_Wst_<__RowId>.png`);僅存檔名字串,無圖檔 |
 
 > 立場聲明:上述為著作權一般原則下的風險評估,非正式法律意見。開工前請再次確認 Leanny 與 splatoon3.ink 當下的使用條款。

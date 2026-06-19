@@ -31,7 +31,8 @@
     "specialLabel": "特殊武器",
     "empty": "沒有符合條件的武器。",
     "backToHome": "‹ 首頁",
-    "backToList": "‹ 武器一覽"
+    "backToList": "‹ 武器一覽",
+    "iconAlt": "{name} 圖示"
   },
   "Random": {
     "title": "隨機決定器",

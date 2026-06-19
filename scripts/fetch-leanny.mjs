@@ -25,6 +25,11 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 
 const BASE = 'https://leanny.github.io/splat3';
+/**
+ * 武器圖示「檔名清單」來源(規格 §4.3.1 opt-in 例外):僅讀 weapon_flat 目錄的檔名作為參照,
+ * **不在此下載任何圖檔**(PNG 一律不入庫)。執行時的實際載入由 app 端 hotlink。
+ */
+const WEAPON_FLAT_API = 'https://api.github.com/repos/Leanny/splat3/contents/images/weapon_flat';
 const CACHE_DIR = join(ROOT, '.cache', 'leanny');
 
 const USER_AGENT =
@@ -102,6 +107,16 @@ async function main() {
   for (const code of Object.values(LEANNY_LANG_FILES)) {
     await cacheFile(`${BASE}/data/language/${code}.json`, join(verDir, 'language', `${code}.json`));
   }
+
+  // 3.5) 武器圖示檔名清單(規格 §4.3.1 opt-in):只取 weapon_flat 的「檔名」作參照,不下載任何圖檔。
+  console.log('抓取 weapon_flat 圖示檔名清單(GitHub contents API)…');
+  const flatRaw = JSON.parse(await fetchText(WEAPON_FLAT_API));
+  const flatNames = (Array.isArray(flatRaw) ? flatRaw : [])
+    .map((e) => e?.name)
+    .filter((name) => typeof name === 'string' && name.endsWith('.png'))
+    .sort();
+  await writeFile(join(verDir, 'weapon-flat-files.json'), JSON.stringify(flatNames, null, 2), 'utf8');
+  console.log(`  weapon_flat 檔名 ${flatNames.length} 筆(僅檔名參照,無圖檔下載)`);
 
   // 4) 對戰武器的參數檔(以 SpecActor basename 去重);kit 變體無獨立檔時退回本體。
   const versus = main.filter((w) => w.Type === 'Versus');

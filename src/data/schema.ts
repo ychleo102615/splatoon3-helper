@@ -116,6 +116,15 @@ export interface WeaponSnapshotEntry {
   nameSource: NameSource;
   /** 若名稱取自 splatoon3.ink,對應的 locale 雜湊 id(規格 §4.2);取自 Leanny 時為 null。 */
   localeId: string | null;
+  /**
+   * 官方武器圖示的「檔名參照」(規格 §4.3.1 opt-in 例外):Leanny `weapon_flat` 的檔名
+   * (如 `Path_Wst_Blaster_Light_00.png`),於 build 時以原始 `__RowId` 比對目錄清單產生;
+   * 找不到對應圖時為 `null`。
+   *
+   * 合規界線:此欄位**僅為指標字串(metadata),非任天堂美術著作本體**。圖檔 PNG 一律不入庫;
+   * 僅在環境變數 `NEXT_PUBLIC_WEAPON_ICONS` 開啟時,於執行時自外部 base URL hotlink(見 src/config/icons.ts)。
+   */
+  iconName: string | null;
   /** 精簡核心子集數值(含 range)。 */
   coreStats: CoreStat[];
   /** 各裝備效益的效果量(靜態);裝備效益曲線屬獨立資料集,Phase 0 暫為空陣列。 */

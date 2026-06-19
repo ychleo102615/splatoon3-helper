@@ -56,6 +56,16 @@ function main() {
   const main = readJson(join(verDir, 'WeaponInfoMain.json'));
   const paramMap = readJson(join(verDir, 'weapon-param-map.json'));
 
+  // 武器圖示「檔名參照」(規格 §4.3.1 opt-in 例外):以原始 __RowId 對 weapon_flat 檔名清單比對。
+  // 僅存「檔名字串」(metadata),不下載/不入庫任何圖檔;執行時是否載入由 app 端環境變數決定。
+  const flatFile = join(verDir, 'weapon-flat-files.json');
+  const flatSet = existsSync(flatFile) ? new Set(readJson(flatFile)) : new Set();
+  /** __RowId → Leanny weapon_flat 檔名(如 Path_Wst_Blaster_Light_00.png);找不到對應圖回 null。 */
+  const resolveIconName = (rowId) => {
+    const candidate = `Path_Wst_${rowId}.png`;
+    return flatSet.has(candidate) ? candidate : null;
+  };
+
   // 語言檔(三語各取武器相關區塊)。
   const lang = {};
   for (const loc of APP_LOCALES) {
@@ -139,6 +149,7 @@ function main() {
       names,
       nameSource,
       localeId,
+      iconName: resolveIconName(w.__RowId),
       coreStats,
       gearEffects: [],
     });
@@ -146,11 +157,12 @@ function main() {
 
   weapons.sort((a, b) => a.category.localeCompare(b.category) || a.id.localeCompare(b.id));
 
-  // coverage:各 coreStat key 的輸出筆數。
+  // coverage:各 coreStat key 的輸出筆數,另加 iconName 命中數(§4.3.1)。
   const coverage = {};
   for (const wpn of weapons) {
     for (const s of wpn.coreStats) coverage[s.key] = (coverage[s.key] ?? 0) + 1;
   }
+  coverage.iconName = weapons.filter((w) => w.iconName).length;
 
   const snapshot = {
     meta: {
@@ -159,6 +171,8 @@ function main() {
       generatedAt: new Date().toISOString(),
       nameSource: `splatoon3.ink 優先(${inkMatched}/${weapons.length} 把),其餘取自 Leanny 語言檔`,
       statSource: 'Leanny 遊戲參數(事實性數據立場,自建 schema,不照抄其結構);damage 內部值÷10、ink×100、cadence 為幀',
+      iconSource:
+        'iconName 為 Leanny weapon_flat 檔名參照(規格 §4.3.1 opt-in 例外);僅存字串、不含圖檔本體,執行時是否載入由 NEXT_PUBLIC_WEAPON_ICONS 控制',
       disclaimer: '非官方工具,與任天堂無關。名稱資料來源 splatoon3.ink。',
       coverage,
     },
@@ -195,6 +209,7 @@ function main() {
   console.log(`武器數:${weapons.length}(splatoon3.ink 命名 ${inkMatched}、Leanny 補 ${weapons.length - inkMatched})`);
   console.log(`副武器 ${usedSub.size} 種、特殊武器 ${usedSpecial.size} 種`);
   console.log('coreStat 涵蓋率:', coverage);
+  console.log(`圖示檔名參照(§4.3.1,僅字串):${coverage.iconName}/${weapons.length} 命中 weapon_flat`);
   console.log('→ src/data/weapons.snapshot.json、src/data/sub-special.json');
 }
 

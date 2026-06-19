@@ -12,6 +12,8 @@ export interface WeaponCardVM {
   name: string;
   subName: string;
   specialName: string;
+  /** §4.3.1 opt-in:官方圖示外部 URL;預設關閉時為 undefined,卡片不渲染圖示。 */
+  iconUrl?: string;
 }
 
 /** 卡片交替的噴濺強調色(品牌區節奏,避免同質卡海;Two-Zone:列表屬品牌區可用霓虹)。 */
@@ -97,13 +99,29 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
                     aria-hidden
                     className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full opacity-20 blur-2xl ${ACCENTS[i % ACCENTS.length]}`}
                   />
-                  <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
-                    <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
-                    {tc(w.category)}
-                  </p>
-                  <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
-                    {w.name}
-                  </h2>
+                  <div className="flex items-start gap-3">
+                    <div className="min-w-0 flex-1">
+                      <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
+                        <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
+                        {tc(w.category)}
+                      </p>
+                      <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
+                        {w.name}
+                      </h2>
+                    </div>
+                    {/* §4.3.1 opt-in:官方圖示(外部 hotlink);未啟用時 iconUrl 為 undefined → 不渲染,版面不變。 */}
+                    {w.iconUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
+                      <img
+                        src={w.iconUrl}
+                        alt={t('iconAlt', { name: w.name })}
+                        width={56}
+                        height={56}
+                        loading="lazy"
+                        className="size-14 shrink-0 object-contain drop-shadow"
+                      />
+                    ) : null}
+                  </div>
                   <dl className="mt-2 space-y-0.5 text-xs text-muted-on-dark">
                     <div className="flex gap-1.5">
                       <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>

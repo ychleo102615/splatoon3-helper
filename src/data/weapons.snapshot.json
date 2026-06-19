@@ -2,15 +2,17 @@
   "meta": {
     "gameVersion": "11.2.0",
     "dataVersionCode": "1120",
-    "generatedAt": "2026-06-18T14:11:57.452Z",
+    "generatedAt": "2026-06-19T13:34:13.592Z",
     "nameSource": "splatoon3.ink 優先(63/173 把),其餘取自 Leanny 語言檔",
     "statSource": "Leanny 遊戲參數(事實性數據立場,自建 schema,不照抄其結構);damage 內部值÷10、ink×100、cadence 為幀",
+    "iconSource": "iconName 為 Leanny weapon_flat 檔名參照(規格 §4.3.1 opt-in 例外);僅存字串、不含圖檔本體,執行時是否載入由 NEXT_PUBLIC_WEAPON_ICONS 控制",
     "disclaimer": "非官方工具,與任天堂無關。名稱資料來源 splatoon3.ink。",
     "coverage": {
       "range": 173,
       "damage": 339,
       "inkConsumption": 173,
-      "cadence": 152
+      "cadence": 152,
+      "iconName": 173
     }
   },
   "weapons": [
@@ -27,6 +29,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "884321fa6165eb37",
+      "iconName": "Path_Wst_Blaster_Light_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -73,6 +76,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Light_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -119,6 +123,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "183dfb6256c39892",
+      "iconName": "Path_Wst_Blaster_LightLong_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -165,6 +170,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_LightLong_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -211,6 +217,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_LightLong_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -257,6 +264,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "830801a9f4555917",
+      "iconName": "Path_Wst_Blaster_LightShort_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -303,6 +311,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_LightShort_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -349,6 +358,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "30f4e84e186e226f",
+      "iconName": "Path_Wst_Blaster_Long_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -395,6 +405,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Long_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -441,6 +452,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "dde2f92988536cd2",
+      "iconName": "Path_Wst_Blaster_Middle_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -487,6 +499,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Middle_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -533,6 +546,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Middle_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -579,6 +593,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "de8a2a542dbe6b99",
+      "iconName": "Path_Wst_Blaster_Precision_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -625,6 +640,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Precision_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -671,6 +687,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "05a0ddd5b919b698",
+      "iconName": "Path_Wst_Blaster_Short_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -717,6 +734,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Short_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -763,6 +781,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Blaster_Short_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -809,6 +828,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b4ebb5629d8c3e5f",
+      "iconName": "Path_Wst_Shelter_Compact_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -855,6 +875,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Compact_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -901,6 +922,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Compact_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -947,6 +969,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "914ca6f3cba7aa98",
+      "iconName": "Path_Wst_Shelter_Focus_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -987,6 +1010,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Focus_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1027,6 +1051,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "23deec47199c37d1",
+      "iconName": "Path_Wst_Shelter_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1067,6 +1092,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1107,6 +1133,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -1147,6 +1174,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "342c1b18ce2732ea",
+      "iconName": "Path_Wst_Shelter_Wide_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1181,6 +1209,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Wide_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1215,6 +1244,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shelter_Wide_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -1249,6 +1279,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3ab1a91f59f81345",
+      "iconName": "Path_Wst_Brush_Heavy_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1295,6 +1326,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Heavy_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1341,6 +1373,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Heavy_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -1387,6 +1420,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "895eaa9e4e5b427b",
+      "iconName": "Path_Wst_Brush_Mini_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1433,6 +1467,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Mini_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1479,6 +1514,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d9632c243eb36d73",
+      "iconName": "Path_Wst_Brush_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1525,6 +1561,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1571,6 +1608,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -1617,6 +1655,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Brush_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -1663,6 +1702,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "17b8d348d6380ae9",
+      "iconName": "Path_Wst_Charger_Keeper_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1709,6 +1749,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Keeper_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1755,6 +1796,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5c8a27c6818f20e6",
+      "iconName": "Path_Wst_Charger_Light_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1801,6 +1843,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Light_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1847,6 +1890,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "dc9f150e86663adb",
+      "iconName": "Path_Wst_Charger_Long_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1893,6 +1937,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Long_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -1939,6 +1984,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_LongScope_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -1985,6 +2031,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_LongScope_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2031,6 +2078,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "961a7063fc94f087",
+      "iconName": "Path_Wst_Charger_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2071,6 +2119,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2111,6 +2160,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -2151,6 +2201,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -2191,6 +2242,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_NormalScope_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2231,6 +2283,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_NormalScope_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2271,6 +2324,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_NormalScope_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -2311,6 +2365,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d22945127fb7584f",
+      "iconName": "Path_Wst_Charger_Pencil_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2357,6 +2412,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Pencil_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2403,6 +2459,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "535d3c822bba0415",
+      "iconName": "Path_Wst_Charger_Quick_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2449,6 +2506,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Charger_Quick_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2495,6 +2553,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d39ba7409f6e1fbc",
+      "iconName": "Path_Wst_Maneuver_Dual_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2541,6 +2600,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Dual_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2587,6 +2647,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Dual_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -2633,6 +2694,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3b31490a368e92e1",
+      "iconName": "Path_Wst_Maneuver_Gallon_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2679,6 +2741,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Gallon_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2725,6 +2788,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "7065ab46c609e6d7",
+      "iconName": "Path_Wst_Maneuver_Long_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2771,6 +2835,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Long_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2817,6 +2882,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "83c543ed4ae19005",
+      "iconName": "Path_Wst_Maneuver_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -2863,6 +2929,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -2909,6 +2976,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -2955,6 +3023,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -3001,6 +3070,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "79e6297eb501599f",
+      "iconName": "Path_Wst_Maneuver_Short_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3047,6 +3117,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Short_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3093,6 +3164,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Short_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -3139,6 +3211,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "523fca90c5771a63",
+      "iconName": "Path_Wst_Maneuver_Stepper_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3185,6 +3258,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Maneuver_Stepper_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3231,6 +3305,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e78ca547494ad3c3",
+      "iconName": "Path_Wst_Roller_Compact_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3277,6 +3352,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Compact_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3323,6 +3399,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Compact_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -3369,6 +3446,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3ed1b23808b91e54",
+      "iconName": "Path_Wst_Roller_Heavy_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3415,6 +3493,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Heavy_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3461,6 +3540,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Heavy_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -3507,6 +3587,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "03146bb3dc0defd4",
+      "iconName": "Path_Wst_Roller_Hunter_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3553,6 +3634,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Hunter_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3599,6 +3681,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e115c15c4a20d8ba",
+      "iconName": "Path_Wst_Roller_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3645,6 +3728,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3691,6 +3775,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -3737,6 +3822,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b04c2fbbe1c98e63",
+      "iconName": "Path_Wst_Roller_Wide_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3783,6 +3869,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Wide_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3829,6 +3916,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Roller_Wide_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -3875,6 +3963,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "935949ea2945806b",
+      "iconName": "Path_Wst_Shooter_Blaze_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -3921,6 +4010,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Blaze_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -3967,6 +4057,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Blaze_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -4013,6 +4104,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "f74d638ac101904e",
+      "iconName": "Path_Wst_Shooter_Expert_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4059,6 +4151,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Expert_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4105,6 +4198,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Expert_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -4151,6 +4245,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "de148ea51e7c28fa",
+      "iconName": "Path_Wst_Shooter_First_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4197,6 +4292,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_First_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4243,6 +4339,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "280ed6683d3eb523",
+      "iconName": "Path_Wst_Shooter_Flash_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4289,6 +4386,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Flash_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4335,6 +4433,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "513c64dd6cd5e723",
+      "iconName": "Path_Wst_Shooter_Gravity_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4381,6 +4480,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Gravity_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4427,6 +4527,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "885c30f6102de958",
+      "iconName": "Path_Wst_Shooter_Heavy_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4473,6 +4574,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Heavy_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4519,6 +4621,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Heavy_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -4565,6 +4668,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "9e45e49e1e9c4853",
+      "iconName": "Path_Wst_Shooter_Long_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4611,6 +4715,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Long_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4657,6 +4762,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Long_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -4703,6 +4809,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e60629ecf35192a1",
+      "iconName": "Path_Wst_Shooter_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4743,6 +4850,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -4783,6 +4891,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -4823,6 +4932,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Normal_H.png",
       "coreStats": [
         {
           "key": "range",
@@ -4863,6 +4973,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -4903,6 +5014,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Normal_Oct.png",
       "coreStats": [
         {
           "key": "range",
@@ -4943,6 +5055,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "ed647072fa99c73e",
+      "iconName": "Path_Wst_Shooter_Precision_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -4989,6 +5102,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Precision_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5035,6 +5149,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Precision_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -5081,6 +5196,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "85c6eda8dffc77a0",
+      "iconName": "Path_Wst_Shooter_QuickLong_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5127,6 +5243,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_QuickLong_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5173,6 +5290,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b3ab498b8a8a0667",
+      "iconName": "Path_Wst_Shooter_QuickMiddle_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5219,6 +5337,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_QuickMiddle_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5265,6 +5384,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5567ca94a5374d21",
+      "iconName": "Path_Wst_Shooter_Short_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5311,6 +5431,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_Short_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5357,6 +5478,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5e5481f626f02cbf",
+      "iconName": "Path_Wst_Shooter_TripleMiddle_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5403,6 +5525,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_TripleMiddle_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5449,6 +5572,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_TripleMiddle_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -5495,6 +5619,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "0578f3b3d9af08ed",
+      "iconName": "Path_Wst_Shooter_TripleQuick_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5541,6 +5666,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_TripleQuick_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5587,6 +5713,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Shooter_TripleQuick_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -5633,6 +5760,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "eb5098db38e209e1",
+      "iconName": "Path_Wst_Slosher_Bathtub_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5673,6 +5801,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Bathtub_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5713,6 +5842,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b4df43b5b0d90b7a",
+      "iconName": "Path_Wst_Slosher_Diffusion_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5759,6 +5889,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Diffusion_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5805,6 +5936,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Diffusion_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -5851,6 +5983,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "09284d9bd3b61ea1",
+      "iconName": "Path_Wst_Slosher_Double_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -5897,6 +6030,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Double_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -5943,6 +6077,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Double_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -5989,6 +6124,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5463ec85acff180c",
+      "iconName": "Path_Wst_Slosher_Launcher_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6035,6 +6171,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Launcher_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6081,6 +6218,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "fe3b9b3b87ca491e",
+      "iconName": "Path_Wst_Slosher_Strong_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6127,6 +6265,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Strong_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6173,6 +6312,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Strong_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -6219,6 +6359,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c19e07d4db9a4075",
+      "iconName": "Path_Wst_Slosher_Washtub_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6259,6 +6400,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Slosher_Washtub_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6299,6 +6441,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b5b716854159da15",
+      "iconName": "Path_Wst_Saber_Heavy_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6345,6 +6488,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Heavy_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6391,6 +6535,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "67b2e7ac4bf64e71",
+      "iconName": "Path_Wst_Saber_Lite_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6437,6 +6582,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Lite_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6483,6 +6629,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Lite_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -6529,6 +6676,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c95b060287d757a2",
+      "iconName": "Path_Wst_Saber_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6575,6 +6723,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6621,6 +6770,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -6667,6 +6817,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Saber_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -6713,6 +6864,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "439343ee49a5126b",
+      "iconName": "Path_Wst_Spinner_Downpour_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6759,6 +6911,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Downpour_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6805,6 +6958,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c100f88e8b925e1c",
+      "iconName": "Path_Wst_Spinner_Hyper_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6851,6 +7005,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Hyper_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -6897,6 +7052,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Hyper_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -6943,6 +7099,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d9a573867cb6ba9a",
+      "iconName": "Path_Wst_Spinner_HyperShort_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -6989,6 +7146,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_HyperShort_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7035,6 +7193,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "cd34251e67bd3f3e",
+      "iconName": "Path_Wst_Spinner_Quick_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7081,6 +7240,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Quick_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7127,6 +7287,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Quick_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -7173,6 +7334,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "6ede65010706778d",
+      "iconName": "Path_Wst_Spinner_Serein_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7219,6 +7381,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Serein_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7265,6 +7428,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3aac272457998973",
+      "iconName": "Path_Wst_Spinner_Standard_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7311,6 +7475,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Standard_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7357,6 +7522,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Spinner_Standard_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -7403,6 +7569,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "66cd48f017d3f078",
+      "iconName": "Path_Wst_Stringer_Explosion_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7449,6 +7616,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Explosion_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7495,6 +7663,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "2136716c07457658",
+      "iconName": "Path_Wst_Stringer_Normal_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7541,6 +7710,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Normal_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7587,6 +7757,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Normal_02.png",
       "coreStats": [
         {
           "key": "range",
@@ -7633,6 +7804,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Normal_O.png",
       "coreStats": [
         {
           "key": "range",
@@ -7679,6 +7851,7 @@
       },
       "nameSource": "splatoon3.ink",
       "localeId": "1f7612f08f804c54",
+      "iconName": "Path_Wst_Stringer_Short_00.png",
       "coreStats": [
         {
           "key": "range",
@@ -7725,6 +7898,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Short_01.png",
       "coreStats": [
         {
           "key": "range",
@@ -7771,6 +7945,7 @@
       },
       "nameSource": "leanny",
       "localeId": null,
+      "iconName": "Path_Wst_Stringer_Short_02.png",
       "coreStats": [
         {
           "key": "range",
