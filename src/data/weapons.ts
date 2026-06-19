@@ -20,6 +20,8 @@ const snapshot = snapshotJson as unknown as WeaponSnapshot;
 interface RefEntry {
   names: Record<SnapshotLocale, string>;
   blurb: Record<SnapshotLocale, string>;
+  /** §4.3.1 opt-in:Leanny subspe 圖示檔名參照(非圖檔本體);無對應圖時為 null。 */
+  iconName: string | null;
 }
 interface SubSpecialTables {
   subWeapons: Record<string, RefEntry>;
@@ -62,4 +64,14 @@ export function subWeaponBlurb(id: string, locale: SnapshotLocale): string {
 /** 特殊武器一行簡述。 */
 export function specialWeaponBlurb(id: string, locale: SnapshotLocale): string {
   return subSpecial.specialWeapons[id]?.blurb[locale] ?? '';
+}
+
+/** 副武器圖示檔名參照(§4.3.1);無對應圖或缺欄位時回 null。 */
+export function subWeaponIconName(id: string): string | null {
+  return subSpecial.subWeapons[id]?.iconName ?? null;
+}
+
+/** 特殊武器圖示檔名參照(§4.3.1);無對應圖或缺欄位時回 null。 */
+export function specialWeaponIconName(id: string): string | null {
+  return subSpecial.specialWeapons[id]?.iconName ?? null;
 }

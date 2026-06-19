@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
-import { weaponIconUrl } from '@/config/icons';
+import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
 import {
   weapons,
   weaponById,
@@ -13,6 +13,8 @@ import {
   specialWeaponName,
   subWeaponBlurb,
   specialWeaponBlurb,
+  subWeaponIconName,
+  specialWeaponIconName,
   snapshotMeta,
   type SnapshotLocale,
 } from '@/data/weapons';
@@ -54,6 +56,8 @@ export default async function WeaponDetailPage({
 
   // §4.3.1 opt-in:官方圖示 URL;預設關閉(或無 iconName)時為 null → 不渲染圖示。
   const iconUrl = weaponIconUrl(w.iconName);
+  const subIconUrl = subspeIconUrl(subWeaponIconName(w.subWeaponId));
+  const specialIconUrl = subspeIconUrl(specialWeaponIconName(w.specialWeaponId));
   const name = weaponName(w, loc);
 
   // 段落語意 label:有翻譯用翻譯,否則退回原始 key(防止漏字串時崩潰)。
@@ -180,9 +184,23 @@ export default async function WeaponDetailPage({
               <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
                 {t('subLabel')}
               </h2>
-              <p className="mt-1 font-display text-base font-bold text-text-on-dark">
-                {subWeaponName(w.subWeaponId, loc)}
-              </p>
+              <div className="mt-1 flex items-center gap-2.5">
+                {/* §4.3.1 opt-in:副武器圖示;未啟用時為 null → 不渲染,版面不變。 */}
+                {subIconUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
+                  <img
+                    src={subIconUrl}
+                    alt={t('iconAlt', { name: subWeaponName(w.subWeaponId, loc) })}
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    className="size-9 shrink-0 object-contain drop-shadow"
+                  />
+                ) : null}
+                <p className="font-display text-base font-bold text-text-on-dark">
+                  {subWeaponName(w.subWeaponId, loc)}
+                </p>
+              </div>
               <p className="mt-1 font-body text-sm leading-relaxed text-muted-on-dark">
                 {subWeaponBlurb(w.subWeaponId, loc)}
               </p>
@@ -191,9 +209,23 @@ export default async function WeaponDetailPage({
               <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
                 {t('specialLabel')}
               </h2>
-              <p className="mt-1 font-display text-base font-bold text-text-on-dark">
-                {specialWeaponName(w.specialWeaponId, loc)}
-              </p>
+              <div className="mt-1 flex items-center gap-2.5">
+                {/* §4.3.1 opt-in:特殊武器圖示;未啟用時為 null → 不渲染,版面不變。 */}
+                {specialIconUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
+                  <img
+                    src={specialIconUrl}
+                    alt={t('iconAlt', { name: specialWeaponName(w.specialWeaponId, loc) })}
+                    width={40}
+                    height={40}
+                    loading="lazy"
+                    className="size-9 shrink-0 object-contain drop-shadow"
+                  />
+                ) : null}
+                <p className="font-display text-base font-bold text-text-on-dark">
+                  {specialWeaponName(w.specialWeaponId, loc)}
+                </p>
+              </div>
               <p className="mt-1 font-body text-sm leading-relaxed text-muted-on-dark">
                 {specialWeaponBlurb(w.specialWeaponId, loc)}
               </p>

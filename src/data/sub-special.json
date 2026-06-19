@@ -1,6 +1,6 @@
 {
-  "_source": "Leanny 語言檔(WeaponName_Sub/Special、WeaponExp_Sub/Special)",
-  "_note": "副/特殊武器三語名稱與一行簡述;key 為快照中的 subWeaponId / specialWeaponId。",
+  "_source": "Leanny 語言檔(WeaponName_Sub/Special、WeaponExp_Sub/Special)+ subspe 圖示檔名(§4.3.1)",
+  "_note": "副/特殊武器三語名稱、一行簡述與圖示檔名參照(iconName,僅字串無圖檔);key 為快照中的 subWeaponId / specialWeaponId。",
   "subWeapons": {
     "beacon": {
       "names": {
@@ -12,7 +12,8 @@
         "ja-JP": "イカが察知できる信号を発信する装置。 味方のジャンプビーコンを選んでを押すと、 そこにスーパージャンプする。 同時に３つまで設置でき、通常は１回しか使えないが、 ジャンプビーコンを装備していない仲間が使う場合は２回まで使える。",
         "zh-TW": "能發出訊號讓魷魚感應的裝置。 選擇同伴設置的跳躍信標並按下 即可朝該地點使用超級跳躍。 最多可以同時設置3個，一般只能使用1次， 但是沒有裝備跳躍信標的同伴最多可以使用2次。",
         "en": "A device that emits a signal that Inklings and Octolings can detect. You can Super Jump to a teammate's Squid Beakon by selecting it and pressing . You can place up to three at a time. They're usually single use, but allies who don't have the Squid Beakon equipped can use them twice."
-      }
+      },
+      "iconName": "Wsb_Beacon00.png"
     },
     "bomb-curling": {
       "names": {
@@ -24,7 +25,8 @@
         "ja-JP": "地面を塗りながら進んだあと、爆発するボム。 カベに当たると はね返る。 を押し続けると、爆発するまでの時間を調整できる。",
         "zh-TW": "會在前進的同時對地面塗墨， 並在最後爆炸的炸彈。 撞到牆壁時會反彈。 持續按住可以調整爆炸時間的快慢。",
         "en": "A bomb that moves in a straight line, inking the ground before it explodes. It also bounces off walls! You can adjust the length of time until detonation by holding down ."
-      }
+      },
+      "iconName": "Wsb_Bomb_Curling00.png"
     },
     "bomb-fizzy": {
       "names": {
@@ -36,7 +38,8 @@
         "ja-JP": "ガスがとけているインクを充填したボム。 を押して構えている間パワーがたまり、 パワーに応じて最大３回連続で爆発する。 コントローラーを動かしたり、スティックやボタンを操作するほど パワーが素早くたまる。",
         "zh-TW": "填充的墨汁中含有溶解氣體的炸彈。 按住手持炸彈時威力會累積， 根據累積的威力大小，最多可以連續爆炸3次。 擺動控制器、推動操控搖桿或按押按鍵等操作 可以快速累積威力。",
         "en": "A bomb loaded with special carbonated ink. Hold to build power, then unleash up to three explosions. Shake the controller, move the Stick, or mash buttons to build power faster!"
-      }
+      },
+      "iconName": "Wsb_Bomb_Fizzy00.png"
     },
     "bomb-quick": {
       "names": {
@@ -48,7 +51,8 @@
         "ja-JP": "何かにぶつかると、すぐに爆発するボム。 爆発が小さく、攻撃力も低いが、 あまりインクを消費せずに連続して投げることができる。",
         "zh-TW": "只要撞到其他東西就會立刻爆炸的炸彈。 爆炸範圍小，且威力也很低， 但是墨汁的消耗量少，可以連續投擲。",
         "en": "A bomb that explodes when it touches something. It's a small, weak explosion, but it doesn't consume much ink, so you can throw one after another."
-      }
+      },
+      "iconName": "Wsb_Bomb_Quick00.png"
     },
     "bomb-robot": {
       "names": {
@@ -60,7 +64,8 @@
         "ja-JP": "自動で相手を追いかけるボム。 投げた場所の周囲を探知し、相手を見つけて自動で歩いていく。 相手に近づくと停止し、爆発する。",
         "zh-TW": "能自動追蹤對手的炸彈。 投擲後會對落地點周圍展開偵測， 一旦發現對手就會自動追蹤， 在接近對手後就會停止並爆炸。",
         "en": "A bomb that automatically seeks out opponents. It will search for opponents in the area that you throw it, and if it finds one, it will automatically start walking toward them. When it approaches an opponent, it stops and explodes."
-      }
+      },
+      "iconName": "Wsb_Bomb_Robot00.png"
     },
     "bomb-splash": {
       "names": {
@@ -72,7 +77,8 @@
         "ja-JP": "着地してしばらくすると、爆発するボム。 爆発で周辺を塗ることができ、相手も倒せる。",
         "zh-TW": "落地後經過一段時間就會爆炸的炸彈。 可藉由爆炸對周邊位置塗墨，也能用來擊倒對手。",
         "en": "A bomb that explodes a short time after it lands. It inks the area around it when it explodes and can even take out opponents."
-      }
+      },
+      "iconName": "Wsb_Bomb_Splash00.png"
     },
     "bomb-suction": {
       "names": {
@@ -84,7 +90,8 @@
         "ja-JP": "地面やカベにくっつくボム。 スプラッシュボムよりも爆発までの時間が長いが、 広い範囲に爆風が届く。",
         "zh-TW": "能吸附在地面或牆壁上的炸彈。 爆炸的時間比斯普拉炸彈慢， 但是爆炸波及的範圍更廣。",
         "en": "A bomb that attaches to the ground and walls. It takes longer to explode than the Splat Bombs and spreads ink farther."
-      }
+      },
+      "iconName": "Wsb_Bomb_Suction00.png"
     },
     "bomb-torpedo": {
       "names": {
@@ -96,7 +103,8 @@
         "ja-JP": "相手に向かって飛んでいくサブウェポン。 相手の近くに投げると、変形して相手に向かって飛んでいき、 着弾した場所に爆発するインクをまき散らす。 相手のトーピードは、攻撃すると撃ち落とせる。",
         "zh-TW": "會直接飛向對手的次要武器。 只要朝著對手附近投擲就會變形並飛向對手， 最後會在中彈的地方爆炸噴灑墨汁。 對手的魚雷可以用攻擊的方式擊落。",
         "en": "A sub weapon that flies toward your enemies. When thrown near an enemy, it changes shape and targets the foe, exploding on impact and splatting ink everywhere. You can shoot down enemy torpedoes."
-      }
+      },
+      "iconName": "Wsb_Bomb_Torpedo00.png"
     },
     "line-marker": {
       "names": {
@@ -108,7 +116,8 @@
         "ja-JP": "通り道に線を残しながら、一直線に飛んでいくサブウェポン。 線にふれた相手をマーキングする。 さらに、直撃した相手にはダメージもあたえる。 カベや地面に当たると はね返る。",
         "zh-TW": "會以直線飛行 並在行經之處留下線條的次要武器。 觸碰到線條的對手會遭到標記。 此外，也會對直接命中的對手造成傷害， 而命中牆壁或地面時則會反彈。",
         "en": "A sub weapon that fires straight forward and leaves a line in its path. Opponents that are hit directly will take damage, and those that touch the remaining line will be marked. When a shot hits a solid surface, it will bounce off of it and continue in a straight line."
-      }
+      },
+      "iconName": "Wsb_LineMarker00.png"
     },
     "point-sensor": {
       "names": {
@@ -120,7 +129,8 @@
         "ja-JP": "投げた場所の近くにいる相手をマーキングする装置。 相手の位置を仲間全員に知らせる。",
         "zh-TW": "可以在投擲後 將落地點周圍的對手標記出來的裝置。 能讓所有的同伴看到對手的位置。",
         "en": "A device that marks opponents nearby where it's thrown. It reveals the opponents' locations to your teammates."
-      }
+      },
+      "iconName": "Wsb_PointSensor00.png"
     },
     "poison-mist": {
       "names": {
@@ -132,7 +142,8 @@
         "ja-JP": "ある生物の体液を霧状にして収めたビン。 霧の中に入った相手の移動をおそくし、インクを少しずつ減らす。 霧の中に入っている時間が長いほど、効果が大きくなる。",
         "zh-TW": "將某種生物的體液霧化後封裝而成的瓶子。 當對手進入霧中，移動會變遲緩， 墨汁也會慢慢地持續減少。 待在霧中的時間越久，效果就越大。",
         "en": "A bottle that sprays the fluid of a certain creature in mist form. Opponents caught in the mist move slower and their ink is slightly reduced. The longer an enemy is in the mist, the stronger the effect becomes."
-      }
+      },
+      "iconName": "Wsb_PoisonMist00.png"
     },
     "shield": {
       "names": {
@@ -144,7 +155,8 @@
         "ja-JP": "目の前にインクのカベを設置し、相手の侵入や攻撃を防ぐしかけ。 相手に攻撃されると、壊れるまでの時間が早くなる。 同時に１つしか設置できない。",
         "zh-TW": "能在眼前設置一道墨汁牆的裝置， 可以阻擋對手的入侵或攻擊。 遭到對手攻擊時會較快損壞。 最多只能同時設置1個。",
         "en": "A device that erects a wall of ink in front of you that blocks enemy intrusion and attacks. Attacks from enemies will speed up the time it takes for the wall to come down. You can only place one at a time."
-      }
+      },
+      "iconName": "Wsb_Shield00.png"
     },
     "sprinkler": {
       "names": {
@@ -156,7 +168,8 @@
         "ja-JP": "地面やカベにくっつき、インクをまき散らすしかけ。 設置してすぐは勢いが強いが、少しずつ弱まる。 同時に１つしか設置できない。",
         "zh-TW": "能吸附在地面或牆壁上的墨汁噴射裝置。 剛設置時的噴灑力道很強， 但是會隨著時間經過而逐漸變弱。 最多只能同時設置1個。",
         "en": "A device that attaches to the ground or to walls and sprays ink. It operates at full power right when you place it but gradually gets weaker. You can only place one at a time."
-      }
+      },
+      "iconName": "Wsb_Sprinkler00.png"
     },
     "trap": {
       "names": {
@@ -168,7 +181,8 @@
         "ja-JP": "足元に置くワナで、相手が近づくと作動し、その相手をマーキングする。 相手の色で塗られると、自然に作動してしまう。 同時に２つまで設置できる。",
         "zh-TW": "可設置在腳下的陷阱， 會在對手接近時啟動並標記該對手。 一旦被對手的墨汁塗到就會直接啟動， 最多可以同時設置2個。",
         "en": "A trap that you place on the ground. When an opponent gets close, it activates, marking that opponent. It'll also activate if inked by an opponent. You can place two at once."
-      }
+      },
+      "iconName": "Wsb_Trap00.png"
     }
   },
   "specialWeapons": {
@@ -182,7 +196,8 @@
         "ja-JP": "相手のインク攻撃を吸いこむほど強力になるインク弾を放つ。 で空気のうずを発生させて相手のインク攻撃を吸いこむ。 メーターが満タンになるか一定時間が経過すると、を離して インク弾を発射できる。",
         "zh-TW": "在吸收墨汁後發射威力隨吸收量提升的墨汁彈。 按住可以產生空氣渦流吸收對手的墨汁， 當量表全滿或是經過一段時間後， 只要放開即可發射墨汁彈。",
         "en": "Make your ink shots more powerful by sucking up enemy attacks! Hold to generate a vortex that sucks up enemy ink attacks. Once the tank is full, or after the timer runs out, let go of , and you'll launch a souped-up super ink shot!"
-      }
+      },
+      "iconName": "Wsp_SpBlower00.png"
     },
     "sp-castle": {
       "names": {
@@ -194,7 +209,8 @@
         "ja-JP": "巨大なイカまたはタコに変身する。 変身中は相手のインク攻撃をはじきながら移動できる。 ジャンプして体当たりすると、強力なスピンで相手にダメージをあたえる。 また、を長押しして離すと前方に突撃する。",
         "zh-TW": "變身成巨大魷魚或巨大章魚。 變身時可以抵禦對手的墨汁攻擊，持續移動。 跳躍並撞擊對手，就能以強大的迴旋造成傷害。 此外，按住再放開就能朝前方展開突襲。",
         "en": "If you ever wanted to become a giant squid or octopus, this weapon is for you. While transformed, you can move around and repel enemy attacks. Jump and splat your enemies with powerful spin moves, or hold and then release to charge forward aggressively."
-      }
+      },
+      "iconName": "Wsp_SpCastle00.png"
     },
     "sp-chariot": {
       "names": {
@@ -206,7 +222,8 @@
         "ja-JP": "多足歩行戦車に乗りこみ、ショットやカノン砲で相手を制圧する。 で連射ショット、でカノン砲を発射する。 背中が弱点。で移動形態に変形して身を守れる。",
         "zh-TW": "駕駛多足步行戰車，發射墨汁和加農炮壓制對手。 按下可以連續發射墨汁， 按下可以發射加農炮。 背部為弱點， 按下可以變形為移動形態保護自己。",
         "en": "Leave your foes in a pinch with this scuttling tank's superior inkpower. Press for rapid-fire shots— will fire your cannon. Its back is vulnerable to enemy attacks, but you can shift into mobile mode with to protect yourself."
-      }
+      },
+      "iconName": "Wsp_SpChariot00.png"
     },
     "sp-chimney": {
       "names": {
@@ -218,7 +235,8 @@
         "ja-JP": "で装置を設置すると、 その場に大きなうすいシートが発生し、ゆっくり前に進む。 シートにふれた相手はダメージを受け、 さらに一定時間、色が落ちて見える。",
         "zh-TW": "用設置裝置後， 會當場出現巨大的薄幕牆，並緩慢前進。 觸碰幕牆的對手會受到一點傷害， 而且在一段時間內看起來像是掉色。",
         "en": "Not quite a shield but unlike any other offensive weapon, this device produces a large, slowly moving sheet when you press to deploy. Enemies who touch the sheet will take damage and briefly lose the ability to perceive color! Anyone who even LOOKS upon the sheet will be mildly disturbed."
-      }
+      },
+      "iconName": "Wsp_SpChimney00.png"
     },
     "sp-energy-stand": {
       "names": {
@@ -230,7 +248,8 @@
         "ja-JP": "一部の能力を一時的に強化するドリンクが入った冷蔵庫を設置する。 ドリンクは４本入りで、１人につき１本だけ飲める。 効果時間中にやられると、効果は切れるが、すぐに復活できる。",
         "zh-TW": "設置一台冰箱， 裡面放了可以暫時強化部分能力的飲料。 飲料總共有4罐，每人只能飲用1罐， 在效果發揮作用時陣亡會導致效果消失， 但是可以馬上復活。",
         "en": "Deploys a fridge stocked with drinks that enhance some of your abilities for a brief time. There are four drinks, but you can only have one—the rest are for sharing! You'll lose the enhancement if you're splatted while the drink is in effect, but you'll respawn right away."
-      }
+      },
+      "iconName": "Wsp_SpEnergyStand00.png"
     },
     "sp-firework": {
       "names": {
@@ -242,7 +261,8 @@
         "ja-JP": "で前方の広い範囲に大量のデコイを発射する。 デコイの落下地点には、スーパージャンプの着地点にそっくりな マーカーが表示される。 着地したデコイは、一定時間で爆発する。",
         "zh-TW": "按下即可朝著前方廣範圍發射大量誘餌。 誘餌的落地點會顯示跟超級跳躍落地點 一模一樣的標記。 落地的誘餌會在經過一段時間後爆炸。",
         "en": "Tired of getting jumped immediately after a Super Jump? Use the Super Chump to fire several decoys that appear to be Super Jump landing points into a wide area using , then giggle as your enemies move in just as the decoys explode with ink."
-      }
+      },
+      "iconName": "Wsp_SpFirework00.png"
     },
     "sp-great-barrier": {
       "names": {
@@ -254,7 +274,8 @@
         "ja-JP": "大型のバリアを発生させる装置を足元に設置する。 バリアは外からのインク攻撃を防ぐが、相手自体の侵入は防げない。 内部の装置や頂上の部品にダメージを受けると早く壊れてしまう。",
         "zh-TW": "在腳下設置能產生大型防護罩的裝置。 防護罩可以阻擋外來的墨汁攻擊， 但是無法阻止對手本身直接入侵內部， 一旦內部的裝置或頂部的零件受到傷害 就會加快損壞的速度。",
         "en": "Deploy this device at your feet to shield yourself with a large, spherical barrier. This bubble will block outside ink attacks, but it can't prevent opponents themselves from entering. Damage to the top section or the inner device will cause the barrier to pop more quickly."
-      }
+      },
+      "iconName": "Wsp_SpGreatBarrier00.png"
     },
     "sp-ink-storm": {
       "names": {
@@ -266,7 +287,8 @@
         "ja-JP": "インクの雨雲を発生させる装置を投げる。 インクの雨雲は着地地点から少しずつ移動していく。",
         "zh-TW": "投擲可以製造墨汁雨雲的裝置。 墨汁雨雲會從落地點開始緩慢移動。",
         "en": "Throw this device to generate a rain cloud of ink. The cloud gradually moves away from where the device was thrown."
-      }
+      },
+      "iconName": "Wsp_SpInkStorm00.png"
     },
     "sp-jetpack": {
       "names": {
@@ -278,7 +300,8 @@
         "ja-JP": "インクを噴射して空を飛び、付属のランチャーで攻撃する。 を押すと、一時的に高度を上げることができる。",
         "zh-TW": "利用墨汁噴射的力量飛在空中 並使用附屬的發射器展開攻擊。 按下可以暫時提升高度。",
         "en": "This launches you into the air by spraying out ink, allowing you to attack opponents with the attached launcher. You can fly higher temporarily by pressing ."
-      }
+      },
+      "iconName": "Wsp_SpJetpack00.png"
     },
     "sp-micro-laser": {
       "names": {
@@ -290,7 +313,8 @@
         "ja-JP": "メガホン型のレーザー発射装置を６つ配置し、攻撃する。 相手プレイヤーをロックオンすると、装置が自動で追撃する。 発動中も、メインウェポンやサブウェポンを使うことができる。",
         "zh-TW": "設置6個喇叭型的雷射發射裝置展開攻擊。 一旦裝置鎖定對手就會自動進行追擊， 在裝置運作時仍可使用主要武器或次要武器。",
         "en": "Unleashes six speaker-shaped, laser-emitting devices to surround and devastate your enemies. Lock onto an opponent, and the emitters will track and blast them wherever they go! You can continue to use your main weapon and sub weapon while the Killer Wail 5.1 is firing."
-      }
+      },
+      "iconName": "Wsp_SpMicroLaser00.png"
     },
     "sp-multi-missile": {
       "names": {
@@ -302,7 +326,8 @@
         "ja-JP": "を押すと、カーソル内の相手にミサイルを発射する。 最大５つの目標をまとめてロックオンできる。 ロックオンした数によって、目標１つあたりのミサイル発射数が変わる。",
         "zh-TW": "按下即可對游標內的所有對手發射導彈， 最多可以同時鎖定5個目標。 鎖定的目標總數 將會影響對各個目標發射的導彈數量。",
         "en": "Press to fire missiles at any enemies within your targeting reticle. Locking on to several enemies will change the number of missiles that hit each target."
-      }
+      },
+      "iconName": "Wsp_SpMultiMissile00.png"
     },
     "sp-nice-ball": {
       "names": {
@@ -314,7 +339,8 @@
         "ja-JP": "力をためて、インクのかたまりを作り、投げつけて爆発させる。 「ナイス」のシグナルを送ったり、仲間から受けたりすることで、 素早く力をためられる。 「ナイス」を送ってくれた仲間は、スペシャルゲージが少し増える。",
         "zh-TW": "凝聚力量製造墨汁彈並在投擲後爆炸。 親自發送或是收到同伴的「讚」信號 就能快速凝聚力量。 同伴在發送「讚」信號後， 特殊武器蓄力槽會微幅增加。",
         "en": "Funnel power into an explosive ink ball, and launch it at the enemy. By sending and receiving \"Booyahs\" from your team, you can build power more quickly. Teammates who send Booyahs will be rewarded by having their special gauge filled a little."
-      }
+      },
+      "iconName": "Wsp_SpNiceBall00.png"
     },
     "sp-pogo": {
       "names": {
@@ -326,7 +352,8 @@
         "ja-JP": "浮き上がりながら力をため、 ３つのこぶしを地面にたたきつけて周囲を攻撃する。 スーパージャンプ中にも使える。 このときは、１つのこぶしだけをたたきつける。",
         "zh-TW": "浮在空中的同時蓄力， 會出現三個拳頭打在地面對周圍攻擊。 可以在超級跳躍中使用。 這時就只會有一個拳頭對地面攻擊。",
         "en": "What's better than splashing down with one fist in a burst of ink-splattered devastation? Splashing down with THREE fists in a burst of ink-splattered devastation! You can even use this special at the end of a Super Jump, but its power will be dialed back to one fist in that case."
-      }
+      },
+      "iconName": "Wsp_SpPogo00.png"
     },
     "sp-shock-sonar": {
       "names": {
@@ -338,7 +365,8 @@
         "ja-JP": "ウェーブを生み出す装置を設置し、かくれた相手をあぶりだす。 ウェーブは地面を伝わり、ふれた相手にダメージをあたえてマーキングする｡ ジャンプすればウェーブをかわすことができる。",
         "zh-TW": "設置產生音波的裝置，逼出躲藏起來的對手。 音波會透過地面傳導， 在接觸到對手時會造成傷害並標記， 可以利用跳躍的方式閃避音波。",
         "en": "Deploys a device that generates sonic waves to drive hidden opponents out into the open. Waves expand along the ground, marking and dealing damage to any opponents they touch. To avoid damage, simply jump over each wave."
-      }
+      },
+      "iconName": "Wsp_SpShockSonar00.png"
     },
     "sp-skewer": {
       "names": {
@@ -350,7 +378,8 @@
         "ja-JP": "インクの力で進むフロートに乗って前方に突撃する。 を押すか、コースから外れると、爆発してダメージをあたえる。",
         "zh-TW": "站在以墨汁力量驅動的充氣艇上朝著前方突襲。 按下或是脫離路線時， 就會引發爆炸造成傷害。",
         "en": "Hop onto a shark-shaped, ink-propelled float, and charge forward. When you reach the end of the path, or if you press , the float will explode and deal damage."
-      }
+      },
+      "iconName": "Wsp_SpSkewer00.png"
     },
     "sp-super-hook": {
       "names": {
@@ -362,7 +391,8 @@
         "ja-JP": "インクをまとった姿に変身し、触腕をのばしてステージを飛び回る。 でカベに張りつき、でメインウェポンを使用できる。 インクが切れると変身が解け、元いた場所にスーパージャンプでもどる。",
         "zh-TW": "變身成被墨汁包覆的模樣並伸長觸手四處飛竄。 按下可以黏在牆上， 按下可以使用主要武器。 一旦墨汁消耗殆盡就會解除變身 並以超級跳躍的方式回到原來的位置。",
         "en": "Transform into an ink-cloaked acrobat, and sling your stretchy arm to zip around the battlefield! Use to aim and stick to walls. You can still use your main weapon like normal with . When your ink runs out, your transformation will end, and you'll Super Jump back to your starting location."
-      }
+      },
+      "iconName": "Wsp_SpSuperHook00.png"
     },
     "sp-triple-tornado": {
       "names": {
@@ -374,7 +404,8 @@
         "ja-JP": "ガイド装置を設置した最大3か所に、インクの竜巻を起こす。 でガイド装置を投げて設置すると、 その場所めがけて上空から竜巻発生弾が撃ちこまれる。",
         "zh-TW": "可在設置了導引裝置的地點引發墨汁龍捲風， 最多可設置3處。 按下投擲導引裝置完成設置後， 龍捲風彈就會從上空飛向該地點進行攻擊。",
         "en": "Throw and deploy a guidance device with to cause a tornado-generating ink strike to land on that spot from above. You can deploy up to three guidance devices to activate three separate ink tornadoes."
-      }
+      },
+      "iconName": "Wsp_SpTripleTornado00.png"
     },
     "sp-ultra-shot": {
       "names": {
@@ -386,7 +417,8 @@
         "ja-JP": "回転しながら飛ぶ強力なショットを、最大で３回発射する。 を押すと３発のインクが同時に射出される。",
         "zh-TW": "發射旋轉飛行的強力墨汁，最多發射3次。 按下可以同時發射3發墨汁。",
         "en": "Press to launch three blasts of spiraling ink in a single shot. You can fire it up to three times."
-      }
+      },
+      "iconName": "Wsp_SpUltraShot00.png"
     },
     "sp-ultra-stamp": {
       "names": {
@@ -398,7 +430,8 @@
         "ja-JP": "巨大なハンコで攻撃する。 を押している間、ハンコをたたきつけながら前進する。 を押して離すと、ハンコを投げつけて遠くまで攻撃し、 スペシャルが終了する。",
         "zh-TW": "以巨大的印章展開攻擊。 按住可以向前移動 並同時使用印章敲打攻擊， 按下並放開可以朝遠處投擲印章 並結束特殊武器的攻擊。",
         "en": "Attack with an enormous hammer. Press and hold to advance while striking with the hammer. If you press and release , you'll throw the hammer far into the distance to attack and the special will end."
-      }
+      },
+      "iconName": "Wsp_SpUltraStamp00.png"
     }
   }
 }

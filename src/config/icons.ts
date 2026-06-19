@@ -9,15 +9,22 @@
  * 以 NEXT_PUBLIC_ 前綴,讓 server component 與 client component('use client')取得一致的 build-time inlined 值。
  */
 
-/** 圖示外部來源的預設 base URL(數值同源 Leanny,§4.2 / §4.3.1)。 */
+/** 主武器圖示外部來源的預設 base URL(數值同源 Leanny,§4.2 / §4.3.1)。 */
 const DEFAULT_ICON_BASE_URL = 'https://leanny.github.io/splat3/images/weapon_flat';
 
-/** 是否啟用官方武器圖示(預設關閉;唯有環境變數明確設為 'on' 才開啟)。 */
+/** 副 / 特殊武器圖示外部來源的預設 base URL(Leanny subspe;§4.3.1)。 */
+const DEFAULT_SUBSPE_BASE_URL = 'https://leanny.github.io/splat3/images/subspe';
+
+/** 是否啟用官方武器圖示(預設關閉;唯有環境變數明確設為 'on' 才開啟;主武器與副/特殊共用此開關)。 */
 export const weaponIconsEnabled = process.env.NEXT_PUBLIC_WEAPON_ICONS === 'on';
 
-/** 圖示外部來源 base URL(可換來源 / 自架鏡像);未設則用預設 Leanny weapon_flat。 */
+/** 主武器圖示外部來源 base URL(可換來源 / 自架鏡像);未設則用預設 Leanny weapon_flat。 */
 export const weaponIconBaseUrl =
   process.env.NEXT_PUBLIC_WEAPON_ICON_BASE_URL ?? DEFAULT_ICON_BASE_URL;
+
+/** 副 / 特殊武器圖示外部來源 base URL(可換來源 / 自架鏡像);未設則用預設 Leanny subspe。 */
+export const weaponIconSubspeBaseUrl =
+  process.env.NEXT_PUBLIC_WEAPON_ICON_SUBSPE_BASE_URL ?? DEFAULT_SUBSPE_BASE_URL;
 
 /**
  * 由 snapshot 的 `iconName` 參照組出可載入的圖示 URL。
@@ -27,4 +34,13 @@ export const weaponIconBaseUrl =
 export function weaponIconUrl(iconName: string | null | undefined): string | null {
   if (!weaponIconsEnabled || !iconName) return null;
   return `${weaponIconBaseUrl.replace(/\/$/, '')}/${iconName}`;
+}
+
+/**
+ * 由 sub-special 的 `iconName` 參照組出副 / 特殊武器圖示 URL。
+ * 同樣受 `weaponIconsEnabled` 控制;未啟用或 iconName 為空時回 `null`。
+ */
+export function subspeIconUrl(iconName: string | null | undefined): string | null {
+  if (!weaponIconsEnabled || !iconName) return null;
+  return `${weaponIconSubspeBaseUrl.replace(/\/$/, '')}/${iconName}`;
 }

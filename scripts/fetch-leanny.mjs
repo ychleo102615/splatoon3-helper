@@ -30,6 +30,8 @@ const BASE = 'https://leanny.github.io/splat3';
  * **不在此下載任何圖檔**(PNG 一律不入庫)。執行時的實際載入由 app 端 hotlink。
  */
 const WEAPON_FLAT_API = 'https://api.github.com/repos/Leanny/splat3/contents/images/weapon_flat';
+/** 副 / 特殊武器圖示檔名清單來源(規格 §4.3.1);同樣只讀檔名、不下載圖檔。 */
+const SUBSPE_API = 'https://api.github.com/repos/Leanny/splat3/contents/images/subspe';
 const CACHE_DIR = join(ROOT, '.cache', 'leanny');
 
 const USER_AGENT =
@@ -117,6 +119,16 @@ async function main() {
     .sort();
   await writeFile(join(verDir, 'weapon-flat-files.json'), JSON.stringify(flatNames, null, 2), 'utf8');
   console.log(`  weapon_flat 檔名 ${flatNames.length} 筆(僅檔名參照,無圖檔下載)`);
+
+  // 3.6) 副 / 特殊武器圖示檔名清單(規格 §4.3.1);同樣只取檔名作參照,不下載任何圖檔。
+  console.log('抓取 subspe(副/特殊)圖示檔名清單(GitHub contents API)…');
+  const subspeRaw = JSON.parse(await fetchText(SUBSPE_API));
+  const subspeNames = (Array.isArray(subspeRaw) ? subspeRaw : [])
+    .map((e) => e?.name)
+    .filter((name) => typeof name === 'string' && name.endsWith('.png'))
+    .sort();
+  await writeFile(join(verDir, 'subspe-files.json'), JSON.stringify(subspeNames, null, 2), 'utf8');
+  console.log(`  subspe 檔名 ${subspeNames.length} 筆(僅檔名參照,無圖檔下載)`);
 
   // 4) 對戰武器的參數檔(以 SpecActor basename 去重);kit 變體無獨立檔時退回本體。
   const versus = main.filter((w) => w.Type === 'Versus');

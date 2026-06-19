@@ -66,6 +66,19 @@ function main() {
     return flatSet.has(candidate) ? candidate : null;
   };
 
+  // 副 / 特殊武器圖示「檔名參照」(規格 §4.3.1):以原始 gyml basename 對 subspe 檔名清單比對。
+  // 副武器前綴 Wsb_、特殊武器前綴 Wsp_;subspe 有 00/01 顏色變體,取 00 為主圖,缺則退 01。
+  const subspeFile = join(verDir, 'subspe-files.json');
+  const subspeSet = existsSync(subspeFile) ? new Set(readJson(subspeFile)) : new Set();
+  /** (basename, 'Wsb'|'Wsp') → subspe 檔名(如 Wsb_Trap00.png / Wsp_SpBlower00.png);找不到回 null。 */
+  const resolveSubspeIconName = (basename, prefix) => {
+    for (const variant of ['00', '01']) {
+      const candidate = `${prefix}_${basename}${variant}.png`;
+      if (subspeSet.has(candidate)) return candidate;
+    }
+    return null;
+  };
+
   // 語言檔(三語各取武器相關區塊)。
   const lang = {};
   for (const loc of APP_LOCALES) {
@@ -183,8 +196,8 @@ function main() {
     JSON.stringify(snapshot, null, 2) + '\n',
   );
 
-  // 副/特殊武器名稱 + 一行簡述(規格 §3.1)。
-  const buildRefTable = (ids, nameKey, expKey) => {
+  // 副/特殊武器名稱 + 一行簡述(規格 §3.1)+ 圖示檔名參照(§4.3.1,僅字串)。
+  const buildRefTable = (ids, nameKey, expKey, iconPrefix) => {
     const out = {};
     for (const rowId of [...ids].sort()) {
       out[kebab(rowId)] = {
@@ -192,15 +205,21 @@ function main() {
         blurb: Object.fromEntries(
           APP_LOCALES.map((loc) => [loc, cleanBlurb(lang[loc][expKey][rowId])]),
         ),
+        iconName: resolveSubspeIconName(rowId, iconPrefix),
       };
     }
     return out;
   };
+  const subWeapons = buildRefTable(usedSub, 'sub', 'subExp', 'Wsb');
+  const specialWeapons = buildRefTable(usedSpecial, 'special', 'specialExp', 'Wsp');
+  const subspeIconHits =
+    Object.values(subWeapons).filter((e) => e.iconName).length +
+    Object.values(specialWeapons).filter((e) => e.iconName).length;
   const subSpecial = {
-    _source: 'Leanny 語言檔(WeaponName_Sub/Special、WeaponExp_Sub/Special)',
-    _note: '副/特殊武器三語名稱與一行簡述;key 為快照中的 subWeaponId / specialWeaponId。',
-    subWeapons: buildRefTable(usedSub, 'sub', 'subExp'),
-    specialWeapons: buildRefTable(usedSpecial, 'special', 'specialExp'),
+    _source: 'Leanny 語言檔(WeaponName_Sub/Special、WeaponExp_Sub/Special)+ subspe 圖示檔名(§4.3.1)',
+    _note: '副/特殊武器三語名稱、一行簡述與圖示檔名參照(iconName,僅字串無圖檔);key 為快照中的 subWeaponId / specialWeaponId。',
+    subWeapons,
+    specialWeapons,
   };
   writeFileSync(join(ROOT, 'src', 'data', 'sub-special.json'), JSON.stringify(subSpecial, null, 2) + '\n');
 
@@ -210,6 +229,7 @@ function main() {
   console.log(`副武器 ${usedSub.size} 種、特殊武器 ${usedSpecial.size} 種`);
   console.log('coreStat 涵蓋率:', coverage);
   console.log(`圖示檔名參照(§4.3.1,僅字串):${coverage.iconName}/${weapons.length} 命中 weapon_flat`);
+  console.log(`副/特殊圖示檔名參照(§4.3.1):${subspeIconHits}/${usedSub.size + usedSpecial.size} 命中 subspe`);
   console.log('→ src/data/weapons.snapshot.json、src/data/sub-special.json');
 }
 

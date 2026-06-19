@@ -8,7 +8,7 @@
 |---|---|---|
 | `schema.ts` | 自有 TypeScript schema(型別與常數,無資料) | 自建(規格 §4.2) |
 | `weapons.snapshot.json` | 全 roster 武器快照(數值 + 三語名稱 + 版本) | 見下「來源與合規」 |
-| `sub-special.json` | 副/特殊武器三語名稱 + 一行簡述 | Leanny 語言檔 |
+| `sub-special.json` | 副/特殊武器三語名稱 + 一行簡述 + 圖示檔名參照(`iconName`,§4.3.1) | Leanny 語言檔 + `subspe` 檔名 |
 | `locale/weapon-names.json` | splatoon3.ink 開放名稱(三語交集) | splatoon3.ink(規格 §4.1) |
 
 ## 執行順序
@@ -31,8 +31,9 @@ pnpm data:build-snapshot     # 合併產出 weapons.snapshot.json 與 sub-specia
 - **數值**:取自 **Leanny** 遊戲參數,僅以「事實性數據」立場使用;**不照抄其結構**,轉為本目錄 `schema.ts` 的扁平自有 schema。
 - **版本**:`meta.gameVersion`(由 Leanny 版本碼推導,如 `1120` → `11.2.0`)標註快照對應遊戲版本(§4.5)。
 - **圖像**:本管線**不下載、不入庫任何官方圖檔**(§4.3,全自繪 SVG 另行處理)。
-  唯一例外為 §4.3.1 opt-in:每筆 `iconName` 僅存 Leanny `weapon_flat` 的**檔名參照字串**(非圖檔本體);
-  圖檔是否於執行時外部載入,由 app 端環境變數 `NEXT_PUBLIC_WEAPON_ICONS`(預設關閉)控制,見 `.env.example` 與 `src/config/icons.ts`。
+  唯一例外為 §4.3.1 opt-in:每筆 `iconName` 僅存**檔名參照字串**(非圖檔本體)——主武器取自 Leanny `weapon_flat`、
+  副/特殊武器取自 Leanny `subspe`;圖檔是否於執行時外部載入,由 app 端環境變數 `NEXT_PUBLIC_WEAPON_ICONS`(預設關閉)
+  控制,見 `.env.example` 與 `src/config/icons.ts`。
 - **非官方**:`meta.disclaimer` 標明非官方、與任天堂無關(§4.4)。
 
 ## 數值抽取規則(精簡核心子集,規格 §3.1)
