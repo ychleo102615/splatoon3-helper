@@ -7,8 +7,7 @@
     "tagline": "Splatoon 3 武器查詢與隨機決定器",
     "lede": "瀏覽所有主武器,查看副武器與特殊武器、閱讀規格表,或直接抽一把當作下一場的武器。",
     "browseWeapons": "瀏覽武器",
-    "randomPicker": "隨機抽一把",
-    "comingSoon": "施工中"
+    "randomPicker": "隨機抽一把"
   },
   "Categories": {
     "shooter": "射擊槍",
@@ -33,6 +32,24 @@
     "empty": "沒有符合條件的武器。",
     "backToHome": "‹ 首頁",
     "backToList": "‹ 武器一覽"
+  },
+  "Random": {
+    "title": "隨機決定器",
+    "lede": "設定條件,抽一把當作下一場的武器。",
+    "filtersTitle": "縮小範圍",
+    "categoryGroup": "分類",
+    "subGroup": "副武器",
+    "specialGroup": "特殊武器",
+    "any": "不限",
+    "poolCount": "抽選範圍:{count} 把",
+    "spin": "抽!",
+    "spinAgain": "再抽一次",
+    "emptyPool": "沒有符合條件的武器。",
+    "prompt": "設定條件後按下抽選。",
+    "resultEyebrow": "你的武器",
+    "viewDetails": "查看詳情 ›",
+    "resetFilters": "重設",
+    "backToHome": "‹ 首頁"
   },
   "Stats": {
     "title": "戰鬥數值",

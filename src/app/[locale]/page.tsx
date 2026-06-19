@@ -43,27 +43,20 @@ export default async function HomePage({
             {t('lede')}
           </p>
 
-          {/* 功能尚未實作 — 按鈕作視覺預覽,標記施工中 */}
+          {/* 主行動:抽武器(品牌 CTA,草綠貼紙鈕)/ 次行動:瀏覽武器(描邊) */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <span className="inline-flex w-fit items-center gap-2 rounded-pill bg-surface-translucent px-3 py-1 font-data text-xs uppercase tracking-wider text-muted-on-dark">
-              <span className="size-1.5 rounded-full bg-fresh-yellow" />
-              {t('comingSoon')}
-            </span>
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                disabled
-                className="cursor-not-allowed rounded-lg bg-turf-green px-5 py-4 text-sm font-bold uppercase tracking-wider text-ink-900 shadow-sticker disabled:opacity-60"
-              >
-                {t('randomPicker')}
-              </button>
-              <Link
-                href="/weapons"
-                className="rounded-lg border border-ink-700 px-5 py-4 text-sm font-bold uppercase tracking-wider text-text-on-dark transition-colors hover:border-muted-on-dark"
-              >
-                {t('browseWeapons')}
-              </Link>
-            </div>
+            <Link
+              href="/random"
+              className="rounded-lg bg-turf-green px-5 py-4 text-center text-sm font-bold uppercase tracking-wider text-ink-900 shadow-sticker transition-transform active:translate-y-0.5 motion-reduce:transition-none"
+            >
+              {t('randomPicker')}
+            </Link>
+            <Link
+              href="/weapons"
+              className="rounded-lg border border-ink-700 px-5 py-4 text-center text-sm font-bold uppercase tracking-wider text-text-on-dark transition-colors hover:border-muted-on-dark"
+            >
+              {t('browseWeapons')}
+            </Link>
           </div>
         </div>
       </main>

@@ -7,8 +7,7 @@
     "tagline": "スプラトゥーン3 のブキ図鑑とランダム選び",
     "lede": "すべてのメインウェポンを一覧で。サブ・スペシャルやスペック表をチェック、あるいは次の一本をランダムに。",
     "browseWeapons": "ブキを見る",
-    "randomPicker": "ランダムで選ぶ",
-    "comingSoon": "準備中"
+    "randomPicker": "ランダムで選ぶ"
   },
   "Categories": {
     "shooter": "シューター",
@@ -33,6 +32,24 @@
     "empty": "条件に合うブキがありません。",
     "backToHome": "‹ ホーム",
     "backToList": "‹ ブキ一覧"
+  },
+  "Random": {
+    "title": "ランダム選び",
+    "lede": "条件を決めて、次の一本をシャッフル。",
+    "filtersTitle": "絞り込む",
+    "categoryGroup": "種類",
+    "subGroup": "サブ",
+    "specialGroup": "スペシャル",
+    "any": "指定なし",
+    "poolCount": "対象:{count} 件",
+    "spin": "シャッフル",
+    "spinAgain": "もう一回",
+    "emptyPool": "条件に合うブキがありません。",
+    "prompt": "条件を決めてシャッフル。",
+    "resultEyebrow": "あなたのブキ",
+    "viewDetails": "詳細を見る ›",
+    "resetFilters": "リセット",
+    "backToHome": "‹ ホーム"
   },
   "Stats": {
     "title": "スペック",
