@@ -10,6 +10,29 @@
     "randomPicker": "ランダムで選ぶ",
     "comingSoon": "準備中"
   },
+  "Categories": {
+    "shooter": "シューター",
+    "blaster": "ブラスター",
+    "roller": "ローラー",
+    "brush": "フデ",
+    "charger": "チャージャー",
+    "slosher": "スロッシャー",
+    "splatling": "スピナー",
+    "dualies": "マニューバー",
+    "brella": "シェルター",
+    "stringer": "ストリンガー",
+    "splatana": "ワイパー"
+  },
+  "Weapons": {
+    "title": "ブキ一覧",
+    "searchPlaceholder": "ブキを検索…",
+    "allCategories": "すべて",
+    "results": "{count} 件",
+    "subLabel": "サブ",
+    "specialLabel": "スペシャル",
+    "empty": "条件に合うブキがありません。",
+    "backToHome": "‹ ホーム"
+  },
   "LanguageSwitcher": {
     "label": "言語"
   },

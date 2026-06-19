@@ -10,6 +10,29 @@
     "randomPicker": "Spin a weapon",
     "comingSoon": "In the workshop"
   },
+  "Categories": {
+    "shooter": "Shooters",
+    "blaster": "Blasters",
+    "roller": "Rollers",
+    "brush": "Brushes",
+    "charger": "Chargers",
+    "slosher": "Sloshers",
+    "splatling": "Splatlings",
+    "dualies": "Dualies",
+    "brella": "Brellas",
+    "stringer": "Stringers",
+    "splatana": "Splatanas"
+  },
+  "Weapons": {
+    "title": "Weapons",
+    "searchPlaceholder": "Search weapons…",
+    "allCategories": "All",
+    "results": "{count, plural, =0 {No weapons} one {# weapon} other {# weapons}}",
+    "subLabel": "Sub",
+    "specialLabel": "Special",
+    "empty": "No weapons match your filters.",
+    "backToHome": "‹ Home"
+  },
   "LanguageSwitcher": {
     "label": "Language"
   },

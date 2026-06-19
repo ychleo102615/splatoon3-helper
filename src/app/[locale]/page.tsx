@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { Link } from '@/i18n/navigation';
 
 export default async function HomePage({
   params,
@@ -56,13 +57,12 @@ export default async function HomePage({
               >
                 {t('randomPicker')}
               </button>
-              <button
-                type="button"
-                disabled
-                className="cursor-not-allowed rounded-lg border border-ink-700 px-5 py-4 text-sm font-bold uppercase tracking-wider text-text-on-dark disabled:opacity-60"
+              <Link
+                href="/weapons"
+                className="rounded-lg border border-ink-700 px-5 py-4 text-sm font-bold uppercase tracking-wider text-text-on-dark transition-colors hover:border-muted-on-dark"
               >
                 {t('browseWeapons')}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -10,6 +10,29 @@
     "randomPicker": "隨機抽一把",
     "comingSoon": "施工中"
   },
+  "Categories": {
+    "shooter": "射擊槍",
+    "blaster": "爆破槍",
+    "roller": "滾筒",
+    "brush": "畫筆",
+    "charger": "蓄力狙擊槍",
+    "slosher": "潑桶",
+    "splatling": "旋轉槍",
+    "dualies": "機動槍",
+    "brella": "防空傘",
+    "stringer": "獵魚弓",
+    "splatana": "刮水刀"
+  },
+  "Weapons": {
+    "title": "武器一覽",
+    "searchPlaceholder": "搜尋武器…",
+    "allCategories": "全部",
+    "results": "{count} 把武器",
+    "subLabel": "副武器",
+    "specialLabel": "特殊武器",
+    "empty": "沒有符合條件的武器。",
+    "backToHome": "‹ 首頁"
+  },
   "LanguageSwitcher": {
     "label": "語言"
   },
