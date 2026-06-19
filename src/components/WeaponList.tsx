@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/navigation';
 import { WEAPON_CATEGORIES, type WeaponCategory } from '@/data/schema';
 
 /** 列表卡片所需的精簡 view-model(名稱已於伺服器端依 locale 解析,client 不持有完整快照)。 */
@@ -89,30 +90,32 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
         <ul role="list" className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((w, i) => (
             <li key={w.id}>
-              <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3">
-                {/* 交替噴濺色塊(裝飾,品牌區) */}
-                <span
-                  aria-hidden
-                  className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full opacity-20 blur-2xl ${ACCENTS[i % ACCENTS.length]}`}
-                />
-                <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
-                  <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
-                  {tc(w.category)}
-                </p>
-                <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
-                  {w.name}
-                </h2>
-                <dl className="mt-2 space-y-0.5 text-xs text-muted-on-dark">
-                  <div className="flex gap-1.5">
-                    <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>
-                    <dd className="font-body text-text-on-dark">{w.subName}</dd>
-                  </div>
-                  <div className="flex gap-1.5">
-                    <dt className="font-label uppercase tracking-wide">{t('specialLabel')}</dt>
-                    <dd className="font-body text-text-on-dark">{w.specialName}</dd>
-                  </div>
-                </dl>
-              </article>
+              <Link href={`/weapons/${w.id}`} className="block h-full rounded-lg">
+                <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3 transition-colors hover:bg-white/10">
+                  {/* 交替噴濺色塊(裝飾,品牌區) */}
+                  <span
+                    aria-hidden
+                    className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full opacity-20 blur-2xl ${ACCENTS[i % ACCENTS.length]}`}
+                  />
+                  <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
+                    <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
+                    {tc(w.category)}
+                  </p>
+                  <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
+                    {w.name}
+                  </h2>
+                  <dl className="mt-2 space-y-0.5 text-xs text-muted-on-dark">
+                    <div className="flex gap-1.5">
+                      <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>
+                      <dd className="font-body text-text-on-dark">{w.subName}</dd>
+                    </div>
+                    <div className="flex gap-1.5">
+                      <dt className="font-label uppercase tracking-wide">{t('specialLabel')}</dt>
+                      <dd className="font-body text-text-on-dark">{w.specialName}</dd>
+                    </div>
+                  </dl>
+                </article>
+              </Link>
             </li>
           ))}
         </ul>

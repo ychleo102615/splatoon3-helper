@@ -31,7 +31,24 @@
     "subLabel": "副武器",
     "specialLabel": "特殊武器",
     "empty": "沒有符合條件的武器。",
-    "backToHome": "‹ 首頁"
+    "backToHome": "‹ 首頁",
+    "backToList": "‹ 武器一覽"
+  },
+  "Stats": {
+    "title": "戰鬥數值",
+    "version": "數值對應 v{version}",
+    "key": { "damage": "傷害", "range": "射程", "inkConsumption": "墨水消耗", "cadence": "節奏" },
+    "unit": { "frame": "幀", "second": "秒" },
+    "seg": {
+      "near": "近", "far": "遠", "direct": "直擊", "blast": "爆風",
+      "tap": "點射", "fullCharge": "滿充",
+      "flingNear": "揮甩(近)", "flingFar": "揮甩(遠)",
+      "swing": "揮砍", "chargedSlash": "蓄力斬",
+      "directMax": "直擊(最大)", "directMin": "直擊(最小)",
+      "pelletNear": "散彈(近)", "pelletFar": "散彈(遠)",
+      "perShot": "每發", "perSwing": "每次揮動", "perFullCharge": "每次滿充", "perSlosh": "每次潑灑",
+      "fireInterval": "連射間隔", "swingInterval": "揮動間隔", "sloshInterval": "潑灑間隔", "fullChargeTime": "滿充時間"
+    }
   },
   "LanguageSwitcher": {
     "label": "語言"

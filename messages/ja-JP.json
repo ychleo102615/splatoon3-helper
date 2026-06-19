@@ -31,7 +31,24 @@
     "subLabel": "サブ",
     "specialLabel": "スペシャル",
     "empty": "条件に合うブキがありません。",
-    "backToHome": "‹ ホーム"
+    "backToHome": "‹ ホーム",
+    "backToList": "‹ ブキ一覧"
+  },
+  "Stats": {
+    "title": "スペック",
+    "version": "v{version} 時点の数値",
+    "key": { "damage": "ダメージ", "range": "射程", "inkConsumption": "インク消費", "cadence": "テンポ" },
+    "unit": { "frame": "F", "second": "秒" },
+    "seg": {
+      "near": "近", "far": "遠", "direct": "直撃", "blast": "爆風",
+      "tap": "タップ", "fullCharge": "フルチャージ",
+      "flingNear": "振り(近)", "flingFar": "振り(遠)",
+      "swing": "振り", "chargedSlash": "タメ斬り",
+      "directMax": "直撃(最大)", "directMin": "直撃(最小)",
+      "pelletNear": "拡散(近)", "pelletFar": "拡散(遠)",
+      "perShot": "1発", "perSwing": "1振り", "perFullCharge": "フルチャージ", "perSlosh": "1回",
+      "fireInterval": "連射間隔", "swingInterval": "振り間隔", "sloshInterval": "発射間隔", "fullChargeTime": "フルチャージ時間"
+    }
   },
   "LanguageSwitcher": {
     "label": "言語"

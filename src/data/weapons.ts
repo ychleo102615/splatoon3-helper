@@ -32,6 +32,13 @@ export const snapshotMeta = snapshot.meta;
 export { WEAPON_CATEGORIES };
 export type { WeaponSnapshotEntry, WeaponCategory, SnapshotLocale };
 
+const byId = new Map(weapons.map((w) => [w.id, w]));
+
+/** 以 id 取單把武器(詳情頁用)。 */
+export function weaponById(id: string): WeaponSnapshotEntry | undefined {
+  return byId.get(id);
+}
+
 /** 主武器三語名稱(找不到語言時退回英文)。 */
 export function weaponName(w: WeaponSnapshotEntry, locale: SnapshotLocale): string {
   return w.names[locale] ?? w.names.en;
@@ -45,4 +52,14 @@ export function subWeaponName(id: string, locale: SnapshotLocale): string {
 /** 特殊武器名稱(以 specialWeaponId 解析;找不到退回 id)。 */
 export function specialWeaponName(id: string, locale: SnapshotLocale): string {
   return subSpecial.specialWeapons[id]?.names[locale] ?? id;
+}
+
+/** 副武器一行簡述。 */
+export function subWeaponBlurb(id: string, locale: SnapshotLocale): string {
+  return subSpecial.subWeapons[id]?.blurb[locale] ?? '';
+}
+
+/** 特殊武器一行簡述。 */
+export function specialWeaponBlurb(id: string, locale: SnapshotLocale): string {
+  return subSpecial.specialWeapons[id]?.blurb[locale] ?? '';
 }

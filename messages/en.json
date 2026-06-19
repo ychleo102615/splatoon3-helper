@@ -31,7 +31,24 @@
     "subLabel": "Sub",
     "specialLabel": "Special",
     "empty": "No weapons match your filters.",
-    "backToHome": "‹ Home"
+    "backToHome": "‹ Home",
+    "backToList": "‹ Weapons"
+  },
+  "Stats": {
+    "title": "Stats",
+    "version": "Stats as of v{version}",
+    "key": { "damage": "Damage", "range": "Range", "inkConsumption": "Ink", "cadence": "Cadence" },
+    "unit": { "frame": "F", "second": "s" },
+    "seg": {
+      "near": "Near", "far": "Far", "direct": "Direct", "blast": "Blast",
+      "tap": "Tap", "fullCharge": "Full charge",
+      "flingNear": "Fling (near)", "flingFar": "Fling (far)",
+      "swing": "Swing", "chargedSlash": "Charged slash",
+      "directMax": "Direct (max)", "directMin": "Direct (min)",
+      "pelletNear": "Pellet (near)", "pelletFar": "Pellet (far)",
+      "perShot": "Per shot", "perSwing": "Per swing", "perFullCharge": "Per full charge", "perSlosh": "Per slosh",
+      "fireInterval": "Fire interval", "swingInterval": "Swing interval", "sloshInterval": "Slosh interval", "fullChargeTime": "Full charge time"
+    }
   },
   "LanguageSwitcher": {
     "label": "Language"
