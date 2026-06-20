@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { SubspeIcon } from '@/components/SubspeIcon';
 import { WEAPON_CATEGORIES, type WeaponCategory } from '@/data/schema';
 
 /** 列表卡片所需的精簡 view-model(名稱已於伺服器端依 locale 解析,client 不持有完整快照)。 */
@@ -12,8 +13,12 @@ export interface WeaponCardVM {
   name: string;
   subName: string;
   specialName: string;
-  /** §4.3.1 opt-in:官方圖示外部 URL;預設關閉時為 undefined,卡片不渲染圖示。 */
+  /** §4.3.1 opt-in:主武器官方圖示外部 URL;預設關閉時為 undefined,卡片不渲染圖示。 */
   iconUrl?: string;
+  /** §4.3.1 opt-in:副武器圖示外部 URL(預設關閉時 undefined)。 */
+  subIconUrl?: string;
+  /** §4.3.1 opt-in:特殊武器圖示外部 URL(預設關閉時 undefined)。 */
+  specialIconUrl?: string;
 }
 
 /** 卡片交替的噴濺強調色(品牌區節奏,避免同質卡海;Two-Zone:列表屬品牌區可用霓虹)。 */
@@ -122,13 +127,29 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
                       />
                     ) : null}
                   </div>
-                  <dl className="mt-2 space-y-0.5 text-xs text-muted-on-dark">
-                    <div className="flex gap-1.5">
+                  <dl className="mt-2 space-y-1 text-xs text-muted-on-dark">
+                    <div className="flex items-center gap-1.5">
                       <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>
+                      {/* §4.3.1 opt-in:副武器圖示徽章(淺色背板);未啟用時不渲染。 */}
+                      {w.subIconUrl ? (
+                        <SubspeIcon
+                          src={w.subIconUrl}
+                          alt={t('iconAlt', { name: w.subName })}
+                          className="size-5 p-0.5"
+                        />
+                      ) : null}
                       <dd className="font-body text-text-on-dark">{w.subName}</dd>
                     </div>
-                    <div className="flex gap-1.5">
+                    <div className="flex items-center gap-1.5">
                       <dt className="font-label uppercase tracking-wide">{t('specialLabel')}</dt>
+                      {/* §4.3.1 opt-in:特殊武器圖示徽章;未啟用時不渲染。 */}
+                      {w.specialIconUrl ? (
+                        <SubspeIcon
+                          src={w.specialIconUrl}
+                          alt={t('iconAlt', { name: w.specialName })}
+                          className="size-5 p-0.5"
+                        />
+                      ) : null}
                       <dd className="font-body text-text-on-dark">{w.specialName}</dd>
                     </div>
                   </dl>

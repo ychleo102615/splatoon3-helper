@@ -2,13 +2,15 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { WeaponList, type WeaponCardVM } from '@/components/WeaponList';
 import { Link } from '@/i18n/navigation';
-import { weaponIconUrl } from '@/config/icons';
+import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
 import {
   WEAPON_CATEGORIES,
   weapons,
   weaponName,
   subWeaponName,
   specialWeaponName,
+  subWeaponIconName,
+  specialWeaponIconName,
   type SnapshotLocale,
 } from '@/data/weapons';
 
@@ -35,6 +37,8 @@ export default async function WeaponsPage({
       specialName: specialWeaponName(w.specialWeaponId, loc),
       // §4.3.1 opt-in:預設關閉時為 null → 轉 undefined,卡片不渲染圖示、版面不變。
       iconUrl: weaponIconUrl(w.iconName) ?? undefined,
+      subIconUrl: subspeIconUrl(subWeaponIconName(w.subWeaponId)) ?? undefined,
+      specialIconUrl: subspeIconUrl(specialWeaponIconName(w.specialWeaponId)) ?? undefined,
     }))
     .sort(
       (a, b) =>

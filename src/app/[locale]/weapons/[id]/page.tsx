@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { SubspeIcon } from '@/components/SubspeIcon';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
@@ -185,16 +186,11 @@ export default async function WeaponDetailPage({
                 {t('subLabel')}
               </h2>
               <div className="mt-1 flex items-center gap-2.5">
-                {/* §4.3.1 opt-in:副武器圖示;未啟用時為 null → 不渲染,版面不變。 */}
+                {/* §4.3.1 opt-in:副武器圖示(淺色背板,黑字形才可辨);未啟用時 null → 不渲染。 */}
                 {subIconUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
-                  <img
+                  <SubspeIcon
                     src={subIconUrl}
                     alt={t('iconAlt', { name: subWeaponName(w.subWeaponId, loc) })}
-                    width={40}
-                    height={40}
-                    loading="lazy"
-                    className="size-9 shrink-0 object-contain drop-shadow"
                   />
                 ) : null}
                 <p className="font-display text-base font-bold text-text-on-dark">
@@ -210,16 +206,11 @@ export default async function WeaponDetailPage({
                 {t('specialLabel')}
               </h2>
               <div className="mt-1 flex items-center gap-2.5">
-                {/* §4.3.1 opt-in:特殊武器圖示;未啟用時為 null → 不渲染,版面不變。 */}
+                {/* §4.3.1 opt-in:特殊武器圖示(淺色背板);未啟用時 null → 不渲染。 */}
                 {specialIconUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
-                  <img
+                  <SubspeIcon
                     src={specialIconUrl}
                     alt={t('iconAlt', { name: specialWeaponName(w.specialWeaponId, loc) })}
-                    width={40}
-                    height={40}
-                    loading="lazy"
-                    className="size-9 shrink-0 object-contain drop-shadow"
                   />
                 ) : null}
                 <p className="font-display text-base font-bold text-text-on-dark">
