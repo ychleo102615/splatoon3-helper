@@ -30,6 +30,8 @@
     "subLabel": "副武器",
     "specialLabel": "特殊武器",
     "empty": "沒有符合條件的武器。",
+    "emptyHint": "試試其他關鍵字,或清除目前的篩選條件。",
+    "clearFilters": "清除篩選",
     "backToHome": "‹ 首頁",
     "backToList": "‹ 武器一覽",
     "iconAlt": "{name} 圖示"
@@ -46,6 +48,7 @@
     "spin": "抽!",
     "spinAgain": "再抽一次",
     "emptyPool": "沒有符合條件的武器。",
+    "emptyPoolHint": "這組條件沒有交集。放寬其中一項,或按重設重新挑選。",
     "prompt": "設定條件後按下抽選。",
     "resultEyebrow": "你的武器",
     "viewDetails": "查看詳情 ›",
@@ -70,6 +73,11 @@
   },
   "LanguageSwitcher": {
     "label": "語言"
+  },
+  "NotFound": {
+    "title": "找不到這把武器",
+    "body": "這個網址沒有對應的武器。連結可能已失效,或網址輸入有誤。",
+    "backToList": "回到武器一覽"
   },
   "Footer": {
     "disclaimer": "非官方工具,與任天堂無關。",

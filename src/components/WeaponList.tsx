@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
+import { chipClass } from '@/components/chipClass';
 import { WEAPON_CATEGORIES, type WeaponCategory } from '@/data/schema';
 
 /** 列表卡片所需的精簡 view-model(名稱已於伺服器端依 locale 解析,client 不持有完整快照)。 */
@@ -92,13 +93,26 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
       </p>
 
       {filtered.length === 0 ? (
-        <p className="mt-8 font-body text-muted-on-dark">{t('empty')}</p>
+        <div className="mt-8 flex flex-col items-start gap-3">
+          <p className="font-body text-text-on-dark">{t('empty')}</p>
+          <p className="max-w-[50ch] font-body text-sm text-muted-on-dark">{t('emptyHint')}</p>
+          <button
+            type="button"
+            onClick={() => {
+              setQuery('');
+              setSelected(new Set());
+            }}
+            className="rounded-lg border border-ink-700 px-4 py-2.5 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
+          >
+            {t('clearFilters')}
+          </button>
+        </div>
       ) : (
         <ul role="list" className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((w, i) => (
             <li key={w.id}>
-              <Link href={`/weapons/${w.id}`} className="block h-full rounded-lg">
-                <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3 transition-colors hover:bg-white/10">
+              <Link href={`/weapons/${w.id}`} className="group block h-full rounded-lg">
+                <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3 transition-[background-color,transform] duration-150 ease-state group-hover:bg-white/10 group-focus-visible:bg-white/10 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-focus-visible:-translate-y-0.5 motion-reduce:transition-none">
                   {/* 交替噴濺色塊(裝飾,品牌區) */}
                   <span
                     aria-hidden
@@ -161,12 +175,4 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
       )}
     </div>
   );
-}
-
-function chipClass(active: boolean): string {
-  return [
-    'rounded-pill px-3 py-1.5 font-label text-xs font-bold tracking-wide transition-colors',
-    'min-h-[32px] cursor-pointer',
-    active ? 'bg-turf-green text-ink-900' : 'bg-surface-translucent text-text-on-dark hover:bg-white/15',
-  ].join(' ');
 }

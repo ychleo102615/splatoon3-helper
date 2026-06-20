@@ -30,6 +30,8 @@
     "subLabel": "Sub",
     "specialLabel": "Special",
     "empty": "No weapons match your filters.",
+    "emptyHint": "Try a different keyword, or clear your current filters.",
+    "clearFilters": "Clear filters",
     "backToHome": "‹ Home",
     "backToList": "‹ Weapons",
     "iconAlt": "{name} icon"
@@ -46,6 +48,7 @@
     "spin": "Spin",
     "spinAgain": "Spin again",
     "emptyPool": "No weapons match these filters.",
+    "emptyPoolHint": "No weapon matches all of these. Loosen one, or reset to start over.",
     "prompt": "Set your filters and hit spin.",
     "resultEyebrow": "Your weapon",
     "viewDetails": "View details ›",
@@ -70,6 +73,11 @@
   },
   "LanguageSwitcher": {
     "label": "Language"
+  },
+  "NotFound": {
+    "title": "Weapon not found",
+    "body": "There's no weapon at this address. The link may be out of date, or the URL was mistyped.",
+    "backToList": "Back to all weapons"
   },
   "Footer": {
     "disclaimer": "Unofficial tool. Not affiliated with Nintendo.",

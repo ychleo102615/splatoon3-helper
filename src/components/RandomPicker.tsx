@@ -3,6 +3,8 @@
 import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
+import { StickerButton } from '@/components/StickerButton';
+import { chipClass } from '@/components/chipClass';
 import type { WeaponCategory } from '@/data/schema';
 
 /**
@@ -146,22 +148,27 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
         <p role="status" aria-live="polite" className="font-data text-xs text-muted-on-dark">
           {t('poolCount', { count: pool.length })}
         </p>
-        <button
-          type="button"
-          onClick={draw}
-          disabled={empty}
-          className="w-full rounded-lg bg-turf-green px-6 py-4 font-label text-sm font-bold uppercase tracking-wider text-ink-900 shadow-sticker transition-transform active:translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none motion-reduce:transition-none sm:w-auto"
-        >
+        <StickerButton onClick={draw} disabled={empty} className="w-full sm:w-auto">
           {result ? t('spinAgain') : t('spin')}
-        </button>
+        </StickerButton>
       </div>
 
       {/* ── 揭曉區:抽中結果(品牌區放膽,Splat Magenta 揭曉氛圍) ─────────── */}
       <div className="mt-6">
         {empty ? (
-          <p className="rounded-lg border border-dashed border-ink-700 px-4 py-8 text-center font-body text-sm text-muted-on-dark">
-            {t('emptyPool')}
-          </p>
+          <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed border-ink-700 px-4 py-8 text-center">
+            <p className="font-body text-sm text-text-on-dark">{t('emptyPool')}</p>
+            <p className="max-w-[40ch] font-body text-xs leading-relaxed text-muted-on-dark">
+              {t('emptyPoolHint')}
+            </p>
+            <button
+              type="button"
+              onClick={resetAll}
+              className="rounded-lg border border-ink-700 px-4 py-2 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
+            >
+              {t('resetFilters')}
+            </button>
+          </div>
         ) : result ? (
           <article
             key={drawSeq}
@@ -208,7 +215,7 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
 
                 <Link
                   href={`/weapons/${result.id}`}
-                  className="mt-4 inline-block font-label text-xs uppercase tracking-wide text-turf-green underline-offset-4 transition-opacity hover:underline hover:opacity-80"
+                  className="mt-4 inline-block font-label text-xs uppercase tracking-wide text-text-on-dark underline decoration-white/40 underline-offset-4 transition-colors duration-150 ease-state hover:decoration-text-on-dark motion-reduce:transition-none"
                 >
                   {t('viewDetails')}
                 </Link>
@@ -269,14 +276,4 @@ function Chip({
       {children}
     </button>
   );
-}
-
-function chipClass(active: boolean): string {
-  return [
-    'rounded-pill px-3 py-1.5 font-label text-xs font-bold tracking-wide transition-colors',
-    'min-h-[32px] cursor-pointer',
-    active
-      ? 'bg-turf-green text-ink-900'
-      : 'bg-surface-translucent text-text-on-dark hover:bg-white/15',
-  ].join(' ');
 }

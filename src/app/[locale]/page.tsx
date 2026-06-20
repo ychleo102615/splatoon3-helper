@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { StickerButton } from '@/components/StickerButton';
 import { Link } from '@/i18n/navigation';
 
 export default async function HomePage({
@@ -45,15 +46,10 @@ export default async function HomePage({
 
           {/* 主行動:抽武器(品牌 CTA,草綠貼紙鈕)/ 次行動:瀏覽武器(描邊) */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/random"
-              className="rounded-lg bg-turf-green px-5 py-4 text-center text-sm font-bold uppercase tracking-wider text-ink-900 shadow-sticker transition-transform active:translate-y-0.5 motion-reduce:transition-none"
-            >
-              {t('randomPicker')}
-            </Link>
+            <StickerButton href="/random">{t('randomPicker')}</StickerButton>
             <Link
               href="/weapons"
-              className="rounded-lg border border-ink-700 px-5 py-4 text-center text-sm font-bold uppercase tracking-wider text-text-on-dark transition-colors hover:border-muted-on-dark"
+              className="rounded-lg border border-ink-700 px-5 py-4 text-center text-sm font-bold uppercase tracking-wider text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
             >
               {t('browseWeapons')}
             </Link>

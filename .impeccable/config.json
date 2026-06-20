@@ -1,0 +1,14 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(0.3, 0.7, 0.4, 1.5)",
+        "reason": "User confirmed the hover overshoot spring on the sticker push-button is intentional",
+        "createdAt": "2026-06-20T15:14:45.582Z"
+      }
+    ]
+  }
+}

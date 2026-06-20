@@ -30,6 +30,8 @@
     "subLabel": "サブ",
     "specialLabel": "スペシャル",
     "empty": "条件に合うブキがありません。",
+    "emptyHint": "別のキーワードを試すか、現在の絞り込みを解除してください。",
+    "clearFilters": "絞り込みを解除",
     "backToHome": "‹ ホーム",
     "backToList": "‹ ブキ一覧",
     "iconAlt": "{name} のアイコン"
@@ -46,6 +48,7 @@
     "spin": "シャッフル",
     "spinAgain": "もう一回",
     "emptyPool": "条件に合うブキがありません。",
+    "emptyPoolHint": "すべての条件に当てはまるブキはありません。条件をゆるめるか、リセットしてやり直してください。",
     "prompt": "条件を決めてシャッフル。",
     "resultEyebrow": "あなたのブキ",
     "viewDetails": "詳細を見る ›",
@@ -70,6 +73,11 @@
   },
   "LanguageSwitcher": {
     "label": "言語"
+  },
+  "NotFound": {
+    "title": "ブキが見つかりません",
+    "body": "このURLに対応するブキはありません。リンクが古いか、URLが間違っている可能性があります。",
+    "backToList": "ブキ一覧へ戻る"
   },
   "Footer": {
     "disclaimer": "非公式ツールです。任天堂とは関係ありません。",
