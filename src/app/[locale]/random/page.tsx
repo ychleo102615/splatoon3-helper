@@ -4,12 +4,15 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { RandomPicker, type FilterOption, type PickerWeapon } from '@/components/RandomPicker';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
+import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
 import {
   WEAPON_CATEGORIES,
   weapons,
   weaponName,
   subWeaponName,
   specialWeaponName,
+  subWeaponIconName,
+  specialWeaponIconName,
   type SnapshotLocale,
   type WeaponCategory,
 } from '@/data/weapons';
@@ -51,6 +54,10 @@ export default async function RandomPage({
     subName: subWeaponName(w.subWeaponId, loc),
     specialId: w.specialWeaponId,
     specialName: specialWeaponName(w.specialWeaponId, loc),
+    // §4.3.1 opt-in:預設關閉時為 null → 轉 undefined,揭曉卡維持自繪佔位、版面不變。
+    iconUrl: weaponIconUrl(w.iconName) ?? undefined,
+    subIconUrl: subspeIconUrl(subWeaponIconName(w.subWeaponId)) ?? undefined,
+    specialIconUrl: subspeIconUrl(specialWeaponIconName(w.specialWeaponId)) ?? undefined,
   }));
 
   // 篩選維度只列出「池中實際出現」的分類 / 副 / 特殊,並依在地化名稱排序。

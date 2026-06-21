@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { StickerButton } from '@/components/StickerButton';
+import { SubspeIcon } from '@/components/SubspeIcon';
 import { chipClass } from '@/components/chipClass';
 import type { WeaponCategory } from '@/data/schema';
 
@@ -27,6 +28,12 @@ export interface PickerWeapon {
   subName: string;
   specialId: string;
   specialName: string;
+  /** §4.3.1 opt-in:主武器官方圖示外部 URL;預設關閉時 undefined,揭曉卡維持自繪佔位。 */
+  iconUrl?: string;
+  /** §4.3.1 opt-in:副武器圖示徽章外部 URL(預設關閉時 undefined)。 */
+  subIconUrl?: string;
+  /** §4.3.1 opt-in:特殊武器圖示徽章外部 URL(預設關閉時 undefined)。 */
+  specialIconUrl?: string;
 }
 
 /** 副 / 特殊武器篩選選項(id + 已在地化名稱)。 */
@@ -181,13 +188,26 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
             />
 
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-              {/* Phase 3 將以該分類自繪 SVG 取代此視覺槽;現為霓虹噴濺佔位(裝飾)。 */}
-              <div
-                aria-hidden
-                className="relative grid h-28 w-28 shrink-0 place-items-center rounded-md bg-ink-800"
-              >
-                <span className="absolute size-16 rounded-full bg-splat-magenta opacity-30 blur-xl" />
-                <span className="size-12 rounded-full bg-turf-green opacity-90" />
+              {/* 視覺槽:霓虹噴濺底(品牌氛圍)。§4.3.1 opt-in 開啟時疊上官方主武器圖;
+                  未啟用(預設)維持自繪綠點佔位,版面與「全自繪」狀態一致。Phase 3 將改為該分類自繪 SVG。 */}
+              <div className="relative grid h-28 w-28 shrink-0 place-items-center rounded-md bg-ink-800">
+                <span
+                  aria-hidden
+                  className="absolute size-16 rounded-full bg-splat-magenta opacity-30 blur-xl"
+                />
+                {result.iconUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- §4.3.1 opt-in 外部圖,刻意用 <img> 避開 next/image 遠端 host 設定
+                  <img
+                    src={result.iconUrl}
+                    alt={tw('iconAlt', { name: result.name })}
+                    width={88}
+                    height={88}
+                    loading="lazy"
+                    className="relative size-[88px] object-contain drop-shadow"
+                  />
+                ) : (
+                  <span aria-hidden className="size-12 rounded-full bg-turf-green opacity-90" />
+                )}
               </div>
 
               <div className="min-w-0">
@@ -203,12 +223,28 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
                 </h2>
 
                 <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-on-dark">
-                  <div className="flex gap-1.5">
+                  <div className="flex items-center gap-1.5">
                     <dt className="font-label uppercase tracking-wide">{tw('subLabel')}</dt>
+                    {/* §4.3.1 opt-in:副武器圖示徽章(淺色背板);未啟用時不渲染。 */}
+                    {result.subIconUrl ? (
+                      <SubspeIcon
+                        src={result.subIconUrl}
+                        alt={tw('iconAlt', { name: result.subName })}
+                        className="size-5 p-0.5"
+                      />
+                    ) : null}
                     <dd className="font-body text-text-on-dark">{result.subName}</dd>
                   </div>
-                  <div className="flex gap-1.5">
+                  <div className="flex items-center gap-1.5">
                     <dt className="font-label uppercase tracking-wide">{tw('specialLabel')}</dt>
+                    {/* §4.3.1 opt-in:特殊武器圖示徽章;未啟用時不渲染。 */}
+                    {result.specialIconUrl ? (
+                      <SubspeIcon
+                        src={result.specialIconUrl}
+                        alt={tw('iconAlt', { name: result.specialName })}
+                        className="size-5 p-0.5"
+                      />
+                    ) : null}
                     <dd className="font-body text-text-on-dark">{result.specialName}</dd>
                   </div>
                 </dl>
