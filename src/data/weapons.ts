@@ -75,3 +75,8 @@ export function subWeaponIconName(id: string): string | null {
 export function specialWeaponIconName(id: string): string | null {
   return subSpecial.specialWeapons[id]?.iconName ?? null;
 }
+
+/** 主武器射程(遊戲內 0–100 相對值);快照缺 range 時回 null(coverage 為全覆蓋,防禦性保留)。 */
+export function weaponRange(w: WeaponSnapshotEntry): number | null {
+  return w.coreStats.find((s) => s.key === 'range')?.value ?? null;
+}

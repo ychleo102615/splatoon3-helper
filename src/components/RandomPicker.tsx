@@ -1,21 +1,26 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { StickerButton } from '@/components/StickerButton';
 import { SubspeIcon } from '@/components/SubspeIcon';
+import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import { chipClass } from '@/components/chipClass';
 import type { WeaponCategory } from '@/data/schema';
 
 /**
  * 隨機武器決定器(規格 §3.2)。
  *
- * - **無狀態純抽選**:不記錄歷史、允許連抽到同一把(規格 §3.2 已定案,不做「排除剛抽過」)。
- * - **多重條件篩選**:分類 / 副武器 / 特殊武器三維度,各維度內為 OR、維度間為 AND;
- *   某維度未選任何項即代表「不限」。
- * - **招牌時刻**(DESIGN Two-Zone):這是品牌區,抽選揭曉放膽用霓虹(Splat Magenta 揭曉氛圍);
- *   主 CTA 為草綠貼紙鈕。資料(副/特殊名稱)維持克制。
+ * - **多槽抽選**:一次抽選由 1–8 個「抽選槽」組成,每槽各自獨立的條件
+ *   (分類 / 副 / 特殊 / 射程區間);按一次「全部抽選」同時揭曉,各槽對應一把。
+ *   單把抽選 = 1 槽的特例(抽象一致,不分兩套 UI)。
+ * - **多重條件篩選**:每槽內,分類 / 副 / 特殊三維度各維度內為 OR、維度間為 AND;
+ *   某維度未選任何項即代表「不限」。射程以區間滑桿表示,滿格 = 不限。
+ * - **單次內去重**(規格 §3.2):「不重複」僅作用於同一次抽選的 N 把之間
+ *   (跨次仍為無狀態純抽選,不記錄歷史);某槽在去重後湊不滿時回 null,顯示提示而非靜默失敗。
+ * - **招牌時刻**(DESIGN Two-Zone):揭曉是品牌區,放膽用霓虹(Splat Magenta 揭曉氛圍);
+ *   主 CTA 為草綠貼紙鈕。槽設定區與資料(副/特殊名稱)維持克制。
  * - 抽選只在點擊事件中發生(client),render 期間不取亂數,避免 SSG/hydration 不一致。
  */
 
@@ -28,6 +33,8 @@ export interface PickerWeapon {
   subName: string;
   specialId: string;
   specialName: string;
+  /** 射程相對值(0–100);用於射程區間篩選。快照缺值時為 null(視為不符射程限制)。 */
+  range: number | null;
   /** §4.3.1 opt-in:主武器官方圖示外部 URL;預設關閉時 undefined,揭曉卡維持自繪佔位。 */
   iconUrl?: string;
   /** §4.3.1 opt-in:副武器圖示徽章外部 URL(預設關閉時 undefined)。 */
@@ -42,127 +49,210 @@ export interface FilterOption {
   name: string;
 }
 
+/** 單一抽選槽的條件(各槽獨立)。 */
+interface Slot {
+  /** 穩定 key(掛載期內唯一)。 */
+  id: number;
+  cats: Set<WeaponCategory>;
+  subIds: Set<string>;
+  specialIds: Set<string>;
+  /** 射程選取區間(初始 = 軌道邊界 = 不限)。 */
+  range: RangeValue;
+}
+
 interface Props {
   weapons: PickerWeapon[];
   /** 出現在抽選池中的分類(依 WEAPON_CATEGORIES 正序);名稱走 Categories i18n。 */
   categories: WeaponCategory[];
   subs: FilterOption[];
   specials: FilterOption[];
+  /** 射程滑桿軌道邊界(= 資料實際 min/max)。 */
+  rangeBounds: RangeValue;
 }
 
-export function RandomPicker({ weapons, categories, subs, specials }: Props) {
+const MAX_SLOTS = 8;
+
+/** 射程刻度參考(絕對值語意:近/中/遠);label 走 i18n,落在 bounds 外者過濾。 */
+const RANGE_MARK_DEFS = [
+  { value: 30, key: 'rangeNear' },
+  { value: 62, key: 'rangeMid' },
+  { value: 85, key: 'rangeFar' },
+] as const;
+
+function createSlot(id: number, bounds: RangeValue): Slot {
+  return {
+    id,
+    cats: new Set(),
+    subIds: new Set(),
+    specialIds: new Set(),
+    range: { ...bounds },
+  };
+}
+
+export function RandomPicker({ weapons, categories, subs, specials, rangeBounds }: Props) {
   const t = useTranslations('Random');
-  const tw = useTranslations('Weapons');
-  const tc = useTranslations('Categories');
 
-  const [cats, setCats] = useState<Set<WeaponCategory>>(new Set());
-  const [subIds, setSubIds] = useState<Set<string>>(new Set());
-  const [specialIds, setSpecialIds] = useState<Set<string>>(new Set());
-  const [result, setResult] = useState<PickerWeapon | null>(null);
-  // 每次抽選自增,作為揭曉卡片的 key:強制重掛載以重播 reveal 動畫。
+  const [slots, setSlots] = useState<Slot[]>(() => [createSlot(0, rangeBounds)]);
+  const [noRepeat, setNoRepeat] = useState(false);
+  // 每槽抽選結果(與 slots 等長);null = 該槽湊不滿(條件無交集或去重後耗盡)。
+  const [results, setResults] = useState<(PickerWeapon | null)[] | null>(null);
+  // 每次抽選自增,作為揭曉網格的 key:強制重掛載以重播 reveal 動畫。
   const [drawSeq, setDrawSeq] = useState(0);
+  const nextId = useRef(1);
 
-  const pool = useMemo(
+  const rangeMarks: RangeMark[] = useMemo(
     () =>
-      weapons.filter(
-        (w) =>
-          (cats.size === 0 || cats.has(w.category)) &&
-          (subIds.size === 0 || subIds.has(w.subId)) &&
-          (specialIds.size === 0 || specialIds.has(w.specialId)),
-      ),
-    [weapons, cats, subIds, specialIds],
+      RANGE_MARK_DEFS.filter(
+        (m) => m.value >= rangeBounds.min && m.value <= rangeBounds.max,
+      ).map((m) => ({ value: m.value, label: t(m.key) })),
+    [rangeBounds, t],
   );
 
-  // 任一篩選變動都清掉上次結果:結果是「對當下抽選池的一次抽選」,條件變了就回到提示態。
-  const toggle = <T,>(setter: React.Dispatch<React.SetStateAction<Set<T>>>, value: T) => {
-    setter((prev) => {
-      const next = new Set(prev);
-      if (next.has(value)) next.delete(value);
-      else next.add(value);
-      return next;
-    });
-    setResult(null);
+  // 單槽抽選池:四維度 AND;射程僅在非滿格時生效(滿格 = 不限)。
+  const poolFor = (slot: Slot): PickerWeapon[] => {
+    const rangeLimited = slot.range.min > rangeBounds.min || slot.range.max < rangeBounds.max;
+    return weapons.filter(
+      (w) =>
+        (slot.cats.size === 0 || slot.cats.has(w.category)) &&
+        (slot.subIds.size === 0 || slot.subIds.has(w.subId)) &&
+        (slot.specialIds.size === 0 || slot.specialIds.has(w.specialId)) &&
+        (!rangeLimited ||
+          (w.range !== null && w.range >= slot.range.min && w.range <= slot.range.max)),
+    );
   };
 
-  const clearDimension = <T,>(setter: React.Dispatch<React.SetStateAction<Set<T>>>) => {
-    setter(new Set());
-    setResult(null);
+  // 任一設定變動都清掉上次結果:結果是「對當下設定的一次抽選」,條件變了就回到提示態。
+  const updateSlot = (id: number, partial: Partial<Slot>) => {
+    setSlots((prev) => prev.map((s) => (s.id === id ? { ...s, ...partial } : s)));
+    setResults(null);
+  };
+
+  const addSlot = () => {
+    setSlots((prev) =>
+      prev.length >= MAX_SLOTS ? prev : [...prev, createSlot(nextId.current++, rangeBounds)],
+    );
+    setResults(null);
+  };
+
+  const removeSlot = (id: number) => {
+    setSlots((prev) => (prev.length <= 1 ? prev : prev.filter((s) => s.id !== id)));
+    setResults(null);
   };
 
   const resetAll = () => {
-    setCats(new Set());
-    setSubIds(new Set());
-    setSpecialIds(new Set());
-    setResult(null);
+    nextId.current = 1;
+    setSlots([createSlot(0, rangeBounds)]);
+    setNoRepeat(false);
+    setResults(null);
+  };
+
+  const toggleNoRepeat = () => {
+    setNoRepeat((v) => !v);
+    setResults(null);
   };
 
   const draw = () => {
-    if (pool.length === 0) return;
-    const picked = pool[Math.floor(Math.random() * pool.length)];
-    setResult(picked);
+    const used = new Set<string>(); // 跨槽去重(noRepeat 時)
+    const next = slots.map((slot) => {
+      let pool = poolFor(slot);
+      if (noRepeat) pool = pool.filter((w) => !used.has(w.id));
+      if (pool.length === 0) return null;
+      const picked = pool[Math.floor(Math.random() * pool.length)];
+      if (noRepeat) used.add(picked.id);
+      return picked;
+    });
+    setResults(next);
     setDrawSeq((s) => s + 1);
   };
 
-  const empty = pool.length === 0;
+  const canDraw = slots.some((s) => poolFor(s).length > 0);
+  const multi = slots.length > 1;
 
   return (
     <div>
-      {/* ── 篩選區:三維度 chips(品牌區,但維持克制) ───────────────────────── */}
-      <section aria-labelledby="filters-heading" className="rounded-lg bg-card-translucent p-4 sm:p-5">
-        <div className="flex items-center justify-between gap-3">
-          <h2
-            id="filters-heading"
-            className="font-label text-xs uppercase tracking-wide text-muted-on-dark"
-          >
-            {t('filtersTitle')}
-          </h2>
-          <button
-            type="button"
-            onClick={resetAll}
-            className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
-          >
-            {t('resetFilters')}
-          </button>
-        </div>
+      {/* ── 頂部:整體標題 + 全部重設 ─────────────────────────────────────── */}
+      <div className="flex items-center justify-between gap-3">
+        <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
+          {t('slotsTitle')}
+        </h2>
+        <button
+          type="button"
+          onClick={resetAll}
+          className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+        >
+          {t('resetFilters')}
+        </button>
+      </div>
 
-        <FilterGroup label={t('categoryGroup')} anyLabel={t('any')} onAny={() => clearDimension(setCats)} anyActive={cats.size === 0}>
-          {categories.map((cat) => (
-            <Chip key={cat} active={cats.has(cat)} onClick={() => toggle(setCats, cat)}>
-              {tc(cat)}
-            </Chip>
-          ))}
-        </FilterGroup>
+      {/* ── 抽選槽:堆疊卡片(每槽各自條件,全展開) ───────────────────────── */}
+      <div className="mt-3 space-y-4">
+        {slots.map((slot, i) => (
+          <SlotCard
+            key={slot.id}
+            index={i}
+            showIndex={multi}
+            slot={slot}
+            poolCount={poolFor(slot).length}
+            canRemove={slots.length > 1}
+            categories={categories}
+            subs={subs}
+            specials={specials}
+            rangeBounds={rangeBounds}
+            rangeMarks={rangeMarks}
+            onUpdate={(partial) => updateSlot(slot.id, partial)}
+            onRemove={() => removeSlot(slot.id)}
+          />
+        ))}
+      </div>
 
-        <FilterGroup label={t('subGroup')} anyLabel={t('any')} onAny={() => clearDimension(setSubIds)} anyActive={subIds.size === 0}>
-          {subs.map((s) => (
-            <Chip key={s.id} active={subIds.has(s.id)} onClick={() => toggle(setSubIds, s.id)}>
-              {s.name}
-            </Chip>
-          ))}
-        </FilterGroup>
-
-        <FilterGroup label={t('specialGroup')} anyLabel={t('any')} onAny={() => clearDimension(setSpecialIds)} anyActive={specialIds.size === 0}>
-          {specials.map((s) => (
-            <Chip key={s.id} active={specialIds.has(s.id)} onClick={() => toggle(setSpecialIds, s.id)}>
-              {s.name}
-            </Chip>
-          ))}
-        </FilterGroup>
-      </section>
-
-      {/* ── 抽選列:池計數 + 主 CTA(草綠貼紙鈕,招牌時刻) ───────────────── */}
-      <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p role="status" aria-live="polite" className="font-data text-xs text-muted-on-dark">
-          {t('poolCount', { count: pool.length })}
+      {/* ── 新增槽 / 上限提示 ─────────────────────────────────────────────── */}
+      {slots.length < MAX_SLOTS ? (
+        <button
+          type="button"
+          onClick={addSlot}
+          className="mt-4 w-full rounded-lg border border-dashed border-ink-700 px-4 py-3 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
+        >
+          {t('addSlot')}
+        </button>
+      ) : (
+        <p className="mt-4 text-center font-data text-xs text-muted-on-dark">
+          {t('maxSlots', { count: MAX_SLOTS })}
         </p>
-        <StickerButton onClick={draw} disabled={empty} className="w-full sm:w-auto">
-          {result ? t('spinAgain') : t('spin')}
+      )}
+
+      {/* ── 抽選列:不重複開關 + 主 CTA(草綠貼紙鈕,招牌時刻) ─────────────── */}
+      <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <label className="flex cursor-pointer items-center gap-2 select-none">
+          <input
+            type="checkbox"
+            checked={noRepeat}
+            onChange={toggleNoRepeat}
+            disabled={!multi}
+            className="size-4 accent-turf-green disabled:opacity-40"
+          />
+          <span className="font-label text-xs uppercase tracking-wide text-text-on-dark">
+            {t('noRepeat')}
+          </span>
+        </label>
+        <StickerButton onClick={draw} disabled={!canDraw} className="w-full sm:w-auto">
+          {results ? t('drawAgain') : t('drawAll')}
         </StickerButton>
       </div>
 
       {/* ── 揭曉區:抽中結果(品牌區放膽,Splat Magenta 揭曉氛圍) ─────────── */}
       <div className="mt-6">
-        {empty ? (
+        {results ? (
+          <div
+            key={drawSeq}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+            role="list"
+            aria-label={t('resultEyebrow')}
+          >
+            {results.map((result, i) => (
+              <ResultCard key={i} index={i} showIndex={multi} result={result} />
+            ))}
+          </div>
+        ) : !canDraw ? (
           <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed border-ink-700 px-4 py-8 text-center">
             <p className="font-body text-sm text-text-on-dark">{t('emptyPool')}</p>
             <p className="max-w-[40ch] font-body text-xs leading-relaxed text-muted-on-dark">
@@ -176,88 +266,6 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
               {t('resetFilters')}
             </button>
           </div>
-        ) : result ? (
-          <article
-            key={drawSeq}
-            className="relative overflow-hidden rounded-lg border border-splat-magenta/40 bg-card-translucent p-5 motion-safe:animate-reveal sm:p-6"
-          >
-            {/* 揭曉輝光(裝飾) */}
-            <span
-              aria-hidden
-              className="pointer-events-none absolute -right-10 -top-10 size-32 rounded-full bg-splat-magenta opacity-20 blur-3xl"
-            />
-
-            <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-              {/* 視覺槽:霓虹噴濺底(品牌氛圍)。§4.3.1 opt-in 開啟時疊上官方主武器圖;
-                  未啟用(預設)維持自繪綠點佔位,版面與「全自繪」狀態一致。Phase 3 將改為該分類自繪 SVG。 */}
-              <div className="relative grid h-28 w-28 shrink-0 place-items-center rounded-md bg-ink-800">
-                <span
-                  aria-hidden
-                  className="absolute size-16 rounded-full bg-splat-magenta opacity-30 blur-xl"
-                />
-                {result.iconUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- §4.3.1 opt-in 外部圖,刻意用 <img> 避開 next/image 遠端 host 設定
-                  <img
-                    src={result.iconUrl}
-                    alt={tw('iconAlt', { name: result.name })}
-                    width={88}
-                    height={88}
-                    loading="lazy"
-                    className="relative size-[88px] object-contain drop-shadow"
-                  />
-                ) : (
-                  <span aria-hidden className="size-12 rounded-full bg-turf-green opacity-90" />
-                )}
-              </div>
-
-              <div className="min-w-0">
-                <p className="font-data text-xs uppercase tracking-[0.2em] text-splat-magenta">
-                  {t('resultEyebrow')}
-                </p>
-                <p className="mt-1 flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
-                  <span className="size-2 rounded-full bg-turf-green" aria-hidden />
-                  {tc(result.category)}
-                </p>
-                <h2 className="mt-1 text-balance font-display text-2xl font-extrabold leading-tight text-text-on-dark">
-                  {result.name}
-                </h2>
-
-                <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1 text-xs text-muted-on-dark">
-                  <div className="flex items-center gap-1.5">
-                    <dt className="font-label uppercase tracking-wide">{tw('subLabel')}</dt>
-                    {/* §4.3.1 opt-in:副武器圖示徽章(淺色背板);未啟用時不渲染。 */}
-                    {result.subIconUrl ? (
-                      <SubspeIcon
-                        src={result.subIconUrl}
-                        alt={tw('iconAlt', { name: result.subName })}
-                        className="size-5 p-0.5"
-                      />
-                    ) : null}
-                    <dd className="font-body text-text-on-dark">{result.subName}</dd>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <dt className="font-label uppercase tracking-wide">{tw('specialLabel')}</dt>
-                    {/* §4.3.1 opt-in:特殊武器圖示徽章;未啟用時不渲染。 */}
-                    {result.specialIconUrl ? (
-                      <SubspeIcon
-                        src={result.specialIconUrl}
-                        alt={tw('iconAlt', { name: result.specialName })}
-                        className="size-5 p-0.5"
-                      />
-                    ) : null}
-                    <dd className="font-body text-text-on-dark">{result.specialName}</dd>
-                  </div>
-                </dl>
-
-                <Link
-                  href={`/weapons/${result.id}`}
-                  className="mt-4 inline-block font-label text-xs uppercase tracking-wide text-text-on-dark underline decoration-white/40 underline-offset-4 transition-colors duration-150 ease-state hover:decoration-text-on-dark motion-reduce:transition-none"
-                >
-                  {t('viewDetails')}
-                </Link>
-              </div>
-            </div>
-          </article>
         ) : (
           <p className="rounded-lg border border-dashed border-ink-700 px-4 py-8 text-center font-body text-sm text-muted-on-dark">
             {t('prompt')}
@@ -265,6 +273,262 @@ export function RandomPicker({ weapons, categories, subs, specials }: Props) {
         )}
       </div>
     </div>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  抽選槽卡片                                                                  */
+/* -------------------------------------------------------------------------- */
+
+function SlotCard({
+  index,
+  showIndex,
+  slot,
+  poolCount,
+  canRemove,
+  categories,
+  subs,
+  specials,
+  rangeBounds,
+  rangeMarks,
+  onUpdate,
+  onRemove,
+}: {
+  index: number;
+  showIndex: boolean;
+  slot: Slot;
+  poolCount: number;
+  canRemove: boolean;
+  categories: WeaponCategory[];
+  subs: FilterOption[];
+  specials: FilterOption[];
+  rangeBounds: RangeValue;
+  rangeMarks: RangeMark[];
+  onUpdate: (partial: Partial<Slot>) => void;
+  onRemove: () => void;
+}) {
+  const t = useTranslations('Random');
+  const tc = useTranslations('Categories');
+
+  const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
+    const next = new Set(set);
+    if (next.has(value)) next.delete(value);
+    else next.add(value);
+    return next;
+  };
+
+  return (
+    <article className="rounded-lg bg-card-translucent p-4 sm:p-5">
+      <div className="flex items-center justify-between gap-3">
+        {showIndex ? (
+          <h3 className="font-label text-xs font-bold uppercase tracking-wide text-text-on-dark">
+            {t('slotLabel', { n: index + 1 })}
+          </h3>
+        ) : (
+          <span aria-hidden />
+        )}
+        <div className="flex items-center gap-3">
+          <span className="font-data text-xs text-muted-on-dark">
+            {t('poolCount', { count: poolCount })}
+          </span>
+          {canRemove ? (
+            <button
+              type="button"
+              onClick={onRemove}
+              aria-label={t('removeSlot', { n: index + 1 })}
+              className="grid size-6 place-items-center rounded-pill text-base leading-none text-muted-on-dark transition-colors hover:bg-white/10 hover:text-text-on-dark"
+            >
+              ×
+            </button>
+          ) : null}
+        </div>
+      </div>
+
+      <FilterGroup
+        label={t('categoryGroup')}
+        anyLabel={t('any')}
+        anyActive={slot.cats.size === 0}
+        onAny={() => onUpdate({ cats: new Set() })}
+      >
+        {categories.map((cat) => (
+          <Chip
+            key={cat}
+            active={slot.cats.has(cat)}
+            onClick={() => onUpdate({ cats: toggleIn(slot.cats, cat) })}
+          >
+            {tc(cat)}
+          </Chip>
+        ))}
+      </FilterGroup>
+
+      <FilterGroup
+        label={t('subGroup')}
+        anyLabel={t('any')}
+        anyActive={slot.subIds.size === 0}
+        onAny={() => onUpdate({ subIds: new Set() })}
+      >
+        {subs.map((s) => (
+          <Chip
+            key={s.id}
+            active={slot.subIds.has(s.id)}
+            onClick={() => onUpdate({ subIds: toggleIn(slot.subIds, s.id) })}
+          >
+            {s.name}
+          </Chip>
+        ))}
+      </FilterGroup>
+
+      <FilterGroup
+        label={t('specialGroup')}
+        anyLabel={t('any')}
+        anyActive={slot.specialIds.size === 0}
+        onAny={() => onUpdate({ specialIds: new Set() })}
+      >
+        {specials.map((s) => (
+          <Chip
+            key={s.id}
+            active={slot.specialIds.has(s.id)}
+            onClick={() => onUpdate({ specialIds: toggleIn(slot.specialIds, s.id) })}
+          >
+            {s.name}
+          </Chip>
+        ))}
+      </FilterGroup>
+
+      <div className="mt-4">
+        <RangeSlider
+          bound={rangeBounds}
+          value={slot.range}
+          onChange={(range) => onUpdate({ range })}
+          label={t('rangeGroup')}
+          minHandleLabel={t('rangeMin')}
+          maxHandleLabel={t('rangeMax')}
+          anyLabel={t('any')}
+          marks={rangeMarks}
+        />
+      </div>
+    </article>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*  揭曉卡片                                                                    */
+/* -------------------------------------------------------------------------- */
+
+function ResultCard({
+  index,
+  showIndex,
+  result,
+}: {
+  index: number;
+  showIndex: boolean;
+  result: PickerWeapon | null;
+}) {
+  const t = useTranslations('Random');
+  const tc = useTranslations('Categories');
+  const tw = useTranslations('Weapons');
+
+  // 逐張 stagger:每卡延後 80ms 進場(motion-safe;reduced-motion 直接顯示)。
+  const delay = { animationDelay: `${index * 80}ms` };
+
+  if (result === null) {
+    return (
+      <article
+        role="listitem"
+        style={delay}
+        className="flex flex-col gap-2 rounded-lg border border-dashed border-ink-700 p-5 motion-safe:animate-reveal"
+      >
+        {showIndex ? (
+          <p className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
+            {t('slotLabel', { n: index + 1 })}
+          </p>
+        ) : null}
+        <p className="font-body text-sm text-muted-on-dark">{t('slotEmpty')}</p>
+      </article>
+    );
+  }
+
+  return (
+    <article
+      role="listitem"
+      style={delay}
+      className="relative overflow-hidden rounded-lg border border-splat-magenta/40 bg-card-translucent p-5 motion-safe:animate-reveal"
+    >
+      {/* 揭曉輝光(裝飾) */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute -right-8 -top-8 size-24 rounded-full bg-splat-magenta opacity-20 blur-3xl"
+      />
+
+      <div className="flex gap-4">
+        {/* 視覺槽:霓虹噴濺底(品牌氛圍)。§4.3.1 opt-in 開啟時疊上官方主武器圖;
+            未啟用(預設)維持自繪綠點佔位,版面與「全自繪」狀態一致。 */}
+        <div className="relative grid size-20 shrink-0 place-items-center rounded-md bg-ink-800">
+          <span
+            aria-hidden
+            className="absolute size-12 rounded-full bg-splat-magenta opacity-30 blur-xl"
+          />
+          {result.iconUrl ? (
+            // eslint-disable-next-line @next/next/no-img-element -- §4.3.1 opt-in 外部圖,刻意用 <img> 避開 next/image 遠端 host 設定
+            <img
+              src={result.iconUrl}
+              alt={tw('iconAlt', { name: result.name })}
+              width={64}
+              height={64}
+              loading="lazy"
+              className="relative size-16 object-contain drop-shadow"
+            />
+          ) : (
+            <span aria-hidden className="size-9 rounded-full bg-turf-green opacity-90" />
+          )}
+        </div>
+
+        <div className="min-w-0">
+          <p className="font-data text-[10px] uppercase tracking-[0.2em] text-splat-magenta">
+            {showIndex ? t('slotLabel', { n: index + 1 }) : t('resultEyebrow')}
+          </p>
+          <p className="mt-1 flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
+            <span className="size-2 rounded-full bg-turf-green" aria-hidden />
+            {tc(result.category)}
+          </p>
+          <h3 className="mt-1 text-balance font-display text-xl font-extrabold leading-tight text-text-on-dark">
+            {result.name}
+          </h3>
+
+          <dl className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-on-dark">
+            <div className="flex items-center gap-1.5">
+              <dt className="font-label uppercase tracking-wide">{tw('subLabel')}</dt>
+              {result.subIconUrl ? (
+                <SubspeIcon
+                  src={result.subIconUrl}
+                  alt={tw('iconAlt', { name: result.subName })}
+                  className="size-5 p-0.5"
+                />
+              ) : null}
+              <dd className="font-body text-text-on-dark">{result.subName}</dd>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <dt className="font-label uppercase tracking-wide">{tw('specialLabel')}</dt>
+              {result.specialIconUrl ? (
+                <SubspeIcon
+                  src={result.specialIconUrl}
+                  alt={tw('iconAlt', { name: result.specialName })}
+                  className="size-5 p-0.5"
+                />
+              ) : null}
+              <dd className="font-body text-text-on-dark">{result.specialName}</dd>
+            </div>
+          </dl>
+
+          <Link
+            href={`/weapons/${result.id}`}
+            className="mt-3 inline-block font-label text-xs uppercase tracking-wide text-text-on-dark underline decoration-white/40 underline-offset-4 transition-colors duration-150 ease-state hover:decoration-text-on-dark motion-reduce:transition-none"
+          >
+            {t('viewDetails')}
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }
 

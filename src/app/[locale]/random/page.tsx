@@ -9,6 +9,7 @@ import {
   WEAPON_CATEGORIES,
   weapons,
   weaponName,
+  weaponRange,
   subWeaponName,
   specialWeaponName,
   subWeaponIconName,
@@ -54,11 +55,22 @@ export default async function RandomPage({
     subName: subWeaponName(w.subWeaponId, loc),
     specialId: w.specialWeaponId,
     specialName: specialWeaponName(w.specialWeaponId, loc),
+    // 射程相對值(0–100);用於 client 端「射程區間」篩選。全覆蓋,防禦性保留 null。
+    range: weaponRange(w),
     // §4.3.1 opt-in:預設關閉時為 null → 轉 undefined,揭曉卡維持自繪佔位、版面不變。
     iconUrl: weaponIconUrl(w.iconName) ?? undefined,
     subIconUrl: subspeIconUrl(subWeaponIconName(w.subWeaponId)) ?? undefined,
     specialIconUrl: subspeIconUrl(specialWeaponIconName(w.specialWeaponId)) ?? undefined,
   }));
+
+  // 射程滑桿軌道邊界 = 資料實際 min/max(非硬寫 0–100,避免出現沒有任何武器的空段)。
+  const rangeValues = weapons
+    .map(weaponRange)
+    .filter((v): v is number => v !== null);
+  const rangeBounds = {
+    min: Math.min(...rangeValues),
+    max: Math.max(...rangeValues),
+  };
 
   // 篩選維度只列出「池中實際出現」的分類 / 副 / 特殊,並依在地化名稱排序。
   const presentCategories = [...new Set(weapons.map((w) => w.category))].sort(
@@ -119,6 +131,7 @@ export default async function RandomPage({
               categories={presentCategories}
               subs={subs}
               specials={specials}
+              rangeBounds={rangeBounds}
             />
           </div>
         </div>

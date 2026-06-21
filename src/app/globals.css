@@ -183,4 +183,48 @@
       filter: none;
     }
   }
+
+  /*
+   * 雙握把射程區間滑桿 — 兩個原生 <input type="range"> 疊合(鍵盤操作與 slider 語意由原生承接)。
+   * 關鍵:input 整體 pointer-events:none、僅 thumb 收事件 → 兩握把不被彼此的透明軌道遮擋;
+   * 全寬軌道視覺(中性底 + 綠色區間填充)改由獨立 div 繪製,滑桿元素本身透明。
+   * 屬篩選區(Two-Zone 品牌區但克制):握把/填充用 Turf Green 量表色,軌道底用中性 ink。
+   */
+  .range-dual input[type='range'] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    margin: 0;
+    transform: translateY(-50%);
+    background: transparent;
+    pointer-events: none;
+  }
+  .range-dual input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-pill);
+    background: var(--color-turf-green);
+    border: 2px solid var(--color-ink-900);
+    cursor: pointer;
+  }
+  .range-dual input[type='range']::-moz-range-thumb {
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-pill);
+    background: var(--color-turf-green);
+    border: 2px solid var(--color-ink-900);
+    cursor: pointer;
+  }
+  .range-dual input[type='range']::-moz-range-track {
+    background: transparent;
+    border: none;
+  }
 }
