@@ -34,6 +34,7 @@
     "rangeNear": "近",
     "rangeMid": "中",
     "rangeFar": "遠",
+    "rangeReset": "リセット",
     "results": "{count} 件",
     "subLabel": "サブ",
     "specialLabel": "スペシャル",
@@ -75,6 +76,7 @@
     "rangeNear": "近",
     "rangeMid": "中",
     "rangeFar": "遠",
+    "rangeReset": "リセット",
     "slotEmpty": "条件に合うブキがありません。",
     "backToHome": "‹ ホーム"
   },

@@ -429,6 +429,7 @@ function SlotCard({
           minHandleLabel={t('rangeMin')}
           maxHandleLabel={t('rangeMax')}
           anyLabel={t('any')}
+          resetLabel={t('rangeReset')}
           marks={rangeMarks}
         />
       </div>

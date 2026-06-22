@@ -34,6 +34,7 @@
     "rangeNear": "Near",
     "rangeMid": "Mid",
     "rangeFar": "Far",
+    "rangeReset": "Reset",
     "results": "{count, plural, =0 {No weapons} one {# weapon} other {# weapons}}",
     "subLabel": "Sub",
     "specialLabel": "Special",
@@ -75,6 +76,7 @@
     "rangeNear": "Near",
     "rangeMid": "Mid",
     "rangeFar": "Far",
+    "rangeReset": "Reset",
     "slotEmpty": "No weapon fits this pick.",
     "backToHome": "‹ Home"
   },

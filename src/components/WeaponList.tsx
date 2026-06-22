@@ -219,6 +219,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
               minHandleLabel={t('rangeMin')}
               maxHandleLabel={t('rangeMax')}
               anyLabel={t('any')}
+              resetLabel={t('rangeReset')}
               marks={rangeMarks}
             />
           </div>
