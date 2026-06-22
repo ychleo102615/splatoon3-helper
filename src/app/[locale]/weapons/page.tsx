@@ -1,20 +1,34 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { WeaponList, type WeaponCardVM } from '@/components/WeaponList';
+import type { FilterOption } from '@/components/FilterGroup';
 import { Link } from '@/i18n/navigation';
 import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
 import {
   WEAPON_CATEGORIES,
   weapons,
   weaponName,
+  weaponRange,
   subWeaponName,
   specialWeaponName,
   subWeaponIconName,
   specialWeaponIconName,
   type SnapshotLocale,
+  type WeaponCategory,
 } from '@/data/weapons';
 
 const CATEGORY_ORDER = new Map(WEAPON_CATEGORIES.map((c, i) => [c, i]));
+
+/** 由 id 陣列去重、解析在地化名稱、依名稱排序,產出篩選選項(與隨機器同一套維度)。 */
+function buildOptions(
+  ids: string[],
+  nameOf: (id: string) => string,
+  loc: SnapshotLocale,
+): FilterOption[] {
+  return [...new Set(ids)]
+    .map((id) => ({ id, name: nameOf(id) }))
+    .sort((a, b) => a.name.localeCompare(b.name, loc));
+}
 
 export default async function WeaponsPage({
   params,
@@ -33,8 +47,12 @@ export default async function WeaponsPage({
       id: w.id,
       category: w.category,
       name: weaponName(w, loc),
+      subId: w.subWeaponId,
       subName: subWeaponName(w.subWeaponId, loc),
+      specialId: w.specialWeaponId,
       specialName: specialWeaponName(w.specialWeaponId, loc),
+      // 射程相對值(0–100);用於 client 端「射程區間」篩選。全覆蓋,防禦性保留 null。
+      range: weaponRange(w),
       // §4.3.1 opt-in:預設關閉時為 null → 轉 undefined,卡片不渲染圖示、版面不變。
       iconUrl: weaponIconUrl(w.iconName) ?? undefined,
       subIconUrl: subspeIconUrl(subWeaponIconName(w.subWeaponId)) ?? undefined,
@@ -45,6 +63,30 @@ export default async function WeaponsPage({
         (CATEGORY_ORDER.get(a.category) ?? 0) - (CATEGORY_ORDER.get(b.category) ?? 0) ||
         a.name.localeCompare(b.name, loc),
     );
+
+  // 篩選維度只列出「列表中實際出現」的分類 / 副 / 特殊,並依在地化名稱排序(與隨機器一致)。
+  const presentCategories = [...new Set(weapons.map((w) => w.category))].sort(
+    (a: WeaponCategory, b: WeaponCategory) =>
+      (CATEGORY_ORDER.get(a) ?? 0) - (CATEGORY_ORDER.get(b) ?? 0),
+  );
+
+  const subs: FilterOption[] = buildOptions(
+    weapons.map((w) => w.subWeaponId),
+    (id) => subWeaponName(id, loc),
+    loc,
+  );
+  const specials: FilterOption[] = buildOptions(
+    weapons.map((w) => w.specialWeaponId),
+    (id) => specialWeaponName(id, loc),
+    loc,
+  );
+
+  // 射程滑桿軌道邊界 = 資料實際 min/max(非硬寫 0–100,避免出現沒有任何武器的空段)。
+  const rangeValues = weapons.map(weaponRange).filter((v): v is number => v !== null);
+  const rangeBounds = {
+    min: Math.min(...rangeValues),
+    max: Math.max(...rangeValues),
+  };
 
   return (
     <div className="relative flex min-h-dvh flex-col overflow-hidden">
@@ -78,7 +120,13 @@ export default async function WeaponsPage({
           </h1>
 
           <div className="mt-6">
-            <WeaponList items={items} />
+            <WeaponList
+              items={items}
+              categories={presentCategories}
+              subs={subs}
+              specials={specials}
+              rangeBounds={rangeBounds}
+            />
           </div>
         </div>
       </main>

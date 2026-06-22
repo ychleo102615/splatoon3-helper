@@ -6,8 +6,11 @@ import { Link } from '@/i18n/navigation';
 import { StickerButton } from '@/components/StickerButton';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
-import { chipClass } from '@/components/chipClass';
+import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
+import { matchesFilters, buildRangeMarks } from '@/components/weaponFilters';
 import type { WeaponCategory } from '@/data/schema';
+
+export type { FilterOption };
 
 /**
  * 隨機武器決定器(規格 §3.2)。
@@ -43,12 +46,6 @@ export interface PickerWeapon {
   specialIconUrl?: string;
 }
 
-/** 副 / 特殊武器篩選選項(id + 已在地化名稱)。 */
-export interface FilterOption {
-  id: string;
-  name: string;
-}
-
 /** 單一抽選槽的條件(各槽獨立)。 */
 interface Slot {
   /** 穩定 key(掛載期內唯一)。 */
@@ -72,13 +69,6 @@ interface Props {
 
 const MAX_SLOTS = 8;
 
-/** 射程刻度參考(絕對值語意:近/中/遠);label 走 i18n,落在 bounds 外者過濾。 */
-const RANGE_MARK_DEFS = [
-  { value: 30, key: 'rangeNear' },
-  { value: 62, key: 'rangeMid' },
-  { value: 85, key: 'rangeFar' },
-] as const;
-
 function createSlot(id: number, bounds: RangeValue): Slot {
   return {
     id,
@@ -101,25 +91,13 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   const nextId = useRef(1);
 
   const rangeMarks: RangeMark[] = useMemo(
-    () =>
-      RANGE_MARK_DEFS.filter(
-        (m) => m.value >= rangeBounds.min && m.value <= rangeBounds.max,
-      ).map((m) => ({ value: m.value, label: t(m.key) })),
+    () => buildRangeMarks(rangeBounds, (k) => t(k)),
     [rangeBounds, t],
   );
 
-  // 單槽抽選池:四維度 AND;射程僅在非滿格時生效(滿格 = 不限)。
-  const poolFor = (slot: Slot): PickerWeapon[] => {
-    const rangeLimited = slot.range.min > rangeBounds.min || slot.range.max < rangeBounds.max;
-    return weapons.filter(
-      (w) =>
-        (slot.cats.size === 0 || slot.cats.has(w.category)) &&
-        (slot.subIds.size === 0 || slot.subIds.has(w.subId)) &&
-        (slot.specialIds.size === 0 || slot.specialIds.has(w.specialId)) &&
-        (!rangeLimited ||
-          (w.range !== null && w.range >= slot.range.min && w.range <= slot.range.max)),
-    );
-  };
+  // 單槽抽選池:四維度 AND(語意由 matchesFilters 統一定義,與列表頁同一份)。
+  const poolFor = (slot: Slot): PickerWeapon[] =>
+    weapons.filter((w) => matchesFilters(w, slot, rangeBounds));
 
   // 任一設定變動都清掉上次結果:結果是「對當下設定的一次抽選」,條件變了就回到提示態。
   const updateSlot = (id: number, partial: Partial<Slot>) => {
@@ -529,51 +507,5 @@ function ResultCard({
         </div>
       </div>
     </article>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/*  區域元件                                                                   */
-/* -------------------------------------------------------------------------- */
-
-function FilterGroup({
-  label,
-  anyLabel,
-  anyActive,
-  onAny,
-  children,
-}: {
-  label: string;
-  anyLabel: string;
-  anyActive: boolean;
-  onAny: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <div className="mt-4 first:mt-3">
-      <p className="font-label text-xs uppercase tracking-wide text-muted-on-dark">{label}</p>
-      <div role="group" aria-label={label} className="mt-2 flex flex-wrap gap-2">
-        <button type="button" onClick={onAny} aria-pressed={anyActive} className={chipClass(anyActive)}>
-          {anyLabel}
-        </button>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-function Chip({
-  active,
-  onClick,
-  children,
-}: {
-  active: boolean;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
-  return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={chipClass(active)}>
-      {children}
-    </button>
   );
 }

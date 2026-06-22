@@ -4,16 +4,22 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
-import { chipClass } from '@/components/chipClass';
-import { WEAPON_CATEGORIES, type WeaponCategory } from '@/data/schema';
+import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
+import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
+import { matchesFilters, isRangeLimited, buildRangeMarks } from '@/components/weaponFilters';
+import type { WeaponCategory } from '@/data/schema';
 
 /** 列表卡片所需的精簡 view-model(名稱已於伺服器端依 locale 解析,client 不持有完整快照)。 */
 export interface WeaponCardVM {
   id: string;
   category: WeaponCategory;
   name: string;
+  subId: string;
   subName: string;
+  specialId: string;
   specialName: string;
+  /** 射程相對值(0–100);用於射程區間篩選。快照缺值時為 null(視為不符射程限制)。 */
+  range: number | null;
   /** §4.3.1 opt-in:主武器官方圖示外部 URL;預設關閉時為 undefined,卡片不渲染圖示。 */
   iconUrl?: string;
   /** §4.3.1 opt-in:副武器圖示外部 URL(預設關閉時 undefined)。 */
@@ -22,19 +28,39 @@ export interface WeaponCardVM {
   specialIconUrl?: string;
 }
 
+interface Props {
+  items: WeaponCardVM[];
+  /** 出現在列表中的分類(依 WEAPON_CATEGORIES 正序);名稱走 Categories i18n。 */
+  categories: WeaponCategory[];
+  subs: FilterOption[];
+  specials: FilterOption[];
+  /** 射程滑桿軌道邊界(= 資料實際 min/max)。 */
+  rangeBounds: RangeValue;
+}
+
 /** 卡片交替的噴濺強調色(品牌區節奏,避免同質卡海;Two-Zone:列表屬品牌區可用霓虹)。 */
 const ACCENTS = ['bg-turf-green', 'bg-splat-magenta', 'bg-ink-purple', 'bg-fresh-yellow'] as const;
 
-export function WeaponList({ items }: { items: WeaponCardVM[] }) {
+export function WeaponList({ items, categories, subs, specials, rangeBounds }: Props) {
   const t = useTranslations('Weapons');
   const tc = useTranslations('Categories');
   const [query, setQuery] = useState('');
-  const [selected, setSelected] = useState<Set<WeaponCategory>>(new Set());
+  const [cats, setCats] = useState<Set<WeaponCategory>>(new Set());
+  const [subIds, setSubIds] = useState<Set<string>>(new Set());
+  const [specialIds, setSpecialIds] = useState<Set<string>>(new Set());
+  const [range, setRange] = useState<RangeValue>(() => ({ ...rangeBounds }));
 
+  const rangeMarks: RangeMark[] = useMemo(
+    () => buildRangeMarks(rangeBounds, (k) => t(k)),
+    [rangeBounds, t],
+  );
+
+  // 維度語意由 matchesFilters 統一定義(與隨機器同一份);搜尋字串在外層另外 AND 疊加。
   const filtered = useMemo(() => {
+    const criteria = { cats, subIds, specialIds, range };
     const q = query.trim().toLowerCase();
     return items.filter((w) => {
-      if (selected.size > 0 && !selected.has(w.category)) return false;
+      if (!matchesFilters(w, criteria, rangeBounds)) return false;
       if (!q) return true;
       return (
         w.name.toLowerCase().includes(q) ||
@@ -42,15 +68,29 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
         w.specialName.toLowerCase().includes(q)
       );
     });
-  }, [items, query, selected]);
+  }, [items, query, cats, subIds, specialIds, range, rangeBounds]);
 
-  const toggle = (cat: WeaponCategory) =>
-    setSelected((prev) => {
-      const next = new Set(prev);
-      if (next.has(cat)) next.delete(cat);
-      else next.add(cat);
-      return next;
-    });
+  const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
+    const next = new Set(set);
+    if (next.has(value)) next.delete(value);
+    else next.add(value);
+    return next;
+  };
+
+  const hasActiveFilters =
+    query.trim() !== '' ||
+    cats.size > 0 ||
+    subIds.size > 0 ||
+    specialIds.size > 0 ||
+    isRangeLimited(range, rangeBounds);
+
+  const clearAll = () => {
+    setQuery('');
+    setCats(new Set());
+    setSubIds(new Set());
+    setSpecialIds(new Set());
+    setRange({ ...rangeBounds });
+  };
 
   return (
     <div>
@@ -64,27 +104,84 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
         className="w-full rounded-md bg-white px-3.5 py-2.5 font-body text-panel-ink placeholder:text-panel-muted"
       />
 
-      {/* 分類篩選:pill chips,多選 toggle */}
-      <div className="mt-4 flex flex-wrap gap-2">
-        <button
-          type="button"
-          onClick={() => setSelected(new Set())}
-          aria-pressed={selected.size === 0}
-          className={chipClass(selected.size === 0)}
-        >
-          {t('allCategories')}
-        </button>
-        {WEAPON_CATEGORIES.map((cat) => (
-          <button
-            key={cat}
-            type="button"
-            onClick={() => toggle(cat)}
-            aria-pressed={selected.has(cat)}
-            className={chipClass(selected.has(cat))}
+      {/* 篩選面板:分類 / 副 / 特殊 / 射程(與隨機器同一套維度語意,共用 FilterGroup) */}
+      <div className="mt-4 rounded-lg bg-card-translucent p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
+            {t('filtersTitle')}
+          </h2>
+          {hasActiveFilters ? (
+            <button
+              type="button"
+              onClick={clearAll}
+              className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+            >
+              {t('clearFilters')}
+            </button>
+          ) : null}
+        </div>
+
+        <div className="mt-3">
+          <FilterGroup
+            label={t('categoryGroup')}
+            anyLabel={t('any')}
+            anyActive={cats.size === 0}
+            onAny={() => setCats(new Set())}
           >
-            {tc(cat)}
-          </button>
-        ))}
+            {categories.map((cat) => (
+              <Chip key={cat} active={cats.has(cat)} onClick={() => setCats(toggleIn(cats, cat))}>
+                {tc(cat)}
+              </Chip>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup
+            label={t('subLabel')}
+            anyLabel={t('any')}
+            anyActive={subIds.size === 0}
+            onAny={() => setSubIds(new Set())}
+          >
+            {subs.map((s) => (
+              <Chip
+                key={s.id}
+                active={subIds.has(s.id)}
+                onClick={() => setSubIds(toggleIn(subIds, s.id))}
+              >
+                {s.name}
+              </Chip>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup
+            label={t('specialLabel')}
+            anyLabel={t('any')}
+            anyActive={specialIds.size === 0}
+            onAny={() => setSpecialIds(new Set())}
+          >
+            {specials.map((s) => (
+              <Chip
+                key={s.id}
+                active={specialIds.has(s.id)}
+                onClick={() => setSpecialIds(toggleIn(specialIds, s.id))}
+              >
+                {s.name}
+              </Chip>
+            ))}
+          </FilterGroup>
+
+          <div className="mt-4">
+            <RangeSlider
+              bound={rangeBounds}
+              value={range}
+              onChange={setRange}
+              label={t('rangeGroup')}
+              minHandleLabel={t('rangeMin')}
+              maxHandleLabel={t('rangeMax')}
+              anyLabel={t('any')}
+              marks={rangeMarks}
+            />
+          </div>
+        </div>
       </div>
 
       {/* 結果計數(螢幕報讀) */}
@@ -98,10 +195,7 @@ export function WeaponList({ items }: { items: WeaponCardVM[] }) {
           <p className="max-w-[50ch] font-body text-sm text-muted-on-dark">{t('emptyHint')}</p>
           <button
             type="button"
-            onClick={() => {
-              setQuery('');
-              setSelected(new Set());
-            }}
+            onClick={clearAll}
             className="rounded-lg border border-ink-700 px-4 py-2.5 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
           >
             {t('clearFilters')}
