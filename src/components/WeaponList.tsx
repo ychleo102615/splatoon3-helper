@@ -1,13 +1,28 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
-import { matchesFilters, isRangeLimited, buildRangeMarks } from '@/components/weaponFilters';
+import {
+  matchesFilters,
+  isRangeLimited,
+  buildRangeMarks,
+  type FilterCriteria,
+} from '@/components/weaponFilters';
+import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
+import {
+  WEAPONS_FILTER_KEY,
+  serializeCriteria,
+  deserializeCriteria,
+  type FilterOptions,
+} from '@/components/filterStorage';
 import type { WeaponCategory } from '@/data/schema';
+
+/** 列表頁的完整篩選狀態:共用的 FilterCriteria + 列表頁特有的搜尋字串。 */
+type WeaponsFilter = FilterCriteria & { query: string };
 
 /** 列表卡片所需的精簡 view-model(名稱已於伺服器端依 locale 解析,client 不持有完整快照)。 */
 export interface WeaponCardVM {
@@ -44,11 +59,36 @@ const ACCENTS = ['bg-turf-green', 'bg-splat-magenta', 'bg-ink-purple', 'bg-fresh
 export function WeaponList({ items, categories, subs, specials, rangeBounds }: Props) {
   const t = useTranslations('Weapons');
   const tc = useTranslations('Categories');
-  const [query, setQuery] = useState('');
-  const [cats, setCats] = useState<Set<WeaponCategory>>(new Set());
-  const [subIds, setSubIds] = useState<Set<string>>(new Set());
-  const [specialIds, setSpecialIds] = useState<Set<string>>(new Set());
-  const [range, setRange] = useState<RangeValue>(() => ({ ...rangeBounds }));
+
+  // 整份篩選狀態收斂為一筆記錄,暫存到 localStorage:重新整理後沿用上次條件。
+  // 還原時對「當前快照」清洗(剔除已不存在的 id、射程夾回邊界),語意層見 filterStorage.ts。
+  const codec = useMemo<PersistentCodec<WeaponsFilter>>(() => {
+    const options: FilterOptions = {
+      cats: new Set(categories),
+      subIds: new Set(subs.map((s) => s.id)),
+      specialIds: new Set(specials.map((s) => s.id)),
+      bounds: rangeBounds,
+    };
+    return {
+      serialize: (f) => ({ query: f.query, ...serializeCriteria(f) }),
+      deserialize: (raw) => {
+        const o = (raw ?? {}) as { query?: unknown };
+        return {
+          query: typeof o.query === 'string' ? o.query : '',
+          ...deserializeCriteria(raw, options),
+        };
+      },
+    };
+  }, [categories, subs, specials, rangeBounds]);
+
+  const [filters, setFilters] = usePersistentState<WeaponsFilter>(
+    WEAPONS_FILTER_KEY,
+    () => ({ query: '', cats: new Set(), subIds: new Set(), specialIds: new Set(), range: { ...rangeBounds } }),
+    codec,
+  );
+  // 解構出同名 local,讓下方讀取維持不變;變更一律經 patch 合併回單一記錄。
+  const { query, cats, subIds, specialIds, range } = filters;
+  const patch = (p: Partial<WeaponsFilter>) => setFilters((f) => ({ ...f, ...p }));
 
   const rangeMarks: RangeMark[] = useMemo(
     () => buildRangeMarks(rangeBounds, (k) => t(k)),
@@ -84,13 +124,14 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
     specialIds.size > 0 ||
     isRangeLimited(range, rangeBounds);
 
-  const clearAll = () => {
-    setQuery('');
-    setCats(new Set());
-    setSubIds(new Set());
-    setSpecialIds(new Set());
-    setRange({ ...rangeBounds });
-  };
+  const clearAll = () =>
+    setFilters({
+      query: '',
+      cats: new Set(),
+      subIds: new Set(),
+      specialIds: new Set(),
+      range: { ...rangeBounds },
+    });
 
   return (
     <div>
@@ -98,7 +139,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
       <input
         type="search"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => patch({ query: e.target.value })}
         placeholder={t('searchPlaceholder')}
         aria-label={t('searchPlaceholder')}
         className="w-full rounded-md bg-white px-3.5 py-2.5 font-body text-panel-ink placeholder:text-panel-muted"
@@ -126,10 +167,10 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             label={t('categoryGroup')}
             anyLabel={t('any')}
             anyActive={cats.size === 0}
-            onAny={() => setCats(new Set())}
+            onAny={() => patch({ cats: new Set() })}
           >
             {categories.map((cat) => (
-              <Chip key={cat} active={cats.has(cat)} onClick={() => setCats(toggleIn(cats, cat))}>
+              <Chip key={cat} active={cats.has(cat)} onClick={() => patch({ cats: toggleIn(cats, cat) })}>
                 {tc(cat)}
               </Chip>
             ))}
@@ -139,13 +180,13 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             label={t('subLabel')}
             anyLabel={t('any')}
             anyActive={subIds.size === 0}
-            onAny={() => setSubIds(new Set())}
+            onAny={() => patch({ subIds: new Set() })}
           >
             {subs.map((s) => (
               <Chip
                 key={s.id}
                 active={subIds.has(s.id)}
-                onClick={() => setSubIds(toggleIn(subIds, s.id))}
+                onClick={() => patch({ subIds: toggleIn(subIds, s.id) })}
               >
                 {s.name}
               </Chip>
@@ -156,13 +197,13 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             label={t('specialLabel')}
             anyLabel={t('any')}
             anyActive={specialIds.size === 0}
-            onAny={() => setSpecialIds(new Set())}
+            onAny={() => patch({ specialIds: new Set() })}
           >
             {specials.map((s) => (
               <Chip
                 key={s.id}
                 active={specialIds.has(s.id)}
-                onClick={() => setSpecialIds(toggleIn(specialIds, s.id))}
+                onClick={() => patch({ specialIds: toggleIn(specialIds, s.id) })}
               >
                 {s.name}
               </Chip>
@@ -173,7 +214,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             <RangeSlider
               bound={rangeBounds}
               value={range}
-              onChange={setRange}
+              onChange={(next) => patch({ range: next })}
               label={t('rangeGroup')}
               minHandleLabel={t('rangeMin')}
               maxHandleLabel={t('rangeMax')}

@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { WeaponList, type WeaponCardVM } from '@/components/WeaponList';
+import { WeaponsBrowser } from '@/components/WeaponsBrowser';
+import type { WeaponCardVM } from '@/components/WeaponList';
 import type { FilterOption } from '@/components/FilterGroup';
 import { Link } from '@/i18n/navigation';
 import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
@@ -120,7 +121,7 @@ export default async function WeaponsPage({
           </h1>
 
           <div className="mt-6">
-            <WeaponList
+            <WeaponsBrowser
               items={items}
               categories={presentCategories}
               subs={subs}

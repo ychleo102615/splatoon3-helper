@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
-import { RandomPicker, type FilterOption, type PickerWeapon } from '@/components/RandomPicker';
+import { RandomBrowser } from '@/components/RandomBrowser';
+import type { FilterOption, PickerWeapon } from '@/components/RandomPicker';
 import { Link } from '@/i18n/navigation';
 import { routing } from '@/i18n/routing';
 import { weaponIconUrl, subspeIconUrl } from '@/config/icons';
@@ -126,7 +127,7 @@ export default async function RandomPage({
           </p>
 
           <div className="mt-6">
-            <RandomPicker
+            <RandomBrowser
               weapons={pool}
               categories={presentCategories}
               subs={subs}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { StickerButton } from '@/components/StickerButton';
@@ -8,6 +8,13 @@ import { SubspeIcon } from '@/components/SubspeIcon';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
 import { matchesFilters, buildRangeMarks } from '@/components/weaponFilters';
+import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
+import {
+  RANDOM_PICKER_KEY,
+  serializeCriteria,
+  deserializeCriteria,
+  type FilterOptions,
+} from '@/components/filterStorage';
 import type { WeaponCategory } from '@/data/schema';
 
 export type { FilterOption };
@@ -57,6 +64,12 @@ interface Slot {
   range: RangeValue;
 }
 
+/** 隨機器的可持久化狀態:多槽設定 + 跨槽不重複開關(抽選結果不在內,屬瞬時)。 */
+interface PickerModel {
+  slots: Slot[];
+  noRepeat: boolean;
+}
+
 interface Props {
   weapons: PickerWeapon[];
   /** 出現在抽選池中的分類(依 WEAPON_CATEGORIES 正序);名稱走 Categories i18n。 */
@@ -82,13 +95,41 @@ function createSlot(id: number, bounds: RangeValue): Slot {
 export function RandomPicker({ weapons, categories, subs, specials, rangeBounds }: Props) {
   const t = useTranslations('Random');
 
-  const [slots, setSlots] = useState<Slot[]>(() => [createSlot(0, rangeBounds)]);
-  const [noRepeat, setNoRepeat] = useState(false);
-  // 每槽抽選結果(與 slots 等長);null = 該槽湊不滿(條件無交集或去重後耗盡)。
+  // 槽設定(每槽條件)+ 不重複開關 = 一份可序列化記錄,暫存到 localStorage:重新整理後沿用。
+  // 抽選結果刻意不持久化——結果是「對當下設定的一次抽選」,還原舊結果會誤導;載入後回到提示態。
+  const codec = useMemo<PersistentCodec<PickerModel>>(() => {
+    const options: FilterOptions = {
+      cats: new Set(categories),
+      subIds: new Set(subs.map((s) => s.id)),
+      specialIds: new Set(specials.map((s) => s.id)),
+      bounds: rangeBounds,
+    };
+    return {
+      // 槽 id 只是 render key,不入存檔;還原時依序重新編號。
+      serialize: (m) => ({ slots: m.slots.map(serializeCriteria), noRepeat: m.noRepeat }),
+      deserialize: (raw) => {
+        const o = (raw ?? {}) as { slots?: unknown; noRepeat?: unknown };
+        const stored = Array.isArray(o.slots) ? o.slots.slice(0, MAX_SLOTS) : [];
+        const slots = stored.map((entry, i) => ({ id: i, ...deserializeCriteria(entry, options) }));
+        return {
+          slots: slots.length > 0 ? slots : [createSlot(0, rangeBounds)],
+          noRepeat: o.noRepeat === true,
+        };
+      },
+    };
+  }, [categories, subs, specials, rangeBounds]);
+
+  const [model, setModel] = usePersistentState<PickerModel>(
+    RANDOM_PICKER_KEY,
+    () => ({ slots: [createSlot(0, rangeBounds)], noRepeat: false }),
+    codec,
+  );
+  const { slots, noRepeat } = model;
+
+  // 每槽抽選結果(與 slots 等長);null = 該槽湊不滿(條件無交集或去重後耗盡)。不持久化。
   const [results, setResults] = useState<(PickerWeapon | null)[] | null>(null);
   // 每次抽選自增,作為揭曉網格的 key:強制重掛載以重播 reveal 動畫。
   const [drawSeq, setDrawSeq] = useState(0);
-  const nextId = useRef(1);
 
   const rangeMarks: RangeMark[] = useMemo(
     () => buildRangeMarks(rangeBounds, (k) => t(k)),
@@ -99,33 +140,39 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   const poolFor = (slot: Slot): PickerWeapon[] =>
     weapons.filter((w) => matchesFilters(w, slot, rangeBounds));
 
+  // 下一個槽 id 由現有槽推導(max + 1):slots 即唯一事實來源,免去獨立計數器與還原後失準。
+  const nextSlotId = (list: Slot[]): number => list.reduce((max, s) => Math.max(max, s.id), -1) + 1;
+
   // 任一設定變動都清掉上次結果:結果是「對當下設定的一次抽選」,條件變了就回到提示態。
   const updateSlot = (id: number, partial: Partial<Slot>) => {
-    setSlots((prev) => prev.map((s) => (s.id === id ? { ...s, ...partial } : s)));
+    setModel((m) => ({
+      ...m,
+      slots: m.slots.map((s) => (s.id === id ? { ...s, ...partial } : s)),
+    }));
     setResults(null);
   };
 
   const addSlot = () => {
-    setSlots((prev) =>
-      prev.length >= MAX_SLOTS ? prev : [...prev, createSlot(nextId.current++, rangeBounds)],
+    setModel((m) =>
+      m.slots.length >= MAX_SLOTS
+        ? m
+        : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds)] },
     );
     setResults(null);
   };
 
   const removeSlot = (id: number) => {
-    setSlots((prev) => (prev.length <= 1 ? prev : prev.filter((s) => s.id !== id)));
+    setModel((m) => (m.slots.length <= 1 ? m : { ...m, slots: m.slots.filter((s) => s.id !== id) }));
     setResults(null);
   };
 
   const resetAll = () => {
-    nextId.current = 1;
-    setSlots([createSlot(0, rangeBounds)]);
-    setNoRepeat(false);
+    setModel({ slots: [createSlot(0, rangeBounds)], noRepeat: false });
     setResults(null);
   };
 
   const toggleNoRepeat = () => {
-    setNoRepeat((v) => !v);
+    setModel((m) => ({ ...m, noRepeat: !m.noRepeat }));
     setResults(null);
   };
 
