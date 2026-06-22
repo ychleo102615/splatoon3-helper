@@ -164,10 +164,12 @@
 
 ### 5.2 架構要點(建議)
 - **資料策略**:武器數值為靜態資料,適合用 SSG / ISR(build 時或定期重新產生),藉此展示 Next.js 的資料取得策略。
+  - `[補述 2026-06]` 渲染採「**server 殼 + client-only 島**」分工:首頁與**武器詳情頁 `/weapons/[id]` 維持 SSG**(數值靜態、利於 SEO);**瀏覽武器列表與隨機決定器兩頁改為 CSR 島** — 頁面殼與依 locale 解析的資料 props 仍由 server 預渲染,互動元件(WeaponList / RandomPicker)以 `next/dynamic({ ssr:false })` 掛載 + 固定高度骨架。此為對「全 SSG」的**刻意、局部偏離**,動機見下方「篩選條件持久化」補述。
 - **多語系 (i18n)**:App Router 的 i18n routing 搭配 next-intl 之類方案。
 - **樣式**:mobile-first,建議 Tailwind CSS。
 - **SVG**:以 inline React component 實作,動態用 CSS / 輕量動畫函式庫。
 - **隨機決定器**:client component,篩選條件以本地 state 管理。
+- **篩選條件持久化(列表 + 隨機器)** `[補述 2026-06]`:兩處的篩選(分類 / 副 / 特殊 / 射程;隨機器另含多槽設定與「單次內去重」開關)以 **localStorage 暫存**,重新整理後沿用上次條件;還原時對當前快照清洗(剔除已不存在的 id、射程夾回邊界)。個人化偏好僅存在 client(不進伺服器、不依賴 cookie)。為消除 SSG 首屏「先畫預設 → 還原」的閃動,承載這兩處篩選的元件改為 **client-only 島**(見上方資料策略補述),首次 render 即讀 localStorage 直接落在還原態。抽選結果本身仍為瞬時、不持久化(維持 §3.2 無狀態純抽選)。
 - **後端**:本專案資料為靜態 + 前端互動,原則上不需獨立後端。
 
 ### 5.3 部署
