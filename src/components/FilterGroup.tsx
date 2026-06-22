@@ -8,11 +8,14 @@
  */
 
 import { chipClass } from '@/components/chipClass';
+import { SubspeIcon } from '@/components/SubspeIcon';
 
 /** 副 / 特殊武器等篩選選項(id + 已在地化名稱)。 */
 export interface FilterOption {
   id: string;
   name: string;
+  /** §4.3.1 opt-in:官方圖示外部 URL;未啟用時 undefined(chip 維持純文字)。 */
+  iconUrl?: string;
 }
 
 export function FilterGroup({
@@ -44,14 +47,23 @@ export function FilterGroup({
 export function Chip({
   active,
   onClick,
+  icon,
   children,
 }: {
   active: boolean;
   onClick: () => void;
+  /** §4.3.1 opt-in:前置圖示 URL(圖文降階);省略 / 未啟用時純文字,版面不變。 */
+  icon?: string;
   children: React.ReactNode;
 }) {
   return (
-    <button type="button" onClick={onClick} aria-pressed={active} className={chipClass(active)}>
+    <button
+      type="button"
+      onClick={onClick}
+      aria-pressed={active}
+      className={icon ? `${chipClass(active)} inline-flex items-center gap-1.5` : chipClass(active)}
+    >
+      {icon ? <SubspeIcon src={icon} alt="" className="size-4 p-0.5" /> : null}
       {children}
     </button>
   );

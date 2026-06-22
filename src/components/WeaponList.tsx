@@ -5,6 +5,8 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
+import { CollapsiblePanel } from '@/components/CollapsiblePanel';
+import { ActiveFilterTokens, type FilterToken } from '@/components/FilterTokens';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import {
   matchesFilters,
@@ -15,6 +17,7 @@ import {
 import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
 import {
   WEAPONS_FILTER_KEY,
+  WEAPONS_FILTERS_OPEN_KEY,
   serializeCriteria,
   deserializeCriteria,
   type FilterOptions,
@@ -56,6 +59,12 @@ interface Props {
 /** 卡片交替的噴濺強調色(品牌區節奏,避免同質卡海;Two-Zone:列表屬品牌區可用霓虹)。 */
 const ACCENTS = ['bg-turf-green', 'bg-splat-magenta', 'bg-ink-purple', 'bg-fresh-yellow'] as const;
 
+/** 展開 / 收合偏好的存檔形狀:就是一個布林。壞值 / 缺值退回 true(= 沿用原本的完整檢視)。 */
+const FILTERS_OPEN_CODEC: PersistentCodec<boolean> = {
+  serialize: (open) => open,
+  deserialize: (raw) => (typeof raw === 'boolean' ? raw : true),
+};
+
 export function WeaponList({ items, categories, subs, specials, rangeBounds }: Props) {
   const t = useTranslations('Weapons');
   const tc = useTranslations('Categories');
@@ -89,6 +98,13 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
   // 解構出同名 local,讓下方讀取維持不變;變更一律經 patch 合併回單一記錄。
   const { query, cats, subIds, specialIds, range } = filters;
   const patch = (p: Partial<WeaponsFilter>) => setFilters((f) => ({ ...f, ...p }));
+
+  // 簡化模式開合:展開 = 完整 chip picker;收合 = 只留已選 token。與條件分檔持久化(見 filterStorage)。
+  const [filtersOpen, setFiltersOpen] = usePersistentState<boolean>(
+    WEAPONS_FILTERS_OPEN_KEY,
+    true,
+    FILTERS_OPEN_CODEC,
+  );
 
   const rangeMarks: RangeMark[] = useMemo(
     () => buildRangeMarks(rangeBounds, (k) => t(k)),
@@ -133,6 +149,44 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
       range: { ...rangeBounds },
     });
 
+  // 已選條件 → 可逐一刪除的 token(簡化模式內容)。副 / 特殊的顯示名與圖示由選項表反查;
+  // 射程僅在有設限時成為一顆 token(滿格 = 不限,不顯示)。搜尋字串自有輸入框,不入 token。
+  const subById = useMemo(() => new Map(subs.map((s) => [s.id, s])), [subs]);
+  const specialById = useMemo(() => new Map(specials.map((s) => [s.id, s])), [specials]);
+  const without = <T,>(set: Set<T>, value: T): Set<T> => {
+    const next = new Set(set);
+    next.delete(value);
+    return next;
+  };
+  const tokens: FilterToken[] = [
+    ...[...cats].map((c) => ({
+      key: `cat:${c}`,
+      label: tc(c),
+      onRemove: () => patch({ cats: without(cats, c) }),
+    })),
+    ...[...subIds].map((id) => ({
+      key: `sub:${id}`,
+      label: subById.get(id)?.name ?? id,
+      iconUrl: subById.get(id)?.iconUrl,
+      onRemove: () => patch({ subIds: without(subIds, id) }),
+    })),
+    ...[...specialIds].map((id) => ({
+      key: `spe:${id}`,
+      label: specialById.get(id)?.name ?? id,
+      iconUrl: specialById.get(id)?.iconUrl,
+      onRemove: () => patch({ specialIds: without(specialIds, id) }),
+    })),
+    ...(isRangeLimited(range, rangeBounds)
+      ? [
+          {
+            key: 'range',
+            label: t('rangeToken', { min: range.min, max: range.max }),
+            onRemove: () => patch({ range: { ...rangeBounds } }),
+          },
+        ]
+      : []),
+  ];
+
   return (
     <div>
       {/* 搜尋:淺色純白欄(DESIGN input-search) */}
@@ -145,24 +199,35 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
         className="w-full rounded-md bg-white px-3.5 py-2.5 font-body text-panel-ink placeholder:text-panel-muted"
       />
 
-      {/* 篩選面板:分類 / 副 / 特殊 / 射程(與隨機器同一套維度語意,共用 FilterGroup) */}
-      <div className="mt-4 rounded-lg bg-card-translucent p-4 sm:p-5">
-        <div className="flex items-center justify-between gap-3">
-          <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
-            {t('filtersTitle')}
-          </h2>
-          {hasActiveFilters ? (
-            <button
-              type="button"
-              onClick={clearAll}
-              className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
-            >
-              {t('clearFilters')}
-            </button>
-          ) : null}
-        </div>
-
-        <div className="mt-3">
+      {/* 篩選面板:可收合(簡化模式)。展開 = 完整 chip picker;收合 = 已選條件 token 摘要。 */}
+      <div className="mt-4">
+        <CollapsiblePanel
+          open={filtersOpen}
+          onOpenChange={setFiltersOpen}
+          title={t('filtersTitle')}
+          expandLabel={t('filtersExpand')}
+          collapseLabel={t('filtersCollapse')}
+          toolbar={
+            hasActiveFilters ? (
+              <button
+                type="button"
+                onClick={clearAll}
+                className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+              >
+                {t('clearFilters')}
+              </button>
+            ) : null
+          }
+          summary={
+            <ActiveFilterTokens
+              tokens={tokens}
+              onAdd={() => setFiltersOpen(true)}
+              addLabel={t('addCondition')}
+              emptyLabel={t('noConditions')}
+              removeLabel={(name) => t('removeCondition', { name })}
+            />
+          }
+        >
           <FilterGroup
             label={t('categoryGroup')}
             anyLabel={t('any')}
@@ -186,6 +251,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
               <Chip
                 key={s.id}
                 active={subIds.has(s.id)}
+                icon={s.iconUrl}
                 onClick={() => patch({ subIds: toggleIn(subIds, s.id) })}
               >
                 {s.name}
@@ -203,6 +269,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
               <Chip
                 key={s.id}
                 active={specialIds.has(s.id)}
+                icon={s.iconUrl}
                 onClick={() => patch({ specialIds: toggleIn(specialIds, s.id) })}
               >
                 {s.name}
@@ -223,7 +290,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
               marks={rangeMarks}
             />
           </div>
-        </div>
+        </CollapsiblePanel>
       </div>
 
       {/* 結果計數(螢幕報讀) */}

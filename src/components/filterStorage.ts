@@ -23,6 +23,12 @@ import type { WeaponCategory } from '@/data/schema';
 export const WEAPONS_FILTER_KEY = 'splatdex:weapons-filter:v1';
 export const RANDOM_PICKER_KEY = 'splatdex:random:v1';
 
+/**
+ * 列表頁篩選面板的展開 / 收合(簡化模式)偏好。獨立於條件存檔:它是「介面音量」
+ * 而非篩選語意,變更不該動到條件版號,反之亦然。預設展開(= 沿用原本的完整檢視)。
+ */
+export const WEAPONS_FILTERS_OPEN_KEY = 'splatdex:weapons-filters-open:v1';
+
 /** JSON 安全的條件形狀(Set 攤平為 array;射程本就是純物件)。 */
 export interface StoredCriteria {
   cats: string[];

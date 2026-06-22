@@ -41,6 +41,12 @@
     "empty": "沒有符合條件的武器。",
     "emptyHint": "試試其他關鍵字,或清除目前的篩選條件。",
     "clearFilters": "清除篩選",
+    "filtersExpand": "展開篩選",
+    "filtersCollapse": "收合篩選",
+    "addCondition": "＋ 新增條件",
+    "noConditions": "尚未設定條件",
+    "removeCondition": "移除 {name}",
+    "rangeToken": "射程 {min}–{max}",
     "backToHome": "‹ 首頁",
     "backToList": "‹ 武器一覽",
     "iconAlt": "{name} 圖示"

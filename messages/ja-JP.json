@@ -41,6 +41,12 @@
     "empty": "条件に合うブキがありません。",
     "emptyHint": "別のキーワードを試すか、現在の絞り込みを解除してください。",
     "clearFilters": "絞り込みを解除",
+    "filtersExpand": "絞り込みを開く",
+    "filtersCollapse": "絞り込みを閉じる",
+    "addCondition": "＋ 条件を追加",
+    "noConditions": "条件なし",
+    "removeCondition": "{name} を解除",
+    "rangeToken": "射程 {min}–{max}",
     "backToHome": "‹ ホーム",
     "backToList": "‹ ブキ一覧",
     "iconAlt": "{name} のアイコン"

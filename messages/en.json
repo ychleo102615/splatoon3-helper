@@ -41,6 +41,12 @@
     "empty": "No weapons match your filters.",
     "emptyHint": "Try a different keyword, or clear your current filters.",
     "clearFilters": "Clear filters",
+    "filtersExpand": "Expand filters",
+    "filtersCollapse": "Collapse filters",
+    "addCondition": "＋ Add filter",
+    "noConditions": "No filters set",
+    "removeCondition": "Remove {name}",
+    "rangeToken": "Range {min}–{max}",
     "backToHome": "‹ Home",
     "backToList": "‹ Weapons",
     "iconAlt": "{name} icon"
