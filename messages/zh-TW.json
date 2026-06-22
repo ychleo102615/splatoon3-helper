@@ -34,6 +34,7 @@
     "rangeNear": "近",
     "rangeMid": "中",
     "rangeFar": "遠",
+    "rangeReset": "重置",
     "results": "{count} 把武器",
     "subLabel": "副武器",
     "specialLabel": "特殊武器",
@@ -75,6 +76,7 @@
     "rangeNear": "近",
     "rangeMid": "中",
     "rangeFar": "遠",
+    "rangeReset": "重置",
     "slotEmpty": "此條件下沒有(更多)武器。",
     "backToHome": "‹ 首頁"
   },
