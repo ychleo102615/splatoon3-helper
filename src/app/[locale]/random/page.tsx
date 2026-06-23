@@ -83,11 +83,13 @@ export default async function RandomPage({
     weapons.map((w) => w.subWeaponId),
     (id) => subWeaponName(id, loc),
     loc,
+    (id) => subspeIconUrl(subWeaponIconName(id)),
   );
   const specials: FilterOption[] = buildOptions(
     weapons.map((w) => w.specialWeaponId),
     (id) => specialWeaponName(id, loc),
     loc,
+    (id) => subspeIconUrl(specialWeaponIconName(id)),
   );
 
   return (
@@ -149,13 +151,17 @@ export default async function RandomPage({
   );
 }
 
-/** 由 id 陣列去重、解析在地化名稱、依名稱排序,產出篩選選項。 */
+/**
+ * 由 id 陣列去重、解析在地化名稱、依名稱排序,產出篩選選項。
+ * `iconOf` 為 §4.3.1 opt-in:回 URL 則 chip / token 圖文降階,回 null(預設關閉)則 undefined → 純文字。
+ */
 function buildOptions(
   ids: string[],
   nameOf: (id: string) => string,
   loc: SnapshotLocale,
+  iconOf: (id: string) => string | null,
 ): FilterOption[] {
   return [...new Set(ids)]
-    .map((id) => ({ id, name: nameOf(id) }))
+    .map((id) => ({ id, name: nameOf(id), iconUrl: iconOf(id) ?? undefined }))
     .sort((a, b) => a.name.localeCompare(b.name, loc));
 }

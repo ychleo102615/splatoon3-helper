@@ -7,7 +7,9 @@ import { StickerButton } from '@/components/StickerButton';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
-import { matchesFilters, buildRangeMarks } from '@/components/weaponFilters';
+import { CollapsiblePanel } from '@/components/CollapsiblePanel';
+import { ActiveFilterTokens, type FilterToken } from '@/components/FilterTokens';
+import { matchesFilters, buildRangeMarks, isRangeLimited } from '@/components/weaponFilters';
 import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
 import {
   RANDOM_PICKER_KEY,
@@ -335,24 +337,70 @@ function SlotCard({
   const t = useTranslations('Random');
   const tc = useTranslations('Categories');
 
+  // 逐槽簡化模式:展開 = 完整 chip picker;收合 = 該槽已選條件 token。8 槽時頁面易過長,
+  // 各槽獨立收合最實用。狀態為 ephemeral(預設展開,新增槽即展開),不入 PickerModel 存檔——
+  // 它是介面音量、非抽選語意,持久化反而要動到存檔形狀與還原邏輯。
+  const [open, setOpen] = useState(true);
+
   const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
     const next = new Set(set);
     if (next.has(value)) next.delete(value);
     else next.add(value);
     return next;
   };
+  const without = <T,>(set: Set<T>, value: T): Set<T> => {
+    const next = new Set(set);
+    next.delete(value);
+    return next;
+  };
+
+  // 已選條件 → 可逐一刪除的 token(收合時顯示)。副 / 特殊的名稱與圖示由選項表反查。
+  const subById = useMemo(() => new Map(subs.map((s) => [s.id, s])), [subs]);
+  const specialById = useMemo(() => new Map(specials.map((s) => [s.id, s])), [specials]);
+  const tokens: FilterToken[] = [
+    ...[...slot.cats].map((c) => ({
+      key: `cat:${c}`,
+      label: tc(c),
+      onRemove: () => onUpdate({ cats: without(slot.cats, c) }),
+    })),
+    ...[...slot.subIds].map((id) => ({
+      key: `sub:${id}`,
+      label: subById.get(id)?.name ?? id,
+      iconUrl: subById.get(id)?.iconUrl,
+      onRemove: () => onUpdate({ subIds: without(slot.subIds, id) }),
+    })),
+    ...[...slot.specialIds].map((id) => ({
+      key: `spe:${id}`,
+      label: specialById.get(id)?.name ?? id,
+      iconUrl: specialById.get(id)?.iconUrl,
+      onRemove: () => onUpdate({ specialIds: without(slot.specialIds, id) }),
+    })),
+    ...(isRangeLimited(slot.range, rangeBounds)
+      ? [
+          {
+            key: 'range',
+            label: t('rangeToken', { min: slot.range.min, max: slot.range.max }),
+            onRemove: () => onUpdate({ range: { ...rangeBounds } }),
+          },
+        ]
+      : []),
+  ];
 
   return (
-    <article className="rounded-lg bg-card-translucent p-4 sm:p-5">
-      <div className="flex items-center justify-between gap-3">
-        {showIndex ? (
+    <CollapsiblePanel
+      open={open}
+      onOpenChange={setOpen}
+      header={
+        showIndex ? (
           <h3 className="font-label text-xs font-bold uppercase tracking-wide text-text-on-dark">
             {t('slotLabel', { n: index + 1 })}
           </h3>
-        ) : (
-          <span aria-hidden />
-        )}
-        <div className="flex items-center gap-3">
+        ) : null
+      }
+      expandLabel={t('filtersExpand')}
+      collapseLabel={t('filtersCollapse')}
+      toolbar={
+        <>
           <span className="font-data text-xs text-muted-on-dark">
             {t('poolCount', { count: poolCount })}
           </span>
@@ -366,9 +414,18 @@ function SlotCard({
               ×
             </button>
           ) : null}
-        </div>
-      </div>
-
+        </>
+      }
+      summary={
+        <ActiveFilterTokens
+          tokens={tokens}
+          onAdd={() => setOpen(true)}
+          addLabel={t('addCondition')}
+          emptyLabel={t('noConditions')}
+          removeLabel={(name) => t('removeCondition', { name })}
+        />
+      }
+    >
       <FilterGroup
         label={t('categoryGroup')}
         anyLabel={t('any')}
@@ -396,6 +453,7 @@ function SlotCard({
           <Chip
             key={s.id}
             active={slot.subIds.has(s.id)}
+            icon={s.iconUrl}
             onClick={() => onUpdate({ subIds: toggleIn(slot.subIds, s.id) })}
           >
             {s.name}
@@ -413,6 +471,7 @@ function SlotCard({
           <Chip
             key={s.id}
             active={slot.specialIds.has(s.id)}
+            icon={s.iconUrl}
             onClick={() => onUpdate({ specialIds: toggleIn(slot.specialIds, s.id) })}
           >
             {s.name}
@@ -433,7 +492,7 @@ function SlotCard({
           marks={rangeMarks}
         />
       </div>
-    </article>
+    </CollapsiblePanel>
   );
 }
 

@@ -204,7 +204,11 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
         <CollapsiblePanel
           open={filtersOpen}
           onOpenChange={setFiltersOpen}
-          title={t('filtersTitle')}
+          header={
+            <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
+              {t('filtersTitle')}
+            </h2>
+          }
           expandLabel={t('filtersExpand')}
           collapseLabel={t('filtersCollapse')}
           toolbar={

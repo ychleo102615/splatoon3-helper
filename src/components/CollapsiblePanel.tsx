@@ -22,7 +22,7 @@ import { useId } from 'react';
 export function CollapsiblePanel({
   open,
   onOpenChange,
-  title,
+  header,
   toolbar,
   summary,
   expandLabel,
@@ -31,9 +31,13 @@ export function CollapsiblePanel({
 }: {
   open: boolean;
   onOpenChange: (next: boolean) => void;
-  /** 面板標題(uppercase eyebrow)。 */
-  title: string;
-  /** 標題右側工具區(例:清除篩選);省略則不渲染。 */
+  /**
+   * 標題列左側內容(由呼叫端提供標題元素本身,例:`<h2>` 或槽的 `<h3>`)。
+   * 交給呼叫端決定標題層級與文案,殼不替它選 heading level(列表頁 vs 槽各有脈絡)。
+   * 省略 / null 時放一個佔位 span,維持右側工具區的 justify-between 對齊。
+   */
+  header?: React.ReactNode;
+  /** 標題右側工具區(例:清除篩選、抽選範圍計數 + 移除鈕);省略則不渲染。 */
   toolbar?: React.ReactNode;
   /** 收合時顯示的簡化摘要(已選 token + 新增條件);展開時隱藏。 */
   summary: React.ReactNode;
@@ -49,7 +53,7 @@ export function CollapsiblePanel({
   return (
     <div className="rounded-lg bg-card-translucent p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">{title}</h2>
+        {header ?? <span aria-hidden />}
         <div className="flex items-center gap-3">
           {toolbar}
           <button
