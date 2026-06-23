@@ -64,6 +64,8 @@ interface Slot {
   specialIds: Set<string>;
   /** 射程選取區間(初始 = 軌道邊界 = 不限)。 */
   range: RangeValue;
+  /** 簡化模式:此槽是否展開(隨設定一起持久化;預設展開)。屬介面狀態,非篩選語意。 */
+  open: boolean;
 }
 
 /** 隨機器的可持久化狀態:多槽設定 + 跨槽不重複開關(抽選結果不在內,屬瞬時)。 */
@@ -91,6 +93,7 @@ function createSlot(id: number, bounds: RangeValue): Slot {
     subIds: new Set(),
     specialIds: new Set(),
     range: { ...bounds },
+    open: true,
   };
 }
 
@@ -107,12 +110,20 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
       bounds: rangeBounds,
     };
     return {
-      // 槽 id 只是 render key,不入存檔;還原時依序重新編號。
-      serialize: (m) => ({ slots: m.slots.map(serializeCriteria), noRepeat: m.noRepeat }),
+      // 槽 id 只是 render key,不入存檔;還原時依序重新編號。open(展開/收合)隨條件一起存。
+      serialize: (m) => ({
+        slots: m.slots.map((s) => ({ ...serializeCriteria(s), open: s.open })),
+        noRepeat: m.noRepeat,
+      }),
       deserialize: (raw) => {
         const o = (raw ?? {}) as { slots?: unknown; noRepeat?: unknown };
         const stored = Array.isArray(o.slots) ? o.slots.slice(0, MAX_SLOTS) : [];
-        const slots = stored.map((entry, i) => ({ id: i, ...deserializeCriteria(entry, options) }));
+        // open 缺值(舊存檔)→ 預設展開;唯有明確存成 false 才收合。
+        const slots = stored.map((entry, i) => ({
+          id: i,
+          open: (entry as { open?: unknown })?.open !== false,
+          ...deserializeCriteria(entry, options),
+        }));
         return {
           slots: slots.length > 0 ? slots : [createSlot(0, rangeBounds)],
           noRepeat: o.noRepeat === true,
@@ -152,6 +163,14 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
       slots: m.slots.map((s) => (s.id === id ? { ...s, ...partial } : s)),
     }));
     setResults(null);
+  };
+
+  // 展開 / 收合:只改介面狀態,刻意不走 updateSlot——open 非篩選條件,切換不該清掉上次抽選結果。
+  const setSlotOpen = (id: number, open: boolean) => {
+    setModel((m) => ({
+      ...m,
+      slots: m.slots.map((s) => (s.id === id ? { ...s, open } : s)),
+    }));
   };
 
   const addSlot = () => {
@@ -227,6 +246,7 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
             rangeBounds={rangeBounds}
             rangeMarks={rangeMarks}
             onUpdate={(partial) => updateSlot(slot.id, partial)}
+            onToggleOpen={(open) => setSlotOpen(slot.id, open)}
             onRemove={() => removeSlot(slot.id)}
           />
         ))}
@@ -319,6 +339,7 @@ function SlotCard({
   rangeBounds,
   rangeMarks,
   onUpdate,
+  onToggleOpen,
   onRemove,
 }: {
   index: number;
@@ -332,15 +353,16 @@ function SlotCard({
   rangeBounds: RangeValue;
   rangeMarks: RangeMark[];
   onUpdate: (partial: Partial<Slot>) => void;
+  /** 展開 / 收合(簡化模式);與條件分流,切換不清抽選結果。 */
+  onToggleOpen: (open: boolean) => void;
   onRemove: () => void;
 }) {
   const t = useTranslations('Random');
   const tc = useTranslations('Categories');
 
   // 逐槽簡化模式:展開 = 完整 chip picker;收合 = 該槽已選條件 token。8 槽時頁面易過長,
-  // 各槽獨立收合最實用。狀態為 ephemeral(預設展開,新增槽即展開),不入 PickerModel 存檔——
-  // 它是介面音量、非抽選語意,持久化反而要動到存檔形狀與還原邏輯。
-  const [open, setOpen] = useState(true);
+  // 各槽獨立收合最實用。open 隨槽設定一起持久化(見 PickerModel codec),重載後沿用上次的開/合。
+  const open = slot.open;
 
   const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
     const next = new Set(set);
@@ -389,7 +411,7 @@ function SlotCard({
   return (
     <CollapsiblePanel
       open={open}
-      onOpenChange={setOpen}
+      onOpenChange={onToggleOpen}
       header={
         showIndex ? (
           <h3 className="font-label text-xs font-bold uppercase tracking-wide text-text-on-dark">
@@ -419,7 +441,7 @@ function SlotCard({
       summary={
         <ActiveFilterTokens
           tokens={tokens}
-          onAdd={() => setOpen(true)}
+          onAdd={() => onToggleOpen(true)}
           addLabel={t('addCondition')}
           emptyLabel={t('noConditions')}
           removeLabel={(name) => t('removeCondition', { name })}
