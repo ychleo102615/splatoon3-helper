@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
@@ -311,71 +311,85 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
           </button>
         </div>
       ) : (
-        <ul role="list" className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((w, i) => (
-            <li key={w.id}>
-              <Link href={`/weapons/${w.id}`} className="group block h-full rounded-lg">
-                <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3 transition-[background-color,transform] duration-150 ease-state group-hover:bg-white/10 group-focus-visible:bg-white/10 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-focus-visible:-translate-y-0.5 motion-reduce:transition-none">
-                  {/* 交替噴濺色塊(裝飾,品牌區) */}
-                  <span
-                    aria-hidden
-                    className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full opacity-20 blur-2xl ${ACCENTS[i % ACCENTS.length]}`}
-                  />
-                  <div className="flex items-start gap-3">
-                    <div className="min-w-0 flex-1">
-                      <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
-                        <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
-                        {tc(w.category)}
-                      </p>
-                      <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
-                        {w.name}
-                      </h2>
-                    </div>
-                    {/* §4.3.1 opt-in:官方圖示(外部 hotlink);未啟用時 iconUrl 為 undefined → 不渲染,版面不變。 */}
-                    {w.iconUrl ? (
-                      // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
-                      <img
-                        src={w.iconUrl}
-                        alt={t('iconAlt', { name: w.name })}
-                        width={56}
-                        height={56}
-                        loading="lazy"
-                        className="size-14 shrink-0 object-contain drop-shadow"
-                      />
-                    ) : null}
-                  </div>
-                  <dl className="mt-2 space-y-1 text-xs text-muted-on-dark">
-                    <div className="flex items-center gap-1.5">
-                      <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>
-                      {/* §4.3.1 opt-in:副武器圖示徽章(淺色背板);未啟用時不渲染。 */}
-                      {w.subIconUrl ? (
-                        <SubspeIcon
-                          src={w.subIconUrl}
-                          alt={t('iconAlt', { name: w.subName })}
-                          className="size-5 p-0.5"
-                        />
-                      ) : null}
-                      <dd className="font-body text-text-on-dark">{w.subName}</dd>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <dt className="font-label uppercase tracking-wide">{t('specialLabel')}</dt>
-                      {/* §4.3.1 opt-in:特殊武器圖示徽章;未啟用時不渲染。 */}
-                      {w.specialIconUrl ? (
-                        <SubspeIcon
-                          src={w.specialIconUrl}
-                          alt={t('iconAlt', { name: w.specialName })}
-                          className="size-5 p-0.5"
-                        />
-                      ) : null}
-                      <dd className="font-body text-text-on-dark">{w.specialName}</dd>
-                    </div>
-                  </dl>
-                </article>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <WeaponGrid items={filtered} />
       )}
     </div>
   );
 }
+
+/**
+ * 結果卡格(173 張卡)。抽成 `memo` 並只吃 `items`:篩選面板開合(`filtersOpen`)時,
+ * 父層 `filtered` 參考不變 → 跳過整格重渲染,避免「切換介面」連帶重建上百張卡的 React 成本。
+ * 自取 i18n(非以 prop 傳入)以保 memo 邊界乾淨。搭配 `<li>` 的 `content-visibility:auto`
+ * (畫面外卡跳過 paint/raster),分別壓下開合時的「JS 重渲染」與「重繪」兩大成本。
+ */
+const WeaponGrid = memo(function WeaponGrid({ items }: { items: WeaponCardVM[] }) {
+  const t = useTranslations('Weapons');
+  const tc = useTranslations('Categories');
+  return (
+    <ul role="list" className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((w, i) => (
+        <li key={w.id} className="[content-visibility:auto] [contain-intrinsic-size:auto_120px]">
+          <Link href={`/weapons/${w.id}`} className="group block h-full rounded-lg">
+            <article className="relative h-full overflow-hidden rounded-lg bg-card-translucent p-3 transition-[background-color,transform] duration-150 ease-state group-hover:bg-white/10 group-focus-visible:bg-white/10 motion-safe:group-hover:-translate-y-0.5 motion-safe:group-focus-visible:-translate-y-0.5 motion-reduce:transition-none">
+              {/* 交替噴濺色塊(裝飾,品牌區) */}
+              <span
+                aria-hidden
+                className={`pointer-events-none absolute -right-6 -top-6 size-20 rounded-full opacity-20 blur-2xl ${ACCENTS[i % ACCENTS.length]}`}
+              />
+              <div className="flex items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="flex items-center gap-1.5 font-label text-xs uppercase tracking-wide text-muted-on-dark">
+                    <span className={`size-2 rounded-full ${ACCENTS[i % ACCENTS.length]}`} aria-hidden />
+                    {tc(w.category)}
+                  </p>
+                  <h2 className="mt-1.5 text-balance font-display text-lg font-bold leading-tight text-text-on-dark">
+                    {w.name}
+                  </h2>
+                </div>
+                {/* §4.3.1 opt-in:官方圖示(外部 hotlink);未啟用時 iconUrl 為 undefined → 不渲染,版面不變。 */}
+                {w.iconUrl ? (
+                  // eslint-disable-next-line @next/next/no-img-element -- 刻意用 <img>:opt-in 外部圖,避免 next/image 遠端 host 設定
+                  <img
+                    src={w.iconUrl}
+                    alt={t('iconAlt', { name: w.name })}
+                    width={56}
+                    height={56}
+                    loading="lazy"
+                    className="size-14 shrink-0 object-contain drop-shadow"
+                  />
+                ) : null}
+              </div>
+              <dl className="mt-2 space-y-1 text-xs text-muted-on-dark">
+                <div className="flex items-center gap-1.5">
+                  <dt className="font-label uppercase tracking-wide">{t('subLabel')}</dt>
+                  {/* §4.3.1 opt-in:副武器圖示徽章(淺色背板);未啟用時不渲染。 */}
+                  {w.subIconUrl ? (
+                    <SubspeIcon
+                      src={w.subIconUrl}
+                      alt={t('iconAlt', { name: w.subName })}
+                      className="size-5 p-0.5"
+                    />
+                  ) : null}
+                  <dd className="font-body text-text-on-dark">{w.subName}</dd>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <dt className="font-label uppercase tracking-wide">{t('specialLabel')}</dt>
+                  {/* §4.3.1 opt-in:特殊武器圖示徽章;未啟用時不渲染。 */}
+                  {w.specialIconUrl ? (
+                    <SubspeIcon
+                      src={w.specialIconUrl}
+                      alt={t('iconAlt', { name: w.specialName })}
+                      className="size-5 p-0.5"
+                    />
+                  ) : null}
+                  <dd className="font-body text-text-on-dark">{w.specialName}</dd>
+                </div>
+              </dl>
+            </article>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+});
