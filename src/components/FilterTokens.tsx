@@ -9,8 +9,9 @@ import { SubspeIcon } from '@/components/SubspeIcon';
  *
  * - **只顯示已選**:一個 token = 一個被選中的維度值(分類 / 副 / 特殊 / 射程),整顆即「刪除鈕」
  *   ——點擊移除該值(規格「簡化篩選器」§ 只顯示被選中、點擊刪除);× 為刪除可供性的視覺提示。
- * - **圖文降階**(§4.3.1):`iconUrl` 有值(= icon 功能開啟且該維度有官方圖)才疊小徽章,
- *   否則純文字;分類無圖一律文字。token 文字本身即無障礙名稱,圖示為裝飾(`alt=""`)。
+ * - **圖文降階**(§4.3.1):`iconUrl` 有值(= icon 功能開啟且該維度有官方圖)時整顆**只留圖示**
+ *   (收合是最克制的摘要,圖示已足夠辨識,省去文字更省版面);否則純文字,分類無圖一律文字。
+ *   icon-only 時文字名改由按鈕 `aria-label`(removeLabel)承載、`title` 補滑過提示,圖示維持裝飾(`alt=""`)。
  * - **新增 = 展開**:末端「新增條件」鈕把面板展開回完整 picker(由呼叫端的 `onAdd` 接上開合)。
  * - 純呈現:token 描述(label / icon / onRemove)由呼叫端依各自條件組裝,本元件不認識篩選語意。
  */
@@ -54,12 +55,16 @@ export function ActiveFilterTokens({
             type="button"
             onClick={token.onRemove}
             aria-label={removeLabel(token.label)}
-            className={`${chipClass(true)} inline-flex items-center gap-1.5`}
+            // 圖文降階(§4.3.1):有官方圖時整顆只留圖示(收合 = 最克制的摘要),
+            // 文字名仍由 aria-label 承載、並以 title 補上 sighted 的滑過提示;無圖則維持文字。
+            title={token.iconUrl ? token.label : undefined}
+            className={`${chipClass(true, token.iconUrl ? 'icon-only' : 'text')} inline-flex items-center gap-1.5`}
           >
             {token.iconUrl ? (
-              <SubspeIcon src={token.iconUrl} alt="" className="size-4 p-0.5" />
-            ) : null}
-            <span>{token.label}</span>
+              <SubspeIcon src={token.iconUrl} alt="" className="size-7 p-1" />
+            ) : (
+              <span>{token.label}</span>
+            )}
             <span aria-hidden className="text-base leading-none text-ink-900/70">
               ×
             </span>
@@ -70,7 +75,7 @@ export function ActiveFilterTokens({
       <button
         type="button"
         onClick={onAdd}
-        className="inline-flex min-h-[32px] items-center rounded-pill border border-dashed border-ink-700 px-3 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
+        className="inline-flex min-h-[44px] items-center rounded-pill border border-dashed border-ink-700 px-3 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
       >
         {addLabel}
       </button>

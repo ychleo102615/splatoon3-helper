@@ -61,9 +61,11 @@ export function Chip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={icon ? `${chipClass(active)} inline-flex items-center gap-1.5` : chipClass(active)}
+      className={
+        icon ? `${chipClass(active, 'icon-text')} inline-flex items-center gap-2` : chipClass(active)
+      }
     >
-      {icon ? <SubspeIcon src={icon} alt="" className="size-4 p-0.5" /> : null}
+      {icon ? <SubspeIcon src={icon} alt="" className="size-6 p-0.5" /> : null}
       {children}
     </button>
   );
