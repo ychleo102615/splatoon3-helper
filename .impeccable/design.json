@@ -10,7 +10,8 @@
       "fresh-yellow": { "role": "tertiary", "displayName": "Fresh Yellow 鮮黃", "canonical": "oklch(0.92 0.18 102)", "tonalRamp": ["#3D3500","#5E5200","#8A7800","#B8A000","#E0C500","#FFE21D","#FFEC66","#FFF6B8"] },
       "ink-900": { "role": "neutral", "displayName": "Ink 墨底", "canonical": "oklch(0.16 0.02 250)", "tonalRamp": ["#0C1219","#17202B","#28323F","#3D4A59","#5A6B7C","#94A3B2","#C4CDD6","#E8EDF2"] },
       "panel-bg": { "role": "neutral", "displayName": "Spec Sheet 規格表面", "canonical": "oklch(0.95 0.004 165)", "tonalRamp": ["#0F1620","#26302E","#3E4A47","#5A6B66","#7E8E89","#A6B2AD","#C9D4D0","#EEF2F1"] },
-      "callout-amber": { "role": "tertiary", "displayName": "Callout 標註琥珀", "canonical": "oklch(0.66 0.13 70)", "tonalRamp": ["#2E1A00","#4A2C00","#6E4200","#935800","#B87200","#E08A1E","#F2B262","#F9D9AC"] }
+      "callout-amber": { "role": "tertiary", "displayName": "Callout 標註琥珀", "canonical": "oklch(0.66 0.13 70)", "tonalRamp": ["#2E1A00","#4A2C00","#6E4200","#935800","#B87200","#E08A1E","#F2B262","#F9D9AC"] },
+      "subspe-badge": { "role": "component", "displayName": "Subspe Badge 圖示徽板", "canonical": "oklch(0.54 0.12 256)", "tonalRamp": ["#000D48","#002A65","#174784","#3463A4","#3F6FB0","#70A0E3","#A1C7FB","#CBE7FF"] }
     },
     "typographyMeta": {
       "display": { "displayName": "Display / 武器名", "purpose": "招牌時刻的標題與武器名;CJK 可渲染的 M PLUS Rounded 1c 800。僅限品牌區。" },

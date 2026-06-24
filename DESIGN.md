@@ -19,6 +19,7 @@ colors:
   panel-muted: "#5A6B66"
   panel-line: "#C9D4D0"
   callout-amber: "#E08A1E"
+  subspe-badge: "#3F6FB0"
 typography:
   display:
     fontFamily: "\"M PLUS Rounded 1c\", \"Zen Maru Gothic\", \"Noto Sans TC\", system-ui, sans-serif"
@@ -156,6 +157,9 @@ components:
 - **Panel-muted 規格灰 (#5A6B66)**:規格表上的欄位標籤(對 Panel-bg 約 6:1)。
 - **Panel-line 規格細線 (#C9D4D0)**:規格表的髮絲分隔線與量測格線。
 - **Callout-amber 標註琥珀 (#E08A1E)**:規格表上的量測標註 / 重點數值高亮(已調深以在淺底達 ≥4.5:1)。
+
+### 元件色(Component)
+- **Subspe-badge 圖示徽板 (#3F6FB0)**:副 / 特殊武器圖示的圓形背板(`SubspeIcon`)。官方圖為黑白雙調,需**中明度**底色讓黑與白同時可讀(白 ≈5.1:1、黑 ≈4.1:1)。選用中明度藍而非高彩 Ink Purple:徽章常疊在選中 chip / 收合 token 的 Turf Green 上,高彩紫與綠會振動「發花」,降彩度的藍可避免此衝突並保留兩種筆畫的清晰度。僅作此徽板填充,不作他用。
 
 ### Named Rules
 **The Two-Zone Rule.** 全站只有兩種色彩音量。**品牌區**(列表卡、隨機器、SVG 美術、wordmark)可以 Committed——霓虹可大面積出現。**資料區**(詳情數值表、規格面板)是 Restrained——除了單一主數值/選取用綠,其餘一律中性。禁止把霓虹潑進資料表當裝飾。

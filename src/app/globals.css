@@ -26,6 +26,9 @@
   --color-ink-purple: #7b2ff7;
   --color-fresh-yellow: #ffe21d;
 
+  /* 元件語意色:副/特殊圖示徽章背板(黑白雙調 glyph 用;中明度藍,見 SubspeIcon) */
+  --color-subspe-badge: #3f6fb0;
+
   /* 淺色規格表 */
   --color-panel-bg: #eef2f1;
   --color-panel-ink: #0f1620;
