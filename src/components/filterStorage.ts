@@ -24,6 +24,14 @@ export const WEAPONS_FILTER_KEY = 'splatdex:weapons-filter:v1';
 export const RANDOM_PICKER_KEY = 'splatdex:random:v1';
 
 /**
+ * 隨機器「最近一次抽選結果」存檔。與 RANDOM_PICKER_KEY(設定)分鍵:結果是「抽到了什麼」、
+ * 設定是「要從哪裡抽」,兩者生命週期獨立——改條件不動結果,清結果不動條件(同 open 偏好分鍵之理)。
+ * 只存武器 id 陣列(非整個物件):還原時對當前快照 / 語系重新解析名稱,缺值的 id 視為空槽。
+ * 只留最近一筆、跨次抽選互不參考,§3.2 的「無狀態純抽選」不變量不受影響。
+ */
+export const RANDOM_RESULT_KEY = 'splatdex:random-result:v1';
+
+/**
  * 列表頁篩選面板的展開 / 收合(簡化模式)偏好。獨立於條件存檔:它是「介面音量」
  * 而非篩選語意,變更不該動到條件版號,反之亦然。預設展開(= 沿用原本的完整檢視)。
  */

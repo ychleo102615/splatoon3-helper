@@ -66,6 +66,8 @@
     "emptyPoolHint": "すべての条件に当てはまるブキはありません。条件をゆるめるか、リセットしてやり直してください。",
     "prompt": "条件を決めてシャッフル。",
     "resultEyebrow": "あなたのブキ",
+    "resultsTitle": "抽選結果",
+    "clearResults": "結果をクリア",
     "viewDetails": "詳細を見る ›",
     "resetFilters": "リセット",
     "slotsTitle": "抽選セット",

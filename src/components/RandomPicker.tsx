@@ -13,6 +13,7 @@ import { matchesFilters, buildRangeMarks, isRangeLimited } from '@/components/we
 import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
 import {
   RANDOM_PICKER_KEY,
+  RANDOM_RESULT_KEY,
   serializeCriteria,
   deserializeCriteria,
   type FilterOptions,
@@ -34,6 +35,9 @@ export type { FilterOption };
  * - **招牌時刻**(DESIGN Two-Zone):揭曉是品牌區,放膽用霓虹(Splat Magenta 揭曉氛圍);
  *   主 CTA 為草綠貼紙鈕。槽設定區與資料(副/特殊名稱)維持克制。
  * - 抽選只在點擊事件中發生(client),render 期間不取亂數,避免 SSG/hydration 不一致。
+ * - **結果留存**(規格 §5.2):最近一次抽選結果以獨立 key 持久化(見 RANDOM_RESULT_KEY),
+ *   與「設定」存檔解耦——改條件 / 增減槽 / 重設都不動結果,結果只由「重新抽選」或
+ *   「清除結果」鈕改變。只留最近一筆、下次抽選仍不參考它,§3.2 跨次無狀態純抽選不受影響。
  */
 
 /** 抽選池中的單把武器(名稱已於伺服器端依 locale 解析)。 */
@@ -68,7 +72,10 @@ interface Slot {
   open: boolean;
 }
 
-/** 隨機器的可持久化狀態:多槽設定 + 跨槽不重複開關(抽選結果不在內,屬瞬時)。 */
+/**
+ * 隨機器的「設定」存檔:多槽條件 + 跨槽不重複開關。抽選結果不在內——
+ * 它是另一個生命週期(「抽到什麼」vs「要從哪抽」),以獨立 key 持久化(見 RANDOM_RESULT_KEY)。
+ */
 interface PickerModel {
   slots: Slot[];
   noRepeat: boolean;
@@ -101,7 +108,7 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   const t = useTranslations('Random');
 
   // 槽設定(每槽條件)+ 不重複開關 = 一份可序列化記錄,暫存到 localStorage:重新整理後沿用。
-  // 抽選結果刻意不持久化——結果是「對當下設定的一次抽選」,還原舊結果會誤導;載入後回到提示態。
+  // 抽選結果則以獨立 key 另存(見下方 resultCodec),與設定解耦:改設定不動結果。
   const codec = useMemo<PersistentCodec<PickerModel>>(() => {
     const options: FilterOptions = {
       cats: new Set(categories),
@@ -139,9 +146,27 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   );
   const { slots, noRepeat } = model;
 
-  // 每槽抽選結果(與 slots 等長);null = 該槽湊不滿(條件無交集或去重後耗盡)。不持久化。
-  const [results, setResults] = useState<(PickerWeapon | null)[] | null>(null);
-  // 每次抽選自增,作為揭曉網格的 key:強制重掛載以重播 reveal 動畫。
+  // 結果存檔只存武器 id(非整個 PickerWeapon):名稱 / 圖示由當前快照重新解析,因此跨語系沿用、
+  // 跨遊戲版本自癒(已不存在的 id → null,顯示為空槽)。null(整體)= 尚未抽 / 已清除。
+  const resultCodec = useMemo<PersistentCodec<(PickerWeapon | null)[] | null>>(() => {
+    const byId = new Map(weapons.map((w) => [w.id, w]));
+    return {
+      serialize: (r) => (r === null ? null : r.map((w) => (w ? w.id : null))),
+      deserialize: (raw) =>
+        Array.isArray(raw)
+          ? raw.map((id) => (typeof id === 'string' ? (byId.get(id) ?? null) : null))
+          : null,
+    };
+  }, [weapons]);
+
+  // 每槽抽選結果(揭曉時與當次的槽等長);null(成員)= 該槽湊不滿(條件無交集或去重後耗盡)。
+  // 以獨立 key 持久化,與設定解耦:改條件不清結果,結果只由重新抽選 / 清除結果鈕改變。
+  const [results, setResults] = usePersistentState<(PickerWeapon | null)[] | null>(
+    RANDOM_RESULT_KEY,
+    null,
+    resultCodec,
+  );
+  // 每次抽選自增,作為揭曉網格的 key:強制重掛載以重播 reveal 動畫。不持久化(還原時自 0 起算)。
   const [drawSeq, setDrawSeq] = useState(0);
 
   const rangeMarks: RangeMark[] = useMemo(
@@ -156,20 +181,13 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   // 下一個槽 id 由現有槽推導(max + 1):slots 即唯一事實來源,免去獨立計數器與還原後失準。
   const nextSlotId = (list: Slot[]): number => list.reduce((max, s) => Math.max(max, s.id), -1) + 1;
 
-  // 任一設定變動都清掉上次結果:結果是「對當下設定的一次抽選」,條件變了就回到提示態。
+  // 單槽變更(條件或 open):合併 partial。結果與設定已解耦,任何設定變更都不清結果——
+  // 上次抽到的武器留在揭曉區,清除交由「清除結果」鈕。open 也走這裡(它與條件同屬槽狀態,
+  // 機械上等價,毋須另立 setter)。
   const updateSlot = (id: number, partial: Partial<Slot>) => {
     setModel((m) => ({
       ...m,
       slots: m.slots.map((s) => (s.id === id ? { ...s, ...partial } : s)),
-    }));
-    setResults(null);
-  };
-
-  // 展開 / 收合:只改介面狀態,刻意不走 updateSlot——open 非篩選條件,切換不該清掉上次抽選結果。
-  const setSlotOpen = (id: number, open: boolean) => {
-    setModel((m) => ({
-      ...m,
-      slots: m.slots.map((s) => (s.id === id ? { ...s, open } : s)),
     }));
   };
 
@@ -179,23 +197,23 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
         ? m
         : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds)] },
     );
-    setResults(null);
   };
 
   const removeSlot = (id: number) => {
     setModel((m) => (m.slots.length <= 1 ? m : { ...m, slots: m.slots.filter((s) => s.id !== id) }));
-    setResults(null);
   };
 
+  // 全部重設只重置「設定」(回到單一空槽);抽選結果不在此清——兩者生命週期獨立。
   const resetAll = () => {
     setModel({ slots: [createSlot(0, rangeBounds)], noRepeat: false });
-    setResults(null);
   };
 
   const toggleNoRepeat = () => {
     setModel((m) => ({ ...m, noRepeat: !m.noRepeat }));
-    setResults(null);
   };
+
+  // 清除最近一次抽選結果:回到提示態,並抹去結果存檔。不動任何設定。
+  const clearResults = () => setResults(null);
 
   const draw = () => {
     const used = new Set<string>(); // 跨槽去重(noRepeat 時)
@@ -246,7 +264,7 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
             rangeBounds={rangeBounds}
             rangeMarks={rangeMarks}
             onUpdate={(partial) => updateSlot(slot.id, partial)}
-            onToggleOpen={(open) => setSlotOpen(slot.id, open)}
+            onToggleOpen={(open) => updateSlot(slot.id, { open })}
             onRemove={() => removeSlot(slot.id)}
           />
         ))}
@@ -289,15 +307,32 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
       {/* ── 揭曉區:抽中結果(品牌區放膽,Splat Magenta 揭曉氛圍) ─────────── */}
       <div className="mt-6">
         {results ? (
-          <div
-            key={drawSeq}
-            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-            role="list"
-            aria-label={t('resultEyebrow')}
-          >
-            {results.map((result, i) => (
-              <ResultCard key={i} index={i} showIndex={multi} result={result} />
-            ))}
+          <div>
+            {/* 結果標題列:鏡像頂部「設定 + 重設」——這裡是「結果 + 清除結果」。
+                showIndex 依「當次抽選的把數」(results.length)而非當前槽數:結果與設定已解耦,
+                抽完後增減槽不影響這份已揭曉的結果。 */}
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-label text-xs uppercase tracking-wide text-muted-on-dark">
+                {t('resultsTitle')}
+              </h2>
+              <button
+                type="button"
+                onClick={clearResults}
+                className="font-label text-xs uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+              >
+                {t('clearResults')}
+              </button>
+            </div>
+            <div
+              key={drawSeq}
+              className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2"
+              role="list"
+              aria-label={t('resultEyebrow')}
+            >
+              {results.map((result, i) => (
+                <ResultCard key={i} index={i} showIndex={results.length > 1} result={result} />
+              ))}
+            </div>
           </div>
         ) : !canDraw ? (
           <div className="flex flex-col items-center gap-3 rounded-lg border border-dashed border-ink-700 px-4 py-8 text-center">

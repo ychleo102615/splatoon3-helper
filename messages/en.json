@@ -66,6 +66,8 @@
     "emptyPoolHint": "No weapon matches all of these. Loosen one, or reset to start over.",
     "prompt": "Set your filters and hit spin.",
     "resultEyebrow": "Your weapon",
+    "resultsTitle": "Results",
+    "clearResults": "Clear results",
     "viewDetails": "View details ›",
     "resetFilters": "Reset",
     "slotsTitle": "Your picks",

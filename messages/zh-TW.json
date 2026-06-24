@@ -66,6 +66,8 @@
     "emptyPoolHint": "這組條件沒有交集。放寬其中一項,或按重設重新挑選。",
     "prompt": "設定條件後按下抽選。",
     "resultEyebrow": "你的武器",
+    "resultsTitle": "抽選結果",
+    "clearResults": "清除結果",
     "viewDetails": "查看詳情 ›",
     "resetFilters": "重設",
     "slotsTitle": "抽選設定",
