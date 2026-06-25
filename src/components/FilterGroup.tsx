@@ -20,24 +20,37 @@ export interface FilterOption {
 
 export function FilterGroup({
   label,
-  anyLabel,
-  anyActive,
-  onAny,
+  mode,
+  action,
+  dimmed = false,
   children,
 }: {
   label: string;
-  anyLabel: string;
-  anyActive: boolean;
-  onAny: () => void;
+  /**
+   * 該維度的「不限 / 必須是 / 可以是」角色切換(DimensionModeToggle),置於標題左側表「它屬於此維度」。
+   * 「不限」已收進此控制(切到不限 = 停用但保留已選值);chip 區不再有獨立的「不限」鈕。
+   */
+  mode?: React.ReactNode;
+  /** 標題列右側動作(例:清除此維度);省略則不渲染。 */
+  action?: React.ReactNode;
+  /** 「不限」時把 chip 區淡化:表示「停用但記著選了什麼」(切回必須是/可以是即還原)。chip 仍可點以重新啟用。 */
+  dimmed?: boolean;
   children: React.ReactNode;
 }) {
   return (
     <div className="mt-4 first:mt-0">
-      <p className="font-label text-xs uppercase tracking-wide text-muted-on-dark">{label}</p>
-      <div role="group" aria-label={label} className="mt-2 flex flex-wrap gap-2">
-        <button type="button" onClick={onAny} aria-pressed={anyActive} className={chipClass(anyActive)}>
-          {anyLabel}
-        </button>
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+        {mode}
+        <p className="font-label text-xs uppercase tracking-wide text-muted-on-dark">{label}</p>
+        {action ? <span className="ml-auto">{action}</span> : null}
+      </div>
+      <div
+        role="group"
+        aria-label={label}
+        className={`mt-2 flex flex-wrap gap-2 transition-opacity duration-150 ease-state motion-reduce:transition-none ${
+          dimmed ? 'opacity-40' : ''
+        }`}
+      >
         {children}
       </div>
     </div>

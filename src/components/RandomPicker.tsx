@@ -7,9 +7,17 @@ import { StickerButton } from '@/components/StickerButton';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
+import { DimensionModeToggle, type DimensionModeToggleProps } from '@/components/DimensionModeToggle';
+import { type DimensionModeSwitchProps } from '@/components/DimensionModeSwitch';
 import { CollapsiblePanel } from '@/components/CollapsiblePanel';
-import { ActiveFilterTokens, type FilterToken } from '@/components/FilterTokens';
-import { matchesFilters, buildRangeMarks, isRangeLimited } from '@/components/weaponFilters';
+import { ActiveFilterTokens, type FilterTokenGroup } from '@/components/FilterTokens';
+import {
+  matchesFilters,
+  buildRangeMarks,
+  isRangeLimited,
+  type DimensionMode,
+  type DimensionRole,
+} from '@/components/weaponFilters';
 import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
 import {
   RANDOM_PICKER_KEY,
@@ -68,6 +76,8 @@ interface Slot {
   specialIds: Set<string>;
   /** 射程選取區間(初始 = 軌道邊界 = 不限)。 */
   range: RangeValue;
+  /** 各離散維度的角色(不限 / 必須是 / 可以是;各槽獨立;與已選值解耦)。預設全 'none'。 */
+  roles: { cats: DimensionRole; subIds: DimensionRole; specialIds: DimensionRole };
   /** 簡化模式:此槽是否展開(隨設定一起持久化;預設展開)。屬介面狀態,非篩選語意。 */
   open: boolean;
 }
@@ -100,6 +110,7 @@ function createSlot(id: number, bounds: RangeValue): Slot {
     subIds: new Set(),
     specialIds: new Set(),
     range: { ...bounds },
+    roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
     open: true,
   };
 }
@@ -399,49 +410,122 @@ function SlotCard({
   // 各槽獨立收合最實用。open 隨槽設定一起持久化(見 PickerModel codec),重載後沿用上次的開/合。
   const open = slot.open;
 
-  const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
-    const next = new Set(set);
-    if (next.has(value)) next.delete(value);
-    else next.add(value);
-    return next;
-  };
-  const without = <T,>(set: Set<T>, value: T): Set<T> => {
-    const next = new Set(set);
-    next.delete(value);
-    return next;
-  };
+  // 每維度控制器(各槽獨立):角色(不限/必須是/可以是)與已選值解耦的互動規則收斂於一處
+  // (同 WeaponList:不限保留值並淡化、切回自動還原、必須是/可以是無值時自動選第一項、清空回不限)。寫回經 onUpdate。
+  const makeDim = <T extends string>(
+    values: Set<T>,
+    role: DimensionRole,
+    first: T | undefined,
+    write: (values: Set<T>, role: DimensionRole) => void,
+  ) => ({
+    role,
+    size: values.size,
+    has: (v: T) => values.has(v),
+    setRole: (r: DimensionRole) => {
+      if (r === 'none') write(values, 'none');
+      else if (values.size === 0)
+        write(first === undefined ? values : new Set<T>([first]), first === undefined ? 'none' : r);
+      else write(values, r);
+    },
+    toggle: (v: T) => {
+      const next = new Set(values);
+      if (next.has(v)) next.delete(v);
+      else next.add(v);
+      write(next, next.size === 0 ? 'none' : role === 'none' ? 'AND' : role);
+    },
+    remove: (v: T) => {
+      const next = new Set(values);
+      next.delete(v);
+      write(next, next.size === 0 ? 'none' : role);
+    },
+    clear: () => write(new Set<T>(), 'none'),
+  });
+  const catDim = makeDim(slot.cats, slot.roles.cats, categories[0], (v, r) =>
+    onUpdate({ cats: v, roles: { ...slot.roles, cats: r } }),
+  );
+  const subDim = makeDim(slot.subIds, slot.roles.subIds, subs[0]?.id, (v, r) =>
+    onUpdate({ subIds: v, roles: { ...slot.roles, subIds: r } }),
+  );
+  const speDim = makeDim(slot.specialIds, slot.roles.specialIds, specials[0]?.id, (v, r) =>
+    onUpdate({ specialIds: v, roles: { ...slot.roles, specialIds: r } }),
+  );
 
-  // 已選條件 → 可逐一刪除的 token(收合時顯示)。副 / 特殊的名稱與圖示由選項表反查。
+  const expandedMode = (
+    dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
+    name: string,
+  ): DimensionModeToggleProps => ({
+    value: dim.role,
+    onChange: dim.setRole,
+    noneLabel: t('any'),
+    requiredLabel: t('modeRequired'),
+    anyLabel: t('modeAny'),
+    ariaLabel: t('modeAria', { name }),
+  });
+  const collapsedMode = (
+    dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
+    name: string,
+  ): DimensionModeSwitchProps => ({
+    value: dim.role as DimensionMode,
+    onChange: (m) => dim.setRole(m),
+    requiredLabel: t('modeRequired'),
+    anyLabel: t('modeAny'),
+    ariaLabel: t('modeSwitchAria', { name }),
+  });
+  const clearAction = (dim: { size: number; clear: () => void }, name: string) =>
+    dim.size > 0 ? (
+      <button
+        type="button"
+        onClick={dim.clear}
+        aria-label={t('clearGroupAria', { name })}
+        className="font-label text-[11px] uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+      >
+        {t('clearGroup')}
+      </button>
+    ) : undefined;
+
+  // 收合摘要:只列「有在篩」(角色非不限)的維度,各帶單鈕角色切換;射程群無角色。
   const subById = useMemo(() => new Map(subs.map((s) => [s.id, s])), [subs]);
   const specialById = useMemo(() => new Map(specials.map((s) => [s.id, s])), [specials]);
-  const tokens: FilterToken[] = [
-    ...[...slot.cats].map((c) => ({
-      key: `cat:${c}`,
-      label: tc(c),
-      onRemove: () => onUpdate({ cats: without(slot.cats, c) }),
-    })),
-    ...[...slot.subIds].map((id) => ({
-      key: `sub:${id}`,
-      label: subById.get(id)?.name ?? id,
-      iconUrl: subById.get(id)?.iconUrl,
-      onRemove: () => onUpdate({ subIds: without(slot.subIds, id) }),
-    })),
-    ...[...slot.specialIds].map((id) => ({
-      key: `spe:${id}`,
-      label: specialById.get(id)?.name ?? id,
-      iconUrl: specialById.get(id)?.iconUrl,
-      onRemove: () => onUpdate({ specialIds: without(slot.specialIds, id) }),
-    })),
-    ...(isRangeLimited(slot.range, rangeBounds)
-      ? [
-          {
-            key: 'range',
-            label: t('rangeToken', { min: slot.range.min, max: slot.range.max }),
-            onRemove: () => onUpdate({ range: { ...rangeBounds } }),
-          },
-        ]
-      : []),
-  ];
+  const groups: FilterTokenGroup[] = [];
+  if (catDim.role !== 'none')
+    groups.push({
+      key: 'cats',
+      mode: collapsedMode(catDim, t('categoryGroup')),
+      tokens: [...slot.cats].map((c) => ({ key: `cat:${c}`, label: tc(c), onRemove: () => catDim.remove(c) })),
+    });
+  if (subDim.role !== 'none')
+    groups.push({
+      key: 'subIds',
+      mode: collapsedMode(subDim, t('subGroup')),
+      tokens: [...slot.subIds].map((id) => ({
+        key: `sub:${id}`,
+        label: subById.get(id)?.name ?? id,
+        iconUrl: subById.get(id)?.iconUrl,
+        onRemove: () => subDim.remove(id),
+      })),
+    });
+  if (speDim.role !== 'none')
+    groups.push({
+      key: 'specialIds',
+      mode: collapsedMode(speDim, t('specialGroup')),
+      tokens: [...slot.specialIds].map((id) => ({
+        key: `spe:${id}`,
+        label: specialById.get(id)?.name ?? id,
+        iconUrl: specialById.get(id)?.iconUrl,
+        onRemove: () => speDim.remove(id),
+      })),
+    });
+  if (isRangeLimited(slot.range, rangeBounds))
+    groups.push({
+      key: 'range',
+      tokens: [
+        {
+          key: 'range',
+          label: t('rangeToken', { min: slot.range.min, max: slot.range.max }),
+          onRemove: () => onUpdate({ range: { ...rangeBounds } }),
+        },
+      ],
+    });
 
   return (
     <CollapsiblePanel
@@ -475,7 +559,7 @@ function SlotCard({
       }
       summary={
         <ActiveFilterTokens
-          tokens={tokens}
+          groups={groups}
           onAdd={() => onToggleOpen(true)}
           addLabel={t('addCondition')}
           emptyLabel={t('noConditions')}
@@ -483,18 +567,16 @@ function SlotCard({
         />
       }
     >
+      {/* 每維度標題左側皆帶「不限 / 必須是 / 可以是」三選一角色切換(各槽獨立);右側「清除」清值並回不限;
+          不限時 chip 淡化(停用但記住,切回即還原)。合成見 weaponFilters。射程恆 AND。 */}
       <FilterGroup
         label={t('categoryGroup')}
-        anyLabel={t('any')}
-        anyActive={slot.cats.size === 0}
-        onAny={() => onUpdate({ cats: new Set() })}
+        mode={<DimensionModeToggle {...expandedMode(catDim, t('categoryGroup'))} />}
+        action={clearAction(catDim, t('categoryGroup'))}
+        dimmed={catDim.role === 'none'}
       >
         {categories.map((cat) => (
-          <Chip
-            key={cat}
-            active={slot.cats.has(cat)}
-            onClick={() => onUpdate({ cats: toggleIn(slot.cats, cat) })}
-          >
+          <Chip key={cat} active={catDim.has(cat)} onClick={() => catDim.toggle(cat)}>
             {tc(cat)}
           </Chip>
         ))}
@@ -502,17 +584,12 @@ function SlotCard({
 
       <FilterGroup
         label={t('subGroup')}
-        anyLabel={t('any')}
-        anyActive={slot.subIds.size === 0}
-        onAny={() => onUpdate({ subIds: new Set() })}
+        mode={<DimensionModeToggle {...expandedMode(subDim, t('subGroup'))} />}
+        action={clearAction(subDim, t('subGroup'))}
+        dimmed={subDim.role === 'none'}
       >
         {subs.map((s) => (
-          <Chip
-            key={s.id}
-            active={slot.subIds.has(s.id)}
-            icon={s.iconUrl}
-            onClick={() => onUpdate({ subIds: toggleIn(slot.subIds, s.id) })}
-          >
+          <Chip key={s.id} active={subDim.has(s.id)} icon={s.iconUrl} onClick={() => subDim.toggle(s.id)}>
             {s.name}
           </Chip>
         ))}
@@ -520,17 +597,12 @@ function SlotCard({
 
       <FilterGroup
         label={t('specialGroup')}
-        anyLabel={t('any')}
-        anyActive={slot.specialIds.size === 0}
-        onAny={() => onUpdate({ specialIds: new Set() })}
+        mode={<DimensionModeToggle {...expandedMode(speDim, t('specialGroup'))} />}
+        action={clearAction(speDim, t('specialGroup'))}
+        dimmed={speDim.role === 'none'}
       >
         {specials.map((s) => (
-          <Chip
-            key={s.id}
-            active={slot.specialIds.has(s.id)}
-            icon={s.iconUrl}
-            onClick={() => onUpdate({ specialIds: toggleIn(slot.specialIds, s.id) })}
-          >
+          <Chip key={s.id} active={speDim.has(s.id)} icon={s.iconUrl} onClick={() => speDim.toggle(s.id)}>
             {s.name}
           </Chip>
         ))}

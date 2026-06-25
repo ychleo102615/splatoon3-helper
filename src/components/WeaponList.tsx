@@ -5,14 +5,18 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { FilterGroup, Chip, type FilterOption } from '@/components/FilterGroup';
+import { DimensionModeToggle, type DimensionModeToggleProps } from '@/components/DimensionModeToggle';
+import { type DimensionModeSwitchProps } from '@/components/DimensionModeSwitch';
 import { CollapsiblePanel } from '@/components/CollapsiblePanel';
-import { ActiveFilterTokens, type FilterToken } from '@/components/FilterTokens';
+import { ActiveFilterTokens, type FilterTokenGroup } from '@/components/FilterTokens';
 import { RangeSlider, type RangeValue, type RangeMark } from '@/components/RangeSlider';
 import {
   matchesFilters,
   isRangeLimited,
   buildRangeMarks,
   type FilterCriteria,
+  type DimensionMode,
+  type DimensionRole,
 } from '@/components/weaponFilters';
 import { usePersistentState, type PersistentCodec } from '@/components/usePersistentState';
 import {
@@ -92,12 +96,61 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
 
   const [filters, setFilters] = usePersistentState<WeaponsFilter>(
     WEAPONS_FILTER_KEY,
-    () => ({ query: '', cats: new Set(), subIds: new Set(), specialIds: new Set(), range: { ...rangeBounds } }),
+    () => ({
+      query: '',
+      cats: new Set(),
+      subIds: new Set(),
+      specialIds: new Set(),
+      range: { ...rangeBounds },
+      roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
+    }),
     codec,
   );
   // 解構出同名 local,讓下方讀取維持不變;變更一律經 patch 合併回單一記錄。
-  const { query, cats, subIds, specialIds, range } = filters;
+  const { query, cats, subIds, specialIds, range, roles } = filters;
   const patch = (p: Partial<WeaponsFilter>) => setFilters((f) => ({ ...f, ...p }));
+
+  // 每維度控制器:把「角色(不限/必須是/可以是)與已選值解耦」的互動規則收斂於一處。
+  //  · setRole('none') 保留值(停用、淡化),切回時自動還原;切到必須是/可以是若無值則自動選第一項。
+  //  · toggle/remove 值:加值且原本不限 → 啟用為必須是;移除最後一個值 → 自動回不限(維持不變量)。
+  //  · clear 清空值並回不限。寫回以顯式 Set 型別保型(避開 computed-key 失準)。
+  const makeDim = <T extends string>(
+    values: Set<T>,
+    role: DimensionRole,
+    first: T | undefined,
+    write: (values: Set<T>, role: DimensionRole) => void,
+  ) => ({
+    role,
+    size: values.size,
+    has: (v: T) => values.has(v),
+    setRole: (r: DimensionRole) => {
+      if (r === 'none') write(values, 'none');
+      else if (values.size === 0)
+        write(first === undefined ? values : new Set<T>([first]), first === undefined ? 'none' : r);
+      else write(values, r);
+    },
+    toggle: (v: T) => {
+      const next = new Set(values);
+      if (next.has(v)) next.delete(v);
+      else next.add(v);
+      write(next, next.size === 0 ? 'none' : role === 'none' ? 'AND' : role);
+    },
+    remove: (v: T) => {
+      const next = new Set(values);
+      next.delete(v);
+      write(next, next.size === 0 ? 'none' : role);
+    },
+    clear: () => write(new Set<T>(), 'none'),
+  });
+  const catDim = makeDim(cats, roles.cats, categories[0], (v, r) =>
+    patch({ cats: v, roles: { ...roles, cats: r } }),
+  );
+  const subDim = makeDim(subIds, roles.subIds, subs[0]?.id, (v, r) =>
+    patch({ subIds: v, roles: { ...roles, subIds: r } }),
+  );
+  const speDim = makeDim(specialIds, roles.specialIds, specials[0]?.id, (v, r) =>
+    patch({ specialIds: v, roles: { ...roles, specialIds: r } }),
+  );
 
   // 簡化模式開合:展開 = 完整 chip picker;收合 = 只留已選 token。與條件分檔持久化(見 filterStorage)。
   const [filtersOpen, setFiltersOpen] = usePersistentState<boolean>(
@@ -113,7 +166,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
 
   // 維度語意由 matchesFilters 統一定義(與隨機器同一份);搜尋字串在外層另外 AND 疊加。
   const filtered = useMemo(() => {
-    const criteria = { cats, subIds, specialIds, range };
+    const criteria = { cats, subIds, specialIds, range, roles };
     const q = query.trim().toLowerCase();
     return items.filter((w) => {
       if (!matchesFilters(w, criteria, rangeBounds)) return false;
@@ -124,14 +177,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
         w.specialName.toLowerCase().includes(q)
       );
     });
-  }, [items, query, cats, subIds, specialIds, range, rangeBounds]);
-
-  const toggleIn = <T,>(set: Set<T>, value: T): Set<T> => {
-    const next = new Set(set);
-    if (next.has(value)) next.delete(value);
-    else next.add(value);
-    return next;
-  };
+  }, [items, query, cats, subIds, specialIds, range, roles, rangeBounds]);
 
   const hasActiveFilters =
     query.trim() !== '' ||
@@ -147,45 +193,88 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
       subIds: new Set(),
       specialIds: new Set(),
       range: { ...rangeBounds },
+      roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
     });
 
-  // 已選條件 → 可逐一刪除的 token(簡化模式內容)。副 / 特殊的顯示名與圖示由選項表反查;
-  // 射程僅在有設限時成為一顆 token(滿格 = 不限,不顯示)。搜尋字串自有輸入框,不入 token。
+  // 展開態 3 選一(不限/必須是/可以是)的 props;角色直接讀寫控制器。
+  const expandedMode = (
+    dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
+    name: string,
+  ): DimensionModeToggleProps => ({
+    value: dim.role,
+    onChange: dim.setRole,
+    noneLabel: t('any'),
+    requiredLabel: t('modeRequired'),
+    anyLabel: t('modeAny'),
+    ariaLabel: t('modeAria', { name }),
+  });
+  // 收合態單鈕(必須是↔可以是);僅用於 role≠none 的維度,故 value 必為 'AND'/'OR'。
+  const collapsedMode = (
+    dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
+    name: string,
+  ): DimensionModeSwitchProps => ({
+    value: dim.role as DimensionMode,
+    onChange: (m) => dim.setRole(m),
+    requiredLabel: t('modeRequired'),
+    anyLabel: t('modeAny'),
+    ariaLabel: t('modeSwitchAria', { name }),
+  });
+  // 標題列右側「清除」鈕:有值(含停用但記住的)才顯示;清掉值並回不限。
+  const clearAction = (dim: { size: number; clear: () => void }, name: string) =>
+    dim.size > 0 ? (
+      <button
+        type="button"
+        onClick={dim.clear}
+        aria-label={t('clearGroupAria', { name })}
+        className="font-label text-[11px] uppercase tracking-wide text-muted-on-dark underline-offset-2 transition-colors hover:text-text-on-dark hover:underline"
+      >
+        {t('clearGroup')}
+      </button>
+    ) : undefined;
+
+  // 收合摘要:只列「有在篩」(角色非不限)的維度,各帶單鈕角色切換;射程群無角色。搜尋字串自有輸入框,不入 token。
   const subById = useMemo(() => new Map(subs.map((s) => [s.id, s])), [subs]);
   const specialById = useMemo(() => new Map(specials.map((s) => [s.id, s])), [specials]);
-  const without = <T,>(set: Set<T>, value: T): Set<T> => {
-    const next = new Set(set);
-    next.delete(value);
-    return next;
-  };
-  const tokens: FilterToken[] = [
-    ...[...cats].map((c) => ({
-      key: `cat:${c}`,
-      label: tc(c),
-      onRemove: () => patch({ cats: without(cats, c) }),
-    })),
-    ...[...subIds].map((id) => ({
-      key: `sub:${id}`,
-      label: subById.get(id)?.name ?? id,
-      iconUrl: subById.get(id)?.iconUrl,
-      onRemove: () => patch({ subIds: without(subIds, id) }),
-    })),
-    ...[...specialIds].map((id) => ({
-      key: `spe:${id}`,
-      label: specialById.get(id)?.name ?? id,
-      iconUrl: specialById.get(id)?.iconUrl,
-      onRemove: () => patch({ specialIds: without(specialIds, id) }),
-    })),
-    ...(isRangeLimited(range, rangeBounds)
-      ? [
-          {
-            key: 'range',
-            label: t('rangeToken', { min: range.min, max: range.max }),
-            onRemove: () => patch({ range: { ...rangeBounds } }),
-          },
-        ]
-      : []),
-  ];
+  const groups: FilterTokenGroup[] = [];
+  if (catDim.role !== 'none')
+    groups.push({
+      key: 'cats',
+      mode: collapsedMode(catDim, t('categoryGroup')),
+      tokens: [...cats].map((c) => ({ key: `cat:${c}`, label: tc(c), onRemove: () => catDim.remove(c) })),
+    });
+  if (subDim.role !== 'none')
+    groups.push({
+      key: 'subIds',
+      mode: collapsedMode(subDim, t('subLabel')),
+      tokens: [...subIds].map((id) => ({
+        key: `sub:${id}`,
+        label: subById.get(id)?.name ?? id,
+        iconUrl: subById.get(id)?.iconUrl,
+        onRemove: () => subDim.remove(id),
+      })),
+    });
+  if (speDim.role !== 'none')
+    groups.push({
+      key: 'specialIds',
+      mode: collapsedMode(speDim, t('specialLabel')),
+      tokens: [...specialIds].map((id) => ({
+        key: `spe:${id}`,
+        label: specialById.get(id)?.name ?? id,
+        iconUrl: specialById.get(id)?.iconUrl,
+        onRemove: () => speDim.remove(id),
+      })),
+    });
+  if (isRangeLimited(range, rangeBounds))
+    groups.push({
+      key: 'range',
+      tokens: [
+        {
+          key: 'range',
+          label: t('rangeToken', { min: range.min, max: range.max }),
+          onRemove: () => patch({ range: { ...rangeBounds } }),
+        },
+      ],
+    });
 
   return (
     <div>
@@ -224,7 +313,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
           }
           summary={
             <ActiveFilterTokens
-              tokens={tokens}
+              groups={groups}
               onAdd={() => setFiltersOpen(true)}
               addLabel={t('addCondition')}
               emptyLabel={t('noConditions')}
@@ -232,14 +321,16 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             />
           }
         >
+          {/* 每維度標題左側皆帶「不限 / 必須是 / 可以是」三選一角色切換;右側「清除」清掉值並回不限。
+              不限時 chip 淡化(停用但記住,切回即還原)。合成見 weaponFilters。射程恆 AND。 */}
           <FilterGroup
             label={t('categoryGroup')}
-            anyLabel={t('any')}
-            anyActive={cats.size === 0}
-            onAny={() => patch({ cats: new Set() })}
+            mode={<DimensionModeToggle {...expandedMode(catDim, t('categoryGroup'))} />}
+            action={clearAction(catDim, t('categoryGroup'))}
+            dimmed={catDim.role === 'none'}
           >
             {categories.map((cat) => (
-              <Chip key={cat} active={cats.has(cat)} onClick={() => patch({ cats: toggleIn(cats, cat) })}>
+              <Chip key={cat} active={catDim.has(cat)} onClick={() => catDim.toggle(cat)}>
                 {tc(cat)}
               </Chip>
             ))}
@@ -247,16 +338,16 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
 
           <FilterGroup
             label={t('subLabel')}
-            anyLabel={t('any')}
-            anyActive={subIds.size === 0}
-            onAny={() => patch({ subIds: new Set() })}
+            mode={<DimensionModeToggle {...expandedMode(subDim, t('subLabel'))} />}
+            action={clearAction(subDim, t('subLabel'))}
+            dimmed={subDim.role === 'none'}
           >
             {subs.map((s) => (
               <Chip
                 key={s.id}
-                active={subIds.has(s.id)}
+                active={subDim.has(s.id)}
                 icon={s.iconUrl}
-                onClick={() => patch({ subIds: toggleIn(subIds, s.id) })}
+                onClick={() => subDim.toggle(s.id)}
               >
                 {s.name}
               </Chip>
@@ -265,16 +356,16 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
 
           <FilterGroup
             label={t('specialLabel')}
-            anyLabel={t('any')}
-            anyActive={specialIds.size === 0}
-            onAny={() => patch({ specialIds: new Set() })}
+            mode={<DimensionModeToggle {...expandedMode(speDim, t('specialLabel'))} />}
+            action={clearAction(speDim, t('specialLabel'))}
+            dimmed={speDim.role === 'none'}
           >
             {specials.map((s) => (
               <Chip
                 key={s.id}
-                active={specialIds.has(s.id)}
+                active={speDim.has(s.id)}
                 icon={s.iconUrl}
-                onClick={() => patch({ specialIds: toggleIn(specialIds, s.id) })}
+                onClick={() => speDim.toggle(s.id)}
               >
                 {s.name}
               </Chip>

@@ -13,7 +13,7 @@
  */
 
 import type { RangeValue } from '@/components/RangeSlider';
-import type { FilterCriteria } from '@/components/weaponFilters';
+import type { FilterCriteria, DimensionRole } from '@/components/weaponFilters';
 import type { WeaponCategory } from '@/data/schema';
 
 /**
@@ -37,12 +37,14 @@ export const RANDOM_RESULT_KEY = 'splatdex:random-result:v1';
  */
 export const WEAPONS_FILTERS_OPEN_KEY = 'splatdex:weapons-filters-open:v1';
 
-/** JSON 安全的條件形狀(Set 攤平為 array;射程本就是純物件)。 */
+/** JSON 安全的條件形狀(Set 攤平為 array;射程與 roles 本就是純物件 / 字面量)。 */
 export interface StoredCriteria {
   cats: string[];
   subIds: string[];
   specialIds: string[];
   range: RangeValue;
+  /** 各維度角色(不限 / 必須是 / 可以是),與已選值解耦獨立存。 */
+  roles: { cats: DimensionRole; subIds: DimensionRole; specialIds: DimensionRole };
 }
 
 /** 清洗還原值所需的「當前合法集合」:任何不在其中的 id 一律剔除,射程夾回 bounds。 */
@@ -57,6 +59,17 @@ export interface FilterOptions {
 function sanitizeIds<T extends string>(raw: unknown, allowed: Set<T>): Set<T> {
   if (!Array.isArray(raw)) return new Set();
   return new Set(raw.filter((v): v is T => typeof v === 'string' && allowed.has(v as T)));
+}
+
+/**
+ * 還原單一維度角色,維持「'AND'/'OR' ⟹ 至少一個值」的不變量:
+ *  - 無值(valuesSize 0)→ 一律 'none'(不限);涵蓋舊存檔的空維度與防呆。
+ *  - 有值 → 沿用存的角色;舊存檔無角色欄位(壞值 / 缺值)→ 'AND'(沿用舊「必須」預設)。
+ * 注意「有值 + 角色 'none'」是合法的「停用但記住」狀態,故有值時不強制覆寫角色。
+ */
+function reconstructRole(raw: unknown, valuesSize: number): DimensionRole {
+  if (valuesSize === 0) return 'none';
+  return raw === 'none' || raw === 'AND' || raw === 'OR' ? raw : 'AND';
 }
 
 /** 把射程夾回當前軌道邊界;形狀不對則退回「不限」(= bounds)。 */
@@ -81,16 +94,27 @@ export function serializeCriteria(c: FilterCriteria): StoredCriteria {
     subIds: [...c.subIds],
     specialIds: [...c.specialIds],
     range: c.range,
+    roles: { ...c.roles },
   };
 }
 
 /** JSON 還原值 → 對當前快照清洗過的 FilterCriteria(任一欄壞掉只影響該維度,退回不限)。 */
 export function deserializeCriteria(raw: unknown, options: FilterOptions): FilterCriteria {
   const o = (raw ?? {}) as Partial<StoredCriteria>;
+  // 先清洗值集合,再據其「是否有值」還原角色(維持 'AND'/'OR' ⟹ 至少一個值 的不變量)。
+  const cats = sanitizeIds(o.cats, options.cats);
+  const subIds = sanitizeIds(o.subIds, options.subIds);
+  const specialIds = sanitizeIds(o.specialIds, options.specialIds);
+  const rawRoles = (o.roles ?? {}) as Partial<StoredCriteria['roles']>;
   return {
-    cats: sanitizeIds(o.cats, options.cats),
-    subIds: sanitizeIds(o.subIds, options.subIds),
-    specialIds: sanitizeIds(o.specialIds, options.specialIds),
+    cats,
+    subIds,
+    specialIds,
     range: sanitizeRange(o.range, options.bounds),
+    roles: {
+      cats: reconstructRole(rawRoles.cats, cats.size),
+      subIds: reconstructRole(rawRoles.subIds, subIds.size),
+      specialIds: reconstructRole(rawRoles.specialIds, specialIds.size),
+    },
   };
 }
