@@ -33,7 +33,11 @@ export function FilterGroup({
   mode?: React.ReactNode;
   /** 標題列右側動作(例:清除此維度);省略則不渲染。 */
   action?: React.ReactNode;
-  /** 「不限」時把 chip 區淡化:表示「停用但記著選了什麼」(切回必須是/可以是即還原)。chip 仍可點以重新啟用。 */
+  /**
+   * 「不限」時把 chip 區淡化 + 去飽和(opacity-40 + grayscale):表示「停用但記著選了什麼」
+   * (切回必須是/可以是即還原)。去飽和是關鍵——飽和的 Turf Green 單靠降透明仍讀作「選取中」,
+   * 抽掉彩度成灰才明確讀作「已停用」。chip 仍可點以重新啟用。
+   */
   dimmed?: boolean;
   children: React.ReactNode;
 }) {
@@ -47,8 +51,8 @@ export function FilterGroup({
       <div
         role="group"
         aria-label={label}
-        className={`mt-2 flex flex-wrap gap-2 transition-opacity duration-150 ease-state motion-reduce:transition-none ${
-          dimmed ? 'opacity-40' : ''
+        className={`mt-2 flex flex-wrap gap-2 transition-[opacity,filter] duration-150 ease-state motion-reduce:transition-none ${
+          dimmed ? 'opacity-40 grayscale' : ''
         }`}
       >
         {children}
@@ -78,7 +82,7 @@ export function Chip({
         icon ? `${chipClass(active, 'icon-text')} inline-flex items-center gap-2` : chipClass(active)
       }
     >
-      {icon ? <SubspeIcon src={icon} alt="" className="size-6 p-0.5" /> : null}
+      {icon ? <SubspeIcon src={icon} alt="" className="size-7 p-0.5" /> : null}
       {children}
     </button>
   );

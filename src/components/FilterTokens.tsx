@@ -95,7 +95,7 @@ export function ActiveFilterTokens({
       <button
         type="button"
         onClick={onAdd}
-        className="inline-flex min-h-[44px] items-center rounded-pill border border-dashed border-ink-700 px-3 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
+        className="inline-flex min-h-[32px] items-center rounded-pill border border-dashed border-ink-700 px-3 font-label text-xs font-bold uppercase tracking-wide text-text-on-dark transition-colors duration-150 ease-state hover:border-muted-on-dark hover:bg-white/5 motion-reduce:transition-none"
       >
         {addLabel}
       </button>
