@@ -41,7 +41,7 @@ export function weaponById(id: string): WeaponSnapshotEntry | undefined {
   return byId.get(id);
 }
 
-/** 主武器三語名稱(找不到語言時退回英文)。 */
+/** 主武器四語名稱(找不到語言時退回英文)。 */
 export function weaponName(w: WeaponSnapshotEntry, locale: SnapshotLocale): string {
   return w.names[locale] ?? w.names.en;
 }

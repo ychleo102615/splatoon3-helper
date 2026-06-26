@@ -4,7 +4,7 @@
  * 設計原則:
  * - **自建、不照抄 Leanny**:欄位採扁平、語意命名,不沿用 Leanny 的 key 命名與巢狀編排
  *   (規避「編輯著作權」,僅以事實性數據立場使用其數值)。
- * - **名稱與數值分離**:本快照只放「事實性數值 + 結構性 id」,三語名稱不寫進快照,
+ * - **名稱與數值分離**:本快照只放「事實性數值 + 結構性 id」,四語名稱不寫進快照,
  *   改由 splatoon3.ink locale 以 `localeId` 對應解析(規格 §4.2)。
  * - **快照標註版本**:每份快照在 `meta.gameVersion` 標明其對應的遊戲版本(規格 §4.5)。
  *
@@ -110,7 +110,7 @@ export interface WeaponSnapshotEntry {
   specialWeaponId: string;
   /** 該武器解鎖的季節編號(Leanny Season)。 */
   season: number;
-  /** 三語名稱(內嵌以利使用;規格 §4.2 的「以 id 對應」原則由 src/data/locale 名稱表另存維持)。 */
+  /** 四語名稱(內嵌以利使用;規格 §4.2 的「以 id 對應」原則由 src/data/locale 名稱表另存維持)。 */
   names: Record<SnapshotLocale, string>;
   /** 名稱來源(per-weapon)。 */
   nameSource: NameSource;
@@ -161,12 +161,12 @@ export interface WeaponSnapshot {
 /*  名稱(由 splatoon3.ink locale 解析,與快照分離,規格 §4.2)               */
 /* -------------------------------------------------------------------------- */
 
-/** splatoon3.ink 支援且本專案採用的三語 locale 代號(與 i18n routing 對齊)。 */
-export const LOCALES = ['ja-JP', 'zh-TW', 'en'] as const;
+/** splatoon3.ink 支援且本專案採用的四語 locale 代號(與 i18n routing 對齊)。 */
+export const LOCALES = ['ja-JP', 'zh-TW', 'en', 'ko-KR'] as const;
 export type SnapshotLocale = (typeof LOCALES)[number];
 
 /** 單一語言的「localeId → 名稱」對照表(取自 splatoon3.ink `weapons` 區塊)。 */
 export type LocaleNameMap = Record<string, string>;
 
-/** 三語名稱表;以 `WeaponSnapshotEntry.localeId` 對應查名。 */
+/** 四語名稱表;以 `WeaponSnapshotEntry.localeId` 對應查名。 */
 export type WeaponNames = Record<SnapshotLocale, LocaleNameMap>;

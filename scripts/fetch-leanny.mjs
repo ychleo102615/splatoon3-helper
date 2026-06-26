@@ -38,8 +38,8 @@ const USER_AGENT =
   process.env.SPLATOON3INK_UA ??
   'splatoon3-helper/0.1 (non-commercial fan tool; set SPLATOON3INK_UA to add contact)';
 
-/** 本專案三語 → Leanny 語言檔名。 */
-export const LEANNY_LANG_FILES = { 'ja-JP': 'JPja', 'zh-TW': 'TWzh', en: 'USen' };
+/** 本專案四語 → Leanny 語言檔名。 */
+export const LEANNY_LANG_FILES = { 'ja-JP': 'JPja', 'zh-TW': 'TWzh', en: 'USen', 'ko-KR': 'KRko' };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -104,7 +104,7 @@ async function main() {
   await cacheFile(`${BASE}/data/mush/${ver}/WeaponInfoSub.json`, join(verDir, 'WeaponInfoSub.json'));
   await cacheFile(`${BASE}/data/mush/${ver}/WeaponInfoSpecial.json`, join(verDir, 'WeaponInfoSpecial.json'));
 
-  // 3) 三語言檔。
+  // 3) 四語言檔。
   console.log('抓取語言檔…');
   for (const code of Object.values(LEANNY_LANG_FILES)) {
     await cacheFile(`${BASE}/data/language/${code}.json`, join(verDir, 'language', `${code}.json`));

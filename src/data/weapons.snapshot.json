@@ -2,7 +2,7 @@
   "meta": {
     "gameVersion": "11.2.0",
     "dataVersionCode": "1120",
-    "generatedAt": "2026-06-19T14:00:21.036Z",
+    "generatedAt": "2026-06-26T06:16:29.979Z",
     "nameSource": "splatoon3.ink 優先(63/173 把),其餘取自 Leanny 語言檔",
     "statSource": "Leanny 遊戲參數(事實性數據立場,自建 schema,不照抄其結構);damage 內部值÷10、ink×100、cadence 為幀",
     "iconSource": "iconName 為 Leanny weapon_flat 檔名參照(規格 §4.3.1 opt-in 例外);僅存字串、不含圖檔本體,執行時是否載入由 NEXT_PUBLIC_WEAPON_ICONS 控制",
@@ -25,7 +25,8 @@
       "names": {
         "ja-JP": "ラピッドブラスター",
         "zh-TW": "快速爆破槍",
-        "en": "Rapid Blaster"
+        "en": "Rapid Blaster",
+        "ko-KR": "래피드 블래스터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "884321fa6165eb37",
@@ -72,7 +73,8 @@
       "names": {
         "ja-JP": "ラピッドブラスターデコ",
         "zh-TW": "快速爆破槍 裝飾",
-        "en": "Rapid Blaster Deco"
+        "en": "Rapid Blaster Deco",
+        "ko-KR": "래피드 블래스터 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -119,7 +121,8 @@
       "names": {
         "ja-JP": "Rブラスターエリート",
         "zh-TW": "快速爆破槍 精英",
-        "en": "Rapid Blaster Pro"
+        "en": "Rapid Blaster Pro",
+        "ko-KR": "R 블래스터 엘리트"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "183dfb6256c39892",
@@ -166,7 +169,8 @@
       "names": {
         "ja-JP": "Rブラスターエリートデコ",
         "zh-TW": "快速爆破槍 精英裝飾",
-        "en": "Rapid Blaster Pro Deco"
+        "en": "Rapid Blaster Pro Deco",
+        "ko-KR": "R 블래스터 엘리트 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -213,7 +217,8 @@
       "names": {
         "ja-JP": "RブラスターエリートWNTR",
         "zh-TW": "快速爆破槍 精英WNTR",
-        "en": "Rapid Blaster Pro WNT-R"
+        "en": "Rapid Blaster Pro WNT-R",
+        "ko-KR": "R 블래스터 엘리트 WNTR"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -260,7 +265,8 @@
       "names": {
         "ja-JP": "クラッシュブラスター",
         "zh-TW": "衝塗爆破槍",
-        "en": "Clash Blaster"
+        "en": "Clash Blaster",
+        "ko-KR": "크래시 블래스터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "830801a9f4555917",
@@ -307,7 +313,8 @@
       "names": {
         "ja-JP": "クラッシュブラスターネオ",
         "zh-TW": "衝塗爆破槍 新型",
-        "en": "Clash Blaster Neo"
+        "en": "Clash Blaster Neo",
+        "ko-KR": "네오 크래시 블래스터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -354,7 +361,8 @@
       "names": {
         "ja-JP": "ロングブラスター",
         "zh-TW": "遠距爆破槍",
-        "en": "Range Blaster"
+        "en": "Range Blaster",
+        "ko-KR": "롱 블래스터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "30f4e84e186e226f",
@@ -401,7 +409,8 @@
       "names": {
         "ja-JP": "ロングブラスターカスタム",
         "zh-TW": "遠距爆破槍 改裝",
-        "en": "Custom Range Blaster"
+        "en": "Custom Range Blaster",
+        "ko-KR": "커스텀 롱 블래스터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -448,7 +457,8 @@
       "names": {
         "ja-JP": "ホットブラスター",
         "zh-TW": "火熱爆破槍",
-        "en": "Blaster"
+        "en": "Blaster",
+        "ko-KR": "핫 블래스터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "dde2f92988536cd2",
@@ -495,7 +505,8 @@
       "names": {
         "ja-JP": "ホットブラスターカスタム",
         "zh-TW": "火熱爆破槍 改裝",
-        "en": "Custom Blaster"
+        "en": "Custom Blaster",
+        "ko-KR": "커스텀 핫 블래스터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -542,7 +553,8 @@
       "names": {
         "ja-JP": "ホットブラスター艶",
         "zh-TW": "火熱爆破槍 艷",
-        "en": "Gleamz Blaster"
+        "en": "Gleamz Blaster",
+        "ko-KR": "글림 핫 블래스터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -589,7 +601,8 @@
       "names": {
         "ja-JP": "S-BLAST92",
         "zh-TW": "S-BLAST92",
-        "en": "S-BLAST '92"
+        "en": "S-BLAST '92",
+        "ko-KR": "S-BLAST92"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "de8a2a542dbe6b99",
@@ -636,7 +649,8 @@
       "names": {
         "ja-JP": "S-BLAST91",
         "zh-TW": "S-BLAST91",
-        "en": "S-BLAST '91"
+        "en": "S-BLAST '91",
+        "ko-KR": "S-BLAST91"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -683,7 +697,8 @@
       "names": {
         "ja-JP": "ノヴァブラスター",
         "zh-TW": "新星爆破槍",
-        "en": "Luna Blaster"
+        "en": "Luna Blaster",
+        "ko-KR": "노바 블래스터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "05a0ddd5b919b698",
@@ -730,7 +745,8 @@
       "names": {
         "ja-JP": "ノヴァブラスターネオ",
         "zh-TW": "新星爆破槍 新型",
-        "en": "Luna Blaster Neo"
+        "en": "Luna Blaster Neo",
+        "ko-KR": "네오 노바 블래스터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -777,7 +793,8 @@
       "names": {
         "ja-JP": "オーダーブラスター レプリカ",
         "zh-TW": "秩序爆破槍 複製",
-        "en": "Order Blaster Replica"
+        "en": "Order Blaster Replica",
+        "ko-KR": "오더 블래스터 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -824,7 +841,8 @@
       "names": {
         "ja-JP": "スパイガジェット",
         "zh-TW": "特務配件",
-        "en": "Undercover Brella"
+        "en": "Undercover Brella",
+        "ko-KR": "스파이 가젯"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b4ebb5629d8c3e5f",
@@ -871,7 +889,8 @@
       "names": {
         "ja-JP": "スパイガジェットソレーラ",
         "zh-TW": "特務配件 姐妹",
-        "en": "Undercover Sorella Brella"
+        "en": "Undercover Sorella Brella",
+        "ko-KR": "스파이 가젯 소렐라"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -918,7 +937,8 @@
       "names": {
         "ja-JP": "スパイガジェット繚",
         "zh-TW": "特務配件 繚",
-        "en": "Patternz Undercover Brella"
+        "en": "Patternz Undercover Brella",
+        "ko-KR": "패턴 스파이 가젯"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -965,7 +985,8 @@
       "names": {
         "ja-JP": "24式張替傘・甲",
         "zh-TW": "24式可替換傘‧甲",
-        "en": "Recycled Brella 24 Mk I"
+        "en": "Recycled Brella 24 Mk I",
+        "ko-KR": "24식 도돌이 우산 갑"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "914ca6f3cba7aa98",
@@ -1006,7 +1027,8 @@
       "names": {
         "ja-JP": "24式張替傘・乙",
         "zh-TW": "24式可替換傘‧乙",
-        "en": "Recycled Brella 24 Mk II"
+        "en": "Recycled Brella 24 Mk II",
+        "ko-KR": "24식 도돌이 우산 을"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1047,7 +1069,8 @@
       "names": {
         "ja-JP": "パラシェルター",
         "zh-TW": "遮陽防空傘",
-        "en": "Splat Brella"
+        "en": "Splat Brella",
+        "ko-KR": "파라 셸터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "23deec47199c37d1",
@@ -1088,7 +1111,8 @@
       "names": {
         "ja-JP": "パラシェルターソレーラ",
         "zh-TW": "遮陽防空傘 姐妹",
-        "en": "Sorella Brella"
+        "en": "Sorella Brella",
+        "ko-KR": "파라 셸터 소렐라"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1129,7 +1153,8 @@
       "names": {
         "ja-JP": "オーダーシェルター レプリカ",
         "zh-TW": "秩序防空傘 複製",
-        "en": "Order Brella Replica"
+        "en": "Order Brella Replica",
+        "ko-KR": "오더 셸터 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1170,7 +1195,8 @@
       "names": {
         "ja-JP": "キャンピングシェルター",
         "zh-TW": "露營防空傘",
-        "en": "Tenta Brella"
+        "en": "Tenta Brella",
+        "ko-KR": "캠핑 셸터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "342c1b18ce2732ea",
@@ -1205,7 +1231,8 @@
       "names": {
         "ja-JP": "キャンピングシェルターソレーラ",
         "zh-TW": "露營防空傘 姐妹",
-        "en": "Tenta Sorella Brella"
+        "en": "Tenta Sorella Brella",
+        "ko-KR": "캠핑 셸터 소렐라"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1240,7 +1267,8 @@
       "names": {
         "ja-JP": "キャンピングシェルターCREM",
         "zh-TW": "露營防空傘CREM",
-        "en": "Tenta Brella CRE-M"
+        "en": "Tenta Brella CRE-M",
+        "ko-KR": "캠핑 셸터 CREM"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1275,7 +1303,8 @@
       "names": {
         "ja-JP": "フィンセント",
         "zh-TW": "文森",
-        "en": "Painbrush"
+        "en": "Painbrush",
+        "ko-KR": "빈센트"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3ab1a91f59f81345",
@@ -1322,7 +1351,8 @@
       "names": {
         "ja-JP": "フィンセント・ヒュー",
         "zh-TW": "文森‧新藝術",
-        "en": "Painbrush Nouveau"
+        "en": "Painbrush Nouveau",
+        "ko-KR": "빈센트 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1369,7 +1399,8 @@
       "names": {
         "ja-JP": "フィンセントBRNZ",
         "zh-TW": "文森BRNZ",
-        "en": "Painbrush BRN-Z"
+        "en": "Painbrush BRN-Z",
+        "ko-KR": "빈센트 BRNZ"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1416,7 +1447,8 @@
       "names": {
         "ja-JP": "パブロ",
         "zh-TW": "巴勃羅",
-        "en": "Inkbrush"
+        "en": "Inkbrush",
+        "ko-KR": "파블로"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "895eaa9e4e5b427b",
@@ -1463,7 +1495,8 @@
       "names": {
         "ja-JP": "パブロ・ヒュー",
         "zh-TW": "巴勃羅‧新藝術",
-        "en": "Inkbrush Nouveau"
+        "en": "Inkbrush Nouveau",
+        "ko-KR": "파블로 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1510,7 +1543,8 @@
       "names": {
         "ja-JP": "ホクサイ",
         "zh-TW": "北齋",
-        "en": "Octobrush"
+        "en": "Octobrush",
+        "ko-KR": "호쿠사이"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d9632c243eb36d73",
@@ -1557,7 +1591,8 @@
       "names": {
         "ja-JP": "ホクサイ・ヒュー",
         "zh-TW": "北齋‧新藝術",
-        "en": "Octobrush Nouveau"
+        "en": "Octobrush Nouveau",
+        "ko-KR": "호쿠사이 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1604,7 +1639,8 @@
       "names": {
         "ja-JP": "ホクサイ彗",
         "zh-TW": "北齋 彗",
-        "en": "Cometz Octobrush"
+        "en": "Cometz Octobrush",
+        "ko-KR": "코메트 호쿠사이"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1651,7 +1687,8 @@
       "names": {
         "ja-JP": "オーダーブラシ レプリカ",
         "zh-TW": "秩序排刷 複製",
-        "en": "Orderbrush Replica"
+        "en": "Orderbrush Replica",
+        "ko-KR": "오더 브러시 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1698,7 +1735,8 @@
       "names": {
         "ja-JP": "ソイチューバー",
         "zh-TW": "高壓油管槍",
-        "en": "Goo Tuber"
+        "en": "Goo Tuber",
+        "ko-KR": "소이 튜버"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "17b8d348d6380ae9",
@@ -1745,7 +1783,8 @@
       "names": {
         "ja-JP": "ソイチューバーカスタム",
         "zh-TW": "高壓油管槍 改裝",
-        "en": "Custom Goo Tuber"
+        "en": "Custom Goo Tuber",
+        "ko-KR": "커스텀 소이 튜버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1792,7 +1831,8 @@
       "names": {
         "ja-JP": "14式竹筒銃・甲",
         "zh-TW": "14式竹筒槍‧甲",
-        "en": "Bamboozler 14 Mk I"
+        "en": "Bamboozler 14 Mk I",
+        "ko-KR": "14식 대나무 총 갑"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5c8a27c6818f20e6",
@@ -1839,7 +1879,8 @@
       "names": {
         "ja-JP": "14式竹筒銃・乙",
         "zh-TW": "14式竹筒槍‧乙",
-        "en": "Bamboozler 14 Mk II"
+        "en": "Bamboozler 14 Mk II",
+        "ko-KR": "14식 대나무 총 을"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1886,7 +1927,8 @@
       "names": {
         "ja-JP": "リッター4K",
         "zh-TW": "公升4K",
-        "en": "E-liter 4K"
+        "en": "E-liter 4K",
+        "ko-KR": "리터 4K"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "dc9f150e86663adb",
@@ -1933,7 +1975,8 @@
       "names": {
         "ja-JP": "リッター4Kカスタム",
         "zh-TW": "公升4K 改裝",
-        "en": "Custom E-liter 4K"
+        "en": "Custom E-liter 4K",
+        "ko-KR": "커스텀 리터 4K"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -1980,7 +2023,8 @@
       "names": {
         "ja-JP": "4Kスコープ",
         "zh-TW": "4K準星槍",
-        "en": "E-liter 4K Scope"
+        "en": "E-liter 4K Scope",
+        "ko-KR": "4K 스코프"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2027,7 +2071,8 @@
       "names": {
         "ja-JP": "4Kスコープカスタム",
         "zh-TW": "4K準星槍 改裝",
-        "en": "Custom E-liter 4K Scope"
+        "en": "Custom E-liter 4K Scope",
+        "ko-KR": "커스텀 4K 스코프"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2074,7 +2119,8 @@
       "names": {
         "ja-JP": "スプラチャージャー",
         "zh-TW": "斯普拉蓄力狙擊槍",
-        "en": "Splat Charger"
+        "en": "Splat Charger",
+        "ko-KR": "스플랫 차저"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "961a7063fc94f087",
@@ -2115,7 +2161,8 @@
       "names": {
         "ja-JP": "スプラチャージャーコラボ",
         "zh-TW": "斯普拉蓄力狙擊槍 聯名",
-        "en": "Z+F Splat Charger"
+        "en": "Z+F Splat Charger",
+        "ko-KR": "스플랫 차저 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2156,7 +2203,8 @@
       "names": {
         "ja-JP": "スプラチャージャーFRST",
         "zh-TW": "斯普拉蓄力狙擊槍FRST",
-        "en": "Splat Charger CAM-O"
+        "en": "Splat Charger CAM-O",
+        "ko-KR": "스플랫 차저 FRST"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2197,7 +2245,8 @@
       "names": {
         "ja-JP": "オーダーチャージャー レプリカ",
         "zh-TW": "秩序蓄力狙擊槍 複製",
-        "en": "Order Charger Replica"
+        "en": "Order Charger Replica",
+        "ko-KR": "오더 차저 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2238,7 +2287,8 @@
       "names": {
         "ja-JP": "スプラスコープ",
         "zh-TW": "斯普拉準星槍",
-        "en": "Splatterscope"
+        "en": "Splatterscope",
+        "ko-KR": "스플랫 스코프"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2279,7 +2329,8 @@
       "names": {
         "ja-JP": "スプラスコープコラボ",
         "zh-TW": "斯普拉準星槍 聯名",
-        "en": "Z+F Splatterscope"
+        "en": "Z+F Splatterscope",
+        "ko-KR": "스플랫 스코프 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2320,7 +2371,8 @@
       "names": {
         "ja-JP": "スプラスコープFRST",
         "zh-TW": "斯普拉準星槍FRST",
-        "en": "Splatterscope CAM-O"
+        "en": "Splatterscope CAM-O",
+        "ko-KR": "스플랫 스코프 FRST"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2361,7 +2413,8 @@
       "names": {
         "ja-JP": "R-PEN/5H",
         "zh-TW": "R-PEN/5H",
-        "en": "Snipewriter 5H"
+        "en": "Snipewriter 5H",
+        "ko-KR": "R-PEN/5H"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d22945127fb7584f",
@@ -2408,7 +2461,8 @@
       "names": {
         "ja-JP": "R-PEN/5B",
         "zh-TW": "R-PEN/5B",
-        "en": "Snipewriter 5B"
+        "en": "Snipewriter 5B",
+        "ko-KR": "R-PEN/5B"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2455,7 +2509,8 @@
       "names": {
         "ja-JP": "スクイックリンα",
         "zh-TW": "魷快潔α",
-        "en": "Classic Squiffer"
+        "en": "Classic Squiffer",
+        "ko-KR": "스퀵 클린 α"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "535d3c822bba0415",
@@ -2502,7 +2557,8 @@
       "names": {
         "ja-JP": "スクイックリンβ",
         "zh-TW": "魷快潔β",
-        "en": "New Squiffer"
+        "en": "New Squiffer",
+        "ko-KR": "스퀵 클린 β"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2549,7 +2605,8 @@
       "names": {
         "ja-JP": "デュアルスイーパー",
         "zh-TW": "雙重清潔槍",
-        "en": "Dualie Squelchers"
+        "en": "Dualie Squelchers",
+        "ko-KR": "듀얼 스위퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d39ba7409f6e1fbc",
@@ -2596,7 +2653,8 @@
       "names": {
         "ja-JP": "デュアルスイーパーカスタム",
         "zh-TW": "雙重清潔槍 改裝",
-        "en": "Custom Dualie Squelchers"
+        "en": "Custom Dualie Squelchers",
+        "ko-KR": "커스텀 듀얼 스위퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2643,7 +2701,8 @@
       "names": {
         "ja-JP": "デュアルスイーパー蹄",
         "zh-TW": "雙重清潔槍 蹄",
-        "en": "Hoofz Dualie Squelchers"
+        "en": "Hoofz Dualie Squelchers",
+        "ko-KR": "후프 듀얼 스위퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2690,7 +2749,8 @@
       "names": {
         "ja-JP": "ケルビン525",
         "zh-TW": "開爾文525",
-        "en": "Glooga Dualies"
+        "en": "Glooga Dualies",
+        "ko-KR": "켈빈 525"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3b31490a368e92e1",
@@ -2737,7 +2797,8 @@
       "names": {
         "ja-JP": "ケルビン525デコ",
         "zh-TW": "開爾文525 裝飾",
-        "en": "Glooga Dualies Deco"
+        "en": "Glooga Dualies Deco",
+        "ko-KR": "켈빈 525 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2784,7 +2845,8 @@
       "names": {
         "ja-JP": "ガエンFF",
         "zh-TW": "滅熄FF",
-        "en": "Douser Dualies FF"
+        "en": "Douser Dualies FF",
+        "ko-KR": "소방 FF"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "7065ab46c609e6d7",
@@ -2831,7 +2893,8 @@
       "names": {
         "ja-JP": "ガエンFFカスタム",
         "zh-TW": "滅熄FF 改裝",
-        "en": "Custom Douser Dualies FF"
+        "en": "Custom Douser Dualies FF",
+        "ko-KR": "커스텀 소방 FF"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2878,7 +2941,8 @@
       "names": {
         "ja-JP": "スプラマニューバー",
         "zh-TW": "斯普拉機動槍",
-        "en": "Splat Dualies"
+        "en": "Splat Dualies",
+        "ko-KR": "스플랫 머누버"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "83c543ed4ae19005",
@@ -2925,7 +2989,8 @@
       "names": {
         "ja-JP": "スプラマニューバーコラボ",
         "zh-TW": "斯普拉機動槍 聯名",
-        "en": "Enperry Splat Dualies"
+        "en": "Enperry Splat Dualies",
+        "ko-KR": "스플랫 머누버 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -2972,7 +3037,8 @@
       "names": {
         "ja-JP": "スプラマニューバー耀",
         "zh-TW": "斯普拉機動槍 耀",
-        "en": "Twinklez Splat Dualies"
+        "en": "Twinklez Splat Dualies",
+        "ko-KR": "트윙클 스플랫 머누버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3019,7 +3085,8 @@
       "names": {
         "ja-JP": "オーダーマニューバー レプリカ",
         "zh-TW": "秩序機動槍 複製",
-        "en": "Order Dualie Replicas"
+        "en": "Order Dualie Replicas",
+        "ko-KR": "오더 머누버 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3066,7 +3133,8 @@
       "names": {
         "ja-JP": "スパッタリー",
         "zh-TW": "濺鍍槍",
-        "en": "Dapple Dualies"
+        "en": "Dapple Dualies",
+        "ko-KR": "스퍼터리"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "79e6297eb501599f",
@@ -3113,7 +3181,8 @@
       "names": {
         "ja-JP": "スパッタリー・ヒュー",
         "zh-TW": "濺鍍槍‧新藝術",
-        "en": "Dapple Dualies Nouveau"
+        "en": "Dapple Dualies Nouveau",
+        "ko-KR": "스퍼터리 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3160,7 +3229,8 @@
       "names": {
         "ja-JP": "スパッタリーOWL",
         "zh-TW": "濺鍍槍OWL",
-        "en": "Dapple Dualies NOC-T"
+        "en": "Dapple Dualies NOC-T",
+        "ko-KR": "스퍼터리 OWL"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3207,7 +3277,8 @@
       "names": {
         "ja-JP": "クアッドホッパーブラック",
         "zh-TW": "四重彈跳手槍 黑",
-        "en": "Dark Tetra Dualies"
+        "en": "Dark Tetra Dualies",
+        "ko-KR": "블랙 쿼드 호퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "523fca90c5771a63",
@@ -3254,7 +3325,8 @@
       "names": {
         "ja-JP": "クアッドホッパーホワイト",
         "zh-TW": "四重彈跳手槍 白",
-        "en": "Light Tetra Dualies"
+        "en": "Light Tetra Dualies",
+        "ko-KR": "화이트 쿼드 호퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3301,7 +3373,8 @@
       "names": {
         "ja-JP": "カーボンローラー",
         "zh-TW": "碳纖維滾筒",
-        "en": "Carbon Roller"
+        "en": "Carbon Roller",
+        "ko-KR": "카본 롤러"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e78ca547494ad3c3",
@@ -3348,7 +3421,8 @@
       "names": {
         "ja-JP": "カーボンローラーデコ",
         "zh-TW": "碳纖維滾筒 裝飾",
-        "en": "Carbon Roller Deco"
+        "en": "Carbon Roller Deco",
+        "ko-KR": "카본 롤러 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3395,7 +3469,8 @@
       "names": {
         "ja-JP": "カーボンローラーANGL",
         "zh-TW": "碳纖維滾筒ANGL",
-        "en": "Carbon Roller ANG-L"
+        "en": "Carbon Roller ANG-L",
+        "ko-KR": "카본 롤러 ANGL"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3442,7 +3517,8 @@
       "names": {
         "ja-JP": "ダイナモローラー",
         "zh-TW": "電動馬達滾筒",
-        "en": "Dynamo Roller"
+        "en": "Dynamo Roller",
+        "ko-KR": "다이너모 롤러"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3ed1b23808b91e54",
@@ -3489,7 +3565,8 @@
       "names": {
         "ja-JP": "ダイナモローラーテスラ",
         "zh-TW": "電動馬達滾筒 高磁波",
-        "en": "Gold Dynamo Roller"
+        "en": "Gold Dynamo Roller",
+        "ko-KR": "골드 다이너모 롤러"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3536,7 +3613,8 @@
       "names": {
         "ja-JP": "ダイナモローラー冥",
         "zh-TW": "電動馬達滾筒 冥",
-        "en": "Starz Dynamo Roller"
+        "en": "Starz Dynamo Roller",
+        "ko-KR": "스타 다이너모 롤러"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3583,7 +3661,8 @@
       "names": {
         "ja-JP": "ヴァリアブルローラー",
         "zh-TW": "可變式滾筒",
-        "en": "Flingza Roller"
+        "en": "Flingza Roller",
+        "ko-KR": "베리어블 롤러"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "03146bb3dc0defd4",
@@ -3630,7 +3709,8 @@
       "names": {
         "ja-JP": "ヴァリアブルローラーフォイル",
         "zh-TW": "可變式滾筒 金屬箔",
-        "en": "Foil Flingza Roller"
+        "en": "Foil Flingza Roller",
+        "ko-KR": "포일 베리어블 롤러"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3677,7 +3757,8 @@
       "names": {
         "ja-JP": "スプラローラー",
         "zh-TW": "斯普拉滾筒",
-        "en": "Splat Roller"
+        "en": "Splat Roller",
+        "ko-KR": "스플랫 롤러"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e115c15c4a20d8ba",
@@ -3724,7 +3805,8 @@
       "names": {
         "ja-JP": "スプラローラーコラボ",
         "zh-TW": "斯普拉滾筒 聯名",
-        "en": "Krak-On Splat Roller"
+        "en": "Krak-On Splat Roller",
+        "ko-KR": "스플랫 롤러 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3771,7 +3853,8 @@
       "names": {
         "ja-JP": "オーダーローラー レプリカ",
         "zh-TW": "秩序滾筒 複製",
-        "en": "Order Roller Replica"
+        "en": "Order Roller Replica",
+        "ko-KR": "오더 롤러 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3818,7 +3901,8 @@
       "names": {
         "ja-JP": "ワイドローラー",
         "zh-TW": "寬滾筒",
-        "en": "Big Swig Roller"
+        "en": "Big Swig Roller",
+        "ko-KR": "와이드 롤러"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b04c2fbbe1c98e63",
@@ -3865,7 +3949,8 @@
       "names": {
         "ja-JP": "ワイドローラーコラボ",
         "zh-TW": "寬滾筒 聯名",
-        "en": "Big Swig Roller Express"
+        "en": "Big Swig Roller Express",
+        "ko-KR": "와이드 롤러 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3912,7 +3997,8 @@
       "names": {
         "ja-JP": "ワイドローラー惑",
         "zh-TW": "寬滾筒 惑",
-        "en": "Planetz Big Swig Roller"
+        "en": "Planetz Big Swig Roller",
+        "ko-KR": "플래닛 와이드 롤러"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -3959,7 +4045,8 @@
       "names": {
         "ja-JP": "プロモデラーMG",
         "zh-TW": "專業模型槍MG",
-        "en": "Aerospray MG"
+        "en": "Aerospray MG",
+        "ko-KR": "프로모델러 MG"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "935949ea2945806b",
@@ -4006,7 +4093,8 @@
       "names": {
         "ja-JP": "プロモデラーRG",
         "zh-TW": "專業模型槍RG",
-        "en": "Aerospray RG"
+        "en": "Aerospray RG",
+        "ko-KR": "프로모델러 RG"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4053,7 +4141,8 @@
       "names": {
         "ja-JP": "プロモデラー彩",
         "zh-TW": "專業模型槍 彩",
-        "en": "Colorz Aerospray"
+        "en": "Colorz Aerospray",
+        "ko-KR": "컬러 프로모델러"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4100,7 +4189,8 @@
       "names": {
         "ja-JP": "プライムシューター",
         "zh-TW": "頂尖射擊槍",
-        "en": "Splattershot Pro"
+        "en": "Splattershot Pro",
+        "ko-KR": "프라임 슈터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "f74d638ac101904e",
@@ -4147,7 +4237,8 @@
       "names": {
         "ja-JP": "プライムシューターコラボ",
         "zh-TW": "頂尖射擊槍 聯名",
-        "en": "Forge Splattershot Pro"
+        "en": "Forge Splattershot Pro",
+        "ko-KR": "프라임 슈터 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4194,7 +4285,8 @@
       "names": {
         "ja-JP": "プライムシューターFRZN",
         "zh-TW": "頂尖射擊槍FRZN",
-        "en": "Splattershot Pro FRZ-N"
+        "en": "Splattershot Pro FRZ-N",
+        "ko-KR": "프라임 슈터 FRZN"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4241,7 +4333,8 @@
       "names": {
         "ja-JP": "わかばシューター",
         "zh-TW": "新葉射擊槍",
-        "en": "Splattershot Jr."
+        "en": "Splattershot Jr.",
+        "ko-KR": "새싹 슈터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "de148ea51e7c28fa",
@@ -4288,7 +4381,8 @@
       "names": {
         "ja-JP": "もみじシューター",
         "zh-TW": "楓葉射擊槍",
-        "en": "Custom Splattershot Jr."
+        "en": "Custom Splattershot Jr.",
+        "ko-KR": "단풍 슈터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4335,7 +4429,8 @@
       "names": {
         "ja-JP": "ボトルガイザー",
         "zh-TW": "開瓶噴泉槍",
-        "en": "Squeezer"
+        "en": "Squeezer",
+        "ko-KR": "보틀 가이저"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "280ed6683d3eb523",
@@ -4382,7 +4477,8 @@
       "names": {
         "ja-JP": "ボトルガイザーフォイル",
         "zh-TW": "開瓶噴泉槍 金屬箔",
-        "en": "Foil Squeezer"
+        "en": "Foil Squeezer",
+        "ko-KR": "포일 보틀 가이저"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4429,7 +4525,8 @@
       "names": {
         "ja-JP": ".52ガロン",
         "zh-TW": ".52加侖",
-        "en": ".52 Gal"
+        "en": ".52 Gal",
+        "ko-KR": ".52 갤런"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "513c64dd6cd5e723",
@@ -4476,7 +4573,8 @@
       "names": {
         "ja-JP": ".52ガロンデコ",
         "zh-TW": ".52加侖 裝飾",
-        "en": ".52 Gal Deco"
+        "en": ".52 Gal Deco",
+        "ko-KR": ".52 갤런 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4523,7 +4621,8 @@
       "names": {
         "ja-JP": ".96ガロン",
         "zh-TW": ".96加侖",
-        "en": ".96 Gal"
+        "en": ".96 Gal",
+        "ko-KR": ".96 갤런"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "885c30f6102de958",
@@ -4570,7 +4669,8 @@
       "names": {
         "ja-JP": ".96ガロンデコ",
         "zh-TW": ".96加侖 裝飾",
-        "en": ".96 Gal Deco"
+        "en": ".96 Gal Deco",
+        "ko-KR": ".96 갤런 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4617,7 +4717,8 @@
       "names": {
         "ja-JP": ".96ガロン爪",
         "zh-TW": ".96加侖 爪",
-        "en": "Clawz .96 Gal"
+        "en": "Clawz .96 Gal",
+        "ko-KR": "클로 .96 갤런"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4664,7 +4765,8 @@
       "names": {
         "ja-JP": "ジェットスイーパー",
         "zh-TW": "噴射清潔槍",
-        "en": "Jet Squelcher"
+        "en": "Jet Squelcher",
+        "ko-KR": "제트 스위퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "9e45e49e1e9c4853",
@@ -4711,7 +4813,8 @@
       "names": {
         "ja-JP": "ジェットスイーパーカスタム",
         "zh-TW": "噴射清潔槍 改裝",
-        "en": "Custom Jet Squelcher"
+        "en": "Custom Jet Squelcher",
+        "ko-KR": "커스텀 제트 스위퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4758,7 +4861,8 @@
       "names": {
         "ja-JP": "ジェットスイーパーCOBR",
         "zh-TW": "噴射清潔槍COBR",
-        "en": "Jet Squelcher COB-R"
+        "en": "Jet Squelcher COB-R",
+        "ko-KR": "제트 스위퍼 COBR"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4805,7 +4909,8 @@
       "names": {
         "ja-JP": "スプラシューター",
         "zh-TW": "斯普拉射擊槍",
-        "en": "Splattershot"
+        "en": "Splattershot",
+        "ko-KR": "스플랫 슈터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "e60629ecf35192a1",
@@ -4846,7 +4951,8 @@
       "names": {
         "ja-JP": "スプラシューターコラボ",
         "zh-TW": "斯普拉射擊槍 聯名",
-        "en": "Tentatek Splattershot"
+        "en": "Tentatek Splattershot",
+        "ko-KR": "스플랫 슈터 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4887,7 +4993,8 @@
       "names": {
         "ja-JP": "スプラシューター煌",
         "zh-TW": "斯普拉射擊槍 煌",
-        "en": "Glamorz Splattershot"
+        "en": "Glamorz Splattershot",
+        "ko-KR": "글램 스플랫 슈터"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4928,7 +5035,8 @@
       "names": {
         "ja-JP": "ヒーローシューター レプリカ",
         "zh-TW": "英雄射擊槍 複製",
-        "en": "Hero Shot Replica"
+        "en": "Hero Shot Replica",
+        "ko-KR": "히어로 슈터 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -4969,7 +5077,8 @@
       "names": {
         "ja-JP": "オーダーシューター レプリカ",
         "zh-TW": "秩序射擊槍 複製",
-        "en": "Order Shot Replica"
+        "en": "Order Shot Replica",
+        "ko-KR": "오더 슈터 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5010,7 +5119,8 @@
       "names": {
         "ja-JP": "オクタシューター レプリカ",
         "zh-TW": "章魚射擊槍 複製",
-        "en": "Octo Shot Replica"
+        "en": "Octo Shot Replica",
+        "ko-KR": "옥타 슈터 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5051,7 +5161,8 @@
       "names": {
         "ja-JP": "シャープマーカー",
         "zh-TW": "窄域標記槍",
-        "en": "Splash-o-matic"
+        "en": "Splash-o-matic",
+        "ko-KR": "샤프 마커"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "ed647072fa99c73e",
@@ -5098,7 +5209,8 @@
       "names": {
         "ja-JP": "シャープマーカーネオ",
         "zh-TW": "窄域標記槍 新型",
-        "en": "Neo Splash-o-matic"
+        "en": "Neo Splash-o-matic",
+        "ko-KR": "네오 샤프 마커"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5145,7 +5257,8 @@
       "names": {
         "ja-JP": "シャープマーカーGECK",
         "zh-TW": "窄域標記槍GECK",
-        "en": "Splash-o-matic GCK-O"
+        "en": "Splash-o-matic GCK-O",
+        "ko-KR": "샤프 마커 GECK"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5192,7 +5305,8 @@
       "names": {
         "ja-JP": "スペースシューター",
         "zh-TW": "太空射擊槍",
-        "en": "Splattershot Nova"
+        "en": "Splattershot Nova",
+        "ko-KR": "스페이스 슈터"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "85c6eda8dffc77a0",
@@ -5239,7 +5353,8 @@
       "names": {
         "ja-JP": "スペースシューターコラボ",
         "zh-TW": "太空射擊槍 聯名",
-        "en": "Annaki Splattershot Nova"
+        "en": "Annaki Splattershot Nova",
+        "ko-KR": "스페이스 슈터 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5286,7 +5401,8 @@
       "names": {
         "ja-JP": "N-ZAP85",
         "zh-TW": "N-ZAP85",
-        "en": "N-ZAP '85"
+        "en": "N-ZAP '85",
+        "ko-KR": "N-ZAP85"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b3ab498b8a8a0667",
@@ -5333,7 +5449,8 @@
       "names": {
         "ja-JP": "N-ZAP89",
         "zh-TW": "N-ZAP89",
-        "en": "N-ZAP '89"
+        "en": "N-ZAP '89",
+        "ko-KR": "N-ZAP89"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5380,7 +5497,8 @@
       "names": {
         "ja-JP": "ボールドマーカー",
         "zh-TW": "廣域標記槍",
-        "en": "Sploosh-o-matic"
+        "en": "Sploosh-o-matic",
+        "ko-KR": "볼드 마커"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5567ca94a5374d21",
@@ -5427,7 +5545,8 @@
       "names": {
         "ja-JP": "ボールドマーカーネオ",
         "zh-TW": "廣域標記槍 新型",
-        "en": "Neo Sploosh-o-matic"
+        "en": "Neo Sploosh-o-matic",
+        "ko-KR": "네오 볼드 마커"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5474,7 +5593,8 @@
       "names": {
         "ja-JP": "H3リールガン",
         "zh-TW": "H3捲管槍",
-        "en": "H-3 Nozzlenose"
+        "en": "H-3 Nozzlenose",
+        "ko-KR": "H3 릴 건"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5e5481f626f02cbf",
@@ -5521,7 +5641,8 @@
       "names": {
         "ja-JP": "H3リールガンD",
         "zh-TW": "H3捲管槍D",
-        "en": "H-3 Nozzlenose D"
+        "en": "H-3 Nozzlenose D",
+        "ko-KR": "H3 릴 건 D"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5568,7 +5689,8 @@
       "names": {
         "ja-JP": "H3リールガンSNAK",
         "zh-TW": "H3捲管槍SNAK",
-        "en": "H-3 Nozzlenose VIP-R"
+        "en": "H-3 Nozzlenose VIP-R",
+        "ko-KR": "H3 릴 건 SNAK"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5615,7 +5737,8 @@
       "names": {
         "ja-JP": "L3リールガン",
         "zh-TW": "L3捲管槍",
-        "en": "L-3 Nozzlenose"
+        "en": "L-3 Nozzlenose",
+        "ko-KR": "L3 릴 건"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "0578f3b3d9af08ed",
@@ -5662,7 +5785,8 @@
       "names": {
         "ja-JP": "L3リールガンD",
         "zh-TW": "L3捲管槍D",
-        "en": "L-3 Nozzlenose D"
+        "en": "L-3 Nozzlenose D",
+        "ko-KR": "L3 릴 건 D"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5709,7 +5833,8 @@
       "names": {
         "ja-JP": "L3リールガン箔",
         "zh-TW": "L3捲管槍 箔",
-        "en": "Glitterz L-3 Nozzlenose"
+        "en": "Glitterz L-3 Nozzlenose",
+        "ko-KR": "글리터 L3 릴 건"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5756,7 +5881,8 @@
       "names": {
         "ja-JP": "オーバーフロッシャー",
         "zh-TW": "滿溢泡澡潑桶",
-        "en": "Bloblobber"
+        "en": "Bloblobber",
+        "ko-KR": "오버플로셔"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "eb5098db38e209e1",
@@ -5797,7 +5923,8 @@
       "names": {
         "ja-JP": "オーバーフロッシャーデコ",
         "zh-TW": "滿溢泡澡潑桶 裝飾",
-        "en": "Bloblobber Deco"
+        "en": "Bloblobber Deco",
+        "ko-KR": "오버플로셔 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5838,7 +5965,8 @@
       "names": {
         "ja-JP": "ヒッセン",
         "zh-TW": "洗筆桶",
-        "en": "Tri-Slosher"
+        "en": "Tri-Slosher",
+        "ko-KR": "물통"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b4df43b5b0d90b7a",
@@ -5885,7 +6013,8 @@
       "names": {
         "ja-JP": "ヒッセン・ヒュー",
         "zh-TW": "洗筆桶‧新藝術",
-        "en": "Tri-Slosher Nouveau"
+        "en": "Tri-Slosher Nouveau",
+        "ko-KR": "물통 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5932,7 +6061,8 @@
       "names": {
         "ja-JP": "ヒッセンASH",
         "zh-TW": "洗筆桶ASH",
-        "en": "Tri-Slosher ASH-N"
+        "en": "Tri-Slosher ASH-N",
+        "ko-KR": "물통 ASH"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -5979,7 +6109,8 @@
       "names": {
         "ja-JP": "モップリン",
         "zh-TW": "墨瀑淋",
-        "en": "Dread Wringer"
+        "en": "Dread Wringer",
+        "ko-KR": "몹 링"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "09284d9bd3b61ea1",
@@ -6026,7 +6157,8 @@
       "names": {
         "ja-JP": "モップリンD",
         "zh-TW": "墨瀑淋D",
-        "en": "Dread Wringer D"
+        "en": "Dread Wringer D",
+        "ko-KR": "몹 링 D"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6073,7 +6205,8 @@
       "names": {
         "ja-JP": "モップリン角",
         "zh-TW": "墨瀑淋 角",
-        "en": "Hornz Dread Wringer"
+        "en": "Hornz Dread Wringer",
+        "ko-KR": "혼 몹 링"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6120,7 +6253,8 @@
       "names": {
         "ja-JP": "スクリュースロッシャー",
         "zh-TW": "迴旋潑桶",
-        "en": "Sloshing Machine"
+        "en": "Sloshing Machine",
+        "ko-KR": "스크루 슬로셔"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "5463ec85acff180c",
@@ -6167,7 +6301,8 @@
       "names": {
         "ja-JP": "スクリュースロッシャーネオ",
         "zh-TW": "迴旋潑桶 新型",
-        "en": "Sloshing Machine Neo"
+        "en": "Sloshing Machine Neo",
+        "ko-KR": "네오 스크루 슬로셔"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6214,7 +6349,8 @@
       "names": {
         "ja-JP": "バケットスロッシャー",
         "zh-TW": "飛濺潑桶",
-        "en": "Slosher"
+        "en": "Slosher",
+        "ko-KR": "버킷 슬로셔"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "fe3b9b3b87ca491e",
@@ -6261,7 +6397,8 @@
       "names": {
         "ja-JP": "バケットスロッシャーデコ",
         "zh-TW": "飛濺潑桶 裝飾",
-        "en": "Slosher Deco"
+        "en": "Slosher Deco",
+        "ko-KR": "버킷 슬로셔 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6308,7 +6445,8 @@
       "names": {
         "ja-JP": "オーダースロッシャー レプリカ",
         "zh-TW": "秩序潑桶 複製",
-        "en": "Order Slosher Replica"
+        "en": "Order Slosher Replica",
+        "ko-KR": "오더 슬로셔 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6355,7 +6493,8 @@
       "names": {
         "ja-JP": "エクスプロッシャー",
         "zh-TW": "爆炸潑桶",
-        "en": "Explosher"
+        "en": "Explosher",
+        "ko-KR": "익스플로셔"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c19e07d4db9a4075",
@@ -6396,7 +6535,8 @@
       "names": {
         "ja-JP": "エクスプロッシャーカスタム",
         "zh-TW": "爆炸潑桶 改裝",
-        "en": "Custom Explosher"
+        "en": "Custom Explosher",
+        "ko-KR": "커스텀 익스플로셔"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6437,7 +6577,8 @@
       "names": {
         "ja-JP": "デンタルワイパーミント",
         "zh-TW": "巨齒刮水刀 薄荷",
-        "en": "Mint Decavitator"
+        "en": "Mint Decavitator",
+        "ko-KR": "민트 덴탈 와이퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "b5b716854159da15",
@@ -6484,7 +6625,8 @@
       "names": {
         "ja-JP": "デンタルワイパースミ",
         "zh-TW": "巨齒刮水刀 墨黑",
-        "en": "Charcoal Decavitator"
+        "en": "Charcoal Decavitator",
+        "ko-KR": "잉크 덴탈 와이퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6531,7 +6673,8 @@
       "names": {
         "ja-JP": "ドライブワイパー",
         "zh-TW": "雨刷刮水刀",
-        "en": "Splatana Wiper"
+        "en": "Splatana Wiper",
+        "ko-KR": "드라이브 와이퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "67b2e7ac4bf64e71",
@@ -6578,7 +6721,8 @@
       "names": {
         "ja-JP": "ドライブワイパーデコ",
         "zh-TW": "雨刷刮水刀 裝飾",
-        "en": "Splatana Wiper Deco"
+        "en": "Splatana Wiper Deco",
+        "ko-KR": "드라이브 와이퍼 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6625,7 +6769,8 @@
       "names": {
         "ja-JP": "ドライブワイパーRUST",
         "zh-TW": "雨刷刮水刀RUST",
-        "en": "Splatana Wiper RUS-T"
+        "en": "Splatana Wiper RUS-T",
+        "ko-KR": "드라이브 와이퍼 RUST"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6672,7 +6817,8 @@
       "names": {
         "ja-JP": "ジムワイパー",
         "zh-TW": "工作刮水刀",
-        "en": "Splatana Stamper"
+        "en": "Splatana Stamper",
+        "ko-KR": "사무 와이퍼"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c95b060287d757a2",
@@ -6719,7 +6865,8 @@
       "names": {
         "ja-JP": "ジムワイパー・ヒュー",
         "zh-TW": "工作刮水刀‧新藝術",
-        "en": "Splatana Stamper Nouveau"
+        "en": "Splatana Stamper Nouveau",
+        "ko-KR": "사무 와이퍼 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6766,7 +6913,8 @@
       "names": {
         "ja-JP": "ジムワイパー封",
         "zh-TW": "工作刮水刀 封",
-        "en": "Stickerz Splatana Stamper"
+        "en": "Stickerz Splatana Stamper",
+        "ko-KR": "스티커 사무 와이퍼"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6813,7 +6961,8 @@
       "names": {
         "ja-JP": "オーダーワイパー レプリカ",
         "zh-TW": "秩序刮水刀 複製",
-        "en": "Order Splatana Replica"
+        "en": "Order Splatana Replica",
+        "ko-KR": "오더 와이퍼 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6860,7 +7009,8 @@
       "names": {
         "ja-JP": "クーゲルシュライバー",
         "zh-TW": "圓珠筆",
-        "en": "Ballpoint Splatling"
+        "en": "Ballpoint Splatling",
+        "ko-KR": "쿠겔 슈라이버"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "439343ee49a5126b",
@@ -6907,7 +7057,8 @@
       "names": {
         "ja-JP": "クーゲルシュライバー・ヒュー",
         "zh-TW": "圓珠筆‧新藝術",
-        "en": "Ballpoint Splatling Nouveau"
+        "en": "Ballpoint Splatling Nouveau",
+        "ko-KR": "쿠겔 슈라이버 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -6954,7 +7105,8 @@
       "names": {
         "ja-JP": "ハイドラント",
         "zh-TW": "消防栓旋轉槍",
-        "en": "Hydra Splatling"
+        "en": "Hydra Splatling",
+        "ko-KR": "하이드런트"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "c100f88e8b925e1c",
@@ -7001,7 +7153,8 @@
       "names": {
         "ja-JP": "ハイドラントカスタム",
         "zh-TW": "消防栓旋轉槍 改裝",
-        "en": "Custom Hydra Splatling"
+        "en": "Custom Hydra Splatling",
+        "ko-KR": "커스텀 하이드런트"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7048,7 +7201,8 @@
       "names": {
         "ja-JP": "ハイドラント圧",
         "zh-TW": "消防栓旋轉槍 壓",
-        "en": "Torrentz Hydra Splatling"
+        "en": "Torrentz Hydra Splatling",
+        "ko-KR": "토렌트 하이드런트"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7095,7 +7249,8 @@
       "names": {
         "ja-JP": "イグザミナー",
         "zh-TW": "審查者",
-        "en": "Heavy Edit Splatling"
+        "en": "Heavy Edit Splatling",
+        "ko-KR": "이그재미너"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "d9a573867cb6ba9a",
@@ -7142,7 +7297,8 @@
       "names": {
         "ja-JP": "イグザミナー・ヒュー",
         "zh-TW": "審查者‧新藝術",
-        "en": "Heavy Edit Splatling Nouveau"
+        "en": "Heavy Edit Splatling Nouveau",
+        "ko-KR": "이그재미너 휴"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7189,7 +7345,8 @@
       "names": {
         "ja-JP": "スプラスピナー",
         "zh-TW": "斯普拉旋轉槍",
-        "en": "Mini Splatling"
+        "en": "Mini Splatling",
+        "ko-KR": "스플랫 스피너"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "cd34251e67bd3f3e",
@@ -7236,7 +7393,8 @@
       "names": {
         "ja-JP": "スプラスピナーコラボ",
         "zh-TW": "斯普拉旋轉槍 聯名",
-        "en": "Zink Mini Splatling"
+        "en": "Zink Mini Splatling",
+        "ko-KR": "스플랫 스피너 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7283,7 +7441,8 @@
       "names": {
         "ja-JP": "スプラスピナーPYTN",
         "zh-TW": "斯普拉旋轉槍PYTN",
-        "en": "Mini Splatling RTL-R"
+        "en": "Mini Splatling RTL-R",
+        "ko-KR": "스플랫 스피너 PYTN"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7330,7 +7489,8 @@
       "names": {
         "ja-JP": "ノーチラス47",
         "zh-TW": "鸚鵡螺號47",
-        "en": "Nautilus 47"
+        "en": "Nautilus 47",
+        "ko-KR": "노틸러스 47"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "6ede65010706778d",
@@ -7377,7 +7537,8 @@
       "names": {
         "ja-JP": "ノーチラス79",
         "zh-TW": "鸚鵡螺號79",
-        "en": "Nautilus 79"
+        "en": "Nautilus 79",
+        "ko-KR": "노틸러스 79"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7424,7 +7585,8 @@
       "names": {
         "ja-JP": "バレルスピナー",
         "zh-TW": "桶裝旋轉槍",
-        "en": "Heavy Splatling"
+        "en": "Heavy Splatling",
+        "ko-KR": "배럴 스피너"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "3aac272457998973",
@@ -7471,7 +7633,8 @@
       "names": {
         "ja-JP": "バレルスピナーデコ",
         "zh-TW": "桶裝旋轉槍 裝飾",
-        "en": "Heavy Splatling Deco"
+        "en": "Heavy Splatling Deco",
+        "ko-KR": "배럴 스피너 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7518,7 +7681,8 @@
       "names": {
         "ja-JP": "オーダースピナー レプリカ",
         "zh-TW": "秩序旋轉槍 複製",
-        "en": "Order Splatling Replica"
+        "en": "Order Splatling Replica",
+        "ko-KR": "오더 스피너 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7565,7 +7729,8 @@
       "names": {
         "ja-JP": "フルイドV",
         "zh-TW": "邦普V",
-        "en": "Wellstring V"
+        "en": "Wellstring V",
+        "ko-KR": "플루이드 V"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "66cd48f017d3f078",
@@ -7612,7 +7777,8 @@
       "names": {
         "ja-JP": "フルイドVカスタム",
         "zh-TW": "邦普V 改裝",
-        "en": "Custom Wellstring V"
+        "en": "Custom Wellstring V",
+        "ko-KR": "커스텀 플루이드 V"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7659,7 +7825,8 @@
       "names": {
         "ja-JP": "トライストリンガー",
         "zh-TW": "三發獵魚弓",
-        "en": "Tri-Stringer"
+        "en": "Tri-Stringer",
+        "ko-KR": "트라이 스트링거"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "2136716c07457658",
@@ -7706,7 +7873,8 @@
       "names": {
         "ja-JP": "トライストリンガーコラボ",
         "zh-TW": "三發獵魚弓 聯名",
-        "en": "Inkline Tri-Stringer"
+        "en": "Inkline Tri-Stringer",
+        "ko-KR": "트라이 스트링거 컬래버"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7753,7 +7921,8 @@
       "names": {
         "ja-JP": "トライストリンガー燈",
         "zh-TW": "三發獵魚弓 燈",
-        "en": "Bulbz Tri-Stringer"
+        "en": "Bulbz Tri-Stringer",
+        "ko-KR": "벌브 트라이 스트링거"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7800,7 +7969,8 @@
       "names": {
         "ja-JP": "オーダーストリンガー レプリカ",
         "zh-TW": "秩序獵魚弓 複製",
-        "en": "Order Stringer Replica"
+        "en": "Order Stringer Replica",
+        "ko-KR": "오더 스트링거 레플리카"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7847,7 +8017,8 @@
       "names": {
         "ja-JP": "LACT-450",
         "zh-TW": "LACT-450",
-        "en": "REEF-LUX 450"
+        "en": "REEF-LUX 450",
+        "ko-KR": "LACT-450"
       },
       "nameSource": "splatoon3.ink",
       "localeId": "1f7612f08f804c54",
@@ -7894,7 +8065,8 @@
       "names": {
         "ja-JP": "LACT-450デコ",
         "zh-TW": "LACT-450 裝飾",
-        "en": "REEF-LUX 450 Deco"
+        "en": "REEF-LUX 450 Deco",
+        "ko-KR": "LACT-450 데코"
       },
       "nameSource": "leanny",
       "localeId": null,
@@ -7941,7 +8113,8 @@
       "names": {
         "ja-JP": "LACT-450MILK",
         "zh-TW": "LACT-450MILK",
-        "en": "REEF-LUX 450 MIL-K"
+        "en": "REEF-LUX 450 MIL-K",
+        "ko-KR": "LACT-450 MILK"
       },
       "nameSource": "leanny",
       "localeId": null,

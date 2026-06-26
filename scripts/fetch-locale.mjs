@@ -1,5 +1,5 @@
 /**
- * fetch-locale.mjs — 抓取 splatoon3.ink 的三語 locale 名稱(資料管線 Phase 0)。
+ * fetch-locale.mjs — 抓取 splatoon3.ink 的四語 locale 名稱(資料管線 Phase 0)。
  *
  * 合規(規格 §4.1,以 splatoon3.ink 開放條件為準):
  * 1. 標註來源 splatoon3.ink            → 寫入快取 meta 與輸出檔 header。
@@ -10,14 +10,14 @@
  * 重要事實(2026-06 實測,寫死於註解供後人參考):
  * - splatoon3.ink 的英文 locale 代碼為 `en-US` / `en-GB`,**非** `en`(故需 app→source 對應表)。
  * - locale 的 `weapons` 區塊是「從賽程/活動 feed 衍生」的,只涵蓋近期出現過的武器
- *   (實測三語一致的武器僅約 65 把),**並非完整全武器字典**;且各語言檔可能混入
+ *   (實測四語一致的武器僅約 65 把),**並非完整全武器字典**;且各語言檔可能混入
  *   同名的陳舊重複 hash id(實測 zh-TW 有 268 個 id 但僅 65 個唯一名稱)。
- * - 因此本腳本只採「三語都存在的 id 交集」作為可靠的跨語言對應集合,並回報涵蓋率。
+ * - 因此本腳本只採「四語都存在的 id 交集」作為可靠的跨語言對應集合,並回報涵蓋率。
  *
  * 產出:
  * - `.cache/splatoon3ink/<sourceLocale>.json`   原始回應(gitignore,僅作快取)。
  * - `.cache/splatoon3ink/meta.json`             各 locale 的最後抓取時戳(守門用)。
- * - `src/data/locale/weapon-names.json`         三語名稱對照表(納入版控,供 app 與快照建構使用)。
+ * - `src/data/locale/weapon-names.json`         四語名稱對照表(納入版控,供 app 與快照建構使用)。
  *
  * 用法:
  *   node scripts/fetch-locale.mjs
@@ -36,12 +36,13 @@ const ROOT = join(__dirname, '..');
 
 /**
  * app locale(與 src/i18n/routing.ts、schema.ts LOCALES 對齊) → splatoon3.ink source locale。
- * ja-JP / zh-TW 兩邊一致;英文我方用 `en`,來源端用 `en-US`(美式為預設,en-GB 差異極小)。
+ * ja-JP / zh-TW / ko-KR 兩邊一致;英文我方用 `en`,來源端用 `en-US`(美式為預設,en-GB 差異極小)。
  */
 const LOCALE_SOURCE_MAP = {
   'ja-JP': 'ja-JP',
   'zh-TW': 'zh-TW',
   en: 'en-US',
+  'ko-KR': 'ko-KR',
 };
 
 /** app locale 清單(輸出以此為 key)。 */
@@ -152,7 +153,7 @@ async function main() {
   }
   await writeJson(CACHE_META_PATH, meta);
 
-  // 只採「三語都存在的 id 交集」作為可靠的跨語言對應集合。
+  // 只採「四語都存在的 id 交集」作為可靠的跨語言對應集合。
   const idSets = APP_LOCALES.map((l) => new Set(Object.keys(perLocale[l])));
   const commonIds = [...idSets[0]]
     .filter((id) => idSets.every((s) => s.has(id)))
@@ -167,7 +168,7 @@ async function main() {
   await writeJson(NAMES_OUT_PATH, {
     _source: SOURCE_LABEL,
     _note:
-      '主武器三語名稱(localeId → { ja-JP, zh-TW, en }),取自 splatoon3.ink locale 的 weapons 區塊,僅含三語皆存在的 id 交集;不含數值。',
+      '主武器四語名稱(localeId → { ja-JP, zh-TW, en, ko-KR }),取自 splatoon3.ink locale 的 weapons 區塊,僅含四語皆存在的 id 交集;不含數值。',
     _coverageWarning:
       'splatoon3.ink locale 的 weapons 為賽程/活動 feed 衍生,僅涵蓋近期出現過的武器,並非完整全武器字典;涵蓋的武器數會隨時間變動。',
     _generatedAt: new Date().toISOString(),
@@ -178,7 +179,7 @@ async function main() {
 
   console.log(
     `\n完成。本次實際抓取 ${fetchedCount} / ${APP_LOCALES.length} 個 locale。` +
-      `\n三語一致的武器 id = ${commonIds.length} 筆 → ${NAMES_OUT_PATH.replace(ROOT + '/', '')}`,
+      `\n四語一致的武器 id = ${commonIds.length} 筆 → ${NAMES_OUT_PATH.replace(ROOT + '/', '')}`,
   );
   console.log(
     '注意:此數量遠少於完整全武器roster,因 splatoon3.ink locale 僅含近期 feed 出現的武器(見輸出檔 _coverageWarning)。',

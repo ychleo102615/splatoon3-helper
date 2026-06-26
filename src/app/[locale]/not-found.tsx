@@ -3,7 +3,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { Link } from '@/i18n/navigation';
 
 /**
- * 在地化 404(規格 §2.1 三語平等)。
+ * 在地化 404(規格 §2.1 四語平等)。
  *
  * 接住 `[locale]/weapons/[id]/page.tsx` 對未知 id 拋出的 `notFound()`,
  * 以及任何 locale 內未匹配的路徑。由 `[locale]/layout.tsx` 包裹,

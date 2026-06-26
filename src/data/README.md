@@ -7,15 +7,15 @@
 | 檔案 | 內容 | 來源 |
 |---|---|---|
 | `schema.ts` | 自有 TypeScript schema(型別與常數,無資料) | 自建(規格 §4.2) |
-| `weapons.snapshot.json` | 全 roster 武器快照(數值 + 三語名稱 + 版本) | 見下「來源與合規」 |
-| `sub-special.json` | 副/特殊武器三語名稱 + 一行簡述 + 圖示檔名參照(`iconName`,§4.3.1) | Leanny 語言檔 + `subspe` 檔名 |
-| `locale/weapon-names.json` | splatoon3.ink 開放名稱(三語交集) | splatoon3.ink(規格 §4.1) |
+| `weapons.snapshot.json` | 全 roster 武器快照(數值 + 四語名稱 + 版本) | 見下「來源與合規」 |
+| `sub-special.json` | 副/特殊武器四語名稱 + 一行簡述 + 圖示檔名參照(`iconName`,§4.3.1) | Leanny 語言檔 + `subspe` 檔名 |
+| `locale/weapon-names.json` | splatoon3.ink 開放名稱(四語交集) | splatoon3.ink(規格 §4.1) |
 
 ## 執行順序
 
 ```bash
 SPLATOON3INK_UA="splatoon3-helper/0.1 (non-commercial fan tool; <你的聯絡方式>)" \
-  pnpm data:fetch-locale     # splatoon3.ink 三語名稱(設 UA、≤1h 快取守門)
+  pnpm data:fetch-locale     # splatoon3.ink 四語名稱(設 UA、≤1h 快取守門)
 pnpm data:fetch-leanny       # Leanny 武器資訊/語言/參數(快取至 .cache/leanny,版本固定)
 pnpm data:build-snapshot     # 合併產出 weapons.snapshot.json 與 sub-special.json
 ```
@@ -25,7 +25,7 @@ pnpm data:build-snapshot     # 合併產出 weapons.snapshot.json 與 sub-specia
 ## 來源與合規(規格 §4)
 
 - **名稱**:優先採 **splatoon3.ink** 開放 locale(§4.1:標來源、設 UA、≤每小時抓一次、產品免費)。
-  splatoon3.ink 的 `weapons` 為賽程/活動 feed 衍生,僅涵蓋近期出現過的武器(實測三語一致約 63 把);
+  splatoon3.ink 的 `weapons` 為賽程/活動 feed 衍生,僅涵蓋近期出現過的武器(實測四語一致約 63 把);
   其餘 roster 之名稱以 **Leanny 語言檔**補足(§4.2,事實性數據立場;此舉合規風險較高,為產品決策)。
   每筆武器的 `nameSource` 標明其名稱來源。
 - **數值**:取自 **Leanny** 遊戲參數,僅以「事實性數據」立場使用;**不照抄其結構**,轉為本目錄 `schema.ts` 的扁平自有 schema。

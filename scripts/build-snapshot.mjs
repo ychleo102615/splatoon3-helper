@@ -9,7 +9,7 @@
  *
  * 產出(納入版控):
  * - src/data/weapons.snapshot.json   全 roster 武器快照(自有 schema,規格 §4.2)
- * - src/data/sub-special.json        副/特殊武器三語名稱 + 一行簡述(規格 §3.1)
+ * - src/data/sub-special.json        副/特殊武器四語名稱 + 一行簡述(規格 §3.1)
  *
  * 合規(規格 §4):名稱優先 splatoon3.ink(§4.1)、缺者以 Leanny 補(§4.2,事實性數據立場);
  * 數值僅取來源確有的欄位、轉為自有單位、附 gameVersion 快照標註(§4.5);標明非官方(§4.4)。
@@ -22,8 +22,8 @@ import { extractCoreStats, PREFIX_TO_CATEGORY } from './lib/extract-stats.mjs';
 import { gymlBasename } from './fetch-leanny.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
-const LEANNY_LANG = { 'ja-JP': 'JPja', 'zh-TW': 'TWzh', en: 'USen' };
-const APP_LOCALES = ['ja-JP', 'zh-TW', 'en'];
+const LEANNY_LANG = { 'ja-JP': 'JPja', 'zh-TW': 'TWzh', en: 'USen', 'ko-KR': 'KRko' };
+const APP_LOCALES = ['ja-JP', 'zh-TW', 'en', 'ko-KR'];
 
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
@@ -79,7 +79,7 @@ function main() {
     return null;
   };
 
-  // 語言檔(三語各取武器相關區塊)。
+  // 語言檔(四語各取武器相關區塊)。
   const lang = {};
   for (const loc of APP_LOCALES) {
     const L = readJson(join(verDir, 'language', `${LEANNY_LANG[loc]}.json`));
@@ -217,7 +217,7 @@ function main() {
     Object.values(specialWeapons).filter((e) => e.iconName).length;
   const subSpecial = {
     _source: 'Leanny 語言檔(WeaponName_Sub/Special、WeaponExp_Sub/Special)+ subspe 圖示檔名(§4.3.1)',
-    _note: '副/特殊武器三語名稱、一行簡述與圖示檔名參照(iconName,僅字串無圖檔);key 為快照中的 subWeaponId / specialWeaponId。',
+    _note: '副/特殊武器四語名稱、一行簡述與圖示檔名參照(iconName,僅字串無圖檔);key 為快照中的 subWeaponId / specialWeaponId。',
     subWeapons,
     specialWeapons,
   };
