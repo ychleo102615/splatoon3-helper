@@ -7,7 +7,7 @@
  * - **Two-Zone**:屬篩選區(品牌區但克制);選中態走 Turf Green 量表色(由 chipClass 提供)。
  */
 
-import { chipClass } from '@/components/chipClass';
+import { chipClass, type ChipTone } from '@/components/chipClass';
 import { SubspeIcon } from '@/components/SubspeIcon';
 
 /** 副 / 特殊武器等篩選選項(id + 已在地化名稱)。 */
@@ -65,12 +65,15 @@ export function Chip({
   active,
   onClick,
   icon,
+  tone = 'select',
   children,
 }: {
   active: boolean;
   onClick: () => void;
   /** §4.3.1 opt-in:前置圖示 URL(圖文降階);省略 / 未啟用時純文字,版面不變。 */
   icon?: string;
+  /** 選中態極性:正向選取(綠,預設)/ 負向排除(琥珀,維度角色為「不要是」時)。 */
+  tone?: ChipTone;
   children: React.ReactNode;
 }) {
   return (
@@ -79,7 +82,9 @@ export function Chip({
       onClick={onClick}
       aria-pressed={active}
       className={
-        icon ? `${chipClass(active, 'icon-text')} inline-flex items-center gap-2` : chipClass(active)
+        icon
+          ? `${chipClass(active, 'icon-text', tone)} inline-flex items-center gap-2`
+          : chipClass(active, 'text', tone)
       }
     >
       {icon ? <SubspeIcon src={icon} alt="" className="size-7 p-0.5" /> : null}

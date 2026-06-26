@@ -1,4 +1,4 @@
-import { chipClass } from '@/components/chipClass';
+import { chipClass, type ChipTone } from '@/components/chipClass';
 import { SubspeIcon } from '@/components/SubspeIcon';
 import { DimensionModeSwitch, type DimensionModeSwitchProps } from '@/components/DimensionModeSwitch';
 
@@ -9,8 +9,9 @@ import { DimensionModeSwitch, type DimensionModeSwitchProps } from '@/components
  * client 樹一起打包;自帶指令會把函式 prop 誤判為需 Server Action(Next.js 71007)。
  *
  * - **依維度分群**:token 以「群」呈現(分類 / 副 / 特殊各一群,射程一群)。離散維度的群帶一顆
- *   **單鈕**角色切換(DimensionModeSwitch:必須是 ↔ 可以是),置於該群 token 前——收合保持精簡,
- *   不含「不限」(要不限就把該維度的 token 全移除,維度自然從摘要消失)。射程群無角色(恆 AND)。
+ *   **單鈕**角色切換(DimensionModeSwitch:必須是 → 可以是 → 不要是 循環),置於該群 token 前——收合
+ *   保持精簡,不含「不限」(要不限就把該維度的 token 全移除,維度自然從摘要消失)。射程群無角色(恆 AND)。
+ *   「不要是」群的 token 走琥珀(`tone:'exclude'`)、與其單鈕同色,讀作「排除」而非「選取」。
  * - **只顯示有在篩的**:呼叫端只把「角色非不限」的維度組進來;一個 token = 一個值,整顆即「刪除鈕」
  *   ——點擊移除該值;× 為刪除提示。某維度的 token 全移除後,該維度即回不限、從摘要消失。
  * - **圖文降階**(§4.3.1):`iconUrl` 有值(= icon 功能開啟且該維度有官方圖)時整顆**只留圖示**
@@ -35,8 +36,10 @@ export interface FilterToken {
 export interface FilterTokenGroup {
   /** React key(維度識別,呼叫端保證掛載期唯一)。 */
   key: string;
-  /** 該群的單鈕角色切換(必須是 ↔ 可以是);射程等無角色的群省略(undefined)。 */
+  /** 該群的單鈕角色切換(必須是 → 可以是 → 不要是 循環);射程等無角色的群省略(undefined)。 */
   mode?: DimensionModeSwitchProps;
+  /** token 選中態極性:正向(綠,預設)/ 負向排除(琥珀,角色為「不要是」時)。 */
+  tone?: ChipTone;
   tokens: FilterToken[];
 }
 
@@ -76,7 +79,7 @@ export function ActiveFilterTokens({
                 // 圖文降階(§4.3.1):有官方圖時整顆只留圖示(收合 = 最克制的摘要),
                 // 文字名仍由 aria-label 承載、並以 title 補上 sighted 的滑過提示;無圖則維持文字。
                 title={token.iconUrl ? token.label : undefined}
-                className={`${chipClass(true, token.iconUrl ? 'icon-only' : 'text')} inline-flex items-center gap-1.5`}
+                className={`${chipClass(true, token.iconUrl ? 'icon-only' : 'text', group.tone ?? 'select')} inline-flex items-center gap-1.5`}
               >
                 {token.iconUrl ? (
                   <SubspeIcon src={token.iconUrl} alt="" className="size-7 p-1" />

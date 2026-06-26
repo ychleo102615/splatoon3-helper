@@ -15,8 +15,16 @@
  *  - `icon-text`:圖 + 文(副 / 特殊),前導內距收到與上下等值(`pl-0.5` = `py-0.5` = 2px),
  *    圓徽在 pill 圓端裡同心內縮、四周等距,不留顯眼的左側空白;尾端維持文字側距(`pr-3`)。
  *  - `icon-only`:收合 token 只剩圖示,前導同上(`pl-0.5`)讓圓徽貼齊圓端,尾端留 `pr-2` 給刪除 ×。
+ *
+ * `tone` 區分**選中態的語意極性**(未選態恆中性,不受影響):
+ *  - `select`(預設):正向選取 = Turf Green 翻黑字(必須是 / 可以是,「要這個」)。
+ *  - `exclude`:負向選取 = Callout Amber 翻黑字(不要是,「排除這個」)——刻意離開綠色,避免
+ *    「被選 = 想要」的誤讀。amber 是既有警示色票(DESIGN),非新增,Two-Zone 仍成立。
  */
 export type ChipShape = 'text' | 'icon-text' | 'icon-only';
+
+/** 選中態的語意極性:正向選取(綠)/ 負向排除(琥珀)。 */
+export type ChipTone = 'select' | 'exclude';
 
 const CHIP_PADDING: Record<ChipShape, string> = {
   text: 'px-3 py-1.5',
@@ -24,14 +32,23 @@ const CHIP_PADDING: Record<ChipShape, string> = {
   'icon-only': 'pl-0.5 pr-2 py-0.5',
 };
 
-export function chipClass(active: boolean, shape: ChipShape = 'text'): string {
+const CHIP_ACTIVE_TONE: Record<ChipTone, string> = {
+  select: 'bg-turf-green text-ink-900',
+  exclude: 'bg-callout-amber text-ink-900',
+};
+
+export function chipClass(
+  active: boolean,
+  shape: ChipShape = 'text',
+  tone: ChipTone = 'select',
+): string {
   return [
     `rounded-pill ${CHIP_PADDING[shape]} font-label text-xs font-bold tracking-wide`,
     'min-h-[32px] cursor-pointer',
     'transition-[background-color,color,transform] duration-150 ease-state',
     'motion-safe:active:scale-[0.97] motion-reduce:transition-none',
     active
-      ? 'bg-turf-green text-ink-900'
+      ? CHIP_ACTIVE_TONE[tone]
       : 'bg-surface-translucent text-text-on-dark hover:bg-white/15',
   ].join(' ');
 }

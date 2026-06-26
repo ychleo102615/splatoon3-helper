@@ -62,14 +62,15 @@ function sanitizeIds<T extends string>(raw: unknown, allowed: Set<T>): Set<T> {
 }
 
 /**
- * 還原單一維度角色,維持「'AND'/'OR' ⟹ 至少一個值」的不變量:
+ * 還原單一維度角色,維持「'AND'/'OR'/'NOT' ⟹ 至少一個值」的不變量:
  *  - 無值(valuesSize 0)→ 一律 'none'(不限);涵蓋舊存檔的空維度與防呆。
  *  - 有值 → 沿用存的角色;舊存檔無角色欄位(壞值 / 缺值)→ 'AND'(沿用舊「必須」預設)。
  * 注意「有值 + 角色 'none'」是合法的「停用但記住」狀態,故有值時不強制覆寫角色。
+ * 舊存檔不含 'NOT',不需遷移;新增 'NOT' 僅是放行新值。
  */
 function reconstructRole(raw: unknown, valuesSize: number): DimensionRole {
   if (valuesSize === 0) return 'none';
-  return raw === 'none' || raw === 'AND' || raw === 'OR' ? raw : 'AND';
+  return raw === 'none' || raw === 'AND' || raw === 'OR' || raw === 'NOT' ? raw : 'AND';
 }
 
 /** 把射程夾回當前軌道邊界;形狀不對則退回「不限」(= bounds)。 */

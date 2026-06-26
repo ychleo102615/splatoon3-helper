@@ -459,6 +459,7 @@ function SlotCard({
     noneLabel: t('any'),
     requiredLabel: t('modeRequired'),
     anyLabel: t('modeAny'),
+    excludeLabel: t('modeExclude'),
     ariaLabel: t('modeAria', { name }),
   });
   const collapsedMode = (
@@ -469,8 +470,11 @@ function SlotCard({
     onChange: (m) => dim.setRole(m),
     requiredLabel: t('modeRequired'),
     anyLabel: t('modeAny'),
+    excludeLabel: t('modeExclude'),
     ariaLabel: t('modeSwitchAria', { name }),
   });
+  // 維度角色 → chip/token 選中態極性:不要是 = 排除(琥珀),其餘 = 選取(綠)。
+  const dimTone = (role: DimensionRole) => (role === 'NOT' ? 'exclude' : 'select');
   const clearAction = (dim: { size: number; clear: () => void }, name: string) =>
     dim.size > 0 ? (
       <button
@@ -491,12 +495,14 @@ function SlotCard({
     groups.push({
       key: 'cats',
       mode: collapsedMode(catDim, t('categoryGroup')),
+      tone: dimTone(catDim.role),
       tokens: [...slot.cats].map((c) => ({ key: `cat:${c}`, label: tc(c), onRemove: () => catDim.remove(c) })),
     });
   if (subDim.role !== 'none')
     groups.push({
       key: 'subIds',
       mode: collapsedMode(subDim, t('subGroup')),
+      tone: dimTone(subDim.role),
       tokens: [...slot.subIds].map((id) => ({
         key: `sub:${id}`,
         label: subById.get(id)?.name ?? id,
@@ -508,6 +514,7 @@ function SlotCard({
     groups.push({
       key: 'specialIds',
       mode: collapsedMode(speDim, t('specialGroup')),
+      tone: dimTone(speDim.role),
       tokens: [...slot.specialIds].map((id) => ({
         key: `spe:${id}`,
         label: specialById.get(id)?.name ?? id,
@@ -576,7 +583,12 @@ function SlotCard({
         dimmed={catDim.role === 'none'}
       >
         {categories.map((cat) => (
-          <Chip key={cat} active={catDim.has(cat)} onClick={() => catDim.toggle(cat)}>
+          <Chip
+            key={cat}
+            active={catDim.has(cat)}
+            tone={dimTone(catDim.role)}
+            onClick={() => catDim.toggle(cat)}
+          >
             {tc(cat)}
           </Chip>
         ))}
@@ -589,7 +601,13 @@ function SlotCard({
         dimmed={subDim.role === 'none'}
       >
         {subs.map((s) => (
-          <Chip key={s.id} active={subDim.has(s.id)} icon={s.iconUrl} onClick={() => subDim.toggle(s.id)}>
+          <Chip
+            key={s.id}
+            active={subDim.has(s.id)}
+            icon={s.iconUrl}
+            tone={dimTone(subDim.role)}
+            onClick={() => subDim.toggle(s.id)}
+          >
             {s.name}
           </Chip>
         ))}
@@ -602,7 +620,13 @@ function SlotCard({
         dimmed={speDim.role === 'none'}
       >
         {specials.map((s) => (
-          <Chip key={s.id} active={speDim.has(s.id)} icon={s.iconUrl} onClick={() => speDim.toggle(s.id)}>
+          <Chip
+            key={s.id}
+            active={speDim.has(s.id)}
+            icon={s.iconUrl}
+            tone={dimTone(speDim.role)}
+            onClick={() => speDim.toggle(s.id)}
+          >
             {s.name}
           </Chip>
         ))}

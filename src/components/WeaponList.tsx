@@ -196,7 +196,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
       roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
     });
 
-  // 展開態 3 選一(不限/必須是/可以是)的 props;角色直接讀寫控制器。
+  // 展開態 4 選一(不限/必須是/可以是/不要是)的 props;角色直接讀寫控制器。
   const expandedMode = (
     dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
     name: string,
@@ -206,9 +206,10 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
     noneLabel: t('any'),
     requiredLabel: t('modeRequired'),
     anyLabel: t('modeAny'),
+    excludeLabel: t('modeExclude'),
     ariaLabel: t('modeAria', { name }),
   });
-  // 收合態單鈕(必須是↔可以是);僅用於 role≠none 的維度,故 value 必為 'AND'/'OR'。
+  // 收合態單鈕(必須是→可以是→不要是 循環);僅用於 role≠none 的維度,故 value 必為 'AND'/'OR'/'NOT'。
   const collapsedMode = (
     dim: { role: DimensionRole; setRole: (r: DimensionRole) => void },
     name: string,
@@ -217,8 +218,11 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
     onChange: (m) => dim.setRole(m),
     requiredLabel: t('modeRequired'),
     anyLabel: t('modeAny'),
+    excludeLabel: t('modeExclude'),
     ariaLabel: t('modeSwitchAria', { name }),
   });
+  // 維度角色 → chip/token 選中態極性:不要是 = 排除(琥珀),其餘 = 選取(綠)。
+  const dimTone = (role: DimensionRole) => (role === 'NOT' ? 'exclude' : 'select');
   // 標題列右側「清除」鈕:有值(含停用但記住的)才顯示;清掉值並回不限。
   const clearAction = (dim: { size: number; clear: () => void }, name: string) =>
     dim.size > 0 ? (
@@ -240,12 +244,14 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
     groups.push({
       key: 'cats',
       mode: collapsedMode(catDim, t('categoryGroup')),
+      tone: dimTone(catDim.role),
       tokens: [...cats].map((c) => ({ key: `cat:${c}`, label: tc(c), onRemove: () => catDim.remove(c) })),
     });
   if (subDim.role !== 'none')
     groups.push({
       key: 'subIds',
       mode: collapsedMode(subDim, t('subLabel')),
+      tone: dimTone(subDim.role),
       tokens: [...subIds].map((id) => ({
         key: `sub:${id}`,
         label: subById.get(id)?.name ?? id,
@@ -257,6 +263,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
     groups.push({
       key: 'specialIds',
       mode: collapsedMode(speDim, t('specialLabel')),
+      tone: dimTone(speDim.role),
       tokens: [...specialIds].map((id) => ({
         key: `spe:${id}`,
         label: specialById.get(id)?.name ?? id,
@@ -330,7 +337,12 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
             dimmed={catDim.role === 'none'}
           >
             {categories.map((cat) => (
-              <Chip key={cat} active={catDim.has(cat)} onClick={() => catDim.toggle(cat)}>
+              <Chip
+                key={cat}
+                active={catDim.has(cat)}
+                tone={dimTone(catDim.role)}
+                onClick={() => catDim.toggle(cat)}
+              >
                 {tc(cat)}
               </Chip>
             ))}
@@ -347,6 +359,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
                 key={s.id}
                 active={subDim.has(s.id)}
                 icon={s.iconUrl}
+                tone={dimTone(subDim.role)}
                 onClick={() => subDim.toggle(s.id)}
               >
                 {s.name}
@@ -365,6 +378,7 @@ export function WeaponList({ items, categories, subs, specials, rangeBounds }: P
                 key={s.id}
                 active={speDim.has(s.id)}
                 icon={s.iconUrl}
+                tone={dimTone(speDim.role)}
                 onClick={() => speDim.toggle(s.id)}
               >
                 {s.name}
