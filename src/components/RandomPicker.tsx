@@ -410,13 +410,26 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
     onPointerMove: (e: React.PointerEvent<HTMLButtonElement>) => {
       const d = dragRef.current;
       if (!d || d.id !== id) return;
+      const offset = e.clientY - d.startY;
       const el = slotEls.current.get(id);
-      if (el) el.style.transform = `translateY(${e.clientY - d.startY}px)`;
-      let insert = d.mids.length;
-      for (let k = 0; k < d.mids.length; k++) {
-        if (e.clientY < d.mids[k]) {
-          insert = k;
-          break;
+      if (el) el.style.transform = `translateY(${offset}px)`;
+      // 觸發閥值 = 被拖卡片「移動方向上的前緣」越過鄰卡中點(等同與鄰卡重疊過半才換)。
+      // 不用「指標 vs 中點」:把手在卡頂,指標被抓取點綁住,會逼著幾乎整張蓋過才觸發。
+      // 改以卡片自身幾何(原始 top/bottom + 位移)判斷,與抓在卡片哪裡無關;沿用原始 mids 為門檻避免回授。
+      const from = d.fromIndex;
+      let insert = from; // 預設原位(未過半 → 不換)
+      if (offset > 0) {
+        const bottom = d.bottoms[from] + offset; // 下緣現位
+        insert = from + 1;
+        for (let k = from + 1; k < d.mids.length; k++) {
+          if (bottom > d.mids[k]) insert = k + 1;
+          else break;
+        }
+      } else if (offset < 0) {
+        const top = d.tops[from] + offset; // 上緣現位
+        for (let k = from - 1; k >= 0; k--) {
+          if (top < d.mids[k]) insert = k;
+          else break;
         }
       }
       d.insert = insert;
