@@ -103,9 +103,9 @@ interface Props {
 
 const MAX_SLOTS = 8;
 
-// open 由呼叫端決定:首槽 / 重設回單槽預設展開(立刻可編輯);使用者「新增」進列表的槽預設收合
-// (見 addSlot / duplicateSlot)——已有多槽時再展開只會把版面推長,收合摘要更適合逐一檢視。
-function createSlot(id: number, bounds: RangeValue, open = true): Slot {
+// 新建的空白槽一律收合(open: false):新增 / 複製 / 重設 / 初次載入皆然——單一空槽收合更精簡,
+// 要設定點「＋新增條件」即展開。已存檔的槽沿用各自持久化的開合(走 codec deserialize,不經此)。
+function createSlot(id: number, bounds: RangeValue): Slot {
   return {
     id,
     cats: new Set(),
@@ -113,7 +113,7 @@ function createSlot(id: number, bounds: RangeValue, open = true): Slot {
     specialIds: new Set(),
     range: { ...bounds },
     roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
-    open,
+    open: false,
   };
 }
 
@@ -204,13 +204,13 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
     }));
   };
 
-  // 新增空槽:預設收合(open=false)。已有槽時展開新空槽只是把版面推長,收合摘要(尚未設定條件)
-  // 更克制;要編輯點開即可。
+  // 新增空槽:收合落地(見 createSlot)。已有槽時展開新空槽只是把版面推長,收合摘要更克制;
+  // 要編輯點開即可。
   const addSlot = () => {
     setModel((m) =>
       m.slots.length >= MAX_SLOTS
         ? m
-        : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds, false)] },
+        : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds)] },
     );
   };
 
