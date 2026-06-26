@@ -27,6 +27,7 @@ export function CollapsiblePanel({
   summary,
   expandLabel,
   collapseLabel,
+  className,
   children,
 }: {
   open: boolean;
@@ -45,13 +46,18 @@ export function CollapsiblePanel({
   expandLabel: string;
   /** 切換鈕在「展開態」的無障礙名稱(動作 = 收合)。 */
   collapseLabel: string;
+  /**
+   * 併入外殼根容器的附加 class(呼叫端覆寫狀態樣式用,例:隨機器拖曳時的浮起描邊 / 陰影)。
+   * 殼只認外觀層,不替呼叫端決定何時套——故以原樣併入,不預設任何狀態語意。
+   */
+  className?: string;
   /** 展開時的完整控制(全部 chip + 射程)。 */
   children: React.ReactNode;
 }) {
   const bodyId = useId();
 
   return (
-    <div className="rounded-lg bg-card-translucent p-4 sm:p-5">
+    <div className={`rounded-lg bg-card-translucent p-4 transition-shadow duration-150 ease-state sm:p-5 motion-reduce:transition-none ${className ?? ''}`}>
       <div className="flex items-center justify-between gap-3">
         {header ?? <span aria-hidden />}
         <div className="flex items-center gap-3">

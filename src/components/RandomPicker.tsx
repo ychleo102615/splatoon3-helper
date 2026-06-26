@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { StickerButton } from '@/components/StickerButton';
@@ -103,7 +103,9 @@ interface Props {
 
 const MAX_SLOTS = 8;
 
-function createSlot(id: number, bounds: RangeValue): Slot {
+// open 由呼叫端決定:首槽 / 重設回單槽預設展開(立刻可編輯);使用者「新增」進列表的槽預設收合
+// (見 addSlot / duplicateSlot)——已有多槽時再展開只會把版面推長,收合摘要更適合逐一檢視。
+function createSlot(id: number, bounds: RangeValue, open = true): Slot {
   return {
     id,
     cats: new Set(),
@@ -111,7 +113,7 @@ function createSlot(id: number, bounds: RangeValue): Slot {
     specialIds: new Set(),
     range: { ...bounds },
     roles: { cats: 'none', subIds: 'none', specialIds: 'none' },
-    open: true,
+    open,
   };
 }
 
@@ -202,16 +204,55 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
     }));
   };
 
+  // 新增空槽:預設收合(open=false)。已有槽時展開新空槽只是把版面推長,收合摘要(尚未設定條件)
+  // 更克制;要編輯點開即可。
   const addSlot = () => {
     setModel((m) =>
       m.slots.length >= MAX_SLOTS
         ? m
-        : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds)] },
+        : { ...m, slots: [...m.slots, createSlot(nextSlotId(m.slots), rangeBounds, false)] },
     );
+  };
+
+  // 複製某一槽:深拷貝其條件(Set / range / roles 皆另建,免共用參照)成新槽,緊接原槽之後插入。
+  // 預設收合——複本一落地就帶完整條件,收合摘要正好讓人「核對複製到什麼」而不撐長版面;與設定解耦,
+  // 不動抽選結果。達上限則無操作。
+  const duplicateSlot = (id: number) => {
+    setModel((m) => {
+      if (m.slots.length >= MAX_SLOTS) return m;
+      const i = m.slots.findIndex((s) => s.id === id);
+      if (i < 0) return m;
+      const src = m.slots[i];
+      const copy: Slot = {
+        id: nextSlotId(m.slots),
+        cats: new Set(src.cats),
+        subIds: new Set(src.subIds),
+        specialIds: new Set(src.specialIds),
+        range: { ...src.range },
+        roles: { ...src.roles },
+        open: false,
+      };
+      const slots = [...m.slots];
+      slots.splice(i + 1, 0, copy);
+      return { ...m, slots };
+    });
   };
 
   const removeSlot = (id: number) => {
     setModel((m) => (m.slots.length <= 1 ? m : { ...m, slots: m.slots.filter((s) => s.id !== id) }));
+  };
+
+  // 槽排序:把第 from 個移到第 to 個(皆為移除前的索引;越界 / 原地則無操作)。拖曳放下與鍵盤上下移
+  // 共用此一入口——重排只動 slots 順序,id 不變故 React key 穩定、抽選結果不受影響。
+  const moveSlot = (from: number, to: number) => {
+    setModel((m) => {
+      if (from === to || from < 0 || to < 0 || from >= m.slots.length || to >= m.slots.length)
+        return m;
+      const slots = [...m.slots];
+      const [moved] = slots.splice(from, 1);
+      slots.splice(to, 0, moved);
+      return { ...m, slots };
+    });
   };
 
   // 全部重設只重置「設定」(回到單一空槽);抽選結果不在此清——兩者生命週期獨立。
@@ -243,6 +284,124 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   const canDraw = slots.some((s) => poolFor(s).length > 0);
   const multi = slots.length > 1;
 
+  /* ── 槽拖曳排序(Pointer Events;觸控 + 滑鼠通用,mobile-first) ──────────────
+     原生 HTML5 DnD 在觸控裝置無效,故自製:拖曳期間「浮起」被拖卡片並以 transform 跟手,
+     其餘卡片留在原位、改以一條落點指示線標示放開後的插入位置(不即時重排,免 reflow 抖動)。
+     效能:移動階段全程以 ref + 直接改 DOM style 進行(不 setState),避免每次 pointermove 重渲染
+     整棵(含開啟槽的大量 chip);僅落下時 setModel 提交一次重排。鍵盤(方向鍵)走另一條 a11y 路徑。 */
+  const slotsContainerRef = useRef<HTMLDivElement>(null);
+  const dropLineRef = useRef<HTMLDivElement>(null);
+  const slotEls = useRef(new Map<number, HTMLElement>());
+  const registerSlotEl = (id: number) => (el: HTMLElement | null) => {
+    if (el) slotEls.current.set(id, el);
+    else slotEls.current.delete(id);
+  };
+  // 拖曳期間量得的版面快照(各槽 viewport 座標 + 容器頂),僅落點計算用;非拖曳時為 null。
+  const dragRef = useRef<{
+    id: number;
+    fromIndex: number;
+    startY: number;
+    insert: number;
+    containerTop: number;
+    tops: number[];
+    bottoms: number[];
+    mids: number[];
+  } | null>(null);
+  // 唯一會觸發重渲染的拖曳狀態:標記哪一槽正被拖(套用浮起樣式)。位移與指示線位置走 imperative。
+  const [draggingId, setDraggingId] = useState<number | null>(null);
+
+  const GAP = 8; // space-y-4 = 16px 間距;指示線置於上下卡片間隙中央
+
+  // 依插入索引把落點指示線移到對應間隙;落點即原位(insert === from / from+1)時藏起(此放下不造成移動)。
+  const positionDropLine = (insert: number) => {
+    const d = dragRef.current;
+    const el = dropLineRef.current;
+    if (!d || !el) return;
+    if (insert === d.fromIndex || insert === d.fromIndex + 1) {
+      el.style.opacity = '0';
+      return;
+    }
+    let top: number;
+    if (insert <= 0) top = d.tops[0] - d.containerTop - GAP;
+    else if (insert >= d.tops.length)
+      top = d.bottoms[d.bottoms.length - 1] - d.containerTop + GAP;
+    else top = (d.bottoms[insert - 1] + d.tops[insert]) / 2 - d.containerTop;
+    el.style.top = `${top}px`;
+    el.style.opacity = '1';
+  };
+
+  const endDrag = (id: number) => {
+    const el = slotEls.current.get(id);
+    if (el) el.style.transform = '';
+    if (dropLineRef.current) dropLineRef.current.style.opacity = '0';
+    dragRef.current = null;
+    setDraggingId(null);
+  };
+
+  // 給拖曳把手的事件組(每槽一份;以 slot.id 綁定,避免跨槽串擾)。把手須 touch-action:none,
+  // 觸控起拖才不被當成捲動;setPointerCapture 後 move/up 一律回到把手。
+  const reorderHandleProps = (id: number, index: number) => ({
+    onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      const container = slotsContainerRef.current;
+      if (!container) return;
+      e.preventDefault();
+      e.currentTarget.setPointerCapture(e.pointerId);
+      const containerTop = container.getBoundingClientRect().top;
+      const tops: number[] = [];
+      const bottoms: number[] = [];
+      const mids: number[] = [];
+      for (const s of slots) {
+        const r = slotEls.current.get(s.id)?.getBoundingClientRect();
+        if (!r) return;
+        tops.push(r.top);
+        bottoms.push(r.bottom);
+        mids.push(r.top + r.height / 2);
+      }
+      dragRef.current = { id, fromIndex: index, startY: e.clientY, insert: index, containerTop, tops, bottoms, mids };
+      setDraggingId(id);
+    },
+    onPointerMove: (e: React.PointerEvent<HTMLButtonElement>) => {
+      const d = dragRef.current;
+      if (!d || d.id !== id) return;
+      const el = slotEls.current.get(id);
+      if (el) el.style.transform = `translateY(${e.clientY - d.startY}px)`;
+      let insert = d.mids.length;
+      for (let k = 0; k < d.mids.length; k++) {
+        if (e.clientY < d.mids[k]) {
+          insert = k;
+          break;
+        }
+      }
+      d.insert = insert;
+      positionDropLine(insert);
+    },
+    onPointerUp: (e: React.PointerEvent<HTMLButtonElement>) => {
+      const d = dragRef.current;
+      try {
+        e.currentTarget.releasePointerCapture(e.pointerId);
+      } catch {
+        /* 指標已釋放 */
+      }
+      if (d && d.id === id) {
+        const to = d.insert > d.fromIndex ? d.insert - 1 : d.insert;
+        moveSlot(d.fromIndex, to);
+      }
+      endDrag(id);
+    },
+    onPointerCancel: () => endDrag(id),
+    onKeyDown: (e: React.KeyboardEvent<HTMLButtonElement>) => {
+      // 鍵盤可及的重排:把手聚焦時 ↑/↓ 上下移一格。key=slot.id 故 DOM 節點隨槽搬移、焦點自然保留。
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        moveSlot(index, index - 1);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        moveSlot(index, index + 1);
+      }
+    },
+  });
+
   return (
     <div>
       {/* ── 頂部:整體標題 + 全部重設 ─────────────────────────────────────── */}
@@ -259,16 +418,29 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
         </button>
       </div>
 
-      {/* ── 抽選槽:堆疊卡片(每槽各自條件,全展開) ───────────────────────── */}
-      <div className="mt-3 space-y-4">
+      {/* ── 抽選槽:堆疊卡片(每槽各自條件,可拖曳排序) ───────────────────── */}
+      <div ref={slotsContainerRef} className="relative mt-3 space-y-4">
+        {/* 落點指示線:拖曳時 imperative 改 top / opacity 移動;非拖曳時 opacity 0 隱形佔位。 */}
+        <div
+          ref={dropLineRef}
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 z-10 h-0.5 -translate-y-1/2 rounded-full bg-turf-green opacity-0 shadow-[0_0_8px_rgba(25,215,25,0.7)] transition-opacity duration-100"
+          style={{ top: 0 }}
+        />
         {slots.map((slot, i) => (
           <SlotCard
             key={slot.id}
             index={i}
+            total={slots.length}
             showIndex={multi}
             slot={slot}
             poolCount={poolFor(slot).length}
             canRemove={slots.length > 1}
+            canDuplicate={slots.length < MAX_SLOTS}
+            canReorder={multi}
+            isDragging={draggingId === slot.id}
+            slotRef={registerSlotEl(slot.id)}
+            reorderHandle={reorderHandleProps(slot.id, i)}
             categories={categories}
             subs={subs}
             specials={specials}
@@ -276,6 +448,7 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
             rangeMarks={rangeMarks}
             onUpdate={(partial) => updateSlot(slot.id, partial)}
             onToggleOpen={(open) => updateSlot(slot.id, { open })}
+            onDuplicate={() => duplicateSlot(slot.id)}
             onRemove={() => removeSlot(slot.id)}
           />
         ))}
@@ -373,12 +546,24 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
 /*  抽選槽卡片                                                                  */
 /* -------------------------------------------------------------------------- */
 
+/** 拖曳把手要散佈到 <button> 上的事件組(由 RandomPicker.reorderHandleProps 產生)。 */
+type ReorderHandleProps = Pick<
+  React.HTMLAttributes<HTMLButtonElement>,
+  'onPointerDown' | 'onPointerMove' | 'onPointerUp' | 'onPointerCancel' | 'onKeyDown'
+>;
+
 function SlotCard({
   index,
+  total,
   showIndex,
   slot,
   poolCount,
   canRemove,
+  canDuplicate,
+  canReorder,
+  isDragging,
+  slotRef,
+  reorderHandle,
   categories,
   subs,
   specials,
@@ -386,13 +571,26 @@ function SlotCard({
   rangeMarks,
   onUpdate,
   onToggleOpen,
+  onDuplicate,
   onRemove,
 }: {
   index: number;
+  /** 當前總槽數(拖曳把手 aria 用「第 n 把,共 total 把」交代位置)。 */
+  total: number;
   showIndex: boolean;
   slot: Slot;
   poolCount: number;
   canRemove: boolean;
+  /** 未達上限時可複製此槽。 */
+  canDuplicate: boolean;
+  /** 多於一槽時才顯示拖曳把手(僅一槽無從排序)。 */
+  canReorder: boolean;
+  /** 此槽正被拖曳:套用浮起樣式(位移與落點線由父層 imperative 處理)。 */
+  isDragging: boolean;
+  /** 量測用:把外層容器元素登記到父層 ref map(供拖曳算落點)。 */
+  slotRef: (el: HTMLElement | null) => void;
+  /** 拖曳把手事件組;散佈於把手 <button>。 */
+  reorderHandle: ReorderHandleProps;
   categories: WeaponCategory[];
   subs: FilterOption[];
   specials: FilterOption[];
@@ -401,6 +599,8 @@ function SlotCard({
   onUpdate: (partial: Partial<Slot>) => void;
   /** 展開 / 收合(簡化模式);與條件分流,切換不清抽選結果。 */
   onToggleOpen: (open: boolean) => void;
+  /** 複製此槽(緊接其後插入一份條件複本)。 */
+  onDuplicate: () => void;
   onRemove: () => void;
 }) {
   const t = useTranslations('Random');
@@ -535,117 +735,180 @@ function SlotCard({
     });
 
   return (
-    <CollapsiblePanel
-      open={open}
-      onOpenChange={onToggleOpen}
-      header={
-        showIndex ? (
-          <h3 className="font-label text-xs font-bold uppercase tracking-wide text-text-on-dark">
-            {t('slotLabel', { n: index + 1 })}
-          </h3>
-        ) : null
-      }
-      expandLabel={t('filtersExpand')}
-      collapseLabel={t('filtersCollapse')}
-      toolbar={
-        <>
-          <span className="font-data text-xs text-muted-on-dark">
-            {t('poolCount', { count: poolCount })}
-          </span>
-          {canRemove ? (
-            <button
-              type="button"
-              onClick={onRemove}
-              aria-label={t('removeSlot', { n: index + 1 })}
-              className="grid size-6 place-items-center rounded-pill text-base leading-none text-muted-on-dark transition-colors hover:bg-white/10 hover:text-text-on-dark"
-            >
-              ×
-            </button>
-          ) : null}
-        </>
-      }
-      summary={
-        <ActiveFilterTokens
-          groups={groups}
-          onAdd={() => onToggleOpen(true)}
-          addLabel={t('addCondition')}
-          emptyLabel={t('noConditions')}
-          removeLabel={(name) => t('removeCondition', { name })}
-        />
-      }
+    // 外層容器:供父層量測(slotRef)與拖曳期間 imperative 套 translateY。浮起時抬升層級,
+    // 並停用文字選取(觸控拖曳手感)。視覺浮起(描邊 / 陰影)交給 CollapsiblePanel 的 className,
+    // 落在真正的卡片邊界上。
+    <div
+      ref={slotRef}
+      className={`relative ${isDragging ? 'z-20 cursor-grabbing select-none' : ''}`}
     >
-      {/* 每維度標題左側皆帶「不限 / 必須是 / 可以是」三選一角色切換(各槽獨立);右側「清除」清值並回不限;
-          不限時 chip 淡化(停用但記住,切回即還原)。合成見 weaponFilters。射程恆 AND。 */}
-      <FilterGroup
-        label={t('categoryGroup')}
-        mode={<DimensionModeToggle {...expandedMode(catDim, t('categoryGroup'))} />}
-        action={clearAction(catDim, t('categoryGroup'))}
-        dimmed={catDim.role === 'none'}
+      <CollapsiblePanel
+        open={open}
+        onOpenChange={onToggleOpen}
+        className={isDragging ? 'shadow-2xl ring-2 ring-turf-green/60' : undefined}
+        header={
+          showIndex ? (
+            <div className="flex items-center gap-2">
+              {canReorder ? (
+                <button
+                  type="button"
+                  {...reorderHandle}
+                  aria-label={t('reorderSlot', { n: index + 1, total })}
+                  className="grid size-6 shrink-0 cursor-grab touch-none place-items-center rounded text-muted-on-dark transition-colors hover:bg-white/10 hover:text-text-on-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-turf-green active:cursor-grabbing motion-reduce:transition-none"
+                >
+                  <GripIcon />
+                </button>
+              ) : null}
+              <h3 className="font-label text-xs font-bold uppercase tracking-wide text-text-on-dark">
+                {t('slotLabel', { n: index + 1 })}
+              </h3>
+            </div>
+          ) : null
+        }
+        expandLabel={t('filtersExpand')}
+        collapseLabel={t('filtersCollapse')}
+        toolbar={
+          <>
+            <span className="font-data text-xs text-muted-on-dark">
+              {t('poolCount', { count: poolCount })}
+            </span>
+            {canDuplicate ? (
+              <button
+                type="button"
+                onClick={onDuplicate}
+                aria-label={t('duplicateSlot', { n: index + 1 })}
+                className="grid size-6 place-items-center rounded-pill text-muted-on-dark transition-colors hover:bg-white/10 hover:text-text-on-dark"
+              >
+                <DuplicateIcon />
+              </button>
+            ) : null}
+            {canRemove ? (
+              <button
+                type="button"
+                onClick={onRemove}
+                aria-label={t('removeSlot', { n: index + 1 })}
+                className="grid size-6 place-items-center rounded-pill text-base leading-none text-muted-on-dark transition-colors hover:bg-white/10 hover:text-text-on-dark"
+              >
+                ×
+              </button>
+            ) : null}
+          </>
+        }
+        summary={
+          <ActiveFilterTokens
+            groups={groups}
+            onAdd={() => onToggleOpen(true)}
+            addLabel={t('addCondition')}
+            emptyLabel={t('noConditions')}
+            removeLabel={(name) => t('removeCondition', { name })}
+          />
+        }
       >
-        {categories.map((cat) => (
-          <Chip
-            key={cat}
-            active={catDim.has(cat)}
-            tone={dimTone(catDim.role)}
-            onClick={() => catDim.toggle(cat)}
-          >
-            {tc(cat)}
-          </Chip>
-        ))}
-      </FilterGroup>
+        {/* 每維度標題左側皆帶「不限 / 必須是 / 可以是」三選一角色切換(各槽獨立);右側「清除」清值並回不限;
+            不限時 chip 淡化(停用但記住,切回即還原)。合成見 weaponFilters。射程恆 AND。 */}
+        <FilterGroup
+          label={t('categoryGroup')}
+          mode={<DimensionModeToggle {...expandedMode(catDim, t('categoryGroup'))} />}
+          action={clearAction(catDim, t('categoryGroup'))}
+          dimmed={catDim.role === 'none'}
+        >
+          {categories.map((cat) => (
+            <Chip
+              key={cat}
+              active={catDim.has(cat)}
+              tone={dimTone(catDim.role)}
+              onClick={() => catDim.toggle(cat)}
+            >
+              {tc(cat)}
+            </Chip>
+          ))}
+        </FilterGroup>
 
-      <FilterGroup
-        label={t('subGroup')}
-        mode={<DimensionModeToggle {...expandedMode(subDim, t('subGroup'))} />}
-        action={clearAction(subDim, t('subGroup'))}
-        dimmed={subDim.role === 'none'}
-      >
-        {subs.map((s) => (
-          <Chip
-            key={s.id}
-            active={subDim.has(s.id)}
-            icon={s.iconUrl}
-            tone={dimTone(subDim.role)}
-            onClick={() => subDim.toggle(s.id)}
-          >
-            {s.name}
-          </Chip>
-        ))}
-      </FilterGroup>
+        <FilterGroup
+          label={t('subGroup')}
+          mode={<DimensionModeToggle {...expandedMode(subDim, t('subGroup'))} />}
+          action={clearAction(subDim, t('subGroup'))}
+          dimmed={subDim.role === 'none'}
+        >
+          {subs.map((s) => (
+            <Chip
+              key={s.id}
+              active={subDim.has(s.id)}
+              icon={s.iconUrl}
+              tone={dimTone(subDim.role)}
+              onClick={() => subDim.toggle(s.id)}
+            >
+              {s.name}
+            </Chip>
+          ))}
+        </FilterGroup>
 
-      <FilterGroup
-        label={t('specialGroup')}
-        mode={<DimensionModeToggle {...expandedMode(speDim, t('specialGroup'))} />}
-        action={clearAction(speDim, t('specialGroup'))}
-        dimmed={speDim.role === 'none'}
-      >
-        {specials.map((s) => (
-          <Chip
-            key={s.id}
-            active={speDim.has(s.id)}
-            icon={s.iconUrl}
-            tone={dimTone(speDim.role)}
-            onClick={() => speDim.toggle(s.id)}
-          >
-            {s.name}
-          </Chip>
-        ))}
-      </FilterGroup>
+        <FilterGroup
+          label={t('specialGroup')}
+          mode={<DimensionModeToggle {...expandedMode(speDim, t('specialGroup'))} />}
+          action={clearAction(speDim, t('specialGroup'))}
+          dimmed={speDim.role === 'none'}
+        >
+          {specials.map((s) => (
+            <Chip
+              key={s.id}
+              active={speDim.has(s.id)}
+              icon={s.iconUrl}
+              tone={dimTone(speDim.role)}
+              onClick={() => speDim.toggle(s.id)}
+            >
+              {s.name}
+            </Chip>
+          ))}
+        </FilterGroup>
 
-      <div className="mt-4">
-        <RangeSlider
-          bound={rangeBounds}
-          value={slot.range}
-          onChange={(range) => onUpdate({ range })}
-          label={t('rangeGroup')}
-          minHandleLabel={t('rangeMin')}
-          maxHandleLabel={t('rangeMax')}
-          anyLabel={t('any')}
-          resetLabel={t('rangeReset')}
-          marks={rangeMarks}
-        />
-      </div>
-    </CollapsiblePanel>
+        <div className="mt-4">
+          <RangeSlider
+            bound={rangeBounds}
+            value={slot.range}
+            onChange={(range) => onUpdate({ range })}
+            label={t('rangeGroup')}
+            minHandleLabel={t('rangeMin')}
+            maxHandleLabel={t('rangeMax')}
+            anyLabel={t('any')}
+            resetLabel={t('rangeReset')}
+            marks={rangeMarks}
+          />
+        </div>
+      </CollapsiblePanel>
+    </div>
+  );
+}
+
+/** 拖曳把手圖示:六點抓握紋(全自繪 SVG,§4 合規);裝飾,語意由按鈕 aria-label 承載。 */
+function GripIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 16 16" className="size-4" fill="currentColor">
+      <circle cx="6" cy="4" r="1.25" />
+      <circle cx="10" cy="4" r="1.25" />
+      <circle cx="6" cy="8" r="1.25" />
+      <circle cx="10" cy="8" r="1.25" />
+      <circle cx="6" cy="12" r="1.25" />
+      <circle cx="10" cy="12" r="1.25" />
+    </svg>
+  );
+}
+
+/** 複製圖示:兩枚交疊圓角方框(全自繪 SVG,§4 合規);裝飾,語意由按鈕 aria-label 承載。 */
+function DuplicateIcon() {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 16 16"
+      className="size-4"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinejoin="round"
+    >
+      <rect x="5.5" y="5.5" width="8" height="8" rx="1.5" />
+      <path d="M10.5 5.5V4A1.5 1.5 0 0 0 9 2.5H4A1.5 1.5 0 0 0 2.5 4v5A1.5 1.5 0 0 0 4 10.5h1.5" />
+    </svg>
   );
 }
 

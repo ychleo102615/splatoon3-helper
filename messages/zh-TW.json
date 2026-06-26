@@ -93,6 +93,8 @@
     "removeCondition": "移除 {name}",
     "rangeToken": "射程 {min}–{max}",
     "removeSlot": "移除第 {n} 把",
+    "duplicateSlot": "複製第 {n} 把",
+    "reorderSlot": "拖曳以重新排序第 {n} 把,共 {total} 把(可用上下方向鍵移動)",
     "addSlot": "＋ 新增一把",
     "maxSlots": "最多 {count} 把",
     "noRepeat": "同一把不重複",

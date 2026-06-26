@@ -93,6 +93,8 @@
     "removeCondition": "{name} を解除",
     "rangeToken": "射程 {min}–{max}",
     "removeSlot": "{n} 本目を削除",
+    "duplicateSlot": "{n} 本目を複製",
+    "reorderSlot": "{n} 本目を並べ替え(全 {total} 本、矢印キーで移動)",
     "addSlot": "＋ 一本追加",
     "maxSlots": "最大 {count} 本",
     "noRepeat": "重複なし",

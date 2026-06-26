@@ -93,6 +93,8 @@
     "removeCondition": "Remove {name}",
     "rangeToken": "Range {min}–{max}",
     "removeSlot": "Remove pick {n}",
+    "duplicateSlot": "Duplicate pick {n}",
+    "reorderSlot": "Drag to reorder pick {n} of {total} (use the arrow keys to move)",
     "addSlot": "＋ Add a pick",
     "maxSlots": "Up to {count} picks",
     "noRepeat": "No duplicates",
