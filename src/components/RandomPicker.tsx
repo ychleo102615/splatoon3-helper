@@ -285,9 +285,13 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
   const multi = slots.length > 1;
 
   /* ── 槽拖曳排序(Pointer Events;觸控 + 滑鼠通用,mobile-first) ──────────────
-     原生 HTML5 DnD 在觸控裝置無效,故自製:拖曳期間「浮起」被拖卡片並以 transform 跟手,
-     其餘卡片留在原位、改以一條落點指示線標示放開後的插入位置(不即時重排,免 reflow 抖動)。
-     效能:移動階段全程以 ref + 直接改 DOM style 進行(不 setState),避免每次 pointermove 重渲染
+     原生 HTML5 DnD 在觸控裝置無效,故自製。被拖卡片一律「浮起」並以 transform 跟手;
+     其餘卡片的視覺回饋採**混合**(模式於按下那刻定案,整段拖曳不切換,避免突兀):
+       - **全部收合 → 即時讓位(live)**:卡片矮且均高,介於原位與落點間的卡片實際平移
+         「被拖卡片佔高 + 間距」讓出洞,所見即所得;落下才提交。
+       - **有任一展開 → 落點線(line)**:展開卡片可達數百 px,實際推動會笨重,故僅以一條
+         指示線標示插入位,不動其他卡片。
+     效能:移動階段全程以 ref + 直接改 DOM style(不 setState),避免每次 pointermove 重渲染
      整棵(含開啟槽的大量 chip);僅落下時 setModel 提交一次重排。鍵盤(方向鍵)走另一條 a11y 路徑。 */
   const slotsContainerRef = useRef<HTMLDivElement>(null);
   const dropLineRef = useRef<HTMLDivElement>(null);
@@ -296,23 +300,29 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
     if (el) slotEls.current.set(id, el);
     else slotEls.current.delete(id);
   };
-  // 拖曳期間量得的版面快照(各槽 viewport 座標 + 容器頂),僅落點計算用;非拖曳時為 null。
+  // 拖曳期間量得的版面快照(viewport 座標)+ 模式相關欄;非拖曳時為 null。
   const dragRef = useRef<{
     id: number;
     fromIndex: number;
     startY: number;
     insert: number;
+    mode: 'live' | 'line';
+    /** live 模式讓位距離 = 被拖卡片佔高 + 一個列間距(均一,故與其他卡片各自高度無關)。 */
+    shift: number;
+    /** 各槽外層元素(原始順序);live 讓位與收尾清樣式用。 */
+    els: (HTMLElement | null)[];
     containerTop: number;
     tops: number[];
     bottoms: number[];
     mids: number[];
   } | null>(null);
-  // 唯一會觸發重渲染的拖曳狀態:標記哪一槽正被拖(套用浮起樣式)。位移與指示線位置走 imperative。
+  // 唯一會觸發重渲染的拖曳狀態:標記哪一槽正被拖(套用浮起樣式)。位移 / 讓位 / 指示線走 imperative。
   const [draggingId, setDraggingId] = useState<number | null>(null);
 
-  const GAP = 8; // space-y-4 = 16px 間距;指示線置於上下卡片間隙中央
+  const GAP = 8; // 指示線置於上下卡片間隙中央(= 列間距一半)
+  const ROW_GAP = 16; // space-y-4 = 1rem;讓位距離含一個列間距
 
-  // 依插入索引把落點指示線移到對應間隙;落點即原位(insert === from / from+1)時藏起(此放下不造成移動)。
+  // [line 模式] 依插入索引把落點指示線移到對應間隙;落點即原位(insert === from / from+1)時藏起。
   const positionDropLine = (insert: number) => {
     const d = dragRef.current;
     const el = dropLineRef.current;
@@ -330,9 +340,29 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
     el.style.opacity = '1';
   };
 
+  // [live 模式] 介於原位與落點之間的卡片讓位:往下拖→上移、往上拖→下移,位移均為 shift;其餘歸零。
+  const applyLiveShift = (insert: number) => {
+    const d = dragRef.current;
+    if (!d) return;
+    for (let k = 0; k < d.els.length; k++) {
+      const el = d.els[k];
+      if (!el || k === d.fromIndex) continue; // 被拖卡片自己跟手,不參與讓位
+      const ty =
+        d.fromIndex < k && k < insert ? -d.shift : insert <= k && k < d.fromIndex ? d.shift : 0;
+      el.style.transform = ty === 0 ? '' : `translateY(${ty}px)`;
+    }
+  };
+
+  // 收尾:清掉拖曳期間 imperative 加的 transform / transition(含被拖卡片與所有讓位卡片),
+  // 藏起指示線。React 不管這些 inline 樣式,故須在此手動還原,否則重排後殘留錯位。
   const endDrag = (id: number) => {
-    const el = slotEls.current.get(id);
-    if (el) el.style.transform = '';
+    const d = dragRef.current;
+    const els = d ? d.els : [slotEls.current.get(id) ?? null];
+    for (const el of els) {
+      if (!el) continue;
+      el.style.transition = '';
+      el.style.transform = '';
+    }
     if (dropLineRef.current) dropLineRef.current.style.opacity = '0';
     dragRef.current = null;
     setDraggingId(null);
@@ -351,14 +381,30 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
       const tops: number[] = [];
       const bottoms: number[] = [];
       const mids: number[] = [];
+      const els: (HTMLElement | null)[] = [];
       for (const s of slots) {
-        const r = slotEls.current.get(s.id)?.getBoundingClientRect();
+        const el = slotEls.current.get(s.id) ?? null;
+        const r = el?.getBoundingClientRect();
         if (!r) return;
+        els.push(el);
         tops.push(r.top);
         bottoms.push(r.bottom);
         mids.push(r.top + r.height / 2);
       }
-      dragRef.current = { id, fromIndex: index, startY: e.clientY, insert: index, containerTop, tops, bottoms, mids };
+      // 模式定案:全部收合 → 即時讓位;有任一展開 → 落點線(避免推動高卡片)。
+      const mode: 'live' | 'line' = slots.every((s) => !s.open) ? 'live' : 'line';
+      const shift = bottoms[index] - tops[index] + ROW_GAP;
+      if (mode === 'live') {
+        // 讓位過渡:僅掛在非被拖卡片;被拖卡片要 1:1 跟手不能有 transition。reduced-motion 則瞬移。
+        const reduced =
+          typeof window !== 'undefined' &&
+          window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+        for (let k = 0; k < els.length; k++) {
+          if (els[k] && k !== index)
+            els[k]!.style.transition = reduced ? 'none' : 'transform 160ms ease';
+        }
+      }
+      dragRef.current = { id, fromIndex: index, startY: e.clientY, insert: index, mode, shift, els, containerTop, tops, bottoms, mids };
       setDraggingId(id);
     },
     onPointerMove: (e: React.PointerEvent<HTMLButtonElement>) => {
@@ -374,7 +420,8 @@ export function RandomPicker({ weapons, categories, subs, specials, rangeBounds 
         }
       }
       d.insert = insert;
-      positionDropLine(insert);
+      if (d.mode === 'live') applyLiveShift(insert);
+      else positionDropLine(insert);
     },
     onPointerUp: (e: React.PointerEvent<HTMLButtonElement>) => {
       const d = dragRef.current;
